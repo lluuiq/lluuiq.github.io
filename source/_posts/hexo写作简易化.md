@@ -7,7 +7,7 @@ top: false
 
 categories: 
 - [笔记,博客]
-tags: [hexo,写作,博文,文章]
+tags: [hexo,博客]
 ---
 # 前言
 hexo写文章不像WordPress与Typecho那样拥有后台管理系统，每次都要新通过指令新建文章（若本地创建的话没有配置的front-matter），并且写完后还要清除缓存，生成页面，然后部署。
@@ -15,17 +15,20 @@ hexo写文章不像WordPress与Typecho那样拥有后台管理系统，每次都
 hexo也缺少一个方便的、随时随地修改文章的后台管理。
 于是写篇文章记录我简化写作的的过程。
 <!-- more -->
+
 # 使用HexoEditor进行写作
 点击进入项目地址：[HexoEditor](https://github.com/zhuzhuyule/HexoEditor)
 HexoEditor的优点：
     1. 读取hexo的post模板生成文章
-    2. 可以在软件上清除缓存、生成页面、推送，也可以直接一键部署
-    3. 支持图床链接
+        2. 可以在软件上清除缓存、生成页面、推送，也可以直接一键部署
+        3. 支持图床链接
 HexoEditor的缺点：
-    1. 没有文件目录
-    2. 没有文章目录
-    3. 个人遇到了腾讯云无法配置图床以及七牛云图床链接缺少一个'/'的问题 
-设置界面：
+        1. 没有文件目录
+        2. 没有文章目录
+        3. 个人遇到了腾讯云无法配置图床以及七牛云图床链接缺少一个'/'的问题 
+
+## 配置界面：
+
 ![mark](http://blogimg.wa2000.cn/blog/20200222/kwL1pyiem704.png?imageslim)
 ![mark](http://blogimg.wa2000.cn/blog/20200222/MGBd42IwCBql.png?imageslim)
 ![mark](http://blogimg.wa2000.cn/blog/20200222/znnIqarzwrAY.png?imageslim)
@@ -33,9 +36,12 @@ HexoEditor的缺点：
 ![mark](http://blogimg.wa2000.cn/blog/20200222/ltDLFTuyJO9H.png?imageslim)
 ![mark](http://blogimg.wa2000.cn/blog/20200222/K01CLhRHAC55.png?imageslim)
 ![mark](http://blogimg.wa2000.cn/blog/20200222/5h3VVdTKEJHw.png?imageslim)
-安装：
+
+## 安装：
+
 到HexoEditor的github地址，下载压缩包解压即可。
 ![mark](http://blogimg.wa2000.cn/blog/20200222/3DFnfRWI8EUU.png?imageslim)
+
 # 使用Typora进行写作
 Typora[官方网站](https://typora.io/)
 Typora具有写作即样式的效果，使用markdown的语法后会直接将该部分文字转为markdown的样子，真·所见即所得。
@@ -44,12 +50,15 @@ Typora具有写作即样式的效果，使用markdown的语法后会直接将该
 当光标没有聚焦在该部分时，就会自动转为markdown样式，当光标再次回来时又会变成文本。
 ![mark](http://blogimg.wa2000.cn/blog/20200222/p3QO4kkkWV52.png?imageslim)
 当然，因为Typora是一个markdown写作软件，不是专为hexo订制，所以写完后还是要通过命令行指令进行部署。
+
 # 关于图床
 有很多能存储图床的服务商，有域名的话可以选择自己域名的服务商提供的空间存储，也可以使用七牛云（个人目前使用），免费的图床有sm.ms。下面以个人使用的七牛云为例优化写作时的图片插入问题。
-## ~~使用HexoEditor~~
----
+## ~~使用HexoEditor~~（舍弃）
+
 因七牛云的链接会缺少一个'/'符号，导致要手动添加，腾讯云又无法配置，故不推荐使用，若用sm.ms作为图床的话可以使用（个人没有sm.ms，所以没有测试是否存在问题)
+
 ---
+
 HexoEditor仅支持截图，不支持复制图片。
 HexoEditor自带上传然后转化功能。只需要填好该三项，存储空间与域名会自动显示出，然后自行选择即可。
 ![mark](http://blogimg.wa2000.cn/blog/20200222/b6juYgPUBw6R.png?imageslim)
@@ -62,19 +71,27 @@ AK粘贴到AccessKey，SK粘贴到SecretKey，就完成配置了。
 当截图后，会在本地保存图片，如下图所示，
 ![mark](http://blogimg.wa2000.cn/blog/20200222/fmDPCcRDCVS9.png?imageslim)
 右键空白处，点击上传 七牛，链接会自动转化为七牛云存储空间里的URL，并且是整篇文章的图片全部转化。
+
 ## 使用Mpic
 [Mpic官网](http://mpic.lzhaofu.cn/)
-这是我一直在用的类似小工具一样的东西，支持截图（看更新日志说是QQ截图，不知其他截图是否支持）、复制、拖拽均可自动上传并复制URL，还可以查看上传目录并且复制链接或者删除（但没有预览图）
+这是我一直在用的类似小工具一样的东西，支持截图（看更新日志说是QQ截图，不知其他截图是否支持）、复制、拖拽均可自动上传并复制URL，还可以查看上传目录并且复制链接或者删除（但没有预览图，可以复制URL地址粘贴到网址栏然后查看）
 ![mark](http://blogimg.wa2000.cn/blog/20200222/Df3bsQb6NvMR.png?imageslim)
 ![mark](http://blogimg.wa2000.cn/blog/20200222/dYR2mLMNBIl6.png?imageslim)
 配置方法参考上方HexoEditor的配置，但域名、空间名需要自己填写。
+
 # 使用Hexo-admin实现后台管理
+
+hexo-admin有个缺点是只能在开启`hexo server`时才能进行管理。
+
+## 安装
+
 [hexo-admin官网](https://jaredforsyth.com/hexo-admin/)
-在下方可以看到
+在下方可以看到安装流程
 ![mark](http://blogimg.wa2000.cn/blog/20200222/pRCLGgIv96rO.png?imageslim)
 若已经安装过hexo和创建好博客根目录了，则直接安装插件即可。
 在博客根目录内右键空白处，点击`Git Bash Here`
 ![mark](http://blogimg.wa2000.cn/blog/20200222/x2lAUJXq0Oti.png?imageslim)
+
 ```
 npm install --save hexo-admin
 hexo server -d
@@ -107,6 +124,7 @@ Deploy可以部署一些脚本
 issue链接：https://github.com/jaredly/hexo-admin/issues/94
 直接打开根目录下的node_modules文件夹，再打开hexo-admin文件夹，编辑器打开deploy.js，
 将
+
 ```
 var proc = spawn(command, [message], {detached: true});
 ```
@@ -120,6 +138,3 @@ var proc = spawn((process.platform === "win32" ? "hexo.cmd" : "hexo"), ['d', '-g
 回到hexo admin的部署界面，直接点击Deploy，效果如下
 ![mark](http://blogimg.wa2000.cn/blog/20200222/aBPRw50miptJ.png?imageslim)
 可以看到 Std Output里的内容说明部署成功，下方的警告是指windows与linux的换行符问题，可以无视。
-# 结语
-上述方法各有各的缺点与优点，可以选择适合自己的结合使用，比如我打算用HexoEditor生成文章，使用Typora+Mpic写文章然后复制到HexoEditor一键部署。
-但接下来打算尝试把hexo部署到服务器上，然后实现通过hexo-admin进行远程部署（因为hexo-admin需要打开本地服务器才能使用），这样本地的hexo只用来修改主题用，同时还能备份hexo源代码到服务器，以后迁移也方便。

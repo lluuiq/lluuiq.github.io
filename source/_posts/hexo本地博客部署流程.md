@@ -387,41 +387,9 @@ categories:
 
 # 为博客绑定域名
 
-## 购买域名
-
-国内域名购买后需要实名认证才可以进行解析。国外不需要。
-
-以阿里云为例，也可以选择其他域名服务商(指国外)，注意选择靠谱的商家。
-
-> 阿里云域名注册网址：https://wanwang.aliyun.com/
-
-![mark](http://blogimg.wa2000.cn/blog/20190809/e38DWTfcU8Ki.png?imageslim)
-
-首先想好自己的域名名。域名指[name].com，开头的www.等是不算在这之内的，
-
-如本人博客域名为wa2000.cn，www是在解析域名时添加的。如下
-
-<fancybox>
-
-![mark](http://blogimg.wa2000.cn/blog/20190809/DK1ukoCbSfBE.png?imageslim)
-
-</fancybox>
-
----
-
-查询自己想要的域名是否已经被注册，未被注册则看价格是否满意即可购买，短域名价格昂贵，`.com`略贵，`.cn`较便宜大概30/年左右，学生购买服务器+域名有优惠，详情百度阿里云/腾讯云 学生套餐 等。套餐内容貌似不同，但是购买有限制，如只能用大陆服务器、尾缀有要求等等。
-
-<fancybox>
-
-![mark](http://blogimg.wa2000.cn/blog/20190809/oAyExD7RFuCp.png?imageslim)
-
-</fancybox>
-
-购买域名并实名认证后即可进行解析。
-
 ## 解析域名
 
-以我的域名为例，不同商家解析时都差不多。点击解析
+以我的域名为例，不同商家解析时都差不多。在域名管理处点击解析
 
 ![mark](http://blogimg.wa2000.cn/blog/20190809/qhS6DJVhEHL6.png?imageslim)
 
@@ -474,3 +442,83 @@ categories:
 然后到本地博客`source`文件夹下新建文件CNAME，输入内容为自己的域名，并将文件尾缀如`.txt`等删掉然后保存即可。(没有的话貌似每次将代码从本地推到github都会使域名访问404，因为每次推送都会覆盖原本的仓库代码。所以把CNAME文件放在source中，使每次推送都会建立一个CNAME)
 
 至此，github pages的域名绑定完成了，稍等片刻即可尝试使用域名访问。
+
+# 将博客源代码保存到github
+
+## 创建分支
+
+在仓库中的文件列表的左上方，点击Branch。
+
+![mark](http://blogimg.wa2000.cn/blog/20200220/vKjTkYWrK8KD.png?imageslim)
+
+搜索 source （分支名，自定义），会提示未找到，是否创建，点击即可创建该分支
+
+![mark](http://blogimg.wa2000.cn/blog/20200220/AQ6FixHkRjvU.png?imageslim)
+
+## 设置新建分支为默认分支
+
+进入设置，左边的列表中选择 Branches，默认分支为master，改为新建的分支，然后点击Update更新。
+
+![mark](http://blogimg.wa2000.cn/blog/20200220/7pI4wicXk16d.png?imageslim)
+
+## 同步配置
+
+首先随便找个地方新建一个文件夹，将你的仓库克隆下来。
+
+打开新建的文件夹，右键空白处点击`Git Bash Here`
+
+然后输入下方命令克隆文件
+
+```
+git clone 【你的仓库地址】
+```
+
+仓库地址获取方法：
+
+![mark](http://blogimg.wa2000.cn/blog/20200223/Q1pkl9KP2JBF.png?imageslim)
+
+点击红框内的按钮复制，然后粘贴到clone后面即可，用空格与clone隔开。
+
+克隆完成后，该文件夹内会出现`【你的用户名】.github.io`文件夹，进去拷贝`.git`文件夹到本地的博客根目录，然后这个新建的文件夹就可以删除了。
+
+接下来在博客根目录右键空白处，打开git bash，输入下方命令，警告不用理会，若没出现报错就没问题。
+
+会需要github的帐号密码，填一下就OK了。
+
+```
+git remote add origin 【你的仓库地址】
+git add .
+git commit -m "【描述，随便写】"
+git push origin 【你的保存源代码的分支名】
+```
+
+描述部分的效果如图，会将内容显示在该分支上。
+
+![mark](http://blogimg.wa2000.cn/blog/20200223/GggAj5iv7u21.png?imageslim)
+
+每次推送时，输入的描述都会在这次推送时更新的文件后面显示出来。
+
+接下来每次想保存时，输入下方指令即可，
+
+```
+git add .
+git commit -m "【描述】"
+git push
+```
+
+但每次都要输入这么多很麻烦，可以创建一个脚本文件，在博客根目录下新建一个txt文本文件，名字随意自己能知道是保存用的就行，将上方三条指令写进去，描述写好后以后固定都是这个，然后将文件改为`.sh`结尾。也可以直接建一个`.sh`尾缀文件，然后用编辑器打开写入。这样以后每次运行这个脚本文件就会自动执行上面三条指令，完成推送。
+
+![mark](http://blogimg.wa2000.cn/blog/20200227/LAd04juFOluO.png?imageslim)
+
+本地同步到github就完成了，但要注意的是只保存了关键文件，如主题、文章、配置等。
+
+node_modules文件夹和public文件夹是没有保存上去的，public文件夹是生成的静态页面，不需要保存，若迁移后直接生成就有了。
+
+node_modules文件夹存放着需要用到的插件，如果想保存的话，打开`.gitignore`文件，把里面的node_modules删掉保存即可，但是这样会造成每次保存都需要很久时间，因为里面东西太多了，看个人需要决定是否需要保存。
+
+生成的静态页面是会推送到master分支的，只要配置文件里面的deploy里的branch的值是master的话
+
+![mark](http://blogimg.wa2000.cn/blog/20200223/rQWYspvqQ5Su.png?imageslim)
+
+配置完成后，若以后要迁移到其他的服务器或者电脑上，只需要安装好git、Node.js、hexo，然后使用`hexo init`命令初始化一个根目录，再克隆下来就行了，若不指定克隆分支的话，会克隆默认分支，即设置好的保存博客源代码的分支。
+
