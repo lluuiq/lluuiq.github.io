@@ -99,7 +99,7 @@ theme: landscape
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/lluuiq/lluuiq.github.io.git
-  # repository: git@github.com:lluuiq/lluuiq.github.io.git
+  # repository: https://github.com/lluuiq/lluuiq.github.io.git
+  repository: git@github.com:lluuiq/lluuiq.github.io.git
   branch: master
 
