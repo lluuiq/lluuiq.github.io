@@ -10,8 +10,6 @@ categories:
 tags: [博客,github,hexo]
 ---
 
-# 前言
-
 最开始用hexo部署过博客，有记录当时的部署过程，现在更新一下，后来又尝试了wordpress与typecho，但个人比较喜欢修改主题样式，感觉wordpress与typecho的封装性太强，于是又回来hexo了。
 
 这篇记录里可以看到	

@@ -9,8 +9,6 @@ categories:
 - [笔记,博客]
 tags: [hexo,github,webhook]
 ---
-# 前言
-
 不使用github pages，改为自己的服务器。将代码托管到gtihub，使用webhook实现github与服务器同步推送代码，并且安装hexo-admin来实现后台管理与服务器到github上的推送。
 
 <!-- more -->
