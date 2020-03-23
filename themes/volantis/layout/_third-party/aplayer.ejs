@@ -12,6 +12,7 @@ let aplayer = theme.plugins.aplayer;
       server='<%- post.music.server || aplayer.server %>'
       type='<%- post.music.type || aplayer.type %>'
       id='<%- post.music.id || aplayer.id %>'>
+      preload='auto'
     </meting-js>
   <% } else { %>
     <meting-js

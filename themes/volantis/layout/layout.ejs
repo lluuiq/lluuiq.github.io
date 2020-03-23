@@ -4,7 +4,8 @@
 <body>
   <%- partial('_partial/cover') %>
   <div class="l_body<%- page.cover ? '' : ' nocover' %>">
-    <div class='body-wrapper'>
+    <!-- <%- partial('_partial/side') %> -->
+    <div class='body-wrapper' id="pjax-container">
       <%- body %>
       <script>setLoadingBarProgress(60);</script>
     </div>
@@ -12,5 +13,6 @@
   </div>
   <%- partial('_partial/scripts') %>
   <script>setLoadingBarProgress(100);</script>
+
 </body>
 </html>

@@ -8,11 +8,13 @@ $device-laptop = 1024px
 $device-desktop = 1440px
 $device-4k = 2560px
 
-
+$width = $sidebar + 100px
 // site layout
 $layout-width = convert(hexo-config('style.max_width')) || 1080px
-$sidebar-s = 240px
-$sidebar = 285px
+// 当窗口缩小时的侧边栏最小宽度
+$sidebar-s = 100px
+// 侧边栏宽度
+$sidebar = 300px
 $modal-threshold = 680px
 $navbar-height = convert(hexo-config('style.navbar.height')) || 64px
 

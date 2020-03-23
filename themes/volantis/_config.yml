@@ -4,22 +4,22 @@
 
 ############################### Basic Information ###############################
 # 启用cdn加速，若有自定义CSS则false
-use_cdn: false
+# use_cdn: false
 
 info:
   name: lluuiq's blog
   version: ''
   docs: https://volantis.js.org/
-  cdn: # To use CDN, write 'use_cdn: true' in 'blog/_config.yml'.
+  # cdn: # To use CDN, write 'use_cdn: true' in 'blog/_config.yml'.
     # css: https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.1.5/css/style.css
-    js: https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.1.5/js/app.js
+    # js: https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.1.5/js/app.js
 
 
 ############################### Style ###############################
 # 总体样式
 style:
   # 页面的卡片宽度之和（文章列表+侧边卡片）
-  max_width: 1280px # Sum of body width and sidebar width
+  max_width: 100% # Sum of body width and sidebar width
   # 顶部导航栏
   navbar:
     # 高度
@@ -90,14 +90,15 @@ style:
     # theme: '#E84D3B'
     site: 'gray'
     site_inner: 'black'
-    theme: '#5C3317'
+    theme: 'gray'
   #   site: '#21232F' # Website background color
   #   site_inner: '#FFCE48' # Text color inside the website background
   #   card: '#444' # Card background color
   #   text: '#fff' # The color of the text on the card.
   #   theme: '#ff9800' # Main color
   #   link: '#1BCDFC' # Link color
-  #   hover: '#ff5722' # Link highlight color
+    hover: '#1BCDFC' # Link highlight color
+
   #   inner: '#333' # Text color inside the button
   #   block: '#555' # Block color
   #   inlinecode: yellow # Inline code color
@@ -149,9 +150,9 @@ cover:
 navbar:
   # 设置logo
   logo: # choose [img] or [icon + title]
-    img: http://blogimg.wa2000.cn/blog/20200317/bhExRqwTPvKQ.jpg?imageslim
+    img: # http://blogimg.wa2000.cn/blog/20200317/bhExRqwTPvKQ.jpg?imageslim
     icon: 
-    title: 
+    title: lluuiq's blog x
   # 设置导航栏菜单 on_desktop为pc端，on_mobile为移动端
   menu:
     # The following can be written in `blog/source/_data/menu.yml`
@@ -348,7 +349,7 @@ widget:
     header:
       icon: fas fa-folder-open
       title: 文章分类
-      url: /blog/categories/
+      url: /categories/
   # ---------------------------------------
   # tagcloud widget
   # 设置云标签卡片
@@ -358,7 +359,7 @@ widget:
     header:
       icon: fas fa-tags
       title: 热门标签
-      url: /blog/tags/
+      url: /tags/
     min_font: 14
     max_font: 24
     color: true
@@ -494,7 +495,8 @@ plugins:
     fade: 1500            # fade duration (ms) (Not more than 1500)
     # 图片
     images:               # For personal use only. At your own risk if used for commercial purposes !!!
-      - https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg
+      # - http://blogimg.wa2000.cn/blog/20200323/3E2JjtuuHclX.png?imageslim
+      - http://blogimg.wa2000.cn/blog/20200323/peuo3qIfcJwD.png?imageslim
       # - https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/BBC19066-E176-47C2-9D22-48C81EE5DF6B.jpeg
       # - https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/B18FCBB3-67FD-48CC-B4F3-457BA145F17A.jpeg
       # - https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/00E0F0ED-9F1C-407A-9AA6-545649D919F4.jpeg

@@ -1,6 +1,19 @@
+<script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+
 <%- js(theme.plugins.jquery) %>
 <% if (theme.search && theme.search.enable) { %>
   <script>
+    var pjax = new Pjax({
+      // 通过节点追踪，用not排除不需要使用pjax跳转的链接
+      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"])',
+      // 通过选择器追踪，选定重载范围，指定标签内的内容会在跳转页面时被替换，不在其中的不做处理
+      selectors: ["#pjax-container","title","meta",".nav-sub.container.container--flex"]
+    });
+
+
     <% if(theme.search.service === 'baidu') { %>
       var BAIDU_API_ID = "<%- theme.search.baidu.apiId %>";
     <%} else if(theme.search.service === 'algolia') { %>
@@ -15,6 +28,7 @@
       var GOOGLE_CUSTOM_SEARCH_API_KEY = "<%- theme.search.google.apiKey %>";
       var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "<%- theme.search.google.engineId %>";
     <%}%>
+    
     var SEARCH_SERVICE = "<%- theme.search.service %>" || "hexo";
     var ROOT = "<%- config.root %>" || "/";
     if (!ROOT.endsWith('/')) ROOT += '/';
@@ -49,7 +63,14 @@
   </script>
 <% } %>
 <% if (theme.plugins.busuanzi) { %>
-  <script async src="<%- theme.plugins.busuanzi %>"></script>
+  <script async src="<%- theme.plugins.busuanzi %>" data-pjax></script>
+  <script>
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+    </script>
 <% } %>
 
 <% if (theme.plugins.backstretch && theme.plugins.backstretch.enable && (theme.plugins.backstretch.images || page.images)) { %>

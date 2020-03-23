@@ -103,3 +103,5 @@ deploy:
   repository: git@github.com:lluuiq/lluuiq.github.io.git
   branch: master
 
+aplayer:
+  meting: true
