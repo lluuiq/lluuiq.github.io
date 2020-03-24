@@ -2,12 +2,17 @@
 # http://www.fontawesome.com.cn/faicons/
 # 找到图标的名字后 使用方式为 icon: fas fa-图标名字
 
+############################### DIY ###############################
+baidu_analytics_key: c2bc3357bbc3b2f5d156b8afe762f688
+
+
+
 ############################### Basic Information ###############################
 # 启用cdn加速，若有自定义CSS则false
 # use_cdn: false
 
 info:
-  name: lluuiq's blog
+  name: volantis
   version: ''
   docs: https://volantis.js.org/
   # cdn: # To use CDN, write 'use_cdn: true' in 'blog/_config.yml'.
@@ -152,7 +157,7 @@ navbar:
   logo: # choose [img] or [icon + title]
     img: # http://blogimg.wa2000.cn/blog/20200317/bhExRqwTPvKQ.jpg?imageslim
     icon: 
-    title: lluuiq's blog x
+    title: lluuiq's blog
   # 设置导航栏菜单 on_desktop为pc端，on_mobile为移动端
   menu:
     # The following can be written in `blog/source/_data/menu.yml`
@@ -219,8 +224,8 @@ layout:
     # 其中，title只在header中有效，music和thumbnail无需在这里设置，文章中有则显示
     # 如果tags放置在meta.header中，那么在post列表中不显示（因为卡片下方已经有了）
     meta:
-      header: [title, author, category, date, top]
-      footer: [updated, tags, btns]
+      header: [title, author, category, date,wordcount, top]
+      footer: [updated, tags, btns, wordcount]
     # 文章页面的侧边栏
     sidebar: [blogger, category, tagcloud, toc]
   # 文章布局，参数继承自 on_page
@@ -238,7 +243,7 @@ meta:
   title: # 暂无配置
   # 默认文章作者（可在front-matter中覆盖）
   author:
-    avatar: http://blogimg.wa2000.cn/blog/20200317/4AU0ooWeUipT.png?imageslim
+    avatar: https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/avatar1.png
     name: lluuiq
     url: https://wa2000.cn
   # 文章创建日期
@@ -320,7 +325,7 @@ widget:
     class: blogger
     # 设置是否在PC端、移动端展示
     display: [desktop] # [desktop, mobile]
-    avatar: http://blogimg.wa2000.cn/blog/20200317/4AU0ooWeUipT.png?imageslim
+    avatar: https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/avatar1.png
     title: lluuiq
     subtitle: fly me to the star
     jinrishici: false # 随机诗句
@@ -409,7 +414,7 @@ footer:
     - icon: fas fa-rss
       url: atom.xml
     - icon: fas fa-envelope
-      url: mailto:844520941@qq.com
+      url: mailto:mail@lluuiq.com
     - icon: fab fa-github
       url: https://github.com/lluuiq
     - icon: fab fa-qq
@@ -418,7 +423,7 @@ footer:
     #   url: https://space.bilibili.com/5988692
     - icon: fas fa-headphones-alt
       url: https://music.163.com/#/user/home?id=118762977
-  copyright: '[Copyright © 2017-2020 Mr. X](https://xaoxuu.com)'
+  copyright: '[Copyright © lluuiq](https://lluuiq.com)'
   # You can add your own property here. (Support markdown, for example: br: '<br>')
   beian: '豫ICP备19027219号'
 
@@ -469,7 +474,7 @@ plugins:
   busuanzi: https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js
 
   # npm i --save hexo-wordcount
-  wordcount: #true
+  wordcount: true
 
   ######## Plugins for ...
   # Button Ripple Effect
@@ -496,7 +501,7 @@ plugins:
     # 图片
     images:               # For personal use only. At your own risk if used for commercial purposes !!!
       # - http://blogimg.wa2000.cn/blog/20200323/3E2JjtuuHclX.png?imageslim
-      - http://blogimg.wa2000.cn/blog/20200323/peuo3qIfcJwD.png?imageslim
+      - https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/background.png
       # - https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/BBC19066-E176-47C2-9D22-48C81EE5DF6B.jpeg
       # - https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/B18FCBB3-67FD-48CC-B4F3-457BA145F17A.jpeg
       # - https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/00E0F0ED-9F1C-407A-9AA6-545649D919F4.jpeg

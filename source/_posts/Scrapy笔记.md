@@ -112,7 +112,7 @@ scrapy shell 【链接】
 
 用于进行一些不调用scrapy引擎进行一些测试（如正则表达式，检查获取信息的内容等等）
 
- ![mark](http://blogimg.wa2000.cn/blog/20200305/SJMShdfHHIsF.png?imageslim)
+ ![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023136.png)
 
 ## 关闭windows的快捷编辑模式
 
@@ -124,6 +124,6 @@ scrapy shell 【链接】
 
 # ERROR: Spider error processing
 
-![mark](http://blogimg.wa2000.cn/blog/20200304/g9OUq9VrLeqX.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023137.png)
 
 response.body返回的是二进制文件，不能用w方式进行写入，应改为wb

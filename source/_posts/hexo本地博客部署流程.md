@@ -36,11 +36,11 @@ tags: [博客,github,hexo]
 
 链接：
 
-[git官方下载地址](https://git-scm.com/downloads)
+- [git官方下载地址](https://git-scm.com/downloads)
 
-[git淘宝镜像下载地址](https://npm.taobao.org/mirrors/git-for-windows/)
+- [git淘宝镜像下载地址](https://npm.taobao.org/mirrors/git-for-windows/)
 
-[Node.js官网下载地址](https://nodejs.org/en/)
+- [Node.js官网下载地址](https://nodejs.org/en/)
 
 hexo使用命令安装。
 
@@ -70,49 +70,49 @@ hexo使用命令安装。
 
 下载完成后进入安装界面 (注:以下安装的选项请以实际自身需求为准，仅供参考):
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/QkGXRrpGKBLP.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030720.png)
 
 选择需要安装的组件。
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/QJ1Ec9vzgHMD.png?imageslim)
-
-
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030722.png)
 
 选择git的默认编辑器:
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/EWmbSK0EEzz4.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030724.png)
 
 配置环境变量选项,推荐默认第二项:
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/rgIA7xnxHD67.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030721.png)
 
 选择https传输协议 默认即可:
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/Xd0XnCyrtMNv.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030723.png)
 
 选择git的换行方式 请根据自身需求更改:
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/icmycKj76mHh.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030725.png)
 
 设置git命令行的样式:
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/EsEgnQoEJkjn.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030726.png)
 
 设置选项：1.是否允许文件缓存 2.是否允许git许可证管理，默认勾选：
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/8ok0b3kloolE.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030740.png)
 
 是否参与新的测试,貌似是会使git更快，但还不稳定:
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/3LvwyMrYREe1.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030727.png)
 
 install 安装即可:
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/vDIk88xGGnTM.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030728.png)
 
 git安装完成后，需要进行配置，在git安装目录或菜单栏中找到git-bash，打开后如图
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/2u0mel07dg8L.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030737.png)
+
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030729.png)
 
 输入如下，其中" "中的your name 和your email为你的Git Hub用户名(非昵称)与邮箱
 
@@ -130,23 +130,21 @@ git config user.email
 
 结果如下
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/a1t3YdXEfQR8.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030731.png)
 
 ## 安装Node.js：
 
 该文章书写时，版本为10.16.0
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/ytErPYwqGyV8.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030730.png)
 
 安装界面:
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/qQXm42XIJUEN.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030732.png)
 
 选择安装模式,我选择了第四个，next即可:
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/bkx3aTEKDTog.png?imageslim)
-
-
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030733.png)
 
 以下过程命令行既可使用windows的cmd，也可以使用git安装过程中的 git-bash进行操作
 
@@ -157,7 +155,7 @@ node -v
 npm -v
 ```
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/K7WbO6VEVaox.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030735.png)
 
 因为npm为国外源，下载速度感人，故使用cnpm使下载指向国内源。
 
@@ -173,7 +171,7 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 cnpm -v
 ```
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/P8PAsqDw65lX.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030734.png)
 
 查询成功则证明安装完成。
 
@@ -186,15 +184,13 @@ cnpm install -g hexo-cli
 hexo -v
 ```
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/88Bwbv6mQ201.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030736.png)
 
 ## hexo部署博客：
 
 在我的电脑中创建文件夹用于存储博客网站，即网站的站点。文件夹名称自定义，我使用blog,目录为D:\blog。打开blog文件夹，右键空白处点击Git Bash Here在该目录下打开Git Bash(或者用CMD切换到该目录也行)。
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/OipAcCd3r6EJ.png?imageslim)
-
-![mark](http://blogimg.wa2000.cn/blog/20190718/sBTAsbfL6oV2.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030738.png)
 
 输入`cnpm install hexo --save`安装组件。
 
@@ -208,11 +204,11 @@ cnpm install hexo --save
 hexo init
 ```
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/CVV5491xAFnJ.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030741.png)
 
 **注**：若blog文件夹非空，则会报错:
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/nTX2pSgyC21i.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030742.png)
 
 使用`hexo s` 在本地启动博客
 
@@ -220,13 +216,13 @@ hexo init
 hexo s
 ```
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/n2g9PK9Czbf6.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030739.png)
 
 如图所示显示本地部署成功
 
 打开网页，地址栏输入`http://localhost:4000`即可从本地进入博客
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/Kkzetyt272KY.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030746.png)
 
 目录内的各个文件的作用参考[官方文档](https://hexo.io/zh-cn/docs/setup)
 
@@ -236,21 +232,21 @@ hexo s
 
 通过`Ctrl+C`停止服务
 
-![mark](http://blogimg.wa2000.cn/blog/20190718/ogjFYaxp94kn.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030744.png)
 
 登陆自己的Git Hub [点击进入登陆界面](https://github.com/login)
 
 登陆成功后，网页右上角个人头像旁边，点击 + 号 选择New repository创建一个新的仓库
 
-![mark](http://blogimg.wa2000.cn/blog/20200220/Meqg4zYg2XoS.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030743.png)
 
 输入的信息如下，其中 Repository name内容必须是 github的用户名，而不是昵称。点击Create repository创建项目。
 
-![mark](http://blogimg.wa2000.cn/blog/20200220/rmK58wOFurxx.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030745.png)
 
 创建成功后，界面如图，复制https的链接。
 
-![mark](http://blogimg.wa2000.cn/blog/20200220/uihnF6GW1gkD.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030748.png)
 
 回到git-bash 使用cnpm安装git部署插件，插件名为:hexo-deployer-git
 
@@ -268,11 +264,11 @@ cnpm install --save hexo-deployer-git
 
 ```
   type: git
-  repository: 刚刚复制的https链接
+  repo: 刚刚复制的https链接
   branch: master
 ```
 
-![mark](http://blogimg.wa2000.cn/blog/20200220/lh991tdJQGYy.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030747.png)
 
 ## 推送到github page：
 
@@ -284,7 +280,7 @@ hexo d
 
 即可将本地的网站服务器渲染出的静态页面上传到github。
 
-![mark](http://blogimg.wa2000.cn/blog/20200220/iXSzQdETnXFB.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030809.png)
 
 该过程可能需要输入github和coding的用户名和密码，若Git Hub配置过SSH则不需要输入。
 
@@ -299,11 +295,11 @@ git config --global user.email "your email"
 
 推送完成后，再次进入仓库，即可看到上传完成的静态网页。
 
-![mark](http://blogimg.wa2000.cn/blog/20200220/erALqpQpC0qo.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030750.png)
 
 并且可以通过 `你的用户名.github.io` 来进入网站，此时网站已经部署到github page，其他人也可以通过该地址访问你的网站。
 
-![mark](http://blogimg.wa2000.cn/blog/20200220/ebI2pgawnztU.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030751.png)
 
 `hexo s`指令仅启动本地服务，修改后只能通过localhost:4000来进行访问，此时没有推送页面到github。想要推送到github生成页面的话，需要通过`hexo d`进行推送。推送前输入指令`hexo clean`清除缓存，然后再输入`hexo g`重新生成静态页面，然后推送即可。
 
@@ -315,7 +311,7 @@ git config --global user.email "your email"
 
 打开博客目录下的配置文件_config.yml，按`Ctrl+F`搜索 URL
 
-![mark](http://blogimg.wa2000.cn/blog/20200220/Eg4mO8uUukoN.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030800.png)
 
 url内容不用改，修改permalink内容
 
@@ -323,7 +319,7 @@ url内容不用改，修改permalink内容
 
 默认的设置为将一篇文章的创建日期+title作为永久链接，但这样并不美观，并且在分享链接时因为编码问题中文会被转码造成如下结果
 
-![mark](http://blogimg.wa2000.cn/blog/20200220/9qlTHhtAstC5.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030749.png)
 
 链接的格式为 你的域名/permalink内容，
 
@@ -389,17 +385,19 @@ categories:
 
 以我的域名为例，不同商家解析时都差不多。在域名管理处点击解析
 
-![mark](http://blogimg.wa2000.cn/blog/20190809/qhS6DJVhEHL6.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030752.png)
 
-点击添加记录。会出现如前图的添加设置。
+点击添加记录。会出现如图的添加设置。
 
-![mark](http://blogimg.wa2000.cn/blog/20190809/svft5fyRq4K9.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030755.png)
+
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030757.png)
 
 主机记录可理解为域名前缀，即用户输入什么样的网址访问到该解析目标。如果主机记录为www ，则用户需要输入www.[你的域名]才能访问到该解析目标。如果为@，则直接输入域名即可。如果不添加www ，则通过www+域名方式访问的用户将访问失败，@同理，其余的也同理。
 
 <fancybox>
 
-![mark](http://blogimg.wa2000.cn/blog/20190809/DK1ukoCbSfBE.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030754.png)
 
 </fancybox>
 
@@ -407,21 +405,13 @@ categories:
 
 这里有两种绑定方法，一种是选CNAME然后在记录值填写 [yourname].github.io ，另一种是选A，然后通过cmd命令行输入 `ping [yourname].github.io` 获取ip地址，记录值里填入ip地址。
 
- <fancybox>
-
-![mark](http://blogimg.wa2000.cn/blog/20190809/ULjGnxivhBkL.png?imageslim)
-
-</fancybox>
-
 获取 [yourname].github.io 的ip地址，如图，ping通后会显示ip地址。
 
-![mark](http://blogimg.wa2000.cn/blog/20190809/vuJLLzM4tkbu.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030753.png)
 
-线路选默认。
+记录值根据选择的记录类型进行填写。线路选默认。TTL为缓存生效时间，默认600秒即可，即10分钟后生效(实际大约需要5 分钟)。填写完毕后点击保存。可以为域名填写多个记录， 如图
 
-记录值根据选择的记录类型进行填写。TTL为缓存生效时间，默认600秒即可，即10分钟后生效(实际大约需要5 分钟)。填写完毕后点击保存。可以为域名填写多个记录， 如图
-
-![mark](http://blogimg.wa2000.cn/blog/20190809/XRklMOF4XVD9.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030756.png)
 
 前两个是为github pages绑定时添加的记录，一个www、一个@，这样可以让用域名直接访问的和加了www访问的用户都能访问到自己的博客 (部署到服务器后就不再用了所以暂停了)。接下来两条A类型是将网站部署到自己的服务器时，把域名解析到了自己的服务器IP地址，这样可以通过www、或者直接输入域名的方式来访问自己的服务器。最后一条是绑定的七牛云，用来当做博客的图床。每条记录后面都有操作可以进行修改以及暂停和开启。
 
@@ -429,13 +419,11 @@ categories:
 
 登陆到自己的github，进入网站绑定的仓库，进入设置
 
-![mark](http://blogimg.wa2000.cn/blog/20190809/l5Rve4E5VVNn.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030759.png)
 
 往下找到GitHub Pages，在Custom domain填入刚刚购买的域名，点击save保存。勾选Enforce HTTPS则开启HTTPS安全协议。
 
-![mark](http://blogimg.wa2000.cn/blog/20190809/zLmperFvIdKm.png?imageslim)
-
-如![mark](http://blogimg.wa2000.cn/blog/20190809/FpsMMknxuhYO.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030758.png)
 
 然后到本地博客`source`文件夹下新建文件CNAME，输入内容为自己的域名，并将文件尾缀如`.txt`等删掉然后保存即可。(没有的话貌似每次将代码从本地推到github都会使域名访问404，因为每次推送都会覆盖原本的仓库代码。所以把CNAME文件放在source中，使每次推送都会建立一个CNAME)
 
@@ -447,17 +435,17 @@ categories:
 
 在仓库中的文件列表的左上方，点击Branch。
 
-![mark](http://blogimg.wa2000.cn/blog/20200220/vKjTkYWrK8KD.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030802.png)
 
 搜索 source （分支名，自定义），会提示未找到，是否创建，点击即可创建该分支
 
-![mark](http://blogimg.wa2000.cn/blog/20200220/AQ6FixHkRjvU.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030804.png)
 
 ## 设置新建分支为默认分支
 
 进入设置，左边的列表中选择 Branches，默认分支为master，改为新建的分支，然后点击Update更新。
 
-![mark](http://blogimg.wa2000.cn/blog/20200220/7pI4wicXk16d.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030805.png)
 
 ## 同步配置
 
@@ -473,7 +461,7 @@ git clone 【你的仓库地址】
 
 仓库地址获取方法：
 
-![mark](http://blogimg.wa2000.cn/blog/20200223/Q1pkl9KP2JBF.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030803.png)
 
 点击红框内的按钮复制，然后粘贴到clone后面即可，用空格与clone隔开。
 
@@ -492,7 +480,7 @@ git push origin 【你的保存源代码的分支名】
 
 描述部分的效果如图，会将内容显示在该分支上。
 
-![mark](http://blogimg.wa2000.cn/blog/20200223/GggAj5iv7u21.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030807.png)
 
 每次推送时，输入的描述都会在这次推送时更新的文件后面显示出来。
 
@@ -506,7 +494,7 @@ git push
 
 但每次都要输入这么多很麻烦，可以创建一个脚本文件，在博客根目录下新建一个txt文本文件，名字随意自己能知道是保存用的就行，将上方三条指令写进去，描述写好后以后固定都是这个，然后将文件改为`.sh`结尾。也可以直接建一个`.sh`尾缀文件，然后用编辑器打开写入。这样以后每次运行这个脚本文件就会自动执行上面三条指令，完成推送。
 
-![mark](http://blogimg.wa2000.cn/blog/20200227/LAd04juFOluO.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030806.png)
 
 本地同步到github就完成了，但要注意的是只保存了关键文件，如主题、文章、配置等。
 
@@ -514,9 +502,9 @@ node_modules文件夹和public文件夹是没有保存上去的，public文件�
 
 node_modules文件夹存放着需要用到的插件，如果想保存的话，打开`.gitignore`文件，把里面的node_modules删掉保存即可，但是这样会造成每次保存都需要很久时间，因为里面东西太多了，看个人需要决定是否需要保存。
 
-生成的静态页面是会推送到master分支的，只要配置文件里面的deploy里的branch的值是master的话
+只要配置文件里面的deploy里的branch的值是master的话，生成的静态页面会推送到master分支
 
-![mark](http://blogimg.wa2000.cn/blog/20200223/rQWYspvqQ5Su.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030808.png)
 
 配置完成后，若以后要迁移到其他的服务器或者电脑上，只需要安装好git、Node.js、hexo，然后使用`hexo init`命令初始化一个根目录，再克隆下来就行了，若不指定克隆分支的话，会克隆默认分支，即设置好的保存博客源代码的分支。
 

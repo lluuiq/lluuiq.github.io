@@ -4,7 +4,7 @@
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '<i class="fas fa-copy"></i><span>复制</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
@@ -19,7 +19,7 @@
         $icon.removeClass('fa-copy');
         $icon.addClass('fa-clipboard-check');
         let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPYED';
+        $span[0].innerText = '复制成功';
       });
       clipboard.on('error', function(e) {
         e.clearSelection();
@@ -29,7 +29,7 @@
         $icon.removeClass('fa-copy');
         $icon.addClass('fa-exclamation-triangle');
         let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPY FAILED';
+        $span[0].innerText = '复制失败';
       });
     }
     initCopyCode();

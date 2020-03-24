@@ -27,7 +27,7 @@ source存放css、js、字体、图片等代码与资源
 
 _config.yml为主题配置文件
 
-![mark](http://blogimg.wa2000.cn/blog/20200317/hSKFk5ikk9JB.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023003.png)
 
 ## 顶部导航栏
 
@@ -37,7 +37,7 @@ _config.yml为主题配置文件
 
 找到最下面的代码，将其注释
 
-![mark](http://blogimg.wa2000.cn/blog/20200317/BLeQEolGaKwF.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023004.png)
 
 ```stylus
 // .cover-wrapper
@@ -54,11 +54,11 @@ _config.yml为主题配置文件
 
 原来的样式：
 
-![mark](http://blogimg.wa2000.cn/blog/20200317/MzNiXRI17xKD.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023005.png)
 
 修改后：
 
-![mark](http://blogimg.wa2000.cn/blog/20200317/88km2cPb1WHm.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023006.png)
 
 打开source/css\_layout/search.styl
 
@@ -77,7 +77,7 @@ _config.yml为主题配置文件
 
 找到`gap`的设置，添加base值，大小为要设置的内外边距
 
-![mark](http://blogimg.wa2000.cn/blog/20200317/D0yaYQXcnYD9.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023007.png)
 
 ```yml
 base: 10px
@@ -89,7 +89,7 @@ base: 10px
 
 例如：
 
-在gap中添加一个变量，变量名自定义，这里用test示例，后面的大小为要设置的大小。
+在gap中添加一个变量，变量名自定义，这里用**test**示例，后面的大小为要设置的大小。
 
 ```yml
 test: 10px
@@ -97,11 +97,11 @@ test: 10px
 
 接着打开source/css/_defines/layout.styl，找到gap的设置
 
-![mark](http://blogimg.wa2000.cn/blog/20200317/OJ1SN2kH9f4E.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023008.png)
 
 添加自定义的变量
 
-![mark](http://blogimg.wa2000.cn/blog/20200317/1GsC3rODl1Y6.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023009.png)
 
 ```stylus
 $test = convert(hexo-config('style.gap.test')) || 16px
@@ -115,19 +115,19 @@ $test为CSS设置中的变量名，`style.gap.test`中的test为在_config.yml�
 
 效果如图
 
-![mark](http://blogimg.wa2000.cn/blog/20200317/BjXFPLvKIWLT.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023016.png)
 
 打开layout/_cover/index.ejs
 
 找到如图所示代码，将其注释
 
-![mark](http://blogimg.wa2000.cn/blog/20200317/EKabzjWjCJ1Y.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023010.png)
 
 ## 添加QQ在线联系
 
 打开_config.yml，搜索social，找到社交功能设置部分
 
-![image-20200317161443443](C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200317161443443.png)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023011.png)
 
 添加内容如下
 
@@ -142,7 +142,7 @@ $test为CSS设置中的变量名，`style.gap.test`中的test为在_config.yml�
 
 打开layout文件夹，对以下文件统一修改
 
-![mark](http://blogimg.wa2000.cn/blog/20200317/qeYmT3crtzeE.png?imageslim)
+![image-20200317161443443](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023012.png)
 
 打开一文件后，搜索代码
 
@@ -152,7 +152,7 @@ $test为CSS设置中的变量名，`style.gap.test`中的test为在_config.yml�
 
 将该行代码复制到第一行代码`<%- partial('_pre') %>`的下方，然后将原来位置的代码注释（方便以后若需要的话改回），示例：
 
-![mark](http://blogimg.wa2000.cn/blog/20200317/NmjNwJwr1Pgg.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023013.png)
 
 然后修改CSS文件，
 
@@ -160,15 +160,15 @@ $test为CSS设置中的变量名，`style.gap.test`中的test为在_config.yml�
 
 搜索`.l_main`，找到`padding-right`，将right改为left，使原本的右边距变为左边距
 
-![mark](http://blogimg.wa2000.cn/blog/20200317/SlAHUzX3EiID.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023014.png)
 
 修改后为
 
-![mark](http://blogimg.wa2000.cn/blog/20200317/CedRTRknjOda.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023015.png)
 
 为适应手机端，还需要修改此处
 
-![mark](http://blogimg.wa2000.cn/blog/20200319/JpxuNdyLQuBF.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023017.png)
 
 若想要手机端的卡片有外边距，则将`padding-right: 0`按需求修改边距 ，例如若想要左右边距都为10px，则应该改成
 
@@ -179,7 +179,7 @@ padding-left: 10px
 
 效果如图：
 
-![mark](http://blogimg.wa2000.cn/blog/20200319/7LuJs22diWU5.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023021.png)
 
 若满意现在的效果则到此即可。接下来将侧边栏移动到网页的边缘处，然后让文章列表、其余页面的主要内容居中。
 
@@ -187,21 +187,21 @@ padding-left: 10px
 
 ### 进一步修改
 
-首先在_config.yml中修改最大宽度为100%，这样会导致顶部 导航栏的宽度也随之变成100%，稍后再作修改。
+首先在_config.yml中修改最大宽度为100%，但注意这样会导致顶部导航栏的宽度也随之变成100%。
 
-![mark](http://blogimg.wa2000.cn/blog/20200319/zYTG6fpVXPJy.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023018.png)
 
 打开source/css/_layout/main.styl，将`.body-wrapper`中的`display: flex`注释，关闭flex布局
 
-![mark](http://blogimg.wa2000.cn/blog/20200319/aY6mpTpdYT5e.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023019.png)
 
 页面内容的修改在该文件中的`.l_main`，将width中的100%调小以更改页面内容的宽度，修改padding-left来更改与侧边栏的距离。
 
-![mark](http://blogimg.wa2000.cn/blog/20200319/FkWDAaSm2uPt.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023020.png)
 
 侧边栏的宽度可以在source/css/_defines/layout.styl中进行修改
 
-![mark](http://blogimg.wa2000.cn/blog/20200319/qU5WCOm10HkJ.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023022.png)
 
 ## 修改透明度
 
@@ -218,7 +218,7 @@ padding-left: 10px
 
 在source/css中创建一个新的stylus文件，名字随意
 
-![mark](http://blogimg.wa2000.cn/blog/20200319/HeigksUYBIfB.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023023.png)
 
 编辑内容，其中颜色代码、透明度自行修改
 

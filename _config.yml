@@ -103,5 +103,18 @@ deploy:
   repository: git@github.com:lluuiq/lluuiq.github.io.git
   branch: master
 
+
+######################################## DIY ###########################################
 aplayer:
   meting: true
+
+# Extensions
+## Plugins: http://hexo.io/plugins/
+#RSS订阅
+plugin:
+- hexo-generator-feed
+#Feed Atom
+feed:
+type: atom
+path: atom.xml
+limit: 20

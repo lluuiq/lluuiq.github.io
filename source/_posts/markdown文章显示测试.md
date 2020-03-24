@@ -143,7 +143,7 @@ df_isPass = df[df['isPass'] == '及格']
 
 正常内容。
 
-![mark](http://blogimg.wa2000.cn/blog/20200219/5hnW4imsFKW8.png?imageslim)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324021616.png)
 
 正常内容。
 
