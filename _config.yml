@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://wa2000.com
+url: https://wa2000.cn
 root: /
 permalink: post/:year:month:day:hour:minute/
 permalink_defaults:
@@ -93,7 +93,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: volantis
+theme: volantis #material-x volantis
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

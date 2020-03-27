@@ -7,13 +7,13 @@ toc: true
 top: false
 
 categories: 
-- [笔记,博客]
-tags: [博客,hexo]
+- [笔记]
+tags: [hexo]
 ---
 
 主题首页：[Volantis](https://volantis.js.org/)
 
-记录一些DIY博客的过程
+记录一些DIY的过程
 
 <!-- more -->
 
@@ -37,7 +37,7 @@ _config.yml为主题配置文件
 
 找到最下面的代码，将其注释
 
-![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023004.png)
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200326081504.png)
 
 ```stylus
 // .cover-wrapper
@@ -191,9 +191,11 @@ padding-left: 10px
 
 ![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023018.png)
 
-打开source/css/_layout/main.styl，将`.body-wrapper`中的`display: flex`注释，关闭flex布局
+打开source/css/_layout/main.styl，将`.body-wrapper`中的`justify-content: space-between`注释。
 
-![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023019.png)
+该语句会使页面内的flex布局为flex项目之间的距离相等，若只有两个项目的情况下会导致一个在最左边，一个在最右边。注释后会采取默认的布局方式即左对齐。
+
+![image-20200326234008039](https://gitee.com/lluuiq/blog_img/raw/master/img/20200326234018.png)
 
 页面内容的修改在该文件中的`.l_main`，将width中的100%调小以更改页面内容的宽度，修改padding-left来更改与侧边栏的距离。
 
@@ -213,8 +215,6 @@ padding-left: 10px
 若使用rgba，则需要传入RGB颜色代码，并且修改的仅有div元素的背景透明度
 
 若使用opacity，则只需要传入透明度，修改的是整个div元素的透明度（包括图片、文字等也会变透明）
-
-
 
 在source/css中创建一个新的stylus文件，名字随意
 
@@ -237,3 +237,102 @@ padding-left: 10px
 ```
 
 同理可以用此方式进行CSS的自定义，可以做到在不修改原本代码的情况下更改css
+
+## 实现pjax
+
+感谢大佬的博客开源，让我能参考源代码进行修改：[Material X主题pjax使用](https://stevenmhy.tk/archives/db1997ec.html) 
+
+感谢大佬的讲解 ：[用pjax让你的页面加载飞起来!](https://sunhang.top/2019/12/20/pjax/)
+
+---
+
+在layout/_partial/head.ejs的末尾 `</head>`的上方引用pjax
+
+![image-20200325222920909](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200325222930.png)
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script>
+```
+
+
+
+在layout/layout.ejs的末尾`</body>`的上方插入代码
+
+```js
+<script>
+var pjax = new Pjax({
+  elements: "a",
+  selectors: [
+    "title", //pjax加载标题
+    ".l_main", //pjax加载主内容
+    ".l_side", //pjax加载侧边栏
+    ".switcher .h-list", // 使手机端的搜索框与菜单栏生效
+  ]
+})
+</script>
+```
+
+![image-20200325224042143](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200325224044.png)
+
+elements选择触发器，即点击什么来触发pjax（只能用a或者form），a为链接。
+
+selectors根据css选择器来选择更新的节点（即当触发elements时哪些内容会刷新，其余部分保持不变）
+
+可以用节点、类、id等选择元素。用法参考：[CSS 选择器](https://www.runoob.com/cssref/css-selectors.html)
+
+这里我设置的为：点击链接，则刷新标题、类为`l_main`与`l_side`的元素（页面内容与侧边栏）会刷新，其余不变。
+
+### pjax优化-自动生成Fancybox
+
+在定义pjax的脚本代码中插入语句（放在\<script>与\</script>中）
+
+```js
+//加载fancybox
+function LoadFancybox(){
+  $(".article-entry").find("img").each(function () {
+    //渲染fancy box
+    var t = document.createElement("a");
+    $(t).attr("data-fancybox", "gallery"),
+    $(t).attr("href", $(this).attr("src")),
+    $(t).attr("margin","0 auto"),
+    $(this).wrap(t)
+  })
+}
+
+// pjax加载结束后执行函数
+document.addEventListener('pjax:complete', function (){
+  LoadFancybox();
+});
+
+// 窗口监听load(加载、刷新)事件，执行LoadFancybox()函数
+window.addEventListener('load',function(){
+  LoadFancybox();
+});
+```
+
+插入后结果如图：
+
+![image-20200327002931652](https://gitee.com/lluuiq/blog_img/raw/master/img/20200327002933.png)
+
+修改后发现实现了fancybox，但是图片不再居中，故进行修改。
+
+打开source/css/_layout/main.styl
+
+搜索`img` 找到位于l_main>post>a下的img，将`display: inline`注释
+
+![image-20200326104120122](https://gitee.com/lluuiq/blog_img/raw/master/img/20200326112446.png)
+
+---
+
+**BUG：**
+
+- 放大图片再关闭后，页面位置与放大前不对应，会返回到放大前一张图片时的位置 。
+
+---
+
+实现pjax后发现导航栏在点击不同部分时，主题的下划线不会改变，进行修改没有修改成，故直接将CSS代码注释
+
+打开source/css/_layout/navbar.styl 搜索`&:active,&.active` 将该部分代码注释
+
+![image-20200327013730981](D:\blog\source\_posts\Volantis主题DIY笔记.assets\image-20200327013730981.png)
+

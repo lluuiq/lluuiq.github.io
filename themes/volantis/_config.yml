@@ -157,7 +157,7 @@ navbar:
   logo: # choose [img] or [icon + title]
     img: # http://blogimg.wa2000.cn/blog/20200317/bhExRqwTPvKQ.jpg?imageslim
     icon: 
-    title: lluuiq's blog
+    title: lluuiq
   # 设置导航栏菜单 on_desktop为pc端，on_mobile为移动端
   menu:
     # The following can be written in `blog/source/_data/menu.yml`
@@ -409,7 +409,7 @@ widget:
 footer:
   # layout of footer: [aplayer, social, license, info, copyright]
   # 页脚显示什么东西，播放器，社交信息，license，信息，copyright
-  layout: [aplayer, license, copyright, beian]
+  layout: [aplayer, copyright, beian]
   social:
     - icon: fas fa-rss
       url: atom.xml
@@ -425,7 +425,7 @@ footer:
       url: https://music.163.com/#/user/home?id=118762977
   copyright: '[Copyright © lluuiq](https://lluuiq.com)'
   # You can add your own property here. (Support markdown, for example: br: '<br>')
-  beian: '豫ICP备19027219号'
+  beian: '[豫ICP备19027219号](http://beian.miit.gov.cn)<br>京公网备案 41140302000094号'
 
 
 ############################### SEO ###############################
@@ -551,7 +551,7 @@ plugins:
 
 ############################### Comments ###############################
 # 设置评论
-comments:
+# comments:
   title: <i class='fas fa-comments'></i> 评论
   subtitle:
   # 设置评论服务商

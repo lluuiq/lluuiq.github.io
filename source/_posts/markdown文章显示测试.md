@@ -1,13 +1,14 @@
 ---
 title: markdown文章显示测试 
 date: 2020-02-20 18:56:45 
+mathjax: true # false: 不渲染, true: 渲染, internal: 只在文章内部渲染，文章列表中不渲染
 comments: true
 toc: true
 top: false
 
 categories: 
-- [笔记,博客]
-tags: [markdown,测试]
+- [笔记,hexo]
+tags: [markdown,hexo]
 ---
 # 这是一个测试用的文档，该句也是一级标题
 
@@ -115,6 +116,8 @@ $$
 
 ## 代码块：
 
+markdown原生：
+
 ```python
 import pandas as pd
 import plotly.graph_objs as go
@@ -128,6 +131,14 @@ df['isPass']=df['score'].apply(lambda x: '及格' if x>=60 else '不及格')
 df_isPass = df[df['isPass'] == '及格']
     
 ```
+
+Volantis2.2.1主题代码块：
+
+![image-20200326082338331](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200326082340.png)
+
+{% codeblock 标题  lang:python%}
+code snippet
+{% endcodeblock %}
 
 ## emoji：
 
@@ -146,6 +157,32 @@ df_isPass = df[df['isPass'] == '及格']
 ![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324021616.png)
 
 正常内容。
+
+## Tab测试：
+
+{% tabs tab-id %}
+
+<!-- tab 第一个tab的名字 -->
+
+```
+代码框
+```
+
+正常文字
+
+<!-- endtab -->
+
+<!-- tab 第二个tab的名字 -->
+
+正常的文字
+
+插入图片：
+
+![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324021616.png)
+
+<!-- endtab -->
+
+{% endtabs %}
 
 ---
 

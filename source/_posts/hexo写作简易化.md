@@ -6,8 +6,8 @@ toc: true
 top: false
 
 categories: 
-- [笔记,博客]
-tags: [hexo,博客]
+- [笔记]
+tags: [hexo]
 ---
 hexo写文章不像WordPress与Typecho那样拥有后台管理系统，每次都要新通过指令新建文章（若本地创建的话没有配置的front-matter），并且写完后还要清除缓存，生成页面，然后部署。
 而且hexo上传到网上的文章要考虑一个图床的问题，图片若不是url链接是无法在网上被访问到的。
@@ -37,7 +37,7 @@ HexoEditor的缺点：
 Typora[官方网站](https://typora.io/)
 Typora具有写作即样式的效果，使用markdown的语法后会直接将该部分文字转为markdown的样子，真·所见即所得。
 这是刚写完的一句话
-![mark](http://blogimg.wa2000.cn/blog/20200222/4ubdJFf3jImV.png?imageslim)
+![mark](D:\blog\source\_posts\hexo写作简易化.assets\4ubdJFf3jImV.png)
 
 ![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023224.png)
 

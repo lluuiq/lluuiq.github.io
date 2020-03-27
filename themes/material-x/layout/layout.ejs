@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<%- partial('_partial/head') %>
+<body>
+  <%
+  var showCover = false;
+  if (theme.cover) {
+    // 如果页面的Front-matter声明了cover，就取页面的值
+    if (page.cover != undefined && page.cover != undefined) {
+      showCover = page.cover;
+    } else {
+      // 否则，如果是首页，只有首页的第一页显示
+      if (is_home()) {
+        if (page.prev) {
+          showCover = false;
+        } else {
+          showCover = true;
+        }
+      } else {
+        showCover = true;
+      }
+    }
+  }
+  %>
+  <%- partial('_partial/cover', {showCover: showCover}) %>
+  <div class="l_body<%- showCover ? '' : ' nocover' %>">
+    <div class='body-wrapper'>
+      <%- body %>
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <%- partial('_partial/scripts') %>
+  <script>setLoadingBarProgress(100);</script>
+
+  <script>
+	var pjax = new Pjax({
+		elements: "a",
+		selectors: [
+			"title",
+			".l_body",
+			"cover-wrapper",
+		]
+	})
+	function LoadHitoKoto(){
+		fetch('https://v1.hitokoto.cn/?c=a')//加载一言
+		.then(function (res){
+			return res.json();
+		})
+		.then(function (data) {
+			var h_content = document.getElementById('hitokoto-content');
+			var h_from = document.getElementById('hitokoto-from');
+			h_content.innerText = data.hitokoto; 
+			h_from.innerText = "——" + data.from; 
+		})
+		.catch(function (err) {
+			console.error(err);
+		})
+	}
+	function LoadGitalk(){
+		$.getScript("/js/gitalk.js", function() {
+			var gitalk = new Gitalk({
+				clientID: '<%= theme.gitalk.clientID %>',
+				clientSecret: '<%= theme.gitalk.clientSecret %>',
+				accessToken: '<%= theme.gitalk.accessToken %>',
+				repo: '<%= theme.gitalk.repo %>',
+				owner: '<%= theme.gitalk.owner %>',
+				admin: ['<%= theme.gitalk.admin %>'],
+				id: location.pathname,
+				language: '<%= theme.gitalk.language %>',
+				distractionFreeMode: '<%= theme.gitalk.distraction_free_mode %>'
+			});
+			gitalk.render('gitalk-container');
+		});
+	}
+	function LoadMathJax(){
+		$.getScript("//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML", function() {//渲染mathjax
+			MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+			// entry-content是文章页的内容div的class
+			var math = document.getElementsByClassName("entry-content")[0];
+			MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
+		});
+	}
+	function LoadFancybox(){
+		$(".article-entry").find("img").each(function () {//渲染fancy box
+			var t = document.createElement("a");
+			$(t).attr("data-fancybox", "gallery"),
+			$(t).attr("href", $(this).attr("src")),
+			$(this).wrap(t)
+		})
+	}
+	function LoadWpac(){
+		wpac_init = window.wpac_init || [];
+		wpac_init.push({widget: 'Rating', id: <%= theme.widget_pack.id %>});//渲染widget pack（点赞系统）
+		WIDGETPACK_LOADED=false;
+		(function() {
+			WIDGETPACK_LOADED = true;
+			var mc = document.createElement('script');
+			mc.type = 'text/javascript';
+			mc.async = true;
+			mc.src = 'https://embed.widgetpack.com/widget.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+		})();
+	}
+    // 开始 PJAX 执行的函数
+    document.addEventListener('pjax:send', function (){
+		$(".loading").css("display", "block");//加载转圈圈的css
+   });
+
+   // PJAX 完成之后执行的函数，可以和上面的重载放在一起
+   document.addEventListener('pjax:complete', function (){
+		$(".loading").css("display", "none");
+		LoadMathJax();
+		LoadHitoKoto();
+		<% if(theme.widget_pack.enable != false) {%>
+			LoadWpac();
+		<% } %>
+		LoadFancybox();
+		<% if(theme.gitalk.enable != false) {%>
+			LoadGitalk();
+		<% } %>
+   });
+  </script>
+
+  <% if(theme.music && theme.music.enable != false){ %>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" rel="noreferrer">
+	<% if(theme.music.own != false){ %>
+		<div id="aplayer"></div>
+			<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js" rel="noreferrer"></script>
+			<script type="text/javascript" src="<%= theme.music.path %>" rel="noreferrer"></script>
+		</div>
+	<% } else {%>
+		<!-- require APlayer -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+		<!-- require MetingJS -->
+		<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+		<meting-js
+			server="<%= theme.music.server %>"
+			type="<%= theme.music.type %>"
+			id="<%= theme.music.id %>"
+			fixed=true
+			color="<%= theme.music.color %>"
+			mode="<%= theme.music.mode %>"
+			autoplay=<%= theme.music.autoplay == "false" ? true:false %>
+			volume=<%= theme.music.volume %>
+		>
+		</meting-js>
+	<% } %>
+  <% } %>
+  <script>
+	  <% if(theme.latest_comments.enable != false){ %>
+		  get_latest_comments("<%= theme.latest_comments.repo %>");
+	  <% } %>
+  </script>
+</body>
+</html>

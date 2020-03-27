@@ -31,7 +31,7 @@
           <% } %>
         </a>
       <% } %>
-
+      <!-- PC端菜单栏 -->
 			<div class='menu navigation'>
 				<ul class='h-list'>
           <%
@@ -85,7 +85,7 @@
           <%})%>
 				</ul>
 			</div>
-
+      <!-- PC端搜索框 -->
       <% if (theme.search.enable === true) { %>
         <div class="m_search">
           <form name="searchform" class="form u-search-form">
@@ -95,6 +95,7 @@
         </div>
       <% } %>
 
+      <!-- 手机端的搜索按钮与菜单栏按钮 -->
 			<ul class='switcher h-list'>
 				<% if (theme.search.enable === true) { %>
 					<li><a class="s-search flat-btn fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
@@ -104,6 +105,8 @@
 		</div>
 	</div>
 </header>
+
+<!-- 手机端导航栏菜单 -->
 <ul class="menu-phone navigation white-box">
   <%
   let menu_mobile;

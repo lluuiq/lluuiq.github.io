@@ -1,34 +1,30 @@
 ---
-title: hexo本地博客部署流程
+title: hexo本地部署流程
 date: 2020-02-19 21:00:39
-urlname: hexo博客部署流程
+urlname: hexo部署流程
 comments: true
 toc: true
 top: false
 categories: 
-- [笔记,博客]
-tags: [博客,github,hexo]
+- [笔记,hexo]
+tags: [hexo,github]
 ---
 
-最开始用hexo部署过博客，有记录当时的部署过程，现在更新一下，后来又尝试了wordpress与typecho，但个人比较喜欢修改主题样式，感觉wordpress与typecho的封装性太强，于是又回来hexo了。
-
-用hexo部署过博客，有记录当时的部署过程，现在更新一下，后来又尝试了wordpress与typecho，但个人比较喜欢修改主题样式，感觉wordpress与typecho的封装性太强，于是又回来hexo了。
-
-一年前用hexo部署过博客，由于其他事情导致长时间未使用，后来又尝试了wordpress与typecho，但个人比较喜欢修改主题样式，感觉wordpress与typecho的封装性太强，于是又回来继续使用hexo。记录自己重新部署hexo博客的过程，更新以前的部署笔记，故有的时间显示为2019年，但流程都是一样的。
+一年前用hexo部署过博客，由于其他事情导致长时间未使用，后来又尝试了wordpress与typecho，但个人比较喜欢修改主题样式，感觉wordpress与typecho的封装性太强，于是又回来继续使用hexo。记录自己重新部署hexo的过程，更新以前的部署笔记，故有的时间显示为2019年，但流程都是一样的。
 
 这篇笔记里可以看到	
 
-1. [博客本地部署过程](#博客本地部署过程)
+1. [本地部署过程](#本地部署过程)
 2. [静态页面部署到github过程](#博客部署到github过程)
 3. [hexo修改配置](#hexo修改配置)
-4. [为博客绑定域名](#为博客绑定域名)
-5. [将博客源代码保存到github](#将博客源代码保存到github)
+4. [绑定域名](#绑定域名)
+5. [源代码保存到github](#源代码保存到github)
 
 <!-- more -->
 
 ---
 
-# 博客本地部署过程
+# 本地部署过程
 
 需要安装的东西：git、Node.js、hexo。
 
@@ -337,13 +333,14 @@ url内容不用改，修改permalink内容
 
 该markdown文档的内容会在生成一个markdown文档后自动添加进去。
 
-```
+```markdown
 ---
 title: {{ title }} 
 date: {{ date }} 
-comments: true
-toc: true
-top: false
+comments: true # 是否开启评论
+mathjax: false # 是否开启数学公式渲染
+toc: true # 是否启用目录
+top: false # 是否置顶
 
 # 若使用urlname作为永久链接则添加该项
 urlname:
@@ -353,7 +350,7 @@ categories:
 - 同级分类
 tags: [标签1,标签2]
 ---
-# 前言
+
 
 <!-- more -->
 
@@ -369,7 +366,7 @@ tags: [标签1,标签2]
 
 例如
 
-```
+```markdown
 categories: 
 - [生活,笔记]
 - 娱乐
@@ -379,7 +376,7 @@ categories:
 
 也可以将娱乐类改为 `[娱乐,音乐]`，这样就同时是娱乐类中的音乐类。
 
-# 为博客绑定域名
+# 绑定域名
 
 ## 解析域名
 
@@ -429,7 +426,7 @@ categories:
 
 至此，github pages的域名绑定完成了，稍等片刻即可尝试使用域名访问。
 
-# 将博客源代码保存到github
+# 源代码保存到github
 
 ## 创建分支
 

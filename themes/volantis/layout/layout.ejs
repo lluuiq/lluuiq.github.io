@@ -5,7 +5,7 @@
   <%- partial('_partial/cover') %>
   <div class="l_body<%- page.cover ? '' : ' nocover' %>">
     <!-- <%- partial('_partial/side') %> -->
-    <div class='body-wrapper' id="pjax-container">
+    <div class='body-wrapper'>
       <%- body %>
       <script>setLoadingBarProgress(60);</script>
     </div>
@@ -22,9 +22,42 @@
   <!-- <script type="text/javascript"
   color="0,0,0" opacity='1' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
   </script> -->
-
   <%- partial('_partial/scripts') %>
   <script>setLoadingBarProgress(100);</script>
 
+  <script>
+    var pjax = new Pjax({
+      elements: "a",
+      selectors: [
+        "title", //pjax加载标题
+        ".l_main", //pjax加载主内容
+        ".l_side", //pjax加载侧边栏
+        ".switcher .h-list", // 使手机端的搜索框与菜单栏生效
+        // ".h-list",
+      ]
+    })
+
+    //加载fancybox
+    function LoadFancybox(){
+      $(".article-entry").find("img").each(function () {
+        //渲染fancy box
+        var t = document.createElement("a");
+        $(t).attr("data-fancybox", "gallery"),
+        $(t).attr("href", $(this).attr("src")),
+        $(t).attr("margin","0 auto"),
+        $(this).wrap(t)
+      })
+    }
+
+    // 加载pjax后执行的函数
+    document.addEventListener('pjax:complete', function (){
+      LoadFancybox();
+    });
+
+    // 窗口监听load(加载、刷新)事件，执行LoadFancybox()函数
+    window.addEventListener('load',function(){
+      LoadFancybox();
+    });
+  </script>
 </body>
 </html>
