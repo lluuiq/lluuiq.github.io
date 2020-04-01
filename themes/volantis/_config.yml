@@ -3,7 +3,7 @@
 # 找到图标的名字后 使用方式为 icon: fas fa-图标名字
 
 ############################### DIY ###############################
-baidu_analytics_key: c2bc3357bbc3b2f5d156b8afe762f688
+baidu_analytics: true
 
 
 
@@ -154,8 +154,8 @@ cover:
 # 顶部导航栏
 navbar:
   # 设置logo
-  logo: # choose [img] or [icon + title]
-    img: # http://blogimg.wa2000.cn/blog/20200317/bhExRqwTPvKQ.jpg?imageslim
+  logo:
+    img: 
     icon: 
     title: lluuiq
   # 设置导航栏菜单 on_desktop为pc端，on_mobile为移动端
@@ -245,7 +245,7 @@ meta:
   author:
     avatar: https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/avatar1.png
     name: lluuiq
-    url: https://wa2000.cn
+    url: https://lluuiq.com
   # 文章创建日期
   date:
     icon: fas fa-edit
@@ -528,7 +528,7 @@ plugins:
     # 设置类型，song：单曲 playlist：歌单 album：专辑
     type: playlist    # song, playlist, album, search, artist
     # 根据设置的类型填入id
-    id: 4919534023 #4871215193    # song id / playlist id / album id / search keyword
+    id: 4945153572  # song id / playlist id / album id / search keyword
     # Optional
     # 是否固定到页面左下角
     fixed: true      # enable fixed mode
@@ -541,7 +541,7 @@ plugins:
     # 循环方式
     loop: all         # player loop play, values: 'all', 'one', 'none'
     # 默认音量
-    volume: 0.5       # default volume, notice that player will remember user setting, default volume will not work after user set volume themselves
+    volume: 0.3       # default volume, notice that player will remember user setting, default volume will not work after user set volume themselves
     # 打开歌曲列表时的最大高度
     list_max_height: 500px # list max height
     list_folded: true
@@ -551,7 +551,7 @@ plugins:
 
 ############################### Comments ###############################
 # 设置评论
-# comments:
+comments:
   title: <i class='fas fa-comments'></i> 评论
   subtitle:
   # 设置评论服务商
@@ -572,14 +572,14 @@ plugins:
     visitor: false # unavailable for now...
   disqus:
     shortname:
-  gitalk:
-    clientID:
-    clientSecret:
-    repo:
-    owner:
-    admin: # []
-  livere:
-    uid:
+  # gitalk:
+    # clientID: 0be79de503d8cfb1e930
+    # clientSecret: f5758a63cce89f357e251159baec4c0066afeaea
+    # repo: https://github.com/lluuiq/lluuiq.github.io
+    # owner: lluuiq
+    # admin: lluuiq
+  # livere:
+    # uid: MTAyMC80NTkzOC8yMjQ0OQ
 
 
 

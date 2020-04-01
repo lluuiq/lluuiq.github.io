@@ -336,3 +336,40 @@ window.addEventListener('load',function(){
 
 ![image-20200327013730981](D:\blog\source\_posts\Volantis主题DIY笔记.assets\image-20200327013730981.png)
 
+## 添加百度统计
+
+首先到[百度统计](https://tongji.baidu.com/)注册帐号，然后到管理界面，新增网站
+
+![image-20200401125207533](D:\blog\source\_posts\Volantis主题DIY笔记.assets\image-20200401125207533.png)
+
+新增后，会给一段代码，将其复制，并在外面加上ejs模板的语句
+
+```ejs
+<% if (theme.baidu_analytics){ %>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?【你的key】";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+<% } %>
+```
+
+打`layout\_partial\scripts.ejs`，将该段代码插入到最后
+
+![image-20200401125553039](D:\blog\source\_posts\Volantis主题DIY笔记.assets\image-20200401125553039.png)
+
+再打开`_config.yml`，加入一条语句
+
+```yml
+baidu_analytics: true
+```
+
+因为用js文件加载的方式，所以百度统计上的代码检查功能失效，需要手动检查。
+
+保存后，打开网站，按F12打开开发者工具，然后刷新页面，在js文件中看到以hm开头的js文件说明配置成功
+
+![image-20200401125819253](D:\blog\source\_posts\Volantis主题DIY笔记.assets\image-20200401125819253.png)

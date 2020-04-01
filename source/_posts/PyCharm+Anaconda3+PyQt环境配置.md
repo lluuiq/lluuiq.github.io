@@ -9,6 +9,7 @@ categories:
 tags:
   - Anaconda3
   - PyQt
+  - PyCharm
 date: 2020-03-29 00:13:44
 ---
 
@@ -68,6 +69,6 @@ Working directory使用当前文件所在的目录
 $FileDir$
 ```
 
-![image-20200329005406124](D:\blog\source\_posts\新建文章.assets\image-20200329005406124.png)
+![image-20200329005406124](https://gitee.com/lluuiq/blog_img/raw/master/img/20200331181240.png)
 
 添加后保存即可。这样每次用designer生成的代码只需要右键->External Tools->pyuic即可生成python文件在相同目录下。

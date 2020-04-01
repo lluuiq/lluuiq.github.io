@@ -92,8 +92,8 @@
     </script>
   <% } %>
 <% } %>
-
-<% if (theme.plugins.aplayer && theme.plugins.aplayer.enable && theme.plugins.aplayer.js) { %>
+<!-- theme.plugins.aplayer.js -->
+<% if (theme.plugins.aplayer && theme.plugins.aplayer.enable) { %>
   <% (theme.plugins.aplayer.js||[]).forEach(function(item){ %>
     <%- js({src:item,async:true}) %>
   <% }) %>
@@ -203,6 +203,7 @@
   </script>
 <% } %>
 
+
 <% if (config.use_cdn && theme.info && theme.info.cdn && theme.info.cdn.js) { %>
   <%- js(theme.info.cdn.js) %>
 <% } else { %>
@@ -230,4 +231,17 @@
 <% if (config.import && config.import.script){ %>
 <% (config.import.script||[]).forEach(function(item){ %>
 <%- item %><% }) %>
+<% } %>
+
+
+<% if (theme.baidu_analytics){ %>
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?23032f56a100d5a5e26ed5b9d94163c7";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
 <% } %>

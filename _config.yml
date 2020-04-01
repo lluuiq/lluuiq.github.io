@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://wa2000.cn
+url: https://lluuiq.com
 root: /
 permalink: post/:year:month:day:hour:minute/
 permalink_defaults:
