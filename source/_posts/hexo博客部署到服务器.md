@@ -118,25 +118,25 @@ tags: [hexo,github,webhook]
 
 **Centos安装命令：**
 
-```
+```shell
 yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh
 ```
 
 **Ubuntu/Deepin安装命令：**
 
-```
+```shell
 wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh && sudo bash install.sh
 ```
 
 **Debian安装命令：**
 
-```
+```shell
 wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh && bash install.sh
 ```
 
 **Fedora安装命令:**
 
-```
+```shell
 wget -O install.sh http://download.bt.cn/install/install_6.0.sh && bash install.sh
 ```
 
@@ -243,12 +243,12 @@ wget -O install.sh http://download.bt.cn/install/install_6.0.sh && bash install.
 
 注：
 
-1. 原代码有一个$1变量，在后面的密钥部分的URL地址最后通过param=X，将X作为 该变量传入脚本，但因为我无论怎么改都会出现参数错误，因此将该变量删掉了。然后改一下代码，将$1的参数替换为固定的值，只要站点目录存在就没问题。
+1. 原代码有一个\$1变量，在后面的密钥部分的URL地址最后通过param=X，将X作为 该变量传入脚本，但因为我无论怎么改都会出现参数错误，因此将该变量删掉了。然后改一下代码，将​\$1的参数替换为固定的值，只要站点目录存在就没问题。
 2. 大概是因为自己设置了保存博客源代码的分支为默认分支的原因，用原代码里面的有一句`git pull`总是拉不过来文件，在服务器上手动拉取发现拉取的是博客源代码的分支。故在原代码中将`git pull`改成`git pull origin master`来指定拉取静态页面的分支。
 
-![image-20200228112635921](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324072705.png)
+![image-20200403154315216](https://gitee.com/lluuiq/blog_img/raw/master/img/20200403160129.png)
 
-```
+```shell
 #!/bin/bash
 echo ""
 #输出当前时间
@@ -267,14 +267,14 @@ if [ -d "$gitPath" ]; then
         #判断是否存在git目录
         if [ ! -d ".git" ]; then
                 echo "在该目录下克隆 git"
-                sudo git clone $gitHttp gittemp
+                sudo -Hu www git clone $gitHttp gittemp --depth=1
                 sudo mv gittemp/.git .
                 sudo rm -rf gittemp
         fi
         #拉取最新的项目文件
         echo "拉取最新文件"
-        sudo git reset --hard origin/master
-        sudo git pull origin master
+        sudo -Hu www git reset --hard origin/master
+        sudo -Hu www git pull origin master
         #设置目录权限
         echo "设置目录权限"
         sudo chown -R www:www $gitPath
@@ -361,9 +361,9 @@ gitHttp="https://github.com/XXXXXX.git"
 
 按步骤填写即可注册证书。添加后下载证书，然后解压。
 
-若关闭了界面，可以在域名管理处下载证书
+若关闭了界面，可以在SSL证书处下载证书
 
-![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324072829.png)
+![image-20200403152926736](https://gitee.com/lluuiq/blog_img/raw/master/img/20200403152945.png)
 
 打开下载好的文件夹，打开Apache
 
@@ -685,7 +685,7 @@ git remote add origin 【github仓库的ssh地址】
 
 我的代码为`mkdir admin`与`vim deploy.sh`
 
-```
+```shell
 mkdir 【新建的文件夹】
 cd 【创建的文件夹】
 vim 【脚本名】.sh
@@ -693,7 +693,7 @@ vim 【脚本名】.sh
 
 在脚本文件中输入下方指令，“save blog”里面是更新说明，自定义填写。
 
-```
+```shell
 #!/usr/bin/env sh
 hexo g
 hexo d

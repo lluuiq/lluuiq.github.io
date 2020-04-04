@@ -5,6 +5,8 @@
 		<%- partial('_partial/archive') %>
 	<% } else { %>
 	  <article id="archive-page" class="post article white-box <%- theme.style.body.effect.join(' ') %>">
+		<!-- 插入类似github的文章日历，pjax无法加载，暂时舍弃 -->
+		<!-- <%- partial('_widget/post-calendar') %> -->
 	    <section class="archive">
 	      <%
 	        var year = -1, postid = -1;

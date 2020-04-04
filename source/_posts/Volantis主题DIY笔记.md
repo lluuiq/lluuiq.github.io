@@ -334,13 +334,77 @@ window.addEventListener('load',function(){
 
 打开source/css/_layout/navbar.styl 搜索`&:active,&.active` 将该部分代码注释
 
-![image-20200327013730981](D:\blog\source\_posts\Volantis主题DIY笔记.assets\image-20200327013730981.png)
+![image-20200327013730981](https://gitee.com/lluuiq/blog_img/raw/master/img/20200401152132.png)
+
+### pjax刷新评论
+
+**问题**：实现pjax后发现通过pjax刷新页面后评论无法成功加载，推测是因为评论由js脚本引入，pjax刷新页面不会加载js。
+
+**解决思路**：当pjax执行完成后再次调用评论js脚本来生成评论。
+
+在pjax脚本中插入以下代码，其中调用脚本的方式有两种，用哪一个都可以。
+
+```js
+function LoadValine(){
+    // 两种调用方式，一个调用配置里的js路径，一个调用本地，用哪个都可以
+ // $.getScript("<%= theme.comments.valine.js %>", function() {
+    $.getScript("/js/Valine.js", function() {
+        
+      // 生成评论的代码
+      var GUEST_INFO = ['nick','mail','link'];
+      var guest_info = '<%= theme.comments.valine.meta %>'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+      });
+      var notify = '<%= theme.comments.valine.notify %>' == true;
+      var verify = '<%= theme.comments.valine.verify %>' == true;
+      var valine = new Valine();
+      valine.init({
+        el: '#valine_container',
+        notify: notify,
+        verify: verify,
+        guest_info: guest_info,
+        <% if (page.valine && page.valine.path) { %>
+          path: "<%= page.valine.path %>",
+        <% } else if (theme.comments.valine.path) { %>
+          path: "<%= theme.comments.valine.path %>",
+        <% } %>
+        appId: "<%= theme.comments.valine.appId %>",
+        appKey: "<%= theme.comments.valine.appKey %>",
+        placeholder: "<%= (page.valine && page.valine.placeholder) ? page.valine.placeholder : theme.comments.valine.placeholder %>",
+        pageSize:'<%= theme.comments.valine.pageSize %>',
+        avatar:'<%= theme.comments.valine.avatar %>',
+        lang:'<%= theme.comments.valine.lang %>',
+        visitor: '<%- theme.comments.valine.visitor %>',
+        highlight:'<%= theme.comments.valine.highlight %>'
+      })
+	});
+}
+```
+
+然后在监听pjax完成后的函数里调用函数
+
+```js
+// 加载pjax后执行的函数
+document.addEventListener('pjax:complete', function (){
+    LoadFancybox();
+    // 调用刚刚设置的函数
+    LoadValine();
+});
+```
+
+结果应该如图：
+
+![image-20200401152044289](https://gitee.com/lluuiq/blog_img/raw/master/img/20200401152053.png)
+
+**源码位置：**`layout\_partial\scripts.ejs`，上述代码中生成评论的部分即红框内的部分
+
+![image-20200401152329756](https://gitee.com/lluuiq/blog_img/raw/master/img/20200401152332.png)
 
 ## 添加百度统计
 
 首先到[百度统计](https://tongji.baidu.com/)注册帐号，然后到管理界面，新增网站
 
-![image-20200401125207533](D:\blog\source\_posts\Volantis主题DIY笔记.assets\image-20200401125207533.png)
+![image-20200401125207533](https://gitee.com/lluuiq/blog_img/raw/master/img/20200401152138.png)
 
 新增后，会给一段代码，将其复制，并在外面加上ejs模板的语句
 
@@ -360,7 +424,7 @@ window.addEventListener('load',function(){
 
 打`layout\_partial\scripts.ejs`，将该段代码插入到最后
 
-![image-20200401125553039](D:\blog\source\_posts\Volantis主题DIY笔记.assets\image-20200401125553039.png)
+![image-20200401125553039](https://gitee.com/lluuiq/blog_img/raw/master/img/20200401152144.png)
 
 再打开`_config.yml`，加入一条语句
 
@@ -372,4 +436,5 @@ baidu_analytics: true
 
 保存后，打开网站，按F12打开开发者工具，然后刷新页面，在js文件中看到以hm开头的js文件说明配置成功
 
-![image-20200401125819253](D:\blog\source\_posts\Volantis主题DIY笔记.assets\image-20200401125819253.png)
+![image-20200401125819253](https://gitee.com/lluuiq/blog_img/raw/master/img/20200401152147.png)
+

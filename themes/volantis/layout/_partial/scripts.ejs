@@ -45,7 +45,7 @@
         $(this).parent().append($(this).remove());
       });
     });
-    </script>
+  </script>
 <% } %>
 
 <% if (theme.plugins.backstretch && theme.plugins.backstretch.enable && (theme.plugins.backstretch.images || page.images)) { %>
@@ -173,6 +173,7 @@
   <% } else { %>
     <%- js(['js/valine.js']) %>
   <% } %>
+
   <script>
   var GUEST_INFO = ['nick','mail','link'];
   var guest_info = '<%= theme.comments.valine.meta %>'.split(',').filter(function(item){

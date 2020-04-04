@@ -27,6 +27,11 @@
   <script>setLoadingBarProgress(100);</script>
 
   <script>
+    // 窗口监听load(加载、刷新)事件，执行LoadFancybox()函数
+    window.addEventListener('load',function(){
+      LoadFancybox();
+    });
+
     var pjax = new Pjax({
       elements: "a",
       selectors: [
@@ -46,18 +51,57 @@
         $(t).attr("href", $(this).attr("src")),
         $(t).attr("margin","0 auto"),
         $(this).wrap(t)
-      })
+      });
     }
+
+    function LoadValine(){
+      $.getScript("<%= theme.comments.valine.js %>", function() {
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = '<%= theme.comments.valine.meta %>'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        var notify = '<%= theme.comments.valine.notify %>' == true;
+        var verify = '<%= theme.comments.valine.verify %>' == true;
+        var valine = new Valine();
+        valine.init({
+          el: '#valine_container',
+          notify: notify,
+          verify: verify,
+          guest_info: guest_info,
+          <% if (page.valine && page.valine.path) { %>
+            path: "<%= page.valine.path %>",
+          <% } else if (theme.comments.valine.path) { %>
+            path: "<%= theme.comments.valine.path %>",
+          <% } %>
+          appId: "<%= theme.comments.valine.appId %>",
+          appKey: "<%= theme.comments.valine.appKey %>",
+          placeholder: "<%= (page.valine && page.valine.placeholder) ? page.valine.placeholder : theme.comments.valine.placeholder %>",
+          pageSize:'<%= theme.comments.valine.pageSize %>',
+          avatar:'<%= theme.comments.valine.avatar %>',
+          lang:'<%= theme.comments.valine.lang %>',
+          visitor: '<%- theme.comments.valine.visitor %>',
+          highlight:'<%= theme.comments.valine.highlight %>'
+        })
+      });
+    }
+  
+    // function LoadBaidu(){
+    //   var _hmt = _hmt || [];
+    //   (function() {
+    //     var hm = document.createElement("script");
+    //     hm.src = "https://hm.baidu.com/hm.js?23032f56a100d5a5e26ed5b9d94163c7";
+    //     var s = document.getElementsByTagName("script")[0]; 
+    //     s.parentNode.insertBefore(hm, s);
+    //   })();
+    // }
 
     // 加载pjax后执行的函数
     document.addEventListener('pjax:complete', function (){
       LoadFancybox();
+      LoadValine();
+      // LoadBaidu();
     });
 
-    // 窗口监听load(加载、刷新)事件，执行LoadFancybox()函数
-    window.addEventListener('load',function(){
-      LoadFancybox();
-    });
   </script>
 </body>
 </html>
