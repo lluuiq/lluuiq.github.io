@@ -8,20 +8,15 @@ links:
     icon: fas fa-user-tie
 	# 描述
     desc: 
-    # items:
-    - name:     # 博客名
-      avatar:   # 头像链接
-      url:      # 博客链接
-	  # 卡片背景颜色
+    items:
+    - name: zhyhy
+      avatar: https://gitee.com/hy_z/Bolg_picture/raw/master/img/20200405231155.png 
+      url: http://hyzz.site
       backgroundColor: '#3E74C9'
-      # 卡片文字颜色
-      textColor: '#fff'  
-	  # 标签
-      tags: [标签1, 标签2]    
+      textColor: '#fff'
+      tags: [标签1,标签2]    
 	  # 描述文字
       desc: 描述文字
 ---
-
-暂无。。
 
 <!--more-->

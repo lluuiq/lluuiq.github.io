@@ -116,12 +116,12 @@ Deploy可以部署一些脚本
 
 ![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023231.png)
 
-![mark](http://blogimg.wa2000.cn/blog/20200222/2vcs0AaFPDT8.png?imageslim)
+![mark](https://gitee.com/lluuiq/blog_img/raw/master/img/20200407221243.png)
 
 ## 为后台添加密码
 可以设置是否需要帐号密码进入后台。（设置后每次hexo clean后登陆都要帐号密码）
 点击Settings，点击如图所示的链接
-![mark](http://blogimg.wa2000.cn/blog/20200222/I9MedKH58PPm.png?imageslim)
+![mark](https://gitee.com/lluuiq/blog_img/raw/master/img/20200407221234.png)
 然后填好帐号与密码，Secret是加密用的，内容不用改。
 
 ![mark](https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023233.png)
