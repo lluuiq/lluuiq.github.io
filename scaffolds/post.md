@@ -4,6 +4,7 @@ date: {{ date }}
 comments: true
 toc: true
 top: false
+mathjax: false
 
 categories: 
 - [父类,子类]

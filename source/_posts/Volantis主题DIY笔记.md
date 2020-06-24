@@ -328,6 +328,14 @@ window.addEventListener('load',function(){
 
 - 放大图片再关闭后，页面位置与放大前不对应，会返回到放大前一张图片时的位置 。
 
+
+
+**更新：**
+
+将原来代码中的`$(t).attr("data-fancybox","gallery"),`中的`"gallery"`改为`""`
+
+![image-20200625071949974](https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200625071949974.png)
+
 ---
 
 实现pjax后发现导航栏在点击不同部分时，主题的下划线不会改变，进行修改没有修改成，故直接将CSS代码注释

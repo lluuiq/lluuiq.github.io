@@ -3,17 +3,15 @@ title: CLion配置C/C++开发环境
 comments: true
 toc: true
 top: false
+
 categories:
-  - - 笔记
-	- C
-tags:
-  - CLion
-  - C
-  - C++
+- [笔记,C]
+tags: [CLion,C,C++]
+
 date: 2020-04-06 22:33:21
 ---
 
-
+记录配置CLion的过程
 
 <!-- more -->
 

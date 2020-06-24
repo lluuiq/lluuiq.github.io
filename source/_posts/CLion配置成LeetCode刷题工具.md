@@ -3,12 +3,11 @@ title: CLion配置成LeetCode做题工具
 comments: true
 toc: true
 top: false
+
 categories:
-  - - 笔记
-	- C
-tags:
-  - CLion
-  - C
+- [妙妙工具箱]
+tags: [CLion]
+
 date: 2020-04-07 13:21:56
 ---
 

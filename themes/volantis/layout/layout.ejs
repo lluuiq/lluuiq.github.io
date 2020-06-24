@@ -28,7 +28,7 @@
 
   <script>
     // 窗口监听load(加载、刷新)事件，执行LoadFancybox()函数
-    window.addEventListener('load',function(){
+    $(function(){
       LoadFancybox();
     });
 
@@ -47,7 +47,7 @@
       $(".article-entry").find("img").each(function () {
         //渲染fancy box
         var t = document.createElement("a");
-        $(t).attr("data-fancybox", "gallery"),
+        $(t).attr("data-fancybox", ""),
         $(t).attr("href", $(this).attr("src")),
         $(t).attr("margin","0 auto"),
         $(this).wrap(t)
@@ -85,16 +85,6 @@
       });
     }
   
-    // function LoadBaidu(){
-    //   var _hmt = _hmt || [];
-    //   (function() {
-    //     var hm = document.createElement("script");
-    //     hm.src = "https://hm.baidu.com/hm.js?23032f56a100d5a5e26ed5b9d94163c7";
-    //     var s = document.getElementsByTagName("script")[0]; 
-    //     s.parentNode.insertBefore(hm, s);
-    //   })();
-    // }
-
     // 加载pjax后执行的函数
     document.addEventListener('pjax:complete', function (){
       LoadFancybox();

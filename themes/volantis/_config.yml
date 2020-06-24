@@ -243,7 +243,7 @@ meta:
   title: # 暂无配置
   # 默认文章作者（可在front-matter中覆盖）
   author:
-    avatar: https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/avatar1.png
+    avatar: https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png
     name: lluuiq
     url: https://lluuiq.com
   # 文章创建日期
@@ -325,7 +325,7 @@ widget:
     class: blogger
     # 设置是否在PC端、移动端展示
     display: [desktop] # [desktop, mobile]
-    avatar: https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/avatar1.png
+    avatar: https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png
     title: lluuiq
     subtitle: fly me to the star
     jinrishici: false # 随机诗句
