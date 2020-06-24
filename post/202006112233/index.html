@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>吴恩达深度学习编程作业1-3 - lluuiq&#39;s blog</title>
+  
+    <meta name="keywords" content="神经网络">
+  
+  
+    <meta name="description" content="吴恩达深度学习课程《神经网络和深度学习》第三周（浅层神经网络）的编程作业。">
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="lluuiq's blog">
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css">
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/global-hot-data.js" ></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script> -->
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script> -->
+
+
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script>
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+
+  <div class='wrapper'>
+    <div class='nav-sub container--flex'>
+      <a class="logo flat-box"></a>
+      <ul class='switcher h-list'>
+        <li><a class="s-comment flat-btn fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc flat-btn fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main container container--flex">
+      
+        
+        <a class="logo flat-box" target="_self" href='/'>
+          
+          
+          
+            lluuiq
+          
+          
+        </a>
+      
+      <!-- PC端菜单栏 -->
+			<div class='menu navigation'>
+				<ul class='h-list'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  
+                    <i class='fas fa-home fa-fw'></i>
+                  
+                  首页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  
+                    <i class='fas fa-tags fa-fw'></i>
+                  
+                  标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  
+                    <i class='fas fa-archive fa-fw'></i>
+                  
+                  归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  
+                    <i class='fas fa-link fa-fw'></i>
+                  
+                  友人帐
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  
+                    <i class='fas fa-info-circle fa-fw'></i>
+                  
+                  关于我
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+      <!-- PC端搜索框 -->
+      
+        <div class="m_search">
+          <form name="searchform" class="form u-search-form">
+            <i class="icon fas fa-search fa-fw"></i>
+            <input type="text" class="input u-search-input" placeholder="想找些什么？" />
+          </form>
+        </div>
+      
+
+      <!-- 手机端的搜索按钮与菜单栏按钮 -->
+			<ul class='switcher h-list'>
+				
+					<li><a class="s-search flat-btn fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li><a class="s-menu flat-btn fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+
+<!-- 手机端导航栏菜单 -->
+<ul class="menu-phone navigation white-box">
+  
+  
+    <li>
+      <a class="flat-box" href=/
+        
+        
+        
+          id="home"
+        >
+        
+          <i class='fas fa-home fa-fw'></i>
+        
+        首页
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/categories/
+        
+        
+        
+          id="categories"
+        >
+        
+          <i class='fas fa-folder-open fa-fw'></i>
+        
+        分类
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/tags/
+        
+        
+        
+          id="tags"
+        >
+        
+          <i class='fas fa-tags fa-fw'></i>
+        
+        标签
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/archives/
+        
+        
+        
+          id="archives"
+        >
+        
+          <i class='fas fa-archive fa-fw'></i>
+        
+        归档
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/friends/
+        
+        
+        
+          id="friends"
+        >
+        
+          <i class='fas fa-link fa-fw'></i>
+        
+        友人帐
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/about/
+        
+        
+        
+          id="about"
+        >
+        
+          <i class='fas fa-info-circle fa-fw'></i>
+        
+        关于我
+      </a>
+    </li>
+  
+</ul>
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导包"><span class="toc-text">导包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加载数据集"><span class="toc-text">加载数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将数据集可视化"><span class="toc-text">将数据集可视化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看逻辑回归的准确率"><span class="toc-text">查看逻辑回归的准确率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建单隐藏层神经网络"><span class="toc-text">构建单隐藏层神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#流程："><span class="toc-text">流程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义神经网络结构"><span class="toc-text">定义神经网络结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义模型参数初始化函数"><span class="toc-text">定义模型参数初始化函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义正向传播函数"><span class="toc-text">定义正向传播函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义计算代价函数的函数"><span class="toc-text">定义计算代价函数的函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义反向传播函数"><span class="toc-text">定义反向传播函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义更新参数的函数"><span class="toc-text">定义更新参数的函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打包成模型函数"><span class="toc-text">打包成模型函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#出现的问题："><span class="toc-text">出现的问题：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进行预测"><span class="toc-text">进行预测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编写预测函数"><span class="toc-text">编写预测函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看准确率"><span class="toc-text">查看准确率</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+    <div class='body-wrapper'>
+      
+
+<aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导包"><span class="toc-text">导包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加载数据集"><span class="toc-text">加载数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将数据集可视化"><span class="toc-text">将数据集可视化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看逻辑回归的准确率"><span class="toc-text">查看逻辑回归的准确率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建单隐藏层神经网络"><span class="toc-text">构建单隐藏层神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#流程："><span class="toc-text">流程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义神经网络结构"><span class="toc-text">定义神经网络结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义模型参数初始化函数"><span class="toc-text">定义模型参数初始化函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义正向传播函数"><span class="toc-text">定义正向传播函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义计算代价函数的函数"><span class="toc-text">定义计算代价函数的函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义反向传播函数"><span class="toc-text">定义反向传播函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义更新参数的函数"><span class="toc-text">定义更新参数的函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打包成模型函数"><span class="toc-text">打包成模型函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#出现的问题："><span class="toc-text">出现的问题：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进行预测"><span class="toc-text">进行预测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编写预测函数"><span class="toc-text">编写预测函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看准确率"><span class="toc-text">查看准确率</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/post/202006112233/">
+        吴恩达深度学习编程作业1-3
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+<div class='new-meta-item author'>
+  <a href="https://lluuiq.com" rel="nofollow">
+    <img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png">
+    <p>lluuiq</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>神经网络&nbsp;/&nbsp;学习笔记</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-edit" aria-hidden="true"></i>
+    <p>发布于：2020年6月11日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：2.3k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：9分钟</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>吴恩达深度学习课程《神经网络和深度学习》第三周（浅层神经网络）的编程作业。</p>
+<a id="more"></a>
+
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>感谢作者<a href="https://blog.csdn.net/u013733326" target="_blank" rel="noopener">阿宽</a>提供作业题目<a href="https://blog.csdn.net/u013733326/article/details/79702148" target="_blank" rel="noopener">【中文】【吴恩达课后编程作业】Course 1 - 神经网络和深度学习 - 第三周作业</a></p>
+<p>数据集以及题目可在该博文中查看与下载。</p>
+<p>题目为建立 单隐藏层的神经网络 对平面数据进行分类。</p>
+<p>下载的文件中：</p>
+<ul>
+<li>testCases 提供一些测试案例来评估正确性，可打开该文件来查看一些测试用例（我这里就不写测试函数了，原博文中有编写）。</li>
+<li>planar_utils 提供在该作业中需要使用的一些功能。</li>
+</ul>
+<p>需要的库：</p>
+<ul>
+<li>numpy 数据科学计算的库</li>
+<li>matplotlib 绘图</li>
+<li>sklearn 机器学习工具包</li>
+<li></li>
+</ul>
+<h2 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> testCases <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> sklearn</span><br><span class="line"><span class="keyword">import</span> sklearn.datasets</span><br><span class="line"><span class="keyword">import</span> sklearn.linear_model</span><br><span class="line"><span class="keyword">from</span> planar_utils <span class="keyword">import</span> plot_decision_boundary, sigmoid, load_planar_dataset, load_extra_datasets</span><br><span class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>]=<span class="literal">False</span></span><br><span class="line">plt.rcParams[<span class="string">'font.family'</span>]=<span class="string">'SimHei'</span></span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置一个随机数种子，与原博文保持一致</span></span><br><span class="line">np.random.seed(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="加载数据集"><a href="#加载数据集" class="headerlink" title="加载数据集"></a>加载数据集</h2><p>查看一下X与Y的维度和类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">X,Y=load_planar_dataset()</span><br><span class="line">print(<span class="string">"X的维度为："</span>,X.shape,<span class="string">"X的类型为："</span>,type(X))</span><br><span class="line">print(<span class="string">"Y的维度为："</span>,Y.shape,<span class="string">"Y的类型为："</span>,type(Y))</span><br></pre></td></tr></table></figure>
+
+<p>结果如图：</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200611052154.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200611052154.png" alt="image-20200611052153391"></a></p>
+<p>可知一共有400个样本。其中X的维度中的2为对应的平面图的X轴、Y轴坐标。</p>
+<p>Y的取值为0或1，为样本的标签。  </p>
+<h2 id="将数据集可视化"><a href="#将数据集可视化" class="headerlink" title="将数据集可视化"></a>将数据集可视化</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.scatter(X[<span class="number">0</span>, :], X[<span class="number">1</span>, :], c=np.squeeze(Y), s=<span class="number">40</span>, cmap=plt.cm.Spectral)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>结果如图：</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200611051941.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200611051941.png" alt="image-20200611051939893"></a></p>
+<p>其中y=0的标签在图中为红色点。</p>
+<p>y=1的标签在图中为蓝色点。  </p>
+<h2 id="查看逻辑回归的准确率"><a href="#查看逻辑回归的准确率" class="headerlink" title="查看逻辑回归的准确率"></a>查看逻辑回归的准确率</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用sklearn库建立逻辑回归模型</span></span><br><span class="line">clf = sklearn.linear_model.LogisticRegressionCV()</span><br><span class="line">clf.fit(X.T,Y.T)</span><br><span class="line"></span><br><span class="line">plot_decision_boundary(<span class="keyword">lambda</span> x: clf.predict(x), X, np.squeeze(Y)) <span class="comment">#绘制决策边界</span></span><br><span class="line">plt.title(<span class="string">"逻辑回归"</span>) <span class="comment">#图标题</span></span><br><span class="line">LR_predictions  = clf.predict(X.T) <span class="comment">#预测结果</span></span><br><span class="line"><span class="keyword">print</span> (<span class="string">"逻辑回归的准确性："</span>,float((np.dot(Y, LR_predictions) + np.dot(<span class="number">1</span> - Y,<span class="number">1</span> - LR_predictions)) / float(Y.size) * <span class="number">100</span>),</span><br><span class="line">       <span class="string">"%"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果如图：</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200611054526.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200611054526.png" alt="image-20200611054524905"></a></p>
+<p>47%表示的为预测正确的所占百分比。</p>
+<p>由结果图可知，逻辑回归的线性决策边界并不能很好的区分这些数据，故正确率仅有47%。  </p>
+<h2 id="构建单隐藏层神经网络"><a href="#构建单隐藏层神经网络" class="headerlink" title="构建单隐藏层神经网络"></a>构建单隐藏层神经网络</h2><h3 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h3><ul>
+<li>定义神经网络结构</li>
+<li>初始化模型参数</li>
+<li>进行梯度下降（正向、反向传播、计算代价函数、更新参数）</li>
+</ul>
+<p>其中正向传播与反向传播的公式：</p>
+<p>正向传播（左），反向传播（右）</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200611065023.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200611065023.png" alt="image-20200611065022546"></a></p>
+<p>可以把这些功能整合到一个模型函数中。</p>
+<p>接下来先根据步骤来逐一编写实现代码。  </p>
+<h3 id="定义神经网络结构"><a href="#定义神经网络结构" class="headerlink" title="定义神经网络结构"></a>定义神经网络结构</h3><p>在这一步定义好神经网络的输入层单元的数量、隐藏层单元的数量、输出层单元的数量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">layer_sizes</span><span class="params">(X , Y)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">     X - 输入特征,维度为（输入特征的数量，样本数）</span></span><br><span class="line"><span class="string">     Y - 标签，维度为（输出的数量，样本数）</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">     n_x - 输入层单元的数量</span></span><br><span class="line"><span class="string">     n_h - 隐藏层单元的数量</span></span><br><span class="line"><span class="string">     n_y - 输出层单元的数量</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    n_x = X.shape[<span class="number">0</span>] </span><br><span class="line">    <span class="comment"># 手动定义为4个隐藏单元</span></span><br><span class="line">    n_h = <span class="number">4</span> </span><br><span class="line">    n_y = Y.shape[<span class="number">0</span>] </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> (n_x,n_h,n_y)</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义模型参数初始化函数"><a href="#定义模型参数初始化函数" class="headerlink" title="定义模型参数初始化函数"></a>定义模型参数初始化函数</h3><ul>
+<li>定义了随机数种子为2，确保结果一致。</li>
+<li>不像第二周作业一样用0初始化，改为随机数初始化，不然梯度下降失去作用。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_parameters</span><span class="params">( n_x , n_h ,n_y)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        n_x - 输入层单元的数量</span></span><br><span class="line"><span class="string">        n_h - 隐藏层单元的数量</span></span><br><span class="line"><span class="string">        n_y - 输出层单元的数量</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        params - 包含参数的字典：</span></span><br><span class="line"><span class="string">            W1 - 权重矩阵,维度为（n_h，n_x）</span></span><br><span class="line"><span class="string">            b1 - 偏向量，维度为（n_h，1）</span></span><br><span class="line"><span class="string">            W2 - 权重矩阵，维度为（n_y，n_h）</span></span><br><span class="line"><span class="string">            b2 - 偏向量，维度为（n_y，1）</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 定义随机数种子，确保结果一致</span></span><br><span class="line">    np.random.seed(<span class="number">2</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 使用随机数初始化</span></span><br><span class="line">    W1 = np.random.randn(n_h,n_x) * <span class="number">0.01</span></span><br><span class="line">    b1 = np.zeros(shape=(n_h, <span class="number">1</span>))</span><br><span class="line">    W2 = np.random.randn(n_y,n_h) * <span class="number">0.01</span></span><br><span class="line">    b2 = np.zeros(shape=(n_y, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    parameters = &#123;</span><br><span class="line">        <span class="string">"W1"</span> : W1,</span><br><span class="line">        <span class="string">"b1"</span> : b1,</span><br><span class="line">        <span class="string">"W2"</span> : W2,</span><br><span class="line">        <span class="string">"b2"</span> : b2 </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义正向传播函数"><a href="#定义正向传播函数" class="headerlink" title="定义正向传播函数"></a>定义正向传播函数</h3><ul>
+<li>这里将初始化函数的返回值（字典作为传入参数）</li>
+<li>隐藏层使用的激活函数是tanh。输出层使用sigmoid，因为想要输出结果的取值范围在[0,1]·。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward_propagation</span><span class="params">( X , parameters )</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">         X - 维度为（n_x，样本数）的输入特征。</span></span><br><span class="line"><span class="string">         parameters - 初始化函数（initialization_parameters）的输出</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">         A2 - 使用sigmoid()函数计算的第二次激活后的数值</span></span><br><span class="line"><span class="string">         cache - 包含“Z1”，“A1”，“Z2”和“A2”的字典类型变量</span></span><br><span class="line"><span class="string">     """</span></span><br><span class="line">    <span class="comment"># 读取初始化后的参数</span></span><br><span class="line">    W1 = parameters[<span class="string">"W1"</span>]</span><br><span class="line">    b1 = parameters[<span class="string">"b1"</span>]</span><br><span class="line">    W2 = parameters[<span class="string">"W2"</span>]</span><br><span class="line">    b2 = parameters[<span class="string">"b2"</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 正向传播，最终输出A2</span></span><br><span class="line">    Z1 = np.dot(W1 , X) + b1</span><br><span class="line">    A1 = np.tanh(Z1) <span class="comment"># 隐藏层使用numpy自带的tanh函数</span></span><br><span class="line">    Z2 = np.dot(W2 , A1) + b2</span><br><span class="line">    A2 = sigmoid(Z2) <span class="comment"># 输出层使用sigmoid激活函数</span></span><br><span class="line"></span><br><span class="line">    cache = &#123;<span class="string">"Z1"</span>: Z1,</span><br><span class="line">             <span class="string">"A1"</span>: A1,</span><br><span class="line">             <span class="string">"Z2"</span>: Z2,</span><br><span class="line">             <span class="string">"A2"</span>: A2&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> (A2, cache)</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义计算代价函数的函数"><a href="#定义计算代价函数的函数" class="headerlink" title="定义计算代价函数的函数"></a>定义计算代价函数的函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_cost</span><span class="params">(A2,Y,parameters)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    计算交叉熵代价函数</span></span><br><span class="line"><span class="string">    J=1/m * ∑损失函数</span></span><br><span class="line"><span class="string">    损失函数= -[Y*log(A2)+(1-Y)*log(1-A2)]</span></span><br><span class="line"><span class="string">    这里 ∑损失函数 可以用向量来表示。</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">         A2 - 正向传播最后的输出结果，即损失函数公式中的y帽</span></span><br><span class="line"><span class="string">         Y - 标签</span></span><br><span class="line"><span class="string">         parameters - 初始化模型参数函数的字典返回值</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">         代价 - 交叉熵成本给出方程（13）</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># 获取样本数</span></span><br><span class="line">    m = X.shape[<span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 获取模型参数W1与W2</span></span><br><span class="line">    W1 = parameters[<span class="string">"W1"</span>]</span><br><span class="line">    W2 = parameters[<span class="string">"W2"</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#计算代价</span></span><br><span class="line">    logprobs  = np.multiply(np.log(A2), Y) + np.multiply((<span class="number">1</span> - Y), np.log(<span class="number">1</span> - A2))</span><br><span class="line">    cost = - np.sum(logprobs) / m</span><br><span class="line">    cost = float(np.squeeze(cost))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> cost</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义反向传播函数"><a href="#定义反向传播函数" class="headerlink" title="定义反向传播函数"></a>定义反向传播函数</h3><p>这里需要注意的是tanh函数 A=g(Z) 的导数为 1−A2</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backward_propagation</span><span class="params">(parameters,cache,X,Y)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">     parameters - 包含我们的参数的一个字典类型的变量。</span></span><br><span class="line"><span class="string">     cache - 包含“Z1”，“A1”，“Z2”和“A2”的字典类型的变量。</span></span><br><span class="line"><span class="string">     X - 输入数据，维度为（2，数量）</span></span><br><span class="line"><span class="string">     Y - “True”标签，维度为（1，数量）</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">     grads - 包含W和b的导数一个字典类型的变量。</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># 获取样本数</span></span><br><span class="line">    m = X.shape[<span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 获取模型参数W1与w2</span></span><br><span class="line">    W1 = parameters[<span class="string">"W1"</span>]</span><br><span class="line">    W2 = parameters[<span class="string">"W2"</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 获取激活函数的输出A1与A2</span></span><br><span class="line">    A1 = cache[<span class="string">"A1"</span>]</span><br><span class="line">    A2 = cache[<span class="string">"A2"</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 计算导数</span></span><br><span class="line">    dZ2= A2 - Y</span><br><span class="line">    dW2 = (<span class="number">1</span> / m) * np.dot(dZ2, A1.T)</span><br><span class="line">    db2 = (<span class="number">1</span> / m) * np.sum(dZ2, axis=<span class="number">1</span>, keepdims=<span class="literal">True</span>)</span><br><span class="line">    dZ1 = np.multiply(np.dot(W2.T, dZ2), <span class="number">1</span> - np.power(A1, <span class="number">2</span>))</span><br><span class="line">    dW1 = (<span class="number">1</span> / m) * np.dot(dZ1, X.T)</span><br><span class="line">    db1 = (<span class="number">1</span> / m) * np.sum(dZ1, axis=<span class="number">1</span>, keepdims=<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line">    grads = &#123;</span><br><span class="line">        <span class="string">"dW1"</span>: dW1,</span><br><span class="line">        <span class="string">"db1"</span>: db1,</span><br><span class="line">        <span class="string">"dW2"</span>: dW2,</span><br><span class="line">        <span class="string">"db2"</span>: db2</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> grads</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义更新参数的函数"><a href="#定义更新参数的函数" class="headerlink" title="定义更新参数的函数"></a>定义更新参数的函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_params</span><span class="params">(parameters,grads,lr=<span class="number">1.2</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">     parameters - 包含模型参数的字典类型的变量。</span></span><br><span class="line"><span class="string">     grads - 包含导数的字典类型的变量。</span></span><br><span class="line"><span class="string">     lr(learning rate) - 学习速率</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">     parameters - 更新后的参数的 字典类型的变量。</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># 读取原模型参数</span></span><br><span class="line">    W1,W2 = parameters[<span class="string">"W1"</span>],parameters[<span class="string">"W2"</span>]</span><br><span class="line">    b1,b2 = parameters[<span class="string">"b1"</span>],parameters[<span class="string">"b2"</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 读取模型参数的导数</span></span><br><span class="line">    dW1,dW2 = grads[<span class="string">"dW1"</span>],grads[<span class="string">"dW2"</span>]</span><br><span class="line">    db1,db2 = grads[<span class="string">"db1"</span>],grads[<span class="string">"db2"</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 更新参数</span></span><br><span class="line">    W1 = W1 - lr * dW1</span><br><span class="line">    b1 = b1 - lr * db1</span><br><span class="line">    W2 = W2 - lr * dW2</span><br><span class="line">    b2 = b2 - lr * db2</span><br><span class="line">    </span><br><span class="line">    parameters = &#123;</span><br><span class="line">        <span class="string">"W1"</span>: W1,</span><br><span class="line">        <span class="string">"b1"</span>: b1,</span><br><span class="line">        <span class="string">"W2"</span>: W2,</span><br><span class="line">        <span class="string">"b2"</span>: b2</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+
+<h3 id="打包成模型函数"><a href="#打包成模型函数" class="headerlink" title="打包成模型函数"></a>打包成模型函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nn_model</span><span class="params">(X,Y,n_h,num_iterations,print_cost=False)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        X - 输入特征,维度为（2，样本数）</span></span><br><span class="line"><span class="string">        Y - 标签，维度为（1，样本数）</span></span><br><span class="line"><span class="string">        n_h - 隐藏层的数量</span></span><br><span class="line"><span class="string">        num_iterations - 梯度下降的迭代次数</span></span><br><span class="line"><span class="string">        print_cost - 如果为True，则每1000次迭代打印一次成本数值</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        parameters - 模型的参数，用于预测。</span></span><br><span class="line"><span class="string">     """</span></span><br><span class="line">     </span><br><span class="line">    np.random.seed(<span class="number">3</span>) <span class="comment">#指定随机种子</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 调用设置网络结构函数</span></span><br><span class="line">    n_x = layer_sizes(X, Y)[<span class="number">0</span>]</span><br><span class="line">    n_y = layer_sizes(X, Y)[<span class="number">2</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    parameters  = initialize_parameters(n_x,n_h,n_y)</span><br><span class="line">    W1 = parameters [<span class="string">"W1"</span>]</span><br><span class="line">    b1 = parameters [<span class="string">"b1"</span>]</span><br><span class="line">    W2 = parameters [<span class="string">"W2"</span>]</span><br><span class="line">    b2 = parameters [<span class="string">"b2"</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(num_iterations):</span><br><span class="line">        A2 , cache = forward_propagation(X,parameters )</span><br><span class="line">        cost = compute_cost(A2,Y,parameters )</span><br><span class="line">        grads = backward_propagation(parameters ,cache,X,Y)</span><br><span class="line">        parameters = update_params(parameters ,grads,lr = <span class="number">0.5</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> print_cost:</span><br><span class="line">            <span class="keyword">if</span> i%<span class="number">1000</span> == <span class="number">0</span>:</span><br><span class="line">                print(<span class="string">"第 "</span>,i,<span class="string">" 次循环，成本为："</span>+str(cost))</span><br><span class="line">                </span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+
+<h3 id="出现的问题："><a href="#出现的问题：" class="headerlink" title="出现的问题："></a>出现的问题：</h3><p>根据<a href="https://blog.csdn.net/u013733326/article/details/79702148" target="_blank" rel="noopener">【中文】【吴恩达课后编程作业】Course 1 - 神经网络和深度学习 - 第三周作业</a>的步骤，在测试模型代码时发现与原文不同。</p>
+<p>这是我的结果：</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200611082222.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200611082222.png" alt="image-20200611081307164"></a></p>
+<p>这是原文的结果：</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200611082252.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200611082252.png" alt="image-20200611081331758"></a></p>
+<p>前面的测试结果都一致，这里以为是自己哪一步出了问题导致在打包好的模型函数里调用错误，以至于把代码全改回和原文一致，结果还是不一样。</p>
+<p>最后看评论和与同学进行讨论发现都存在此问题，但用在训练集与测试集时是正常的。</p>
+<p>推测原因应该是此时 numpy相同的随机数种子，生成的随机数却不一样导致的吧。所以现在生成的随机数用在该段代码中会出现错误，如结果提示中的除数为0。</p>
+<h2 id="进行预测"><a href="#进行预测" class="headerlink" title="进行预测"></a>进行预测</h2><h3 id="编写预测函数"><a href="#编写预测函数" class="headerlink" title="编写预测函数"></a>编写预测函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(parameters,X)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">     parameters - 包含模型参数的字典类型的变量。</span></span><br><span class="line"><span class="string">     X - 输入特征（n_x，m）</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回:</span></span><br><span class="line"><span class="string">     predictions - 预测的向量（红色：0 /蓝色：1）</span></span><br><span class="line"><span class="string">     """</span></span><br><span class="line">    <span class="comment"># 计算A2</span></span><br><span class="line">    A2 , cache = forward_propagation(X,parameters)</span><br><span class="line">    <span class="comment"># np.round 求平均</span></span><br><span class="line">    predictions = np.round(A2)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> predictions</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看准确率"><a href="#查看准确率" class="headerlink" title="查看准确率"></a>查看准确率</h3><p>根据博主最后提出的更改隐藏单元数问题，这里设置隐藏单元为5准确率最高，但出于对比，还是设置为了4。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">parameters = nn_model(X, Y, n_h = <span class="number">4</span>, num_iterations=<span class="number">10000</span>, print_cost=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#绘制边界</span></span><br><span class="line">plot_decision_boundary(<span class="keyword">lambda</span> x: predict(parameters, x.T), X, np.squeeze(Y))</span><br><span class="line">plt.title(<span class="string">"隐藏单元数为"</span> + str(<span class="number">4</span>)+<span class="string">"时的决策边界"</span>)</span><br><span class="line"></span><br><span class="line">predictions = predict(parameters, X)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">'准确率:'</span>, float((np.dot(Y, predictions.T) + np.dot(<span class="number">1</span> - Y, <span class="number">1</span> - predictions.T)) / float(Y.size) * <span class="number">100</span>),<span class="string">'%'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200611082213.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200611082213.png" alt="image-20200611082210060"></a></p>
+
+          
+            <br>
+            
+  
+    
+    
+
+<section class="widget copyright shadow desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://lluuiq.com/post/202006112233/>https://lluuiq.com/post/202006112233/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+
+
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-25T06:12:52+08:00">
+  <a class='notlink'>
+    <i class="fas fa-save" aria-hidden="true"></i>
+    <p>更新于：2020年6月25日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="nofollow"><i class="fas fa-tags" aria-hidden="true"></i><p>神经网络</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：2.3k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：9分钟</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/post/202006132233/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>使用WebStack为Hexo博客添加网址导航页面</p>
+                <p class='content'>因为经常把一些网站添加到浏览器的书签栏，目前已经多到眼花缭乱了，故想个办法为博客新建一个分页，把一些网址存在博客上，自己浏览器上存一部分。
+
+
+说明WebStack的github地址：WebSt...</p>
+              </a>
+            
+            
+              <a class='next' href='/post/202006082233/'>
+                <p class='title'>吴恩达深度学习编程作业1-2<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>吴恩达深度学习课程《神经网络和深 度学习》第二周（神经网络基础）的编程作业。
+
+
+说明感谢作者阿宽提供作业题目【中文】【吴恩达课后编程作业】Course 1 - 神经网络和深度学习 - 第二周作...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    processEscapes: true,
+    tags: "ams",
+    macros: {
+      href: "{}"
+    }
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|dno",
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+};
+</script>
+
+
+
+
+  <script>
+    window.subData = {
+      title: '吴恩达深度学习编程作业1-3',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导包"><span class="toc-text">导包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加载数据集"><span class="toc-text">加载数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将数据集可视化"><span class="toc-text">将数据集可视化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看逻辑回归的准确率"><span class="toc-text">查看逻辑回归的准确率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建单隐藏层神经网络"><span class="toc-text">构建单隐藏层神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#流程："><span class="toc-text">流程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义神经网络结构"><span class="toc-text">定义神经网络结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义模型参数初始化函数"><span class="toc-text">定义模型参数初始化函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义正向传播函数"><span class="toc-text">定义正向传播函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义计算代价函数的函数"><span class="toc-text">定义计算代价函数的函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义反向传播函数"><span class="toc-text">定义反向传播函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义更新参数的函数"><span class="toc-text">定义更新参数的函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打包成模型函数"><span class="toc-text">打包成模型函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#出现的问题："><span class="toc-text">出现的问题：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进行预测"><span class="toc-text">进行预测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编写预测函数"><span class="toc-text">编写预测函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看准确率"><span class="toc-text">查看准确率</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.3'
+      loop='all'
+      order='random'
+      fixed='true'
+      list-max-height='500px'
+      server='netease'
+      type='playlist'
+      id='4945153572'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://lluuiq.com">Copyright © lluuiq</a></p>
+
+        </div>
+      
+    
+      
+        
+          <div><p><a href="http://beian.miit.gov.cn" target="_blank" rel="noopener">豫ICP备19027219号</a><br>京公网备案 41140302000094号</p>
+</div>
+        
+      
+    
+    <!--网站运行时间统计-->
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+        var now = new Date(); 
+        function createtime() { 
+            var grt= new Date("07/30/2019 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+            now.setTime(now.getTime()+250); 
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+            document.getElementById("timeDate").innerHTML = "本站已苟活 "+dnum+" 天 "; 
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+        } 
+    setInterval("createtime()",250);
+    </script>
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+
+  <!-- 彩带点击 -->
+  <!-- <script type="text/javascript" src="\js\ribbon.min.js"></script> -->
+  <!-- 雪花特效 -->
+  <!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+
+
+  <!-- 线条特效 -->
+  <!-- <script type="text/javascript"
+  color="0,0,0" opacity='1' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script> -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<!-- <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> -->
+<!-- <script src="/js/jquery.pjax.min.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js" data-pjax></script>
+  <script>
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+  </script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/background.png"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+<!-- theme.plugins.aplayer.js -->
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" async></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js" async></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js"></script>
+
+  
+
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+    appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+    placeholder: "有什么想说的吗？",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    visitor: 'false',
+    highlight:'true'
+  })
+  </script>
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.1/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copyed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-clipboard-check');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制成功';
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-exclamation-triangle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制失败';
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+
+
+
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?23032f56a100d5a5e26ed5b9d94163c7";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
+
+  <script>setLoadingBarProgress(100);</script>
+
+  <script>
+    // 窗口监听load(加载、刷新)事件，执行LoadFancybox()函数
+    $(function(){
+      LoadFancybox();
+    });
+
+    var pjax = new Pjax({
+      elements: "a",
+      selectors: [
+        "title", //pjax加载标题
+        ".l_main", //pjax加载主内容
+        ".l_side", //pjax加载侧边栏
+        ".switcher .h-list", // 使手机端的搜索框与菜单栏生效
+      ]
+    })
+
+    //加载fancybox
+    function LoadFancybox(){
+      $(".article-entry").find("img").each(function () {
+        //渲染fancy box
+        var t = document.createElement("a");
+        $(t).attr("data-fancybox", ""),
+        $(t).attr("href", $(this).attr("src")),
+        $(t).attr("margin","0 auto"),
+        $(this).wrap(t)
+      });
+    }
+
+    function LoadValine(){
+      $.getScript("https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js", function() {
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        var notify = 'true' == true;
+        var verify = 'true' == true;
+        var valine = new Valine();
+        valine.init({
+          el: '#valine_container',
+          notify: notify,
+          verify: verify,
+          guest_info: guest_info,
+          
+          appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+          appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+          placeholder: "有什么想说的吗？",
+          pageSize:'10',
+          avatar:'mp',
+          lang:'zh-cn',
+          visitor: 'false',
+          highlight:'true'
+        })
+      });
+    }
+  
+    // 加载pjax后执行的函数
+    document.addEventListener('pjax:complete', function (){
+      LoadFancybox();
+      LoadValine();
+      // LoadBaidu();
+    });
+
+  </script>
+</body>
+</html>

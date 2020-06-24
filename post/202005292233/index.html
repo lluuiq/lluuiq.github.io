@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>Valine配置邮件与QQ提醒 - lluuiq&#39;s blog</title>
+  
+    <meta name="keywords" content="Valine">
+  
+  
+    <meta name="description" content="valine在配置好后没有邮件提醒功能，需要到LeanCloud登陆控制台进行一系列设置。
+最开始是只想配置个邮件提醒，但直到看到了这位大佬的博文
+Valine评论之Valine-admin配置攻略
+该版本基于Valine-admin的二次开发，加入了微信提醒、QQ提醒功能。
+因为个人常用QQ，微信很少登陆，故只...">
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="lluuiq's blog">
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css">
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/global-hot-data.js" ></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script> -->
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script> -->
+
+
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script>
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+
+  <div class='wrapper'>
+    <div class='nav-sub container--flex'>
+      <a class="logo flat-box"></a>
+      <ul class='switcher h-list'>
+        <li><a class="s-comment flat-btn fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc flat-btn fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main container container--flex">
+      
+        
+        <a class="logo flat-box" target="_self" href='/'>
+          
+          
+          
+            lluuiq
+          
+          
+        </a>
+      
+      <!-- PC端菜单栏 -->
+			<div class='menu navigation'>
+				<ul class='h-list'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  
+                    <i class='fas fa-home fa-fw'></i>
+                  
+                  首页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  
+                    <i class='fas fa-tags fa-fw'></i>
+                  
+                  标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  
+                    <i class='fas fa-archive fa-fw'></i>
+                  
+                  归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  
+                    <i class='fas fa-link fa-fw'></i>
+                  
+                  友人帐
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  
+                    <i class='fas fa-info-circle fa-fw'></i>
+                  
+                  关于我
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+      <!-- PC端搜索框 -->
+      
+        <div class="m_search">
+          <form name="searchform" class="form u-search-form">
+            <i class="icon fas fa-search fa-fw"></i>
+            <input type="text" class="input u-search-input" placeholder="想找些什么？" />
+          </form>
+        </div>
+      
+
+      <!-- 手机端的搜索按钮与菜单栏按钮 -->
+			<ul class='switcher h-list'>
+				
+					<li><a class="s-search flat-btn fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li><a class="s-menu flat-btn fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+
+<!-- 手机端导航栏菜单 -->
+<ul class="menu-phone navigation white-box">
+  
+  
+    <li>
+      <a class="flat-box" href=/
+        
+        
+        
+          id="home"
+        >
+        
+          <i class='fas fa-home fa-fw'></i>
+        
+        首页
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/categories/
+        
+        
+        
+          id="categories"
+        >
+        
+          <i class='fas fa-folder-open fa-fw'></i>
+        
+        分类
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/tags/
+        
+        
+        
+          id="tags"
+        >
+        
+          <i class='fas fa-tags fa-fw'></i>
+        
+        标签
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/archives/
+        
+        
+        
+          id="archives"
+        >
+        
+          <i class='fas fa-archive fa-fw'></i>
+        
+        归档
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/friends/
+        
+        
+        
+          id="friends"
+        >
+        
+          <i class='fas fa-link fa-fw'></i>
+        
+        友人帐
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/about/
+        
+        
+        
+          id="about"
+        >
+        
+          <i class='fas fa-info-circle fa-fw'></i>
+        
+        关于我
+      </a>
+    </li>
+  
+</ul>
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#获取Qmsg酱的key"><span class="toc-text">获取Qmsg酱的key</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置valine实例"><span class="toc-text">配置valine实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#云引擎部署"><span class="toc-text">云引擎部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置变量"><span class="toc-text">设置变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#休眠策略配置"><span class="toc-text">休眠策略配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#自动唤醒任务"><span class="toc-text">自动唤醒任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重发邮件任务"><span class="toc-text">重发邮件任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更新"><span class="toc-text">更新</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取SMTP授权码，并设置自动转发（以163举例）"><span class="toc-text">获取SMTP授权码，并设置自动转发（以163举例）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#以下有需要则看"><span class="toc-text">&#x3D;&#x3D;&#x3D;&#x3D;以下有需要则看&#x3D;&#x3D;&#x3D;&#x3D;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开启网页后台管理"><span class="toc-text">开启网页后台管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改邮件、QQ提醒的模板"><span class="toc-text">修改邮件、QQ提醒的模板</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改发送邮件的标题"><span class="toc-text">修改发送邮件的标题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#站长邮件提醒"><span class="toc-text">站长邮件提醒</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访客邮件提醒"><span class="toc-text">访客邮件提醒</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改QQ提醒的模板"><span class="toc-text">修改QQ提醒的模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改发送邮件的内容模板"><span class="toc-text">修改发送邮件的内容模板</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#说明-1"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#站长提醒"><span class="toc-text">站长提醒</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访客提醒"><span class="toc-text">访客提醒</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+    <div class='body-wrapper'>
+      
+
+<aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#获取Qmsg酱的key"><span class="toc-text">获取Qmsg酱的key</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置valine实例"><span class="toc-text">配置valine实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#云引擎部署"><span class="toc-text">云引擎部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置变量"><span class="toc-text">设置变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#休眠策略配置"><span class="toc-text">休眠策略配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#自动唤醒任务"><span class="toc-text">自动唤醒任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重发邮件任务"><span class="toc-text">重发邮件任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更新"><span class="toc-text">更新</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取SMTP授权码，并设置自动转发（以163举例）"><span class="toc-text">获取SMTP授权码，并设置自动转发（以163举例）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#以下有需要则看"><span class="toc-text">&#x3D;&#x3D;&#x3D;&#x3D;以下有需要则看&#x3D;&#x3D;&#x3D;&#x3D;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开启网页后台管理"><span class="toc-text">开启网页后台管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改邮件、QQ提醒的模板"><span class="toc-text">修改邮件、QQ提醒的模板</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改发送邮件的标题"><span class="toc-text">修改发送邮件的标题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#站长邮件提醒"><span class="toc-text">站长邮件提醒</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访客邮件提醒"><span class="toc-text">访客邮件提醒</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改QQ提醒的模板"><span class="toc-text">修改QQ提醒的模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改发送邮件的内容模板"><span class="toc-text">修改发送邮件的内容模板</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#说明-1"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#站长提醒"><span class="toc-text">站长提醒</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访客提醒"><span class="toc-text">访客提醒</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/post/202005292233/">
+        Valine配置邮件与QQ提醒
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+<div class='new-meta-item author'>
+  <a href="https://lluuiq.com" rel="nofollow">
+    <img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png">
+    <p>lluuiq</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>笔记&nbsp;/&nbsp;博客</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-edit" aria-hidden="true"></i>
+    <p>发布于：2020年5月29日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：3.9k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：13分钟</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>valine在配置好后没有邮件提醒功能，需要到<a href="https://www.leancloud.cn/" target="_blank" rel="noopener">LeanCloud</a>登陆控制台进行一系列设置。</p>
+<p>最开始是只想配置个邮件提醒，但直到看到了这位大佬的博文</p>
+<p><a href="https://www.antmoe.com/posts/2380732b/index.html" target="_blank" rel="noopener">Valine评论之Valine-admin配置攻略</a></p>
+<p>该版本基于Valine-admin的二次开发，加入了微信提醒、QQ提醒功能。</p>
+<p>因为个人常用QQ，微信很少登陆，故只配置了QQ提醒功能。微信提醒的配置方法与QQ类似。</p>
+<p>QQ消息推送机器人：<a href="https://qmsg.zendee.cn/" target="_blank" rel="noopener">Qmsg酱</a></p>
+<p>本文基于上述配置攻略博文，详细记录自己的配置过程。请先确定自己已经配置好了基础的valine评论服务。</p>
+<a id="more"></a>
+
+<h2 id="获取Qmsg酱的key"><a href="#获取Qmsg酱的key" class="headerlink" title="获取Qmsg酱的key"></a>获取Qmsg酱的key</h2><p>进入官网<a href="https://qmsg.zendee.cn/" target="_blank" rel="noopener">Qmsg酱</a>，使用QQ号一键登录即可。</p>
+<p>在首页如下</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015227.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015227.png" alt="image-20200528185730555"></a></p>
+<p>添加完成后，打开你添加的QQ号，<strong>添加机器人为好友</strong></p>
+<p>选了哪个就加哪个为好友，添加好友后是自动通过的，不加好友怎么收到提醒呢。</p>
+<hr>
+<p>接下来到右上角点击文档，</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015233.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015233.png" alt="image-20200528185920380"></a></p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015242.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015242.png" alt="image-20200528190006620"></a></p>
+<p>复制接口地址后面的key值， 即<code>send/</code> 后面的所有字符，可以暂时将该key记录在笔记本等位置，稍后配置要用。</p>
+<h2 id="配置valine实例"><a href="#配置valine实例" class="headerlink" title="配置valine实例"></a>配置valine实例</h2><h3 id="云引擎部署"><a href="#云引擎部署" class="headerlink" title="云引擎部署"></a>云引擎部署</h3><p><a href="https://leancloud.cn/" target="_blank" rel="noopener">Leancloud官网</a>，进入后登陆到自己的控制台。进入自己创建的应用。然后进入云引擎/部署</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015251.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015251.png" alt="image-20200528191403112"></a></p>
+<p>大佬二次开发的valine-admin-server的github地址：<a href="https://github.com/sviptzk/Valine-Admin-Server" target="_blank" rel="noopener">https://github.com/sviptzk/Valine-Admin-Server</a></p>
+<p>在下面的部署中的Deploy from中填入该地址。</p>
+<p><strong>注：若是打算自己定义邮件通知的模板或者QQ提醒的模板的，fork一份到自己的github来修改。</strong></p>
+<p><strong>这样填入的地址使用fork到自己github中的地址，后面修改模板时修改代码即可。</strong></p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015255.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015255.png" alt="image-20200528191440296"></a></p>
+<p>填入后点击部署。出现如下所示的log信息（最后提示1个实例部署成功）即可。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200528015233.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200528015233.png" alt="image-20200528015231941"></a></p>
+<h3 id="设置变量"><a href="#设置变量" class="headerlink" title="设置变量"></a>设置变量</h3><p>进入到云引擎/设置中</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015307.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015307.png" alt="image-20200528191931864"></a></p>
+<p>在页面中添加新变量</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015310.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015310.png" alt="image-20200528191921578"></a></p>
+<p>首先添加几个基本变量：</p>
+<p>括号中说明根据使用情况来选填，没有括号的为必填项。</p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>变量值</th>
+<th>变量值举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ADMIN_URL</td>
+<td>博客网址</td>
+<td><a href="https://lluuiq.com/">https://lluuiq.com</a></td>
+</tr>
+<tr>
+<td>QMSG_KEY</td>
+<td>（使用QQ提醒必填）之前获得的Qmsg的key</td>
+<td>7b04XXXXXXXXfc5</td>
+</tr>
+<tr>
+<td>QQ</td>
+<td>（使用QQ提醒必填）Qmsg中添加的自己的QQ号</td>
+<td>844520941</td>
+</tr>
+<tr>
+<td>QQ_SHAKE</td>
+<td>（想在提醒时被戳一下就设置）是否开启QQ提醒时戳一戳</td>
+<td>true</td>
+</tr>
+<tr>
+<td>SENDER_NAME</td>
+<td>发件人昵称</td>
+<td>lluuiq</td>
+</tr>
+<tr>
+<td>SITE_NAME</td>
+<td>博客网站名称</td>
+<td>lluuiq’s Blog</td>
+</tr>
+<tr>
+<td>SITE_URL</td>
+<td>网站地址</td>
+<td><a href="https://lluuiq.com/">https://lluuiq.com</a></td>
+</tr>
+<tr>
+<td>SMTP_SERVICE</td>
+<td>SMTP服务器提供商</td>
+<td>163</td>
+</tr>
+<tr>
+<td>SMTP_PASS</td>
+<td>SMTP授权码</td>
+<td>CSTXXXXXXXOUC</td>
+</tr>
+<tr>
+<td>SMTP_USER</td>
+<td>用于发邮件的邮箱，需要与SMTP服务商对应</td>
+<td><a href="mailto:lluuiq@163.com">lluuiq@163.com</a></td>
+</tr>
+<tr>
+<td>TEMPLATE_NAME</td>
+<td>邮件模板</td>
+<td>custom2</td>
+</tr>
+<tr>
+<td>TO_EMAIL</td>
+<td>（在valine评论填邮箱的情况下好像没什么用，但是可以加上用于后面自定义邮件模板时使用）博主的收件邮箱</td>
+<td><a href="mailto:mail@lluuiq.com">mail@lluuiq.com</a></td>
+</tr>
+</tbody></table>
+<p>一些说明：</p>
+<ul>
+<li><p><strong>ADMIN_URL</strong>：开启网页后台管理功能才需要添加的变量，若不需要通过网页来管理的话可以不加，因为可以登陆LeanCloud来进行管理，开启方法后面介绍。</p>
+</li>
+<li><p><strong>QQ</strong>：自己接收消息的QQ号，要存在之前获取key时添加的QQ列表中</p>
+</li>
+<li><p><strong>SMTP_SERVICE</strong>：这是valine支持的一些服务商：<a href="https://nodemailer.com/smtp/well-known/#supported-services" target="_blank" rel="noopener">Supported</a>，选择对应的服务商后，要更改对应的发件邮箱与授权码，关于授权码的获取方法各个服务商的直接百度即可，后面我以网易163的举例。</p>
+<p>关于为什么使用网易，我使用QQ邮箱结果发件一直<code>550 mail content denied</code>，被腾讯服务器当成垃圾广告邮件给退回，故换成了163邮箱。想使用QQ邮箱来接收消息的话，可以设置163邮箱的自动转发。</p>
+</li>
+<li><p><strong>SMTP_PASS</strong>：163为例的获取方法，点击<a href="https://lluuiq.com/post/202005290137/?t=1593036314039#获取SMTP授权码，并设置自动转发（以163举例）">获取SMTP授权码，并设置自动转发（以163举例）</a>跳转到下方查看。</p>
+</li>
+<li><p><strong>TEMPLATE_NAME</strong>：valine自带的主题有默认default、彩虹rainbow，该版本新增的有custom1、custom2，其中custom2的样式如下：</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015313.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015313.png" alt="image-20200528193512145"></a></p>
+<p>当然，如果是fork的主题的话，这个是可以自行修改的，后面再讲自己的修改过程。</p>
+</li>
+</ul>
+</br>
+
+<p><strong>注意事项：</strong></p>
+<p>我没有配置垃圾过滤、微信提醒。以及并没有使用自定义服务商（我配置的总是失败，想使用自定义服务商的可以参考原博文进行配置 ）。</p>
+<p>每次修改变量后，点击保存后是<strong>不会生效</strong>的。需要重新部署一次云引擎（回到<a href="https://lluuiq.com/post/202005290137/?t=1593036314039#云引擎部署">云引擎部署</a>，不用重新填github地址，直接点击部署即可）。</p>
+<p>配置完成后并且重新部署后，即可尝试在valine评论里发送一条评论来进行尝试。</p>
+<p>博主收到的效果：</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015319.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015319.png" alt="image-20200528201032449"></a></p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015322.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015322.png" alt="image-20200528201058382"></a></p>
+<p>访客收到的效果：</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015325.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015325.png" alt="image-20200528201143027"></a></p>
+<p>这是默认的模板，若需要修改的话后面有介绍。</p>
+<h2 id="休眠策略配置"><a href="#休眠策略配置" class="headerlink" title="休眠策略配置"></a>休眠策略配置</h2><p>LeanCloud现在每天必须停机6个小时，并且若30分钟内无访问会自动休眠。</p>
+<p>详细的配置方法还是建议参考原文<a href="https://www.antmoe.com/posts/2380732b/index.html" target="_blank" rel="noopener">Valine评论之Valine-admin配置攻略</a> 。</p>
+<h4 id="自动唤醒任务"><a href="#自动唤醒任务" class="headerlink" title="自动唤醒任务"></a>自动唤醒任务</h4><p>登陆该网址：<a href="https://cron-job.org/" target="_blank" rel="noopener">https://cron-job.org/</a></p>
+<p>注册帐号后，创建任务。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015327.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015327.png" alt="image-20200528231230639"></a></p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015603.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015603.png" alt="image-20200529011449656"></a></p>
+<p>第一个title 就是给这个任务起个名字，随意填</p>
+<p>第二个http链接输入LeanCloud的后台管理地址，例如我通过<code>https://abc.lluuiq.com</code>来进入后台，则填进去</p>
+<p>时间使用自定义，然后日、星期、月都全选（先选中第一个，然后拉到最下面按shift点一下最后一个）</p>
+<p>小时我选择的是7点到23点，详细根据自己需要来设置，总之中间要有6小时的时间让LeanCloud停机</p>
+<p>分钟可以使用ctrl键来选择多个，我设置的是0、10、20、30、40、50，即在0分、10分、20分。。的时候访问一次后台。</p>
+<p>这样设置的结果就是每天的7:00开始到晚上12:00，每隔10分钟进行一次访问来唤醒机器。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015333.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015333.png" alt="image-20200529011825115"></a></p>
+<p>最后如果要保存日志则勾选Save responses，创建任务即可。</p>
+<p>创建完成后，任务列表会出现目前进行的任务。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015336.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015336.png" alt="image-20200529011908143"></a></p>
+<p>点击右方的History可以查看历史状态的信息</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015338.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015338.png" alt="image-20200529011955085"></a></p>
+<p>前面有对号的标志即表示成功访问了后台，后面可以看到具体的时间以及状态码等等。</p>
+<h4 id="重发邮件任务"><a href="#重发邮件任务" class="headerlink" title="重发邮件任务"></a>重发邮件任务</h4><p>使用LeanCloud自带的定时任务来完成即可。进入云引擎/定时任务</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015340.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015340.png" alt="image-20200529012155255"></a></p>
+<p>创建定时任务，</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015342.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015342.png" alt="image-20200529012305308"></a></p>
+<p>关于Cron表达式，因为我设置的是每天7点到晚上12点之间来不停唤醒机器，所以我的表达式为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 5 7 * * *</span><br></pre></td></tr></table></figure>
+
+<p>秒 分 时 天 月 星期，假如Cron表达式为 a b c d e f</p>
+<p>则在 e月份的第d天的c时b分a秒，且仅为星期f时进行该任务。 *表示全部。</p>
+<p>所以我的表达式意思为 在每天的7点05分0秒时，进行resend_mails函数，即检测未发送的邮件进行补发。</p>
+<p>这样就解决了在0点到7点机器停机时假如有回复不能进行提醒的问题。</p>
+<p>（目前仅是理论，因为并未实际测试过）</p>
+<h4 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h4><p>上述配置已成功。7点05收到了邮件补发。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529070827.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529070827.png" alt="image-20200529070819358"></a></p>
+<p>查看日志可以发现</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200531142056.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200531142056.png" alt="image-20200531142051117"></a></p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200531141900.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200531141900.png" alt="image-20200531141847831"></a></p>
+<h2 id="获取SMTP授权码，并设置自动转发（以163举例）"><a href="#获取SMTP授权码，并设置自动转发（以163举例）" class="headerlink" title="获取SMTP授权码，并设置自动转发（以163举例）"></a>获取SMTP授权码，并设置自动转发（以163举例）</h2><p>登陆<a href="https://mail.163.com/" target="_blank" rel="noopener">163邮箱</a>，注意登陆的邮箱必须要是变量SMTP_USER填的值。</p>
+<p>在设置里可以找到<code>POP3/SMTP/IMAP</code></p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015346.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015346.png" alt="image-20200528194857850"></a></p>
+<p>随便开启一个服务，主要是需要SMTP服务，IMAP与POP3无所谓。</p>
+<p>我记得是开启时就会获得授权码，该授权码即为SMTP_PASS的值。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015348.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015348.png" alt="image-20200528195001992"></a></p>
+<p>也可以在下面添加新的授权码</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015350.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015350.png" alt="image-20200528200300874"></a></p>
+<p>在设置里的常规设置中,找到自动回复/转发</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015352.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015352.png" alt="image-20200528194813459"></a></p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015354.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015354.png" alt="image-20200528200338330"></a></p>
+<p>填写转发到哪个邮箱，然后验证一下即可。若打算在该邮箱内保留邮件，则勾选保留原邮件。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015356.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015356.png" alt="image-20200528200356454"></a></p>
+<p>配置好后返回 <a href="https://lluuiq.com/post/202005290137/?t=1593036314039#设置变量">设置变量</a>继续配置即可。</p>
+<h2 id="以下有需要则看"><a href="#以下有需要则看" class="headerlink" title="====以下有需要则看===="></a>====以下有需要则看====</h2><h2 id="开启网页后台管理"><a href="#开启网页后台管理" class="headerlink" title="开启网页后台管理"></a>开启网页后台管理</h2><p>需要有个域名，进入设置里的域名绑定</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015358.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015358.png" alt="image-20200528202131169"></a></p>
+<p>这里因为我已经绑定过，所以显示的不一样，总之点击绑定新域名的那个按键。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015401.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015401.png" alt="image-20200528202237785"></a></p>
+<p>二级域名可以自定义 ，例如 abc.lluuiq.com，我的域名是lluuiq，二级域名为abc。</p>
+<p>这里就填个abc.lluuiq.com，稍后到域名管理处进行解析。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015402.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015402.png" alt="image-20200528202409331"></a></p>
+<p>填好后大概会稍等一会，然后会给出CNAME记录值。记录值为<code>CNAME:</code>后面的内容，即</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kkfwnugs.cn-n1-cname.leanapp.cn</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015405.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015405.png" alt="image-20200528202542704"></a></p>
+<p>接下来到域名管理处进行解析CNAME</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015407.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015407.png" alt="image-20200528202747129"></a></p>
+<p>解析完成后，并且在设置变量中有添加ADMIN_URL的话，即可通过 <code>https://绑定的云引擎域名</code> 来进行访问</p>
+<p>需要注意的是开启了自动管理SSL才能使用https访问，否则只能通过http访问。</p>
+<p>在访问之前，先登陆<code>https://绑定的云引擎域名/sign-up</code>注册一个管理员帐号</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015409.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015409.png" alt="image-20200528211613911"></a></p>
+<p>邮箱是SMTP设置的邮箱，无法修改。</p>
+<p>登录名使用只读里面的邮箱（登陆时要输入邮箱，我用自定义的昵称无法登陆，并且只能让登录名等于只读中的邮箱才有效。。），密码自定义。这样登录名即为SMTP的邮箱，密码为自定义的密码。</p>
+<p>确认设置后，再通过<code>https://绑定的云引擎域名</code>来登陆，即可访问后台。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015412.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015412.png" alt="image-20200528212716610"></a></p>
+<p>管理界面如图所示，样式可以更改，参考<a href="https://lluuiq.com/post/202005290137/?t=1593036314039#修改右键、QQ提醒的模板">修改右键、QQ提醒的模板</a>去修改后台管理的即可。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015414.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015414.png" alt="image-20200528212738206"></a></p>
+<h2 id="修改邮件、QQ提醒的模板"><a href="#修改邮件、QQ提醒的模板" class="headerlink" title="修改邮件、QQ提醒的模板"></a>修改邮件、QQ提醒的模板</h2><h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>修改的前提是在<a href="https://lluuiq.com/post/202005290137/?t=1593036314039#云引擎部署">云引擎部署</a>中使用的github地址是fork的地址。</p>
+<p>克隆fork的代码仓库到本地，对文件进行修改。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015419.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015419.png" alt="image-20200528214044654"></a></p>
+<ul>
+<li>public/stylesheets中的css文件是 views/comments.ejs的样式表</li>
+<li>template内的文件夹名即<a href="https://lluuiq.com/post/202005290137/?t=1593036314039#设置变量">设置变量</a>中的<code>TEMPLATE_NAME</code>的值，引入对应的模板。这里我copy了一份custom2文件夹重命名为lluuiq来进行自定义，保证原本样式的情况下来修改。</li>
+<li>check-spam.js为过滤邮件的脚本，基本不用管。</li>
+<li>send-mail.js中设置QQ提醒的模板，并且可以修改发送邮件时的一些设置和邮件标题</li>
+<li>其余的能不动就不动。</li>
+</ul>
+<p><strong>其余说明：</strong></p>
+<ul>
+<li>最好copy一份主题文件到新的文件夹中来对副本进行修改，这样能保持原主题的内容。</li>
+<li>详细的修改可以自己尝试，可以重写一份页面来全面替换，这里例举个人对原有的主题进行修改的内容。</li>
+<li>以下出现的process.env.XXX 表示获取云引擎设置的变量名内容。</li>
+<li>&lt;%=XXX%&gt;为获取send-email.ejs里的对应代码块的变量。notice.ejs获取站长提醒的，send.ejs获取访客提醒的。</li>
+<li>修改完后，要提交和push到github上，然后LeanCloud的云引擎再重新部署才能生效。</li>
+</ul>
+<h3 id="修改发送邮件的标题"><a href="#修改发送邮件的标题" class="headerlink" title="修改发送邮件的标题"></a>修改发送邮件的标题</h3><h4 id="站长邮件提醒"><a href="#站长邮件提醒" class="headerlink" title="站长邮件提醒"></a>站长邮件提醒</h4><p>打开utilities/send-mail.js</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015427.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015427.png" alt="image-20200528214657413"></a></p>
+<p>站长自己发的评论不需要通知的内容为 comment.get(“mail”)来获取新评论的邮箱，如果是站长自己的邮箱则不发送邮件，毕竟自己回复别人干嘛发邮件来提醒自己。（QQ也不会提醒）</p>
+<p>这里因为我设置了163邮箱的转发，所以SMTP_USER=163邮箱，但自己使用的不是这个邮箱。所以如果不进行其他设置的话，这段代码不会生效。这也是为什么当时加了TO_EMAIL变量指向自己的邮箱。当判定获取的邮箱为自己的邮箱时，就不会再进行提醒。</p>
+<p>如果设置的SMTP_USER邮箱与自己接收提醒的邮箱为同一个，那么TO_EMAIL就可以去掉，这部分就不用管了。</p>
+<hr>
+<p>第二个红框的部分，emailSubject为邮件的主题，可以根据自己的喜好来进行修改。</p>
+<p>我在修改主题的下方的变量名中添加了一个变量senderName来获取LeanCloud中的SENDER_NAME变量，用来当自己的昵称，可以放在邮件提醒里的称呼中，也可以放在结尾的 <code>@2020 lluuiq</code> 中。</p>
+<p>其余的部分为LeanCloud的日志输出内容，可以不用管，想修改输出信息的可以进行修改。</p>
+<h4 id="访客邮件提醒"><a href="#访客邮件提醒" class="headerlink" title="访客邮件提醒"></a>访客邮件提醒</h4><p>还是在utilities/send-mail.js中，代码块在下方，注意和站长提醒的类似，但代码是不一样的。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015430.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015430.png" alt="image-20200528215622357"></a></p>
+<p>站长被@不需要提醒，是当访客回复自己时不触发这个回复提醒（毕竟站长提醒那里已经发一次了）。</p>
+<p>第二个红框同上来修改 发送给访客的 邮件的 主题。</p>
+<p>其余同上为输出日志，想修改的自行修改即可。</p>
+<h3 id="修改QQ提醒的模板"><a href="#修改QQ提醒的模板" class="headerlink" title="修改QQ提醒的模板"></a>修改QQ提醒的模板</h3><p>还是utilities/send-mail.js里。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015433.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015433.png" alt="image-20200528220435859"></a></p>
+<p>第一个红框的部分为戳一戳功能，基本不用修改。</p>
+<p>第二个红框的部分为QQ机器人发送消息的模板，<strong>这里是我修改之后的样子</strong>，原来的样式是有一堆QQ表情的，我给删除了，并添加一些语句。[CQ:face,id=63]为鲜花表情，详细的id可以百度搜索。</p>
+<p>$(text) 获取评论内容、$(url) 获取文章地址 、axios.get() 调用Qmsg接口 。。。等这样的内容就不用修改了。</p>
+<p>最后一个红框是输出日志，不管就行了。</p>
+<p>微信的模板修改与QQ的同理，找到对应的内容进行修改即可。</p>
+</br>
+
+<p>我修改后的简约提醒模板如图：</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200531142344.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200531142344.png" alt="image-20200531142340361"></a></p>
+<h3 id="修改发送邮件的内容模板"><a href="#修改发送邮件的内容模板" class="headerlink" title="修改发送邮件的内容模板"></a>修改发送邮件的内容模板</h3><h4 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h4><p>内容模板都在template/主题文件夹 中，若在原主题上进行修改则进入对应文件夹修改ejs文件就行了。这里我copy的custom2来进行修改的。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015436.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015436.png" alt="image-20200528221841902"></a></p>
+<p>notice.ejs为发送给自己的评论提醒模板。</p>
+<p>send.ejs为发送给访客的评论回复模板。</p>
+<h4 id="站长提醒"><a href="#站长提醒" class="headerlink" title="站长提醒"></a>站长提醒</h4><p>进入notice.ejs</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015438.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015438.png" alt="image-20200528223121881"></a></p>
+<p>其中需要说明的是&lt;%=sendName%&gt;，为获取在<a href="https://lluuiq.com/post/202005290137/?t=1593036314039#站长邮件提醒">站长邮件提醒</a>里设置的sendName变量。</p>
+<p>注意notice.ejs获取的是站长邮件提醒的代码块的内容。</p>
+<p>稍后的send.ejs获取的是访客邮件提醒的代码块内容，也就是说如果访客邮件提醒的代码块里没有设置这个变量。那么send.ejs里使用&lt;%=sendName%&gt;是无效的，并且不会发送邮件给访客。（当初发现没有发邮件找了好久的原因，后来才发现是没在访客的代码块里添加该变量）</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015441.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015441.png" alt="image-20200528224442093"></a></p>
+<p>部分获取评论内容的东西就不用修改，修改一些自己想要的样式什么的就行了。</p>
+<p>从这里再往下基本都是CSS，修改样式的。</p>
+<p>效果图：</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015443.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015443.png" alt="image-20200528230358526"></a></p>
+<h4 id="访客提醒"><a href="#访客提醒" class="headerlink" title="访客提醒"></a>访客提醒</h4><p>进入send.ejs</p>
+<p>代码内容与notice.ejs几乎一模一样，但是要注意的这里的内容是让访客看到的，根据自己喜好来修改或添加想让访客收到回复时看到的内容就行了。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015446.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015446.png" alt="image-20200528224731789"></a></p>
+<p>Dear &lt;%=pname%&gt;为 Dear 访客昵称。</p>
+<p>我删掉了原来的h3标签，因为显得过于冗余了，直奔主题显示曾经的评论、收到的回复。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015449.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015449.png" alt="image-20200528225041802"></a></p>
+<p>这里在页脚处添加了一些信息，注意copy原来的<p>标签语句后把id去掉，html里的id只能有一个。</p>
+<p>效果图：</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015451.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200529015451.png" alt="image-20200528230322245"></a></p>
+
+          
+            <br>
+            
+  
+    
+    
+
+<section class="widget copyright shadow desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://lluuiq.com/post/202005292233/>https://lluuiq.com/post/202005292233/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+
+
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-25T06:07:01+08:00">
+  <a class='notlink'>
+    <i class="fas fa-save" aria-hidden="true"></i>
+    <p>更新于：2020年6月25日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Valine/" rel="nofollow"><i class="fas fa-tags" aria-hidden="true"></i><p>Valine</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：3.9k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：13分钟</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/post/202006082233/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>吴恩达深度学习编程作业1-2</p>
+                <p class='content'>吴恩达深度学习课程《神经网络和深 度学习》第二周（神经网络基础）的编程作业。
+
+
+说明感谢作者阿宽提供作业题目【中文】【吴恩达课后编程作业】Course 1 - 神经网络和深度学习 - 第二周作...</p>
+              </a>
+            
+            
+              <a class='next' href='/post/202004071321/'>
+                <p class='title'>CLion配置成LeetCode做题工具<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>LeetCode自带的编译感觉并不好用，而且代码补全与提示是收费，故使用本地IDE作为LeetCode做题的工具。
+
+
+前言关于CLion的C/C++环境配置在另一篇文章里有说明。
+PyChar...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Valine配置邮件与QQ提醒',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#获取Qmsg酱的key"><span class="toc-text">获取Qmsg酱的key</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置valine实例"><span class="toc-text">配置valine实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#云引擎部署"><span class="toc-text">云引擎部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置变量"><span class="toc-text">设置变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#休眠策略配置"><span class="toc-text">休眠策略配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#自动唤醒任务"><span class="toc-text">自动唤醒任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重发邮件任务"><span class="toc-text">重发邮件任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更新"><span class="toc-text">更新</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取SMTP授权码，并设置自动转发（以163举例）"><span class="toc-text">获取SMTP授权码，并设置自动转发（以163举例）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#以下有需要则看"><span class="toc-text">&#x3D;&#x3D;&#x3D;&#x3D;以下有需要则看&#x3D;&#x3D;&#x3D;&#x3D;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开启网页后台管理"><span class="toc-text">开启网页后台管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改邮件、QQ提醒的模板"><span class="toc-text">修改邮件、QQ提醒的模板</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改发送邮件的标题"><span class="toc-text">修改发送邮件的标题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#站长邮件提醒"><span class="toc-text">站长邮件提醒</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访客邮件提醒"><span class="toc-text">访客邮件提醒</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改QQ提醒的模板"><span class="toc-text">修改QQ提醒的模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改发送邮件的内容模板"><span class="toc-text">修改发送邮件的内容模板</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#说明-1"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#站长提醒"><span class="toc-text">站长提醒</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#访客提醒"><span class="toc-text">访客提醒</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.3'
+      loop='all'
+      order='random'
+      fixed='true'
+      list-max-height='500px'
+      server='netease'
+      type='playlist'
+      id='4945153572'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://lluuiq.com">Copyright © lluuiq</a></p>
+
+        </div>
+      
+    
+      
+        
+          <div><p><a href="http://beian.miit.gov.cn" target="_blank" rel="noopener">豫ICP备19027219号</a><br>京公网备案 41140302000094号</p>
+</div>
+        
+      
+    
+    <!--网站运行时间统计-->
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+        var now = new Date(); 
+        function createtime() { 
+            var grt= new Date("07/30/2019 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+            now.setTime(now.getTime()+250); 
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+            document.getElementById("timeDate").innerHTML = "本站已苟活 "+dnum+" 天 "; 
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+        } 
+    setInterval("createtime()",250);
+    </script>
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+
+  <!-- 彩带点击 -->
+  <!-- <script type="text/javascript" src="\js\ribbon.min.js"></script> -->
+  <!-- 雪花特效 -->
+  <!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+
+
+  <!-- 线条特效 -->
+  <!-- <script type="text/javascript"
+  color="0,0,0" opacity='1' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script> -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<!-- <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> -->
+<!-- <script src="/js/jquery.pjax.min.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js" data-pjax></script>
+  <script>
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+  </script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/background.png"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+<!-- theme.plugins.aplayer.js -->
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" async></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js" async></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js"></script>
+
+  
+
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+    appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+    placeholder: "有什么想说的吗？",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    visitor: 'false',
+    highlight:'true'
+  })
+  </script>
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.1/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copyed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-clipboard-check');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制成功';
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-exclamation-triangle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制失败';
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+
+
+
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?23032f56a100d5a5e26ed5b9d94163c7";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
+
+  <script>setLoadingBarProgress(100);</script>
+
+  <script>
+    // 窗口监听load(加载、刷新)事件，执行LoadFancybox()函数
+    $(function(){
+      LoadFancybox();
+    });
+
+    var pjax = new Pjax({
+      elements: "a",
+      selectors: [
+        "title", //pjax加载标题
+        ".l_main", //pjax加载主内容
+        ".l_side", //pjax加载侧边栏
+        ".switcher .h-list", // 使手机端的搜索框与菜单栏生效
+      ]
+    })
+
+    //加载fancybox
+    function LoadFancybox(){
+      $(".article-entry").find("img").each(function () {
+        //渲染fancy box
+        var t = document.createElement("a");
+        $(t).attr("data-fancybox", ""),
+        $(t).attr("href", $(this).attr("src")),
+        $(t).attr("margin","0 auto"),
+        $(this).wrap(t)
+      });
+    }
+
+    function LoadValine(){
+      $.getScript("https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js", function() {
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        var notify = 'true' == true;
+        var verify = 'true' == true;
+        var valine = new Valine();
+        valine.init({
+          el: '#valine_container',
+          notify: notify,
+          verify: verify,
+          guest_info: guest_info,
+          
+          appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+          appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+          placeholder: "有什么想说的吗？",
+          pageSize:'10',
+          avatar:'mp',
+          lang:'zh-cn',
+          visitor: 'false',
+          highlight:'true'
+        })
+      });
+    }
+  
+    // 加载pjax后执行的函数
+    document.addEventListener('pjax:complete', function (){
+      LoadFancybox();
+      LoadValine();
+      // LoadBaidu();
+    });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>hexo本地部署流程 - lluuiq&#39;s blog</title>
+  
+    <meta name="keywords" content="hexo,github">
+  
+  
+    <meta name="description" content="一年前用hexo部署过博客，由于其他事情导致长时间未使用，后来又尝试了wordpress与typecho，但个人比较喜欢修改主题样式，感觉wordpress与typecho的封装性太强，于是又回来继续使用hexo。记录自己重新部署hexo的过程，更新以前的部署笔记，故有的时间显示为2019年，但流程都是一样的。
+...">
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="lluuiq's blog">
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css">
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/global-hot-data.js" ></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script> -->
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script> -->
+
+
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script>
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+
+  <div class='wrapper'>
+    <div class='nav-sub container--flex'>
+      <a class="logo flat-box"></a>
+      <ul class='switcher h-list'>
+        <li><a class="s-comment flat-btn fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc flat-btn fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main container container--flex">
+      
+        
+        <a class="logo flat-box" target="_self" href='/'>
+          
+          
+          
+            lluuiq
+          
+          
+        </a>
+      
+      <!-- PC端菜单栏 -->
+			<div class='menu navigation'>
+				<ul class='h-list'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  
+                    <i class='fas fa-home fa-fw'></i>
+                  
+                  首页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  
+                    <i class='fas fa-tags fa-fw'></i>
+                  
+                  标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  
+                    <i class='fas fa-archive fa-fw'></i>
+                  
+                  归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  
+                    <i class='fas fa-link fa-fw'></i>
+                  
+                  友人帐
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  
+                    <i class='fas fa-info-circle fa-fw'></i>
+                  
+                  关于我
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+      <!-- PC端搜索框 -->
+      
+        <div class="m_search">
+          <form name="searchform" class="form u-search-form">
+            <i class="icon fas fa-search fa-fw"></i>
+            <input type="text" class="input u-search-input" placeholder="想找些什么？" />
+          </form>
+        </div>
+      
+
+      <!-- 手机端的搜索按钮与菜单栏按钮 -->
+			<ul class='switcher h-list'>
+				
+					<li><a class="s-search flat-btn fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li><a class="s-menu flat-btn fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+
+<!-- 手机端导航栏菜单 -->
+<ul class="menu-phone navigation white-box">
+  
+  
+    <li>
+      <a class="flat-box" href=/
+        
+        
+        
+          id="home"
+        >
+        
+          <i class='fas fa-home fa-fw'></i>
+        
+        首页
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/categories/
+        
+        
+        
+          id="categories"
+        >
+        
+          <i class='fas fa-folder-open fa-fw'></i>
+        
+        分类
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/tags/
+        
+        
+        
+          id="tags"
+        >
+        
+          <i class='fas fa-tags fa-fw'></i>
+        
+        标签
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/archives/
+        
+        
+        
+          id="archives"
+        >
+        
+          <i class='fas fa-archive fa-fw'></i>
+        
+        归档
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/friends/
+        
+        
+        
+          id="friends"
+        >
+        
+          <i class='fas fa-link fa-fw'></i>
+        
+        友人帐
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/about/
+        
+        
+        
+          id="about"
+        >
+        
+          <i class='fas fa-info-circle fa-fw'></i>
+        
+        关于我
+      </a>
+    </li>
+  
+</ul>
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo常用指令："><span class="toc-text">hexo常用指令：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装git："><span class="toc-text">安装git：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Node-js："><span class="toc-text">安装Node.js：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装hexo："><span class="toc-text">安装hexo：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo部署博客："><span class="toc-text">hexo部署博客：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在github上创建静态网站的存储库："><span class="toc-text">在github上创建静态网站的存储库：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改-config-yml-文件："><span class="toc-text">修改 _config.yml 文件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推送到github-page："><span class="toc-text">推送到github page：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#永久链接："><span class="toc-text">永久链接：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改默认文章模板："><span class="toc-text">修改默认文章模板：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解析域名"><span class="toc-text">解析域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#绑定到github-pages"><span class="toc-text">绑定到github pages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建分支"><span class="toc-text">创建分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置新建分支为默认分支"><span class="toc-text">设置新建分支为默认分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#同步配置"><span class="toc-text">同步配置</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+    <div class='body-wrapper'>
+      
+
+<aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo常用指令："><span class="toc-text">hexo常用指令：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装git："><span class="toc-text">安装git：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Node-js："><span class="toc-text">安装Node.js：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装hexo："><span class="toc-text">安装hexo：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo部署博客："><span class="toc-text">hexo部署博客：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在github上创建静态网站的存储库："><span class="toc-text">在github上创建静态网站的存储库：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改-config-yml-文件："><span class="toc-text">修改 _config.yml 文件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推送到github-page："><span class="toc-text">推送到github page：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#永久链接："><span class="toc-text">永久链接：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改默认文章模板："><span class="toc-text">修改默认文章模板：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解析域名"><span class="toc-text">解析域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#绑定到github-pages"><span class="toc-text">绑定到github pages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建分支"><span class="toc-text">创建分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置新建分支为默认分支"><span class="toc-text">设置新建分支为默认分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#同步配置"><span class="toc-text">同步配置</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/post/202002192100/">
+        hexo本地部署流程
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+<div class='new-meta-item author'>
+  <a href="https://lluuiq.com" rel="nofollow">
+    <img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png">
+    <p>lluuiq</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E7%AC%94%E8%AE%B0/hexo/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>笔记&nbsp;/&nbsp;hexo</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-edit" aria-hidden="true"></i>
+    <p>发布于：2020年2月19日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：3.9k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：14分钟</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>一年前用hexo部署过博客，由于其他事情导致长时间未使用，后来又尝试了wordpress与typecho，但个人比较喜欢修改主题样式，感觉wordpress与typecho的封装性太强，于是又回来继续使用hexo。记录自己重新部署hexo的过程，更新以前的部署笔记，故有的时间显示为2019年，但流程都是一样的。</p>
+<p>这篇笔记里可以看到    </p>
+<ol>
+<li><a href="#本地部署过程">本地部署过程</a></li>
+<li><a href="#博客部署到github过程">静态页面部署到github过程</a></li>
+<li><a href="#hexo修改配置">hexo修改配置</a></li>
+<li><a href="#绑定域名">绑定域名</a></li>
+<li><a href="#源代码保存到github">源代码保存到github</a></li>
+</ol>
+<a id="more"></a>
+
+<hr>
+<h1 id="本地部署过程"><a href="#本地部署过程" class="headerlink" title="本地部署过程"></a>本地部署过程</h1><p>需要安装的东西：git、Node.js、hexo。</p>
+<p>其中git安装完成后的Git Bash，其作用与系统自带的CMD命令行相同，系统中的CMD命令同样可以在Git Bash中完成。</p>
+<p>链接：</p>
+<ul>
+<li><p><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git官方下载地址</a></p>
+</li>
+<li><p><a href="https://npm.taobao.org/mirrors/git-for-windows/" target="_blank" rel="noopener">git淘宝镜像下载地址</a></p>
+</li>
+<li><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js官网下载地址</a></p>
+</li>
+</ul>
+<p>hexo使用命令安装。</p>
+<p><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">hexo官方文档</a>里面有关于hexo的各种使用方法，包括各个指令、文件的说明、如何更改网站的一些信息等等。</p>
+<hr>
+<h2 id="hexo常用指令："><a href="#hexo常用指令：" class="headerlink" title="hexo常用指令："></a>hexo常用指令：</h2><p><code>hexo new &quot;title&quot;</code> 新建文章(md文件)，title为文章的标题<br><code>hexo new page &quot;pagename&quot;</code> 新建网页，pagename为网页的名称<br><code>hexo clean</code> 清除部署的緩存<br><code>hexo n == hexo new</code> 新建一篇文章<br><code>hexo g == hexo generate</code> 生成静态页面<br><code>hexo s == hexo server</code> 本地部署，可预览网站，默认端口为4000，浏览器输入<code>localhost:4000</code>即可进入网站进行预览，回到git-bash按<code>ctrl+c</code>退出预览(退出后<code>localhost:4000</code>失效)<br><code>hexo d == hexo deploy</code> 将网站部署到GitHub<br><code>hexo g -d</code> 生成页面并部署到GitHub<br><code>hexo g -s</code> 生成页面并本地部署进行预览</p>
+<hr>
+<h2 id="安装git："><a href="#安装git：" class="headerlink" title="安装git："></a>安装git：</h2><p>本文章书写日期时最新版本为2.22.0版本</p>
+<p>因版本可能不同，因此安装过程中的组件选择可能会有所差异，基本默认选项即可</p>
+<p>下载完成后进入安装界面 (注:以下安装的选项请以实际自身需求为准，仅供参考):</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030720.png" alt="mark"></p>
+<p>选择需要安装的组件。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030722.png" alt="mark"></p>
+<p>选择git的默认编辑器:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030724.png" alt="mark"></p>
+<p>配置环境变量选项,推荐默认第二项:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030721.png" alt="mark"></p>
+<p>选择https传输协议 默认即可:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030723.png" alt="mark"></p>
+<p>选择git的换行方式 请根据自身需求更改:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030725.png" alt="mark"></p>
+<p>设置git命令行的样式:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030726.png" alt="mark"></p>
+<p>设置选项：1.是否允许文件缓存 2.是否允许git许可证管理，默认勾选：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030740.png" alt="mark"></p>
+<p>是否参与新的测试,貌似是会使git更快，但还不稳定:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030727.png" alt="mark"></p>
+<p>install 安装即可:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030728.png" alt="mark"></p>
+<p>git安装完成后，需要进行配置，在git安装目录或菜单栏中找到git-bash，打开后如图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030737.png" alt="mark"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030729.png" alt="mark"></p>
+<p>输入如下，其中” “中的your name 和your email为你的Git Hub用户名(非昵称)与邮箱</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;your name&quot;</span><br><span class="line">git config --global user.email &quot;your email&quot;</span><br></pre></td></tr></table></figure>
+
+<p>并可通过以下命令查询用户名与邮箱</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name</span><br><span class="line">git config user.email</span><br></pre></td></tr></table></figure>
+
+<p>结果如下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030731.png" alt="mark"></p>
+<h2 id="安装Node-js："><a href="#安装Node-js：" class="headerlink" title="安装Node.js："></a>安装Node.js：</h2><p>该文章书写时，版本为10.16.0</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030730.png" alt="mark"></p>
+<p>安装界面:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030732.png" alt="mark"></p>
+<p>选择安装模式,我选择了第四个，next即可:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030733.png" alt="mark"></p>
+<p>以下过程命令行既可使用windows的cmd，也可以使用git安装过程中的 git-bash进行操作</p>
+<p>命令行中输入<code>node -v</code>可查看node的版本 ,输入 <code>npm -v</code>查看npm包的版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030735.png" alt="mark"></p>
+<p>因为npm为国外源，下载速度感人，故使用cnpm使下载指向国内源。</p>
+<p>使用淘宝镜像下载 cnpm:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+<p>下载完后查看cnpm版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm -v</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030734.png" alt="mark"></p>
+<p>查询成功则证明安装完成。</p>
+<h2 id="安装hexo："><a href="#安装hexo：" class="headerlink" title="安装hexo："></a>安装hexo：</h2><p>使用cnpm下载hexo,用hexo -v查看hexo的版本:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g hexo-cli</span><br><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030736.png" alt="mark"></p>
+<h2 id="hexo部署博客："><a href="#hexo部署博客：" class="headerlink" title="hexo部署博客："></a>hexo部署博客：</h2><p>在我的电脑中创建文件夹用于存储博客网站，即网站的站点。文件夹名称自定义，我使用blog,目录为D:\blog。打开blog文件夹，右键空白处点击Git Bash Here在该目录下打开Git Bash(或者用CMD切换到该目录也行)。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030738.png" alt="mark"></p>
+<p>输入<code>cnpm install hexo --save</code>安装组件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install hexo --save</span><br></pre></td></tr></table></figure>
+
+<p>输入<code>hexo init</code>进行初始化，等待时间较长，约几分钟。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030741.png" alt="mark"></p>
+<p><strong>注</strong>：若blog文件夹非空，则会报错:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030742.png" alt="mark"></p>
+<p>使用<code>hexo s</code> 在本地启动博客</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030739.png" alt="mark"></p>
+<p>如图所示显示本地部署成功</p>
+<p>打开网页，地址栏输入<code>http://localhost:4000</code>即可从本地进入博客</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030746.png" alt="mark"></p>
+<p>目录内的各个文件的作用参考<a href="https://hexo.io/zh-cn/docs/setup" target="_blank" rel="noopener">官方文档</a></p>
+<h1 id="静态页面部署到github过程"><a href="#静态页面部署到github过程" class="headerlink" title="静态页面部署到github过程"></a>静态页面部署到github过程</h1><h2 id="在github上创建静态网站的存储库："><a href="#在github上创建静态网站的存储库：" class="headerlink" title="在github上创建静态网站的存储库："></a>在github上创建静态网站的存储库：</h2><p>通过<code>Ctrl+C</code>停止服务</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030744.png" alt="mark"></p>
+<p>登陆自己的Git Hub <a href="https://github.com/login" target="_blank" rel="noopener">点击进入登陆界面</a></p>
+<p>登陆成功后，网页右上角个人头像旁边，点击 + 号 选择New repository创建一个新的仓库</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030743.png" alt="mark"></p>
+<p>输入的信息如下，其中 Repository name内容必须是 github的用户名，而不是昵称。点击Create repository创建项目。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030745.png" alt="mark"></p>
+<p>创建成功后，界面如图，复制https的链接。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030748.png" alt="mark"></p>
+<p>回到git-bash 使用cnpm安装git部署插件，插件名为:hexo-deployer-git</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+
+<p>安装过程中若有警告可以忽略</p>
+<h2 id="修改-config-yml-文件："><a href="#修改-config-yml-文件：" class="headerlink" title="修改 _config.yml 文件："></a>修改 _config.yml 文件：</h2><p>打开网站目录的 _config.yml</p>
+<p>移动到最低端，在deploy:后面写入内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type: git</span><br><span class="line">repo: 刚刚复制的https链接</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030747.png" alt="mark"></p>
+<h2 id="推送到github-page："><a href="#推送到github-page：" class="headerlink" title="推送到github page："></a>推送到github page：</h2><p>修改完成后，保存文件，在Git Bash中输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>即可将本地的网站服务器渲染出的静态页面上传到github。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030809.png" alt="mark"></p>
+<p>该过程可能需要输入github和coding的用户名和密码，若Git Hub配置过SSH则不需要输入。</p>
+<p>如果有报错，检查之前的配置是否有误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;your name&quot;</span><br><span class="line">git config --global user.email &quot;your email&quot;</span><br></pre></td></tr></table></figure>
+
+<p>配置语句是否正确 your name为用户名(非昵称)</p>
+<p>推送完成后，再次进入仓库，即可看到上传完成的静态网页。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030750.png" alt="mark"></p>
+<p>并且可以通过 <code>你的用户名.github.io</code> 来进入网站，此时网站已经部署到github page，其他人也可以通过该地址访问你的网站。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030751.png" alt="mark"></p>
+<p><code>hexo s</code>指令仅启动本地服务，修改后只能通过localhost:4000来进行访问，此时没有推送页面到github。想要推送到github生成页面的话，需要通过<code>hexo d</code>进行推送。推送前输入指令<code>hexo clean</code>清除缓存，然后再输入<code>hexo g</code>重新生成静态页面，然后推送即可。</p>
+<h1 id="hexo修改配置"><a href="#hexo修改配置" class="headerlink" title="hexo修改配置"></a>hexo修改配置</h1><p><a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">官方文档</a>里有基本的配置文件内容说明，例如修改博主名称、网站名称、副标题、描述等等。</p>
+<h2 id="永久链接："><a href="#永久链接：" class="headerlink" title="永久链接："></a>永久链接：</h2><p>打开博客目录下的配置文件_config.yml，按<code>Ctrl+F</code>搜索 URL</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030800.png" alt="mark"></p>
+<p>url内容不用改，修改permalink内容</p>
+<p>其意思为：修改一篇文章的url</p>
+<p>默认的设置为将一篇文章的创建日期+title作为永久链接，但这样并不美观，并且在分享链接时因为编码问题中文会被转码造成如下结果</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030749.png" alt="mark"></p>
+<p>链接的格式为 你的域名/permalink内容，</p>
+<p>比如我修改后的<code>post/:year:month:day:hour:minute/</code></p>
+<p>会将创建文件时的年月日时分作为永久链接，避免了分享中文时的乱码。</p>
+<p>加一个post是为了将文章统一放在一个文件夹中，在生成静态网页时，会生成一个post文件夹，里面存放生成的文章。还有其余的样式，在官方文档的永久链接中有说明。</p>
+<p>还有一种改法是使用<code>:urlname</code>，然后在文档的头信息中给urlname参数，让该参数的值为永久链接，但同样避免不了中文转码的问题，我个人就使用日期作为永久链接了。但这样其实有个问题就是以后管理文档时，post文件夹内显示的都是日期数字，不能直观的看到文章标题。</p>
+<h2 id="修改默认文章模板："><a href="#修改默认文章模板：" class="headerlink" title="修改默认文章模板："></a>修改默认文章模板：</h2><p>打开站点目录下的<code>scaffolds</code>文件夹，打开<code>post.md</code></p>
+<p>该markdown文档的内容会在生成一个markdown文档后自动添加进去。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125; </span><br><span class="line">date: &#123;&#123; date &#125;&#125; </span><br><span class="line">comments: true # 是否开启评论</span><br><span class="line">mathjax: false # 是否开启数学公式渲染</span><br><span class="line">toc: true # 是否启用目录</span><br><span class="line">top: false # 是否置顶</span><br><span class="line"></span><br><span class="line"><span class="section"># 若使用urlname作为永久链接则添加该项</span></span><br><span class="line">urlname:</span><br><span class="line"></span><br><span class="line">categories: </span><br><span class="line"><span class="bullet">- </span>[父类,子类]</span><br><span class="line"><span class="bullet">- </span>同级分类</span><br><span class="line">tags: [标签1,标签2]</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="comment">&lt;!-- more --&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>提前设置好模板，这样生成一个新markdown文档后，只需修改urlname以及设置分类<code>categories</code>与标签<code>tags</code>即可，若主题支持，可设置是否有目录<code>toc</code>，是否置顶<code>top</code>，是否开启评论<code>comments</code>，不同的主题可能名称不同，根据自己的主题修改即可。</p>
+<p>若有不支持的功能也不会出错，仅仅无法加载该内容。</p>
+hexo本地部署流程与1582117239000 为标题与文档创建日期，不需要改动
+
+<p>分类<code>categories</code>里，前面有减号<code>-</code>的表示为同级分类，中括号<code>[]</code>括起来的为父子分类。</p>
+<p>例如</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">categories: </span><br><span class="line"><span class="bullet">- </span>[生活,笔记]</span><br><span class="line"><span class="bullet">- </span>娱乐</span><br></pre></td></tr></table></figure>
+
+<p>文档在推送后，分类为生活类中的笔记类，同时也是娱乐类。</p>
+<p>也可以将娱乐类改为 <code>[娱乐,音乐]</code>，这样就同时是娱乐类中的音乐类。</p>
+<h1 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h1><h2 id="解析域名"><a href="#解析域名" class="headerlink" title="解析域名"></a>解析域名</h2><p>以我的域名为例，不同商家解析时都差不多。在域名管理处点击解析</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030752.png" alt="mark"></p>
+<p>点击添加记录。会出现如图的添加设置。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030755.png" alt="mark"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030757.png" alt="mark"></p>
+<p>主机记录可理解为域名前缀，即用户输入什么样的网址访问到该解析目标。如果主机记录为www ，则用户需要输入www.[你的域名]才能访问到该解析目标。如果为@，则直接输入域名即可。如果不添加www ，则通过www+域名方式访问的用户将访问失败，@同理，其余的也同理。</p>
+<fancybox>
+
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030754.png" alt="mark"></p>
+</fancybox>
+
+<p>记录类型为解析目标的类型，如果想把该域名绑定到一个ip地址，则选A，如果目标为一个网址，则选CNAME。</p>
+<p>这里有两种绑定方法，一种是选CNAME然后在记录值填写 [yourname].github.io ，另一种是选A，然后通过cmd命令行输入 <code>ping [yourname].github.io</code> 获取ip地址，记录值里填入ip地址。</p>
+<p>获取 [yourname].github.io 的ip地址，如图，ping通后会显示ip地址。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030753.png" alt="mark"></p>
+<p>记录值根据选择的记录类型进行填写。线路选默认。TTL为缓存生效时间，默认600秒即可，即10分钟后生效(实际大约需要5 分钟)。填写完毕后点击保存。可以为域名填写多个记录， 如图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030756.png" alt="mark"></p>
+<p>前两个是为github pages绑定时添加的记录，一个www、一个@，这样可以让用域名直接访问的和加了www访问的用户都能访问到自己的博客 (部署到服务器后就不再用了所以暂停了)。接下来两条A类型是将网站部署到自己的服务器时，把域名解析到了自己的服务器IP地址，这样可以通过www、或者直接输入域名的方式来访问自己的服务器。最后一条是绑定的七牛云，用来当做博客的图床。每条记录后面都有操作可以进行修改以及暂停和开启。</p>
+<h2 id="绑定到github-pages"><a href="#绑定到github-pages" class="headerlink" title="绑定到github pages"></a>绑定到github pages</h2><p>登陆到自己的github，进入网站绑定的仓库，进入设置</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030759.png" alt="mark"></p>
+<p>往下找到GitHub Pages，在Custom domain填入刚刚购买的域名，点击save保存。勾选Enforce HTTPS则开启HTTPS安全协议。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030758.png" alt="mark"></p>
+<p>然后到本地博客<code>source</code>文件夹下新建文件CNAME，输入内容为自己的域名，并将文件尾缀如<code>.txt</code>等删掉然后保存即可。(没有的话貌似每次将代码从本地推到github都会使域名访问404，因为每次推送都会覆盖原本的仓库代码。所以把CNAME文件放在source中，使每次推送都会建立一个CNAME)</p>
+<p>至此，github pages的域名绑定完成了，稍等片刻即可尝试使用域名访问。</p>
+<h1 id="源代码保存到github"><a href="#源代码保存到github" class="headerlink" title="源代码保存到github"></a>源代码保存到github</h1><h2 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h2><p>在仓库中的文件列表的左上方，点击Branch。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030802.png" alt="mark"></p>
+<p>搜索 source （分支名，自定义），会提示未找到，是否创建，点击即可创建该分支</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030804.png" alt="mark"></p>
+<h2 id="设置新建分支为默认分支"><a href="#设置新建分支为默认分支" class="headerlink" title="设置新建分支为默认分支"></a>设置新建分支为默认分支</h2><p>进入设置，左边的列表中选择 Branches，默认分支为master，改为新建的分支，然后点击Update更新。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030805.png" alt="mark"></p>
+<h2 id="同步配置"><a href="#同步配置" class="headerlink" title="同步配置"></a>同步配置</h2><p>首先随便找个地方新建一个文件夹，将你的仓库克隆下来。</p>
+<p>打开新建的文件夹，右键空白处点击<code>Git Bash Here</code></p>
+<p>然后输入下方命令克隆文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone 【你的仓库地址】</span><br></pre></td></tr></table></figure>
+
+<p>仓库地址获取方法：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030803.png" alt="mark"></p>
+<p>点击红框内的按钮复制，然后粘贴到clone后面即可，用空格与clone隔开。</p>
+<p>克隆完成后，该文件夹内会出现<code>【你的用户名】.github.io</code>文件夹，进去拷贝<code>.git</code>文件夹到本地的博客根目录，然后这个新建的文件夹就可以删除了。</p>
+<p>接下来在博客根目录右键空白处，打开git bash，输入下方命令，警告不用理会，若没出现报错就没问题。</p>
+<p>会需要github的帐号密码，填一下就OK了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 【你的仓库地址】</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;【描述，随便写】&quot;</span><br><span class="line">git push origin 【你的保存源代码的分支名】</span><br></pre></td></tr></table></figure>
+
+<p>描述部分的效果如图，会将内容显示在该分支上。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030807.png" alt="mark"></p>
+<p>每次推送时，输入的描述都会在这次推送时更新的文件后面显示出来。</p>
+<p>接下来每次想保存时，输入下方指令即可，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;【描述】&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<p>但每次都要输入这么多很麻烦，可以创建一个脚本文件，在博客根目录下新建一个txt文本文件，名字随意自己能知道是保存用的就行，将上方三条指令写进去，描述写好后以后固定都是这个，然后将文件改为<code>.sh</code>结尾。也可以直接建一个<code>.sh</code>尾缀文件，然后用编辑器打开写入。这样以后每次运行这个脚本文件就会自动执行上面三条指令，完成推送。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030806.png" alt="mark"></p>
+<p>本地同步到github就完成了，但要注意的是只保存了关键文件，如主题、文章、配置等。</p>
+<p>node_modules文件夹和public文件夹是没有保存上去的，public文件夹是生成的静态页面，不需要保存，若迁移后直接生成就有了。</p>
+<p>node_modules文件夹存放着需要用到的插件，如果想保存的话，打开<code>.gitignore</code>文件，把里面的node_modules删掉保存即可，但是这样会造成每次保存都需要很久时间，因为里面东西太多了，看个人需要决定是否需要保存。</p>
+<p>只要配置文件里面的deploy里的branch的值是master的话，生成的静态页面会推送到master分支</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324030808.png" alt="mark"></p>
+<p>配置完成后，若以后要迁移到其他的服务器或者电脑上，只需要安装好git、Node.js、hexo，然后使用<code>hexo init</code>命令初始化一个根目录，再克隆下来就行了，若不指定克隆分支的话，会克隆默认分支，即设置好的保存博客源代码的分支。</p>
+
+          
+            <br>
+            
+  
+    
+    
+
+<section class="widget copyright shadow desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://lluuiq.com/post/202002192100/>https://lluuiq.com/post/202002192100/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+
+
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-25T04:33:37+08:00">
+  <a class='notlink'>
+    <i class="fas fa-save" aria-hidden="true"></i>
+    <p>更新于：2020年6月25日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/hexo/" rel="nofollow"><i class="fas fa-tags" aria-hidden="true"></i><p>hexo</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/github/" rel="nofollow"><i class="fas fa-tags" aria-hidden="true"></i><p>github</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：3.9k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：14分钟</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/post/202002201856/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>markdown文章显示测试</p>
+                <p class='content'>这是一个测试用的文档，该句也是一级标题这是二级标题这是三级标题这是四级标题这是五级标题接下来是阅读更多 
+接下来的测试内容用二级标题标注
+分隔符：第一行，接下来加入分隔符
+
+第二行，与第一行之间...</p>
+              </a>
+            
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'hexo本地部署流程',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo常用指令："><span class="toc-text">hexo常用指令：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装git："><span class="toc-text">安装git：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Node-js："><span class="toc-text">安装Node.js：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装hexo："><span class="toc-text">安装hexo：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo部署博客："><span class="toc-text">hexo部署博客：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在github上创建静态网站的存储库："><span class="toc-text">在github上创建静态网站的存储库：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改-config-yml-文件："><span class="toc-text">修改 _config.yml 文件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推送到github-page："><span class="toc-text">推送到github page：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#永久链接："><span class="toc-text">永久链接：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改默认文章模板："><span class="toc-text">修改默认文章模板：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解析域名"><span class="toc-text">解析域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#绑定到github-pages"><span class="toc-text">绑定到github pages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建分支"><span class="toc-text">创建分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置新建分支为默认分支"><span class="toc-text">设置新建分支为默认分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#同步配置"><span class="toc-text">同步配置</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.3'
+      loop='all'
+      order='random'
+      fixed='true'
+      list-max-height='500px'
+      server='netease'
+      type='playlist'
+      id='4945153572'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://lluuiq.com">Copyright © lluuiq</a></p>
+
+        </div>
+      
+    
+      
+        
+          <div><p><a href="http://beian.miit.gov.cn" target="_blank" rel="noopener">豫ICP备19027219号</a><br>京公网备案 41140302000094号</p>
+</div>
+        
+      
+    
+    <!--网站运行时间统计-->
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+        var now = new Date(); 
+        function createtime() { 
+            var grt= new Date("07/30/2019 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+            now.setTime(now.getTime()+250); 
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+            document.getElementById("timeDate").innerHTML = "本站已苟活 "+dnum+" 天 "; 
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+        } 
+    setInterval("createtime()",250);
+    </script>
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+
+  <!-- 彩带点击 -->
+  <!-- <script type="text/javascript" src="\js\ribbon.min.js"></script> -->
+  <!-- 雪花特效 -->
+  <!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+
+
+  <!-- 线条特效 -->
+  <!-- <script type="text/javascript"
+  color="0,0,0" opacity='1' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script> -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<!-- <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> -->
+<!-- <script src="/js/jquery.pjax.min.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js" data-pjax></script>
+  <script>
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+  </script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/background.png"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+<!-- theme.plugins.aplayer.js -->
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" async></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js" async></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js"></script>
+
+  
+
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+    appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+    placeholder: "有什么想说的吗？",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    visitor: 'false',
+    highlight:'true'
+  })
+  </script>
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.1/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copyed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-clipboard-check');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制成功';
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-exclamation-triangle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制失败';
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+
+
+
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?23032f56a100d5a5e26ed5b9d94163c7";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
+
+  <script>setLoadingBarProgress(100);</script>
+
+  <script>
+    // 窗口监听load(加载、刷新)事件，执行LoadFancybox()函数
+    $(function(){
+      LoadFancybox();
+    });
+
+    var pjax = new Pjax({
+      elements: "a",
+      selectors: [
+        "title", //pjax加载标题
+        ".l_main", //pjax加载主内容
+        ".l_side", //pjax加载侧边栏
+        ".switcher .h-list", // 使手机端的搜索框与菜单栏生效
+      ]
+    })
+
+    //加载fancybox
+    function LoadFancybox(){
+      $(".article-entry").find("img").each(function () {
+        //渲染fancy box
+        var t = document.createElement("a");
+        $(t).attr("data-fancybox", ""),
+        $(t).attr("href", $(this).attr("src")),
+        $(t).attr("margin","0 auto"),
+        $(this).wrap(t)
+      });
+    }
+
+    function LoadValine(){
+      $.getScript("https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js", function() {
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        var notify = 'true' == true;
+        var verify = 'true' == true;
+        var valine = new Valine();
+        valine.init({
+          el: '#valine_container',
+          notify: notify,
+          verify: verify,
+          guest_info: guest_info,
+          
+          appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+          appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+          placeholder: "有什么想说的吗？",
+          pageSize:'10',
+          avatar:'mp',
+          lang:'zh-cn',
+          visitor: 'false',
+          highlight:'true'
+        })
+      });
+    }
+  
+    // 加载pjax后执行的函数
+    document.addEventListener('pjax:complete', function (){
+      LoadFancybox();
+      LoadValine();
+      // LoadBaidu();
+    });
+
+  </script>
+</body>
+</html>

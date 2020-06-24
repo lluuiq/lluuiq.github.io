@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>Volantis主题DIY笔记 - lluuiq&#39;s blog</title>
+  
+    <meta name="keywords" content="hexo">
+  
+  
+    <meta name="description" content="主题首页：Volantis
+记录一些DIY的过程">
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="lluuiq's blog">
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css">
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/global-hot-data.js" ></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script> -->
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script> -->
+
+
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script>
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+
+  <div class='wrapper'>
+    <div class='nav-sub container--flex'>
+      <a class="logo flat-box"></a>
+      <ul class='switcher h-list'>
+        <li><a class="s-comment flat-btn fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc flat-btn fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main container container--flex">
+      
+        
+        <a class="logo flat-box" target="_self" href='/'>
+          
+          
+          
+            lluuiq
+          
+          
+        </a>
+      
+      <!-- PC端菜单栏 -->
+			<div class='menu navigation'>
+				<ul class='h-list'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  
+                    <i class='fas fa-home fa-fw'></i>
+                  
+                  首页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  
+                    <i class='fas fa-tags fa-fw'></i>
+                  
+                  标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  
+                    <i class='fas fa-archive fa-fw'></i>
+                  
+                  归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  
+                    <i class='fas fa-link fa-fw'></i>
+                  
+                  友人帐
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  
+                    <i class='fas fa-info-circle fa-fw'></i>
+                  
+                  关于我
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+      <!-- PC端搜索框 -->
+      
+        <div class="m_search">
+          <form name="searchform" class="form u-search-form">
+            <i class="icon fas fa-search fa-fw"></i>
+            <input type="text" class="input u-search-input" placeholder="想找些什么？" />
+          </form>
+        </div>
+      
+
+      <!-- 手机端的搜索按钮与菜单栏按钮 -->
+			<ul class='switcher h-list'>
+				
+					<li><a class="s-search flat-btn fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li><a class="s-menu flat-btn fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+
+<!-- 手机端导航栏菜单 -->
+<ul class="menu-phone navigation white-box">
+  
+  
+    <li>
+      <a class="flat-box" href=/
+        
+        
+        
+          id="home"
+        >
+        
+          <i class='fas fa-home fa-fw'></i>
+        
+        首页
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/categories/
+        
+        
+        
+          id="categories"
+        >
+        
+          <i class='fas fa-folder-open fa-fw'></i>
+        
+        分类
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/tags/
+        
+        
+        
+          id="tags"
+        >
+        
+          <i class='fas fa-tags fa-fw'></i>
+        
+        标签
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/archives/
+        
+        
+        
+          id="archives"
+        >
+        
+          <i class='fas fa-archive fa-fw'></i>
+        
+        归档
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/friends/
+        
+        
+        
+          id="friends"
+        >
+        
+          <i class='fas fa-link fa-fw'></i>
+        
+        友人帐
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/about/
+        
+        
+        
+          id="about"
+        >
+        
+          <i class='fas fa-info-circle fa-fw'></i>
+        
+        关于我
+      </a>
+    </li>
+  
+</ul>
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#主题文件目录"><span class="toc-text">主题文件目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#顶部导航栏"><span class="toc-text">顶部导航栏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搜索栏"><span class="toc-text">搜索栏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改卡片的内外边距"><span class="toc-text">修改卡片的内外边距</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#封面界面去掉搜索"><span class="toc-text">封面界面去掉搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加QQ在线联系"><span class="toc-text">添加QQ在线联系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将侧边栏移动到左边"><span class="toc-text">将侧边栏移动到左边</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进一步修改"><span class="toc-text">进一步修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改透明度"><span class="toc-text">修改透明度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现pjax"><span class="toc-text">实现pjax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pjax优化-自动生成Fancybox"><span class="toc-text">pjax优化-自动生成Fancybox</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pjax刷新评论"><span class="toc-text">pjax刷新评论</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加百度统计"><span class="toc-text">添加百度统计</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+    <div class='body-wrapper'>
+      
+
+<aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#主题文件目录"><span class="toc-text">主题文件目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#顶部导航栏"><span class="toc-text">顶部导航栏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搜索栏"><span class="toc-text">搜索栏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改卡片的内外边距"><span class="toc-text">修改卡片的内外边距</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#封面界面去掉搜索"><span class="toc-text">封面界面去掉搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加QQ在线联系"><span class="toc-text">添加QQ在线联系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将侧边栏移动到左边"><span class="toc-text">将侧边栏移动到左边</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进一步修改"><span class="toc-text">进一步修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改透明度"><span class="toc-text">修改透明度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现pjax"><span class="toc-text">实现pjax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pjax优化-自动生成Fancybox"><span class="toc-text">pjax优化-自动生成Fancybox</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pjax刷新评论"><span class="toc-text">pjax刷新评论</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加百度统计"><span class="toc-text">添加百度统计</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/post/202003171229/">
+        Volantis主题DIY笔记
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+<div class='new-meta-item author'>
+  <a href="https://lluuiq.com" rel="nofollow">
+    <img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png">
+    <p>lluuiq</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E7%AC%94%E8%AE%B0/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>笔记</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-edit" aria-hidden="true"></i>
+    <p>发布于：2020年3月17日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：2.4k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：9分钟</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>主题首页：<a href="https://volantis.js.org/" target="_blank" rel="noopener">Volantis</a></p>
+<p>记录一些DIY的过程</p>
+<a id="more"></a>
+
+<h2 id="主题文件目录"><a href="#主题文件目录" class="headerlink" title="主题文件目录"></a>主题文件目录</h2><p>在主题的根目录下。</p>
+<p>layout为页面、卡片、各部位的布局代码</p>
+<p>source存放css、js、字体、图片等代码与资源</p>
+<p>_config.yml为主题配置文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023003.png" alt="mark"></p>
+<h2 id="顶部导航栏"><a href="#顶部导航栏" class="headerlink" title="顶部导航栏"></a>顶部导航栏</h2><p>设置顶部导航栏始终显示。</p>
+<p>打开source/css/_layout/navbar.styl</p>
+<p>找到最下面的代码，将其注释</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200326081504.png" alt="mark"></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .cover-wrapper</span></span><br><span class="line"><span class="comment">//   .l_header</span></span><br><span class="line"><span class="comment">//     trans(0.5s)</span></span><br><span class="line"><span class="comment">//     transform: translateY(-2 * $navbar-height)</span></span><br><span class="line"><span class="comment">//     &amp;.show</span></span><br><span class="line"><span class="comment">//       transform: translateY(0)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="搜索栏"><a href="#搜索栏" class="headerlink" title="搜索栏"></a>搜索栏</h2><p>修改搜索结果中的输入内容的上边距，使内容显示在合适位置</p>
+<p>原来的样式：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023005.png" alt="mark"></p>
+<p>修改后：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023006.png" alt="mark"></p>
+<p>打开source/css_layout/search.styl</p>
+<p>使用搜索功能搜索关键词<code>input</code></p>
+<p>修改margin，将<code>$gap</code>改为<code>5px</code></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#u-search-modal-input</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">5px</span> <span class="number">50px</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="修改卡片的内外边距"><a href="#修改卡片的内外边距" class="headerlink" title="修改卡片的内外边距"></a>修改卡片的内外边距</h2><p>打开_config.yml</p>
+<p>找到<code>gap</code>的设置，添加base值，大小为要设置的内外边距</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023007.png" alt="mark"></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">base:</span> <span class="string">10px</span></span><br></pre></td></tr></table></figure>
+
+<p>该方法是同时修改卡片之间的距离以及卡片内容与卡片边框之间的距离。</p>
+<p>若要分开修改需要到css文件逐一修改，可以用该方法添加一个新的变量来传参。</p>
+<p>例如：</p>
+<p>在gap中添加一个变量，变量名自定义，这里用<strong>test</strong>示例，后面的大小为要设置的大小。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">test:</span> <span class="string">10px</span></span><br></pre></td></tr></table></figure>
+
+<p>接着打开source/css/_defines/layout.styl，找到gap的设置</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023008.png" alt="mark"></p>
+<p>添加自定义的变量</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023009.png" alt="mark"></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$test = convert(hexo-config('style.gap.test')) || 16px</span><br></pre></td></tr></table></figure>
+
+<p>$test为CSS设置中的变量名，<code>style.gap.test</code>中的test为在_config.yml中设置的变量名，||后面为默认值</p>
+<p>设置完成后，在对应的CSS设置中仅需要将间距大小改为<code>$test</code>，就会使用设置中test的值</p>
+<h2 id="封面界面去掉搜索"><a href="#封面界面去掉搜索" class="headerlink" title="封面界面去掉搜索"></a>封面界面去掉搜索</h2><p>效果如图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023016.png" alt="mark"></p>
+<p>打开layout/_cover/index.ejs</p>
+<p>找到如图所示代码，将其注释</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023010.png" alt="mark"></p>
+<h2 id="添加QQ在线联系"><a href="#添加QQ在线联系" class="headerlink" title="添加QQ在线联系"></a>添加QQ在线联系</h2><p>打开_config.yml，搜索social，找到社交功能设置部分</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023011.png" alt="mark"></p>
+<p>添加内容如下</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">icon:</span> <span class="string">fab</span> <span class="string">fa-qq</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">http://wpa.qq.com/msgrd?v=3&amp;uin=【你的QQ号】&amp;site=qq&amp;menu=yes</span></span><br></pre></td></tr></table></figure>
+
+<p>第一次点击会提示未开通，到提示网站登入一次即可。</p>
+<h2 id="将侧边栏移动到左边"><a href="#将侧边栏移动到左边" class="headerlink" title="将侧边栏移动到左边"></a>将侧边栏移动到左边</h2><p>打开layout文件夹，对以下文件统一修改</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023012.png" alt="image-20200317161443443"></p>
+<p>打开一文件后，搜索代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%- partial(&#39;_partial&#x2F;side&#39;) %&gt;</span><br></pre></td></tr></table></figure>
+
+<p>将该行代码复制到第一行代码<code>&lt;%- partial(&#39;_pre&#39;) %&gt;</code>的下方，然后将原来位置的代码注释（方便以后若需要的话改回），示例：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023013.png" alt="mark"></p>
+<p>然后修改CSS文件，</p>
+<p>打开source/css/_layout/main.styl</p>
+<p>搜索<code>.l_main</code>，找到<code>padding-right</code>，将right改为left，使原本的右边距变为左边距</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023014.png" alt="mark"></p>
+<p>修改后为</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023015.png" alt="mark"></p>
+<p>为适应手机端，还需要修改此处</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023017.png" alt="mark"></p>
+<p>若想要手机端的卡片有外边距，则将<code>padding-right: 0</code>按需求修改边距 ，例如若想要左右边距都为10px，则应该改成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">padding-right: 10px</span><br><span class="line">padding-left: 10px</span><br></pre></td></tr></table></figure>
+
+<p>效果如图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023021.png" alt="mark"></p>
+<p>若满意现在的效果则到此即可。接下来将侧边栏移动到网页的边缘处，然后让文章列表、其余页面的主要内容居中。</p>
+<p><strong>注：</strong>修改后，在主题的配置文件中的最大宽度max_width将只修改页面内容卡片的宽度</p>
+<h3 id="进一步修改"><a href="#进一步修改" class="headerlink" title="进一步修改"></a>进一步修改</h3><p>首先在_config.yml中修改最大宽度为100%，但注意这样会导致顶部导航栏的宽度也随之变成100%。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023018.png" alt="mark"></p>
+<p>打开source/css/_layout/main.styl，将<code>.body-wrapper</code>中的<code>justify-content: space-between</code>注释。</p>
+<p>该语句会使页面内的flex布局为flex项目之间的距离相等，若只有两个项目的情况下会导致一个在最左边，一个在最右边。注释后会采取默认的布局方式即左对齐。</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200326234018.png" alt="image-20200326234008039"></p>
+<p>页面内容的修改在该文件中的<code>.l_main</code>，将width中的100%调小以更改页面内容的宽度，修改padding-left来更改与侧边栏的距离。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023020.png" alt="mark"></p>
+<p>侧边栏的宽度可以在source/css/_defines/layout.styl中进行修改</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023022.png" alt="mark"></p>
+<h2 id="修改透明度"><a href="#修改透明度" class="headerlink" title="修改透明度"></a>修改透明度</h2><p>使用css两种更改透明度方法，其中透明度取值为0~1，越小则透明程度越高</p>
+<ol>
+<li>使用 background-color:rgba(R,G,B,透明度)</li>
+<li>使用 opacity: 透明度</li>
+</ol>
+<p>若使用rgba，则需要传入RGB颜色代码，并且修改的仅有div元素的背景透明度</p>
+<p>若使用opacity，则只需要传入透明度，修改的是整个div元素的透明度（包括图片、文字等也会变透明）</p>
+<p>在source/css中创建一个新的stylus文件，名字随意</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200324023023.png" alt="mark"></p>
+<p>编辑内容，其中颜色代码、透明度自行修改</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.widget</span><br><span class="line">  <span class="attribute">background-color</span>:rgba(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">0.9</span>)</span><br><span class="line"></span><br><span class="line">.post</span><br><span class="line">  <span class="attribute">background-color</span>:rgba(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">0.9</span>)</span><br></pre></td></tr></table></figure>
+
+<p>然后打开source/css/style.styl，插入引用语句</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@import <span class="string">'diy_css.styl'</span></span><br></pre></td></tr></table></figure>
+
+<p>同理可以用此方式进行CSS的自定义，可以做到在不修改原本代码的情况下更改css</p>
+<h2 id="实现pjax"><a href="#实现pjax" class="headerlink" title="实现pjax"></a>实现pjax</h2><p>感谢大佬的博客开源，让我能参考源代码进行修改：<a href="https://stevenmhy.tk/archives/db1997ec.html" target="_blank" rel="noopener">Material X主题pjax使用</a> </p>
+<p>感谢大佬的讲解 ：<a href="https://sunhang.top/2019/12/20/pjax/" target="_blank" rel="noopener">用pjax让你的页面加载飞起来!</a></p>
+<hr>
+<p>在layout/_partial/head.ejs的末尾 <code>&lt;/head&gt;</code>的上方引用pjax</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200325222930.png" alt="image-20200325222920909"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/npm/pjax/pjax.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>在layout/layout.ejs的末尾<code>&lt;/body&gt;</code>的上方插入代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">var</span> pjax = <span class="keyword">new</span> Pjax(&#123;</span><br><span class="line">  elements: <span class="string">"a"</span>,</span><br><span class="line">  selectors: [</span><br><span class="line">    <span class="string">"title"</span>, <span class="comment">//pjax加载标题</span></span><br><span class="line">    <span class="string">".l_main"</span>, <span class="comment">//pjax加载主内容</span></span><br><span class="line">    <span class="string">".l_side"</span>, <span class="comment">//pjax加载侧边栏</span></span><br><span class="line">    <span class="string">".switcher .h-list"</span>, <span class="comment">// 使手机端的搜索框与菜单栏生效</span></span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/20200325224044.png" alt="image-20200325224042143"></p>
+<p>elements选择触发器，即点击什么来触发pjax（只能用a或者form），a为链接。</p>
+<p>selectors根据css选择器来选择更新的节点（即当触发elements时哪些内容会刷新，其余部分保持不变）</p>
+<p>可以用节点、类、id等选择元素。用法参考：<a href="https://www.runoob.com/cssref/css-selectors.html" target="_blank" rel="noopener">CSS 选择器</a></p>
+<p>这里我设置的为：点击链接，则刷新标题、类为<code>l_main</code>与<code>l_side</code>的元素（页面内容与侧边栏）会刷新，其余不变。</p>
+<h3 id="pjax优化-自动生成Fancybox"><a href="#pjax优化-自动生成Fancybox" class="headerlink" title="pjax优化-自动生成Fancybox"></a>pjax优化-自动生成Fancybox</h3><p>在定义pjax的脚本代码中插入语句（放在&lt;script&gt;与&lt;/script&gt;中）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//加载fancybox</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">LoadFancybox</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  $(<span class="string">".article-entry"</span>).find(<span class="string">"img"</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//渲染fancy box</span></span><br><span class="line">    <span class="keyword">var</span> t = <span class="built_in">document</span>.createElement(<span class="string">"a"</span>);</span><br><span class="line">    $(t).attr(<span class="string">"data-fancybox"</span>, <span class="string">"gallery"</span>),</span><br><span class="line">    $(t).attr(<span class="string">"href"</span>, $(<span class="keyword">this</span>).attr(<span class="string">"src"</span>)),</span><br><span class="line">    $(t).attr(<span class="string">"margin"</span>,<span class="string">"0 auto"</span>),</span><br><span class="line">    $(<span class="keyword">this</span>).wrap(t)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// pjax加载结束后执行函数</span></span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'pjax:complete'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  LoadFancybox();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 窗口监听load(加载、刷新)事件，执行LoadFancybox()函数</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'load'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  LoadFancybox();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>插入后结果如图：</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200327002933.png" alt="image-20200327002931652"></p>
+<p>修改后发现实现了fancybox，但是图片不再居中，故进行修改。</p>
+<p>打开source/css/_layout/main.styl</p>
+<p>搜索<code>img</code> 找到位于l_main&gt;post&gt;a下的img，将<code>display: inline</code>注释</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200326112446.png" alt="image-20200326104120122"></p>
+<hr>
+<p><strong>BUG：</strong></p>
+<ul>
+<li>放大图片再关闭后，页面位置与放大前不对应，会返回到放大前一张图片时的位置 。</li>
+</ul>
+<hr>
+<p>实现pjax后发现导航栏在点击不同部分时，主题的下划线不会改变，进行修改没有修改成，故直接将CSS代码注释</p>
+<p>打开source/css/_layout/navbar.styl 搜索<code>&amp;:active,&amp;.active</code> 将该部分代码注释</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200401152132.png" alt="image-20200327013730981"></p>
+<h3 id="pjax刷新评论"><a href="#pjax刷新评论" class="headerlink" title="pjax刷新评论"></a>pjax刷新评论</h3><p><strong>问题</strong>：实现pjax后发现通过pjax刷新页面后评论无法成功加载，推测是因为评论由js脚本引入，pjax刷新页面不会加载js。</p>
+<p><strong>解决思路</strong>：当pjax执行完成后再次调用评论js脚本来生成评论。</p>
+<p>在pjax脚本中插入以下代码，其中调用脚本的方式有两种，用哪一个都可以。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">LoadValine</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 两种调用方式，一个调用配置里的js路径，一个调用本地，用哪个都可以</span></span><br><span class="line"> <span class="comment">// $.getScript("&lt;%= theme.comments.valine.js %&gt;", function() &#123;</span></span><br><span class="line">    $.getScript(<span class="string">"/js/Valine.js"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        </span><br><span class="line">      <span class="comment">// 生成评论的代码</span></span><br><span class="line">      <span class="keyword">var</span> GUEST_INFO = [<span class="string">'nick'</span>,<span class="string">'mail'</span>,<span class="string">'link'</span>];</span><br><span class="line">      <span class="keyword">var</span> guest_info = <span class="string">'&lt;%= theme.comments.valine.meta %&gt;'</span>.split(<span class="string">','</span>).filter(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> GUEST_INFO.indexOf(item) &gt; <span class="number">-1</span></span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">var</span> notify = <span class="string">'&lt;%= theme.comments.valine.notify %&gt;'</span> == <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">var</span> verify = <span class="string">'&lt;%= theme.comments.valine.verify %&gt;'</span> == <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">var</span> valine = <span class="keyword">new</span> Valine();</span><br><span class="line">      valine.init(&#123;</span><br><span class="line">        el: <span class="string">'#valine_container'</span>,</span><br><span class="line">        notify: notify,</span><br><span class="line">        verify: verify,</span><br><span class="line">        guest_info: guest_info,</span><br><span class="line">        &lt;% <span class="keyword">if</span> (page.valine &amp;&amp; page.valine.path) &#123; %&gt;</span><br><span class="line">          path: <span class="string">"&lt;%= page.valine.path %&gt;"</span>,</span><br><span class="line">        &lt;% &#125; <span class="keyword">else</span> <span class="keyword">if</span> (theme.comments.valine.path) &#123; %&gt;</span><br><span class="line">          path: <span class="string">"&lt;%= theme.comments.valine.path %&gt;"</span>,</span><br><span class="line">        &lt;% &#125; %&gt;</span><br><span class="line">        appId: <span class="string">"&lt;%= theme.comments.valine.appId %&gt;"</span>,</span><br><span class="line">        appKey: <span class="string">"&lt;%= theme.comments.valine.appKey %&gt;"</span>,</span><br><span class="line">        placeholder: <span class="string">"&lt;%= (page.valine &amp;&amp; page.valine.placeholder) ? page.valine.placeholder : theme.comments.valine.placeholder %&gt;"</span>,</span><br><span class="line">        pageSize:<span class="string">'&lt;%= theme.comments.valine.pageSize %&gt;'</span>,</span><br><span class="line">        avatar:<span class="string">'&lt;%= theme.comments.valine.avatar %&gt;'</span>,</span><br><span class="line">        lang:<span class="string">'&lt;%= theme.comments.valine.lang %&gt;'</span>,</span><br><span class="line">        visitor: <span class="string">'&lt;%- theme.comments.valine.visitor %&gt;'</span>,</span><br><span class="line">        highlight:<span class="string">'&lt;%= theme.comments.valine.highlight %&gt;'</span></span><br><span class="line">      &#125;)</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在监听pjax完成后的函数里调用函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载pjax后执行的函数</span></span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'pjax:complete'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">    LoadFancybox();</span><br><span class="line">    <span class="comment">// 调用刚刚设置的函数</span></span><br><span class="line">    LoadValine();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>结果应该如图：</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200401152053.png" alt="image-20200401152044289"></p>
+<p><strong>源码位置：</strong><code>layout\_partial\scripts.ejs</code>，上述代码中生成评论的部分即红框内的部分</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200401152332.png" alt="image-20200401152329756"></p>
+<h2 id="添加百度统计"><a href="#添加百度统计" class="headerlink" title="添加百度统计"></a>添加百度统计</h2><p>首先到<a href="https://tongji.baidu.com/" target="_blank" rel="noopener">百度统计</a>注册帐号，然后到管理界面，新增网站</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200401152138.png" alt="image-20200401125207533"></p>
+<p>新增后，会给一段代码，将其复制，并在外面加上ejs模板的语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;% if (theme.baidu_analytics)&#123; %&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var _hmt &#x3D; _hmt || [];</span><br><span class="line">        (function() &#123;</span><br><span class="line">          var hm &#x3D; document.createElement(&quot;script&quot;);</span><br><span class="line">          hm.src &#x3D; &quot;https:&#x2F;&#x2F;hm.baidu.com&#x2F;hm.js?【你的key】&quot;;</span><br><span class="line">          var s &#x3D; document.getElementsByTagName(&quot;script&quot;)[0]; </span><br><span class="line">          s.parentNode.insertBefore(hm, s);</span><br><span class="line">        &#125;)();</span><br><span class="line">    &lt;&#x2F;script&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+
+<p>打<code>layout\_partial\scripts.ejs</code>，将该段代码插入到最后</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200401152144.png" alt="image-20200401125553039"></p>
+<p>再打开<code>_config.yml</code>，加入一条语句</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">baidu_analytics:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>因为用js文件加载的方式，所以百度统计上的代码检查功能失效，需要手动检查。</p>
+<p>保存后，打开网站，按F12打开开发者工具，然后刷新页面，在js文件中看到以hm开头的js文件说明配置成功</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200401152147.png" alt="image-20200401125819253"></p>
+
+          
+            <br>
+            
+  
+    
+    
+
+<section class="widget copyright shadow desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://lluuiq.com/post/202003171229/>https://lluuiq.com/post/202003171229/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+
+
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-25T04:33:37+08:00">
+  <a class='notlink'>
+    <i class="fas fa-save" aria-hidden="true"></i>
+    <p>更新于：2020年6月25日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/hexo/" rel="nofollow"><i class="fas fa-tags" aria-hidden="true"></i><p>hexo</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：2.4k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：9分钟</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/post/202003290013/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>PyCharm+Anaconda3+PyQt环境配置</p>
+                <p class='content'>记录用Pycharm搭建PyQt环境的过程
+
+
+配置Qt Designer下载PyCharm与Anaconda3后，Anaconda3的包中集成了PyQt，并且也安装了Qt Designer
+其...</p>
+              </a>
+            
+            
+              <a class='next' href='/post/202003040405/'>
+                <p class='title'>Scrapy笔记<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>记录学习Scrapy时遇到的坑
+Scrapy官方文档
+学习时看的视频：【python爬虫_从入门到精通（高级篇）】scrapy框架、反爬、分布式爬虫
+
+
+使用笔记创建爬虫项目CMD命令：
+1sc...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Volantis主题DIY笔记',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#主题文件目录"><span class="toc-text">主题文件目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#顶部导航栏"><span class="toc-text">顶部导航栏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搜索栏"><span class="toc-text">搜索栏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改卡片的内外边距"><span class="toc-text">修改卡片的内外边距</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#封面界面去掉搜索"><span class="toc-text">封面界面去掉搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加QQ在线联系"><span class="toc-text">添加QQ在线联系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将侧边栏移动到左边"><span class="toc-text">将侧边栏移动到左边</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进一步修改"><span class="toc-text">进一步修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改透明度"><span class="toc-text">修改透明度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现pjax"><span class="toc-text">实现pjax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pjax优化-自动生成Fancybox"><span class="toc-text">pjax优化-自动生成Fancybox</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pjax刷新评论"><span class="toc-text">pjax刷新评论</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加百度统计"><span class="toc-text">添加百度统计</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.3'
+      loop='all'
+      order='random'
+      fixed='true'
+      list-max-height='500px'
+      server='netease'
+      type='playlist'
+      id='4945153572'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://lluuiq.com">Copyright © lluuiq</a></p>
+
+        </div>
+      
+    
+      
+        
+          <div><p><a href="http://beian.miit.gov.cn" target="_blank" rel="noopener">豫ICP备19027219号</a><br>京公网备案 41140302000094号</p>
+</div>
+        
+      
+    
+    <!--网站运行时间统计-->
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+        var now = new Date(); 
+        function createtime() { 
+            var grt= new Date("07/30/2019 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+            now.setTime(now.getTime()+250); 
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+            document.getElementById("timeDate").innerHTML = "本站已苟活 "+dnum+" 天 "; 
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+        } 
+    setInterval("createtime()",250);
+    </script>
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+
+  <!-- 彩带点击 -->
+  <!-- <script type="text/javascript" src="\js\ribbon.min.js"></script> -->
+  <!-- 雪花特效 -->
+  <!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+
+
+  <!-- 线条特效 -->
+  <!-- <script type="text/javascript"
+  color="0,0,0" opacity='1' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script> -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<!-- <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> -->
+<!-- <script src="/js/jquery.pjax.min.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js" data-pjax></script>
+  <script>
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+  </script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/background.png"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+<!-- theme.plugins.aplayer.js -->
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" async></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js" async></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js"></script>
+
+  
+
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+    appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+    placeholder: "有什么想说的吗？",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    visitor: 'false',
+    highlight:'true'
+  })
+  </script>
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.1/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copyed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-clipboard-check');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制成功';
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-exclamation-triangle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制失败';
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+
+
+
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?23032f56a100d5a5e26ed5b9d94163c7";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
+
+  <script>setLoadingBarProgress(100);</script>
+
+  <script>
+    // 窗口监听load(加载、刷新)事件，执行LoadFancybox()函数
+    $(function(){
+      LoadFancybox();
+    });
+
+    var pjax = new Pjax({
+      elements: "a",
+      selectors: [
+        "title", //pjax加载标题
+        ".l_main", //pjax加载主内容
+        ".l_side", //pjax加载侧边栏
+        ".switcher .h-list", // 使手机端的搜索框与菜单栏生效
+      ]
+    })
+
+    //加载fancybox
+    function LoadFancybox(){
+      $(".article-entry").find("img").each(function () {
+        //渲染fancy box
+        var t = document.createElement("a");
+        $(t).attr("data-fancybox", ""),
+        $(t).attr("href", $(this).attr("src")),
+        $(t).attr("margin","0 auto"),
+        $(this).wrap(t)
+      });
+    }
+
+    function LoadValine(){
+      $.getScript("https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js", function() {
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        var notify = 'true' == true;
+        var verify = 'true' == true;
+        var valine = new Valine();
+        valine.init({
+          el: '#valine_container',
+          notify: notify,
+          verify: verify,
+          guest_info: guest_info,
+          
+          appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+          appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+          placeholder: "有什么想说的吗？",
+          pageSize:'10',
+          avatar:'mp',
+          lang:'zh-cn',
+          visitor: 'false',
+          highlight:'true'
+        })
+      });
+    }
+  
+    // 加载pjax后执行的函数
+    document.addEventListener('pjax:complete', function (){
+      LoadFancybox();
+      LoadValine();
+      // LoadBaidu();
+    });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>吴恩达深度学习编程作业1-4 - lluuiq&#39;s blog</title>
+  
+    <meta name="keywords" content="神经网络">
+  
+  
+    <meta name="description" content="吴恩达深度学习课程《神经网络和深度学习》第三周（深层神经网络）的编程作业。">
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="lluuiq's blog">
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css">
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/global-hot-data.js" ></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script> -->
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script> -->
+
+
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script>
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+
+  <div class='wrapper'>
+    <div class='nav-sub container--flex'>
+      <a class="logo flat-box"></a>
+      <ul class='switcher h-list'>
+        <li><a class="s-comment flat-btn fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc flat-btn fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main container container--flex">
+      
+        
+        <a class="logo flat-box" target="_self" href='/'>
+          
+          
+          
+            lluuiq
+          
+          
+        </a>
+      
+      <!-- PC端菜单栏 -->
+			<div class='menu navigation'>
+				<ul class='h-list'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  
+                    <i class='fas fa-home fa-fw'></i>
+                  
+                  首页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  
+                    <i class='fas fa-tags fa-fw'></i>
+                  
+                  标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  
+                    <i class='fas fa-archive fa-fw'></i>
+                  
+                  归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  
+                    <i class='fas fa-link fa-fw'></i>
+                  
+                  友人帐
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  
+                    <i class='fas fa-info-circle fa-fw'></i>
+                  
+                  关于我
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+      <!-- PC端搜索框 -->
+      
+        <div class="m_search">
+          <form name="searchform" class="form u-search-form">
+            <i class="icon fas fa-search fa-fw"></i>
+            <input type="text" class="input u-search-input" placeholder="想找些什么？" />
+          </form>
+        </div>
+      
+
+      <!-- 手机端的搜索按钮与菜单栏按钮 -->
+			<ul class='switcher h-list'>
+				
+					<li><a class="s-search flat-btn fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li><a class="s-menu flat-btn fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+
+<!-- 手机端导航栏菜单 -->
+<ul class="menu-phone navigation white-box">
+  
+  
+    <li>
+      <a class="flat-box" href=/
+        
+        
+        
+          id="home"
+        >
+        
+          <i class='fas fa-home fa-fw'></i>
+        
+        首页
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/categories/
+        
+        
+        
+          id="categories"
+        >
+        
+          <i class='fas fa-folder-open fa-fw'></i>
+        
+        分类
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/tags/
+        
+        
+        
+          id="tags"
+        >
+        
+          <i class='fas fa-tags fa-fw'></i>
+        
+        标签
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/archives/
+        
+        
+        
+          id="archives"
+        >
+        
+          <i class='fas fa-archive fa-fw'></i>
+        
+        归档
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/friends/
+        
+        
+        
+          id="friends"
+        >
+        
+          <i class='fas fa-link fa-fw'></i>
+        
+        友人帐
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/about/
+        
+        
+        
+          id="about"
+        >
+        
+          <i class='fas fa-info-circle fa-fw'></i>
+        
+        关于我
+      </a>
+    </li>
+  
+</ul>
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看下载的资料"><span class="toc-text">查看下载的资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读取数据"><span class="toc-text">读取数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据处理"><span class="toc-text">数据处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建神经网络"><span class="toc-text">构建神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#导入numpy"><span class="toc-text">导入numpy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化模型参数函数"><span class="toc-text">初始化模型参数函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义正向传播函数"><span class="toc-text">定义正向传播函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义代价函数"><span class="toc-text">定义代价函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义反向传播函数"><span class="toc-text">定义反向传播函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义更新参数函数"><span class="toc-text">定义更新参数函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打包训练模型"><span class="toc-text">打包训练模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预测"><span class="toc-text">预测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义预测函数"><span class="toc-text">定义预测函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#训练模型"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进行预测"><span class="toc-text">进行预测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看准确率"><span class="toc-text">查看准确率</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+    <div class='body-wrapper'>
+      
+
+<aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看下载的资料"><span class="toc-text">查看下载的资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读取数据"><span class="toc-text">读取数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据处理"><span class="toc-text">数据处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建神经网络"><span class="toc-text">构建神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#导入numpy"><span class="toc-text">导入numpy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化模型参数函数"><span class="toc-text">初始化模型参数函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义正向传播函数"><span class="toc-text">定义正向传播函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义代价函数"><span class="toc-text">定义代价函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义反向传播函数"><span class="toc-text">定义反向传播函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义更新参数函数"><span class="toc-text">定义更新参数函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打包训练模型"><span class="toc-text">打包训练模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预测"><span class="toc-text">预测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义预测函数"><span class="toc-text">定义预测函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#训练模型"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进行预测"><span class="toc-text">进行预测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看准确率"><span class="toc-text">查看准确率</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/post/202006142233/">
+        吴恩达深度学习编程作业1-4
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+<div class='new-meta-item author'>
+  <a href="https://lluuiq.com" rel="nofollow">
+    <img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png">
+    <p>lluuiq</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>神经网络&nbsp;/&nbsp;学习笔记</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-edit" aria-hidden="true"></i>
+    <p>发布于：2020年6月14日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：2.7k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：11分钟</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>吴恩达深度学习课程《神经网络和深度学习》第三周（深层神经网络）的编程作业。</p>
+<a id="more"></a>
+
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>题目与参考作业的地址：<a href="https://blog.csdn.net/u013733326/article/details/79767169" target="_blank" rel="noopener">【中文】【吴恩达课后编程作业】Course 1 - 神经网络和深度学习 - 第四周作业(1&amp;2)</a></p>
+<p>相关数据集与前提代码在该博文中下载。</p>
+<h2 id="查看下载的资料"><a href="#查看下载的资料" class="headerlink" title="查看下载的资料"></a>查看下载的资料</h2><p>下载后如图所示：</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200621080116.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200621080116.png" alt="image-20200614025709724"></a></p>
+<p>打开datasets，可以发现是h5文件，与第二周的作业文件相同，是猫的图片数据</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200621080119.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200621080119.png" alt="image-20200614025724028"></a></p>
+<p>文件因为内容过多，就不截图了。</p>
+<ul>
+<li>打开dnn_utils.py，可以看到提供了神经网络的ReLU激活函数与sigmoid函数（正向与反向）</li>
+<li>打开lr_utils.py，可以看到是第二周作业的读取训练集、测试集数据的代码</li>
+<li>打开testCases.py， 该文件提供了各个函数的测试用参数（测试用的，该文章中没用到）</li>
+</ul>
+<p>根据以上可知，这次作业是使用深层神经网络来完成第二周的作业：识别猫的图片。</p>
+<h2 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h2><p>与第二周的作业步骤相同。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加载 lr_utils的load_dataset函数</span></span><br><span class="line"><span class="keyword">from</span> lr_utils <span class="keyword">import</span> load_dataset</span><br><span class="line"><span class="comment"># 定义变量来获取load_dataset函数的返回值</span></span><br><span class="line">train_set_x , train_set_y , test_set_x , test_set_y , classes = load_dataset()</span><br><span class="line"></span><br><span class="line">print(<span class="string">"训练集特征的维度："</span>,train_set_x.shape,<span class="string">"训练集特征的类型"</span>,type(train_set_x))</span><br><span class="line">print(<span class="string">"训练集标签的维度："</span>,train_set_y.shape,<span class="string">"训练集标签的类型"</span>,type(train_set_y))</span><br><span class="line">print(<span class="string">"测试集特征的维度："</span>,test_set_x.shape,<span class="string">"测试集特征的类型"</span>,type(test_set_x))</span><br><span class="line">print(<span class="string">"测试集标签的维度："</span>,test_set_y.shape,<span class="string">"测试集标签的类型"</span>,type(test_set_y))</span><br><span class="line">print(<span class="string">"classes的维度："</span>,classes.shape,<span class="string">"classes的类型"</span>,type(classes))</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h2><p>与第二周的作业步骤相同。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">train_set_x_flatten = train_set_x.reshape(train_set_x.shape[<span class="number">0</span>],<span class="number">-1</span>).T</span><br><span class="line">test_set_x_flatten = test_set_x.reshape(test_set_x.shape[<span class="number">0</span>],<span class="number">-1</span>).T</span><br><span class="line"></span><br><span class="line">train_set_x_flatten_normalization = train_set_x_flatten/<span class="number">255</span></span><br><span class="line">test_set_x_flatten_normalization = test_set_x_flatten/<span class="number">255</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"处理后的训练集维度："</span>,train_set_x_flatten_normalization.shape)</span><br><span class="line">print(<span class="string">"处理后的测试集维度："</span>,test_set_x_flatten_normalization.shape)</span><br></pre></td></tr></table></figure>
+
+<p>处理后图片的存储矩阵就变为（64<em>64</em>3，样本个数）</p>
+<h2 id="构建神经网络"><a href="#构建神经网络" class="headerlink" title="构建神经网络"></a>构建神经网络</h2><h3 id="导入numpy"><a href="#导入numpy" class="headerlink" title="导入numpy"></a>导入numpy</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="初始化模型参数函数"><a href="#初始化模型参数函数" class="headerlink" title="初始化模型参数函数"></a>初始化模型参数函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialization_parameters</span><span class="params">(layers)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">        参数：</span></span><br><span class="line"><span class="string">            layers 隐藏层列表，元素为对应层的隐藏单元个数</span></span><br><span class="line"><span class="string">        返回：</span></span><br><span class="line"><span class="string">            params 存储W[i] 与b[i] 的字典</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    </span><br><span class="line">    params = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 遍历隐藏层</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(layers)):</span><br><span class="line">        <span class="comment"># 为每一层初始化模型参数</span></span><br><span class="line">        params[<span class="string">'W'</span>+str(i)] = np.random.randn(layers[i],</span><br><span class="line">                                             layers[i<span class="number">-1</span>]) / np.sqrt(layers[i<span class="number">-1</span>])</span><br><span class="line">        params[<span class="string">'b'</span>+str(i)] = np.zeros((layers[i], <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">assert</span>(params[<span class="string">'W'</span>+str(i)].shape == (layers[i], layers[i<span class="number">-1</span>]))</span><br><span class="line">        <span class="keyword">assert</span>(params[<span class="string">'b'</span>+str(i)].shape == (layers[i], <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 返回值字典 内容为[W1,b1,W2,b2,W3,b3 ..... WL,bL]</span></span><br><span class="line">    <span class="keyword">return</span> params</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这里传入一个变量layers，用来保存隐藏层的信息，元素为各层的隐藏单元数目，不包括输入层。</p>
+<p>例如：创建一个5层的神经网络，对应隐层分别为 5、5、4、4、1。</p>
+<p>则 layers=[5,5,4,4,1] ，图如下</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200621080124.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200621080124.png" alt="image-20200615000700220"></a></p>
+<p>这样，<code>len(layers)</code>为神经网络的层数。<code>leyers[i]</code>为第<code>i</code>层的隐藏单元数目。</p>
+<p>用params来存储各隐藏层的模型参数。</p>
+<p>因为与无隐层、单隐层不同，这是一个有L个隐层的神经网络，所以使用遍历的方式来逐层初始化。</p>
+<p><strong>注：</strong> 这里生成随机数后不再 *0.01，该为 <code>/ np.sqrt(layers[i-1])</code>，否则深层的话代价函数更新不下去。</p>
+<h3 id="定义正向传播函数"><a href="#定义正向传播函数" class="headerlink" title="定义正向传播函数"></a>定义正向传播函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> dnn_utils <span class="keyword">as</span> dnn</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(X, params, activations)</span>:</span></span><br><span class="line">    <span class="string">''' </span></span><br><span class="line"><span class="string">        参数：</span></span><br><span class="line"><span class="string">            X 输入特征，即A[i-1]</span></span><br><span class="line"><span class="string">            params 模型参数字典</span></span><br><span class="line"><span class="string">            activation 激活函数列表</span></span><br><span class="line"><span class="string">        返回：</span></span><br><span class="line"><span class="string">            cache 存储A[i] 与 Z[i] 的字典</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 定义激活函数字典，根据输入的activation来选择对应的激活函数</span></span><br><span class="line">    activation_function = &#123;</span><br><span class="line">        <span class="string">"relu"</span>: dnn.relu,</span><br><span class="line">        <span class="string">"sigmoid"</span>: dnn.sigmoid</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取层数</span></span><br><span class="line">    L = len(activations)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># cache['A0']初始化为输入特征X</span></span><br><span class="line">    cache = &#123;</span><br><span class="line">        <span class="string">'A0'</span>: X</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 遍历隐藏层进行正向传播</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, L+<span class="number">1</span>):</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 获取当前层的W与Z</span></span><br><span class="line">        W = params[<span class="string">'W'</span>+str(i)]</span><br><span class="line">        b = params[<span class="string">'b'</span>+str(i)]</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#获取当前层的上一层的A，即当前层的输入值</span></span><br><span class="line">        A_pre = cache[<span class="string">'A'</span>+str(i<span class="number">-1</span>)]</span><br><span class="line">		</span><br><span class="line">        <span class="comment"># 获取当前层选择的激活函数</span></span><br><span class="line">        activation = activations[i<span class="number">-1</span>]</span><br><span class="line">		</span><br><span class="line">        <span class="comment"># 计算Z</span></span><br><span class="line">        Z = np.dot(W, A_pre)+b</span><br><span class="line">        <span class="comment"># 使用dnn_utils中的激活函数来计算当前层的A</span></span><br><span class="line">        cache[<span class="string">'A'</span>+str(i)], cache[<span class="string">'Z'</span>+str(i)</span><br><span class="line">                                 ] = activation_function[activation](Z)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 断言</span></span><br><span class="line">        <span class="keyword">assert</span> cache[<span class="string">'Z'</span>+str(i)].shape == Z.shape, <span class="string">'error：维度错误'</span></span><br><span class="line">        <span class="keyword">assert</span> cache[<span class="string">'A'</span>+str(i)].shape == cache[<span class="string">'Z'</span>+str(i)</span><br><span class="line">                                                ].shape, <span class="string">'error: A与Z的维度不相等'</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> cache</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p>导入dnn_utils来使用其中的激活函数。</p>
+</li>
+<li><p>传入的参数有一个activations，是一个列表，其元素为从第一个隐藏层开始的各层使用的激活函数，因为本次作业的dnn_utils文件只有ReLU与sigmoid激活函数，所以值为relu或sigmoid。</p>
+</li>
+<li><p>activation_function字典的value值为dnn_utils文件中的函数，这样后面执行<code>activation = activations[i-1]</code>后，只需使用activation_function<a href="Z">activation</a>来将Z传入激活函数即可 。</p>
+<p>关于activation_function[activation]，假如是使用ReLU函数，那么activation=“relu”，结果为activation_function[“relu”]，即dnn.relu，后面加上(Z)，即组成dnn.relu(Z)，调用函数。</p>
+</li>
+<li><p>遍历隐藏层，根据激活函数列表来实现对应的激活函数。</p>
+</li>
+</ul>
+<h3 id="定义代价函数"><a href="#定义代价函数" class="headerlink" title="定义代价函数"></a>定义代价函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_cost</span><span class="params">(AL,Y)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    计算交叉熵代价函数</span></span><br><span class="line"><span class="string">    J=1/m * ∑损失函数</span></span><br><span class="line"><span class="string">    损失函数= -[Y*log(A2)+(1-Y)*log(1-A2)]</span></span><br><span class="line"><span class="string">    这里 ∑损失函数 可以用向量来表示。</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">         AL - 正向传播最后的输出结果，即损失函数公式中的y帽</span></span><br><span class="line"><span class="string">         Y - 标签</span></span><br><span class="line"><span class="string">         params - 初始化模型参数函数的字典返回值</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">         代价 - 交叉熵成本给出方程（13）</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># 获取样本数</span></span><br><span class="line">    m = AL.shape[<span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#计算代价</span></span><br><span class="line">    logprobs  = np.multiply(np.log(AL), Y) + np.multiply((<span class="number">1</span> - Y), np.log(<span class="number">1</span> - AL))</span><br><span class="line">    cost = - np.sum(logprobs) / m</span><br><span class="line">    cost = float(np.squeeze(cost))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> cost</span><br></pre></td></tr></table></figure>
+
+
+
+<p>用于计算每一次迭代的代价。</p>
+<h3 id="定义反向传播函数"><a href="#定义反向传播函数" class="headerlink" title="定义反向传播函数"></a>定义反向传播函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">model_backward</span><span class="params">(X, Y, params, cache, activations)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">        参数： </span></span><br><span class="line"><span class="string">            Y 训练集标签</span></span><br><span class="line"><span class="string">            params 模型参数字典</span></span><br><span class="line"><span class="string">            cache A与Z的字典</span></span><br><span class="line"><span class="string">            activations 激活函数列表</span></span><br><span class="line"><span class="string">        返回：</span></span><br><span class="line"><span class="string">            grads 存储dA[i] dW[i] db[i]</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取样本数</span></span><br><span class="line">    m = Y.shape[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取层数</span></span><br><span class="line">    L = len(activations)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取输出层的A （正向传播的输出）</span></span><br><span class="line">    AL = cache[<span class="string">'A'</span>+str(L)]</span><br><span class="line"><span class="comment">#     AL = np.random.randn(1, 2)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 激活函数字典</span></span><br><span class="line">    activation_function = &#123;</span><br><span class="line">        <span class="string">"relu"</span>: dnn.relu_backward,</span><br><span class="line">        <span class="string">"sigmoid"</span>: dnn.sigmoid_backward</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cache[<span class="string">'A0'</span>] = X <span class="comment"># 将cache['A0']定义为输入特征X</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 初始化dAL</span></span><br><span class="line">    grads = &#123;</span><br><span class="line">        <span class="string">'dA'</span>+str(L): -(np.divide(Y, AL) - np.divide(<span class="number">1</span> - Y, <span class="number">1</span> - AL))</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 反向传播从后往前计算，所以range(L,0,-1)，使用-1来实现区间(0,L]的反向遍历</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(L, <span class="number">0</span>, <span class="number">-1</span>):</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 根据传入的激活函数列表选择对应的激活函数</span></span><br><span class="line">        activation = activation_function[activations[i<span class="number">-1</span>]]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 获取当前层的W与Z</span></span><br><span class="line">        W = params[<span class="string">'W'</span>+str(i)]</span><br><span class="line">        Z = cache[<span class="string">'Z'</span>+str(i)]</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#获取当前层的上一层的A，即当前层的输入值</span></span><br><span class="line">        A_pre = cache[<span class="string">'A'</span>+str(i<span class="number">-1</span>)]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 计算导数dA与dZ</span></span><br><span class="line">        dA = grads[<span class="string">'dA'</span>+str(i)]</span><br><span class="line">        dZ = activation(dA, Z)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 计算dW与db 并将dW、db、dA存到grads中</span></span><br><span class="line">        grads[<span class="string">'dW'</span>+str(i)] = np.dot(dZ, A_pre.T)/m</span><br><span class="line">        grads[<span class="string">'db'</span>+str(i)] = np.sum(dZ, axis=<span class="number">1</span>, keepdims=<span class="literal">True</span>)/m</span><br><span class="line">        grads[<span class="string">'dA'</span>+str(i<span class="number">-1</span>)] = np.dot(W.T, dZ)</span><br><span class="line">    <span class="keyword">return</span> grads</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这里同样使用了activations，与正向不同的是这里是根据激活函数列表来选择对应的激活函数的求导函数。</p>
+<p>其余关于activations的部分与正向传播相同。</p>
+<h3 id="定义更新参数函数"><a href="#定义更新参数函数" class="headerlink" title="定义更新参数函数"></a>定义更新参数函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_params</span><span class="params">(params,grads,L,lr)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">        参数： </span></span><br><span class="line"><span class="string">            parameters 模型参数字典</span></span><br><span class="line"><span class="string">            grads  反向传播得到的导数字典</span></span><br><span class="line"><span class="string">            lr 学习率</span></span><br><span class="line"><span class="string">            L 神经网络的层数</span></span><br><span class="line"><span class="string">        返回值：</span></span><br><span class="line"><span class="string">            params 更新后的模型参数字典</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,L+<span class="number">1</span>):</span><br><span class="line">        params[<span class="string">'W'</span>+str(i)] = params[<span class="string">'W'</span>+str(i)] - lr * grads[<span class="string">'dW'</span>+str(i)]</span><br><span class="line">        params[<span class="string">'b'</span>+str(i)] = params[<span class="string">'b'</span>+str(i)] - lr * grads[<span class="string">'db'</span>+str(i)]</span><br><span class="line">    <span class="keyword">return</span> params</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="打包训练模型"><a href="#打包训练模型" class="headerlink" title="打包训练模型"></a>打包训练模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nn_model</span><span class="params">(X, Y, layers, activations, lr, num_iterations, print_cost=False)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">        深层神经网络模型</span></span><br><span class="line"><span class="string">        参数：</span></span><br><span class="line"><span class="string">            X 训练集输入特征</span></span><br><span class="line"><span class="string">            Y 训练集标签</span></span><br><span class="line"><span class="string">            layers 神经网络隐藏层列表(不包含输入层)，元素为各隐藏层的隐藏单元数量</span></span><br><span class="line"><span class="string">            activations 激活函数列表，元素为对应层的激活函数（作业里只有relu和sigmoid）</span></span><br><span class="line"><span class="string">            lr 学习率</span></span><br><span class="line"><span class="string">            num_iterations 迭代次数</span></span><br><span class="line"><span class="string">            seed 随机数种子</span></span><br><span class="line"><span class="string">            print_cost 是否输出代价，默认为否</span></span><br><span class="line"><span class="string">        返回：</span></span><br><span class="line"><span class="string">            parameters 各层更新后的模型参数 字典</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line"></span><br><span class="line">    nx = X.shape[<span class="number">0</span>]  <span class="comment"># 获取输入特征的维数</span></span><br><span class="line">    ny = Y.shape[<span class="number">0</span>]  <span class="comment"># 获取标签的维数</span></span><br><span class="line">    <span class="keyword">assert</span> layers[<span class="number">-1</span>] == ny, <span class="string">'error：请确定输出层的单元数与标签的维数相等'</span></span><br><span class="line"></span><br><span class="line">    L = len(layers)  <span class="comment"># 获取神经网络层数（隐藏层的层数）</span></span><br><span class="line">    <span class="keyword">assert</span> len(activations) == L, <span class="string">'error: 请确定激活函数的个数与隐藏层的层数相等'</span></span><br><span class="line"></span><br><span class="line">    layers.insert(<span class="number">0</span>, nx) <span class="comment"># 输入层的节点数 n0</span></span><br><span class="line"></span><br><span class="line">    print(<span class="string">"初始化模型参数"</span>)</span><br><span class="line">    params = initialization_parameters(layers)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 梯度下降</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,num_iterations+<span class="number">1</span>):</span><br><span class="line">        <span class="comment"># 正向传播</span></span><br><span class="line">        cache = forward(X, params, activations)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 计算代价</span></span><br><span class="line">        AL = cache[<span class="string">'A'</span>+str(L)]</span><br><span class="line">        cost = compute_cost(AL, Y)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 输出代价</span></span><br><span class="line">        <span class="keyword">if</span> print_cost <span class="keyword">and</span> i%<span class="number">100</span> ==<span class="number">0</span>:</span><br><span class="line">            print(<span class="string">"第"</span>,i,<span class="string">"次迭代，当前代价为："</span>,cost)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 反向传播</span></span><br><span class="line">        grads = model_backward(X,Y, params, cache, activations)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 更新参数</span></span><br><span class="line">        params = update_params(params,grads,L,lr)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> params</span><br></pre></td></tr></table></figure>
+
+
+
+<p>调用模型函数，传入训练集输入特征X、输出特征Y 与神经网络结构layers、激活函数列表、学习率、迭代次数即可获得训练完成后的模型参数W与b。</p>
+<h2 id="预测"><a href="#预测" class="headerlink" title="预测"></a>预测</h2><h3 id="定义预测函数"><a href="#定义预测函数" class="headerlink" title="定义预测函数"></a>定义预测函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(X,params,activations)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">        预测函数，调用正向传播函数来得到Y帽，即预测值</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">        参数：</span></span><br><span class="line"><span class="string">            X 测试集输入特征</span></span><br><span class="line"><span class="string">            params 由神经网络模型得到的模型参数</span></span><br><span class="line"><span class="string">            activations 激活函数列表</span></span><br><span class="line"><span class="string">        返回：</span></span><br><span class="line"><span class="string">            Y 预测的标签</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 执行正向传播，params存储的为更新完成后的W与b</span></span><br><span class="line">    cache = forward(X,params,activations)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 获取层数</span></span><br><span class="line">    L = len(activations)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 获取正向传播后最后的预测值</span></span><br><span class="line">    A = cache[<span class="string">'A'</span>+str(L)]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 初始化标签Y</span></span><br><span class="line">    Y = np.zeros((<span class="number">1</span>, X.shape[<span class="number">1</span>]))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 遍历所有预测值，若预测大于0.5则标签为1，否则为0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(A.shape[<span class="number">1</span>]):</span><br><span class="line">        Y[<span class="number">0</span>][i] = <span class="number">1</span> <span class="keyword">if</span> A[<span class="number">0</span>][i] &gt; <span class="number">0.5</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> Y</span><br></pre></td></tr></table></figure>
+
+<p>接下来只需训练模型得到params，将测试集输入特征与params、激活函数列表传入预测函数即可得到预测的标签。</p>
+<h3 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置随机数种子</span></span><br><span class="line">np.random.seed(<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 定义神经网络结构</span></span><br><span class="line">layers = [<span class="number">20</span>,<span class="number">7</span>,<span class="number">5</span>,<span class="number">1</span>]</span><br><span class="line"><span class="comment"># 定义各层使用的激活函数</span></span><br><span class="line">activations = [<span class="string">'relu'</span>,<span class="string">'relu'</span>,<span class="string">'relu'</span>,<span class="string">'sigmoid'</span>]</span><br><span class="line"><span class="comment"># 定义学习率</span></span><br><span class="line">lr = <span class="number">0.0075</span></span><br><span class="line"><span class="comment"># 定义迭代次数</span></span><br><span class="line">num_iterations = <span class="number">2500</span></span><br><span class="line"><span class="comment"># 执行模型函数，获得更新后的模型参数字典params</span></span><br><span class="line">params = nn_model(train_set_x_flatten_normalization, train_set_y, layers, activations, lr, num_iterations, print_cost=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>执行后结果如图：</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200621075431.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200621075431.png" alt="image-20200621075429192"></a></p>
+<h3 id="进行预测"><a href="#进行预测" class="headerlink" title="进行预测"></a>进行预测</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 预测训练集</span></span><br><span class="line">train_predict_y = predict(train_set_x_flatten_normalization, params, activations)</span><br><span class="line"><span class="comment"># 预测测试集</span></span><br><span class="line">test_predict_y = predict(test_set_x_flatten_normalization, params, activations)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="查看准确率"><a href="#查看准确率" class="headerlink" title="查看准确率"></a>查看准确率</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"训练集准确率："</span>, format(<span class="number">100</span>-np.mean(np.abs(train_predict_y-train_set_y))*<span class="number">100</span>), <span class="string">"%"</span>)</span><br><span class="line">print(<span class="string">"测试集准确率："</span>, format(<span class="number">100</span>-np.mean(np.abs(test_predict_y-test_set_y))*<span class="number">100</span>), <span class="string">"%"</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200621075517.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200621075517.png" alt="image-20200621075516324"></a></p>
+<p>可以看出训练集的准确率远高于测试集，明显有过拟合现象。</p>
+
+          
+            <br>
+            
+  
+    
+    
+
+<section class="widget copyright shadow desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://lluuiq.com/post/202006142233/>https://lluuiq.com/post/202006142233/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+
+
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-25T06:12:56+08:00">
+  <a class='notlink'>
+    <i class="fas fa-save" aria-hidden="true"></i>
+    <p>更新于：2020年6月25日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="nofollow"><i class="fas fa-tags" aria-hidden="true"></i><p>神经网络</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：2.7k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：11分钟</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/post/202006192233/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>网易云代理(听灰色歌曲)</p>
+                <p class='content'>想听一听网易云的灰色歌曲
+
+
+说明使用的工具地址：UnblockNeteaseMusic
+分为本地代理与服务器代理两种方法：
+
+使用服务器代理较为方便，所有设备的代理地址填服务器的即可。
+本地的...</p>
+              </a>
+            
+            
+              <a class='next' href='/post/202006132233/'>
+                <p class='title'>使用WebStack为Hexo博客添加网址导航页面<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>因为经常把一些网站添加到浏览器的书签栏，目前已经多到眼花缭乱了，故想个办法为博客新建一个分页，把一些网址存在博客上，自己浏览器上存一部分。
+
+
+说明WebStack的github地址：WebSt...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    processEscapes: true,
+    tags: "ams",
+    macros: {
+      href: "{}"
+    }
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|dno",
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+};
+</script>
+
+
+
+
+  <script>
+    window.subData = {
+      title: '吴恩达深度学习编程作业1-4',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看下载的资料"><span class="toc-text">查看下载的资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读取数据"><span class="toc-text">读取数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据处理"><span class="toc-text">数据处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建神经网络"><span class="toc-text">构建神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#导入numpy"><span class="toc-text">导入numpy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化模型参数函数"><span class="toc-text">初始化模型参数函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义正向传播函数"><span class="toc-text">定义正向传播函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义代价函数"><span class="toc-text">定义代价函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义反向传播函数"><span class="toc-text">定义反向传播函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义更新参数函数"><span class="toc-text">定义更新参数函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打包训练模型"><span class="toc-text">打包训练模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#预测"><span class="toc-text">预测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义预测函数"><span class="toc-text">定义预测函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#训练模型"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进行预测"><span class="toc-text">进行预测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看准确率"><span class="toc-text">查看准确率</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.3'
+      loop='all'
+      order='random'
+      fixed='true'
+      list-max-height='500px'
+      server='netease'
+      type='playlist'
+      id='4945153572'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://lluuiq.com">Copyright © lluuiq</a></p>
+
+        </div>
+      
+    
+      
+        
+          <div><p><a href="http://beian.miit.gov.cn" target="_blank" rel="noopener">豫ICP备19027219号</a><br>京公网备案 41140302000094号</p>
+</div>
+        
+      
+    
+    <!--网站运行时间统计-->
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+        var now = new Date(); 
+        function createtime() { 
+            var grt= new Date("07/30/2019 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+            now.setTime(now.getTime()+250); 
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+            document.getElementById("timeDate").innerHTML = "本站已苟活 "+dnum+" 天 "; 
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+        } 
+    setInterval("createtime()",250);
+    </script>
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+
+  <!-- 彩带点击 -->
+  <!-- <script type="text/javascript" src="\js\ribbon.min.js"></script> -->
+  <!-- 雪花特效 -->
+  <!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+
+
+  <!-- 线条特效 -->
+  <!-- <script type="text/javascript"
+  color="0,0,0" opacity='1' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script> -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<!-- <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> -->
+<!-- <script src="/js/jquery.pjax.min.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js" data-pjax></script>
+  <script>
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+  </script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/background.png"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+<!-- theme.plugins.aplayer.js -->
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" async></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js" async></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js"></script>
+
+  
+
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+    appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+    placeholder: "有什么想说的吗？",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    visitor: 'false',
+    highlight:'true'
+  })
+  </script>
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.1/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copyed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-clipboard-check');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制成功';
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-exclamation-triangle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制失败';
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+
+
+
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?23032f56a100d5a5e26ed5b9d94163c7";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
+
+  <script>setLoadingBarProgress(100);</script>
+
+  <script>
+    // 窗口监听load(加载、刷新)事件，执行LoadFancybox()函数
+    $(function(){
+      LoadFancybox();
+    });
+
+    var pjax = new Pjax({
+      elements: "a",
+      selectors: [
+        "title", //pjax加载标题
+        ".l_main", //pjax加载主内容
+        ".l_side", //pjax加载侧边栏
+        ".switcher .h-list", // 使手机端的搜索框与菜单栏生效
+      ]
+    })
+
+    //加载fancybox
+    function LoadFancybox(){
+      $(".article-entry").find("img").each(function () {
+        //渲染fancy box
+        var t = document.createElement("a");
+        $(t).attr("data-fancybox", ""),
+        $(t).attr("href", $(this).attr("src")),
+        $(t).attr("margin","0 auto"),
+        $(this).wrap(t)
+      });
+    }
+
+    function LoadValine(){
+      $.getScript("https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js", function() {
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        var notify = 'true' == true;
+        var verify = 'true' == true;
+        var valine = new Valine();
+        valine.init({
+          el: '#valine_container',
+          notify: notify,
+          verify: verify,
+          guest_info: guest_info,
+          
+          appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+          appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+          placeholder: "有什么想说的吗？",
+          pageSize:'10',
+          avatar:'mp',
+          lang:'zh-cn',
+          visitor: 'false',
+          highlight:'true'
+        })
+      });
+    }
+  
+    // 加载pjax后执行的函数
+    document.addEventListener('pjax:complete', function (){
+      LoadFancybox();
+      LoadValine();
+      // LoadBaidu();
+    });
+
+  </script>
+</body>
+</html>

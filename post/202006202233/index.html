@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>吴恩达深度学习编程作业2-1 - lluuiq&#39;s blog</title>
+  
+    <meta name="keywords" content="神经网络">
+  
+  
+    <meta name="description" content="吴恩达深度学习课程《改善深层神经网络：超参数调试、正则化以及优化》第一周（深度学习的实用层面）的编程作业。">
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="lluuiq's blog">
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css">
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/global-hot-data.js" ></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script> -->
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script> -->
+
+
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script>
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+
+  <div class='wrapper'>
+    <div class='nav-sub container--flex'>
+      <a class="logo flat-box"></a>
+      <ul class='switcher h-list'>
+        <li><a class="s-comment flat-btn fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc flat-btn fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main container container--flex">
+      
+        
+        <a class="logo flat-box" target="_self" href='/'>
+          
+          
+          
+            lluuiq
+          
+          
+        </a>
+      
+      <!-- PC端菜单栏 -->
+			<div class='menu navigation'>
+				<ul class='h-list'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  
+                    <i class='fas fa-home fa-fw'></i>
+                  
+                  首页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  
+                    <i class='fas fa-tags fa-fw'></i>
+                  
+                  标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  
+                    <i class='fas fa-archive fa-fw'></i>
+                  
+                  归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  
+                    <i class='fas fa-link fa-fw'></i>
+                  
+                  友人帐
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  
+                    <i class='fas fa-info-circle fa-fw'></i>
+                  
+                  关于我
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+      <!-- PC端搜索框 -->
+      
+        <div class="m_search">
+          <form name="searchform" class="form u-search-form">
+            <i class="icon fas fa-search fa-fw"></i>
+            <input type="text" class="input u-search-input" placeholder="想找些什么？" />
+          </form>
+        </div>
+      
+
+      <!-- 手机端的搜索按钮与菜单栏按钮 -->
+			<ul class='switcher h-list'>
+				
+					<li><a class="s-search flat-btn fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li><a class="s-menu flat-btn fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+
+<!-- 手机端导航栏菜单 -->
+<ul class="menu-phone navigation white-box">
+  
+  
+    <li>
+      <a class="flat-box" href=/
+        
+        
+        
+          id="home"
+        >
+        
+          <i class='fas fa-home fa-fw'></i>
+        
+        首页
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/categories/
+        
+        
+        
+          id="categories"
+        >
+        
+          <i class='fas fa-folder-open fa-fw'></i>
+        
+        分类
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/tags/
+        
+        
+        
+          id="tags"
+        >
+        
+          <i class='fas fa-tags fa-fw'></i>
+        
+        标签
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/archives/
+        
+        
+        
+          id="archives"
+        >
+        
+          <i class='fas fa-archive fa-fw'></i>
+        
+        归档
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/friends/
+        
+        
+        
+          id="friends"
+        >
+        
+          <i class='fas fa-link fa-fw'></i>
+        
+        友人帐
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/about/
+        
+        
+        
+          id="about"
+        >
+        
+          <i class='fas fa-info-circle fa-fw'></i>
+        
+        关于我
+      </a>
+    </li>
+  
+</ul>
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导入相关库"><span class="toc-text">导入相关库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化"><span class="toc-text">初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#读取数据并绘图"><span class="toc-text">读取数据并绘图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说明-1"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看模型"><span class="toc-text">查看模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用0初始化"><span class="toc-text">使用0初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义函数"><span class="toc-text">定义函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看准确率"><span class="toc-text">查看准确率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看细节"><span class="toc-text">查看细节</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#随机初始化"><span class="toc-text">随机初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义函数-1"><span class="toc-text">定义函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型-1"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看准确率-1"><span class="toc-text">查看准确率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看细节-1"><span class="toc-text">查看细节</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抑梯度异常初始化"><span class="toc-text">抑梯度异常初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义函数-2"><span class="toc-text">定义函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型-2"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看准确率-2"><span class="toc-text">查看准确率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看细节-2"><span class="toc-text">查看细节</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正则化"><span class="toc-text">正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题描述"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取数据并绘图-1"><span class="toc-text">读取数据并绘图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看模型-1"><span class="toc-text">查看模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不使用正则化"><span class="toc-text">不使用正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型-3"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#绘制决策边界"><span class="toc-text">绘制决策边界</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用L2正则化"><span class="toc-text">使用L2正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义L2函数"><span class="toc-text">定义L2函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型-4"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#绘制决策边界-1"><span class="toc-text">绘制决策边界</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用随机失活"><span class="toc-text">使用随机失活</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义dropout正向传播函数"><span class="toc-text">定义dropout正向传播函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义dropout反向传播函数"><span class="toc-text">定义dropout反向传播函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型-5"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#绘制决策边界-2"><span class="toc-text">绘制决策边界</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度校验"><span class="toc-text">梯度校验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题描述-1"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一维线性"><span class="toc-text">一维线性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义正向传播函数"><span class="toc-text">定义正向传播函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义反向传播函数"><span class="toc-text">定义反向传播函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义校验函数"><span class="toc-text">定义校验函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进行测试"><span class="toc-text">进行测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高维度梯度校验"><span class="toc-text">高维度梯度校验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义正向传播函数-1"><span class="toc-text">定义正向传播函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义校验函数-1"><span class="toc-text">定义校验函数</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+    <div class='body-wrapper'>
+      
+
+<aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导入相关库"><span class="toc-text">导入相关库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化"><span class="toc-text">初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#读取数据并绘图"><span class="toc-text">读取数据并绘图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说明-1"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看模型"><span class="toc-text">查看模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用0初始化"><span class="toc-text">使用0初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义函数"><span class="toc-text">定义函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看准确率"><span class="toc-text">查看准确率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看细节"><span class="toc-text">查看细节</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#随机初始化"><span class="toc-text">随机初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义函数-1"><span class="toc-text">定义函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型-1"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看准确率-1"><span class="toc-text">查看准确率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看细节-1"><span class="toc-text">查看细节</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抑梯度异常初始化"><span class="toc-text">抑梯度异常初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义函数-2"><span class="toc-text">定义函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型-2"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看准确率-2"><span class="toc-text">查看准确率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看细节-2"><span class="toc-text">查看细节</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正则化"><span class="toc-text">正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题描述"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取数据并绘图-1"><span class="toc-text">读取数据并绘图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看模型-1"><span class="toc-text">查看模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不使用正则化"><span class="toc-text">不使用正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型-3"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#绘制决策边界"><span class="toc-text">绘制决策边界</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用L2正则化"><span class="toc-text">使用L2正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义L2函数"><span class="toc-text">定义L2函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型-4"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#绘制决策边界-1"><span class="toc-text">绘制决策边界</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用随机失活"><span class="toc-text">使用随机失活</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义dropout正向传播函数"><span class="toc-text">定义dropout正向传播函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义dropout反向传播函数"><span class="toc-text">定义dropout反向传播函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型-5"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#绘制决策边界-2"><span class="toc-text">绘制决策边界</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度校验"><span class="toc-text">梯度校验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题描述-1"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一维线性"><span class="toc-text">一维线性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义正向传播函数"><span class="toc-text">定义正向传播函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义反向传播函数"><span class="toc-text">定义反向传播函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义校验函数"><span class="toc-text">定义校验函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进行测试"><span class="toc-text">进行测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高维度梯度校验"><span class="toc-text">高维度梯度校验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义正向传播函数-1"><span class="toc-text">定义正向传播函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义校验函数-1"><span class="toc-text">定义校验函数</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/post/202006202233/">
+        吴恩达深度学习编程作业2-1
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+<div class='new-meta-item author'>
+  <a href="https://lluuiq.com" rel="nofollow">
+    <img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png">
+    <p>lluuiq</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>神经网络&nbsp;/&nbsp;学习笔记</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-edit" aria-hidden="true"></i>
+    <p>发布于：2020年6月20日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：6.1k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：27分钟</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>吴恩达深度学习课程《改善深层神经网络：超参数调试、正则化以及优化》第一周（深度学习的实用层面）的编程作业。</p>
+<a id="more"></a>
+
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>题目与参考作业的地址：<a href="https://blog.csdn.net/u013733326/article/details/79847918" target="_blank" rel="noopener">【中文】【吴恩达课后编程作业】Course 2 - 改善深层神经网络 - 第一周作业(1&amp;2&amp;3)</a></p>
+<p>相关数据集与前提代码在该博文中下载。</p>
+<p><strong>注：</strong>本文极其没有营养价值，还请看原文。</p>
+<p>本次作业完成内容：</p>
+<ul>
+<li>初始化内容：<ol>
+<li>使用0来初始化参数。</li>
+<li>使用随机数来初始化参数。</li>
+<li>使用抑梯度异常初始化参数（参见视频中的梯度消失和梯度爆炸）。</li>
+</ol>
+</li>
+<li>正则化模型：<ol>
+<li>使用二范数对二分类模型正则化，尝试避免过拟合。</li>
+<li>使用随机删除节点的方法精简模型，同样是为了尝试避免过拟合。</li>
+</ol>
+</li>
+<li>梯度校验：<ol>
+<li>对模型使用梯度校验，检测它是否在梯度下降的过程中出现误差过大的情况。</li>
+</ol>
+</li>
+</ul>
+<h2 id="导入相关库"><a href="#导入相关库" class="headerlink" title="导入相关库"></a>导入相关库</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> sklearn</span><br><span class="line"><span class="keyword">import</span> sklearn.datasets</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> init_utils   <span class="comment">#用于初始化</span></span><br><span class="line"><span class="keyword">import</span> reg_utils    <span class="comment">#用于正则化</span></span><br><span class="line"><span class="keyword">import</span> gc_utils     <span class="comment">#用于梯度校验</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">%matplotlib inline</span><br><span class="line">plt.rcParams[<span class="string">'figure.figsize'</span>] = (<span class="number">7.0</span>, <span class="number">4.0</span>) <span class="comment"># 设置画布的默认大小</span></span><br><span class="line">plt.rcParams[<span class="string">'image.interpolation'</span>] = <span class="string">'nearest'</span></span><br><span class="line">plt.rcParams[<span class="string">'image.cmap'</span>] = <span class="string">'gray'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><h3 id="读取数据并绘图"><a href="#读取数据并绘图" class="headerlink" title="读取数据并绘图"></a>读取数据并绘图</h3><p>init_utils的load_dataset函数中已有绘制图案代码。</p>
+<p>用4个变量接收训练集、测试集的输入特征与标签。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_X, train_Y, test_X, test_Y = init_utils.load_dataset(is_plot=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620162549.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620162549.png" alt="image-20200620162539883"></a></p>
+<h3 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h3><p>建立一个分类器将红蓝点分开，使用之前的模型（因自己之前建立的模型与该作业的不同，故这里直接使用了原文的模型代码）。</p>
+<p>使用三种初始化方法：</p>
+<ul>
+<li><p>0初始化，传参的值为“zeros”，核心代码：</p>
+<p> parameters[‘W’ + str(l)] = np.zeros((layers_dims[l], layers_dims[l - 1]))</p>
+</li>
+<li><p>随机数初始化，传参的值为 “random”，核心代码：<br>  parameters[‘W’ + str(l)] = np.random.randn(layers_dims[l], layers_dims[l - 1]) * 10</p>
+</li>
+<li><p>抑梯度异常初始化，传参的值为“he”，核心代码：<br>  parameters[‘W’ + str(l)] = np.random.randn(layers_dims[l], layers_dims[l - 1]) * np.sqrt(2 / layers_dims[l - 1])</p>
+</li>
+</ul>
+<h3 id="查看模型"><a href="#查看模型" class="headerlink" title="查看模型"></a>查看模型</h3><p>代码作用已写在注释，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">model</span><span class="params">(X,Y,learning_rate=<span class="number">0.01</span>,num_iterations=<span class="number">15000</span>,print_cost=True,initialization=<span class="string">"he"</span>,is_polt=True)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    实现一个三层的神经网络：LINEAR -&gt;RELU -&gt; LINEAR -&gt; RELU -&gt; LINEAR -&gt; SIGMOID</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        X - 输入的数据，维度为(2, 要训练/测试的数量)</span></span><br><span class="line"><span class="string">        Y - 标签，【0 | 1】，维度为(1，对应的是输入的数据的标签)</span></span><br><span class="line"><span class="string">        learning_rate - 学习速率</span></span><br><span class="line"><span class="string">        num_iterations - 迭代的次数</span></span><br><span class="line"><span class="string">        print_cost - 是否打印成本值，每迭代1000次打印一次</span></span><br><span class="line"><span class="string">        initialization - 字符串类型，初始化的类型【"zeros" | "random" | "he"】</span></span><br><span class="line"><span class="string">        is_polt - 是否绘制梯度下降的曲线图</span></span><br><span class="line"><span class="string">    返回</span></span><br><span class="line"><span class="string">        parameters - 学习后的参数</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    grads = &#123;&#125;  <span class="comment"># 存储导数</span></span><br><span class="line">    costs = []  <span class="comment"># 存储代价</span></span><br><span class="line">    m = X.shape[<span class="number">1</span>] <span class="comment"># 获取样本数</span></span><br><span class="line">    layers_dims = [X.shape[<span class="number">0</span>],<span class="number">10</span>,<span class="number">5</span>,<span class="number">1</span>] <span class="comment"># 定义神经网络结构</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 根据传入的参数来进行初始化</span></span><br><span class="line">    <span class="keyword">if</span> initialization == <span class="string">"zeros"</span>:</span><br><span class="line">        parameters = initialize_parameters_zeros(layers_dims) <span class="comment"># 0初始化</span></span><br><span class="line">    <span class="keyword">elif</span> initialization == <span class="string">"random"</span>:</span><br><span class="line">        parameters = initialize_parameters_random(layers_dims) <span class="comment"># 随机初始化</span></span><br><span class="line">    <span class="keyword">elif</span> initialization == <span class="string">"he"</span>:</span><br><span class="line">        parameters = initialize_parameters_he(layers_dims) <span class="comment"># 抑梯度异常初始化</span></span><br><span class="line">    <span class="keyword">else</span> : </span><br><span class="line">        print(<span class="string">"错误的初始化参数！程序退出"</span>)</span><br><span class="line">        exit</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 开始学习</span></span><br><span class="line">    <span class="keyword">for</span> i  <span class="keyword">in</span> range(<span class="number">0</span>,num_iterations):</span><br><span class="line">        <span class="comment">#正向传播</span></span><br><span class="line">        a3 , cache = init_utils.forward_propagation(X,parameters)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 计算成本  </span></span><br><span class="line">        cost = init_utils.compute_loss(a3,Y)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#反向传播</span></span><br><span class="line">        grads = init_utils.backward_propagation(X,Y,cache)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#更新参数</span></span><br><span class="line">        parameters = init_utils.update_parameters(parameters,grads,learning_rate)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#记录成本</span></span><br><span class="line">        <span class="keyword">if</span> i % <span class="number">1000</span> == <span class="number">0</span>:</span><br><span class="line">            costs.append(cost)</span><br><span class="line">            <span class="comment">#打印成本</span></span><br><span class="line">            <span class="keyword">if</span> print_cost:</span><br><span class="line">                print(<span class="string">"第"</span> + str(i) + <span class="string">"次迭代，成本值为："</span> + str(cost))</span><br><span class="line">        </span><br><span class="line">    </span><br><span class="line">    <span class="comment">#学习完毕，绘制成本曲线</span></span><br><span class="line">    <span class="keyword">if</span> is_polt:</span><br><span class="line">        plt.plot(costs)</span><br><span class="line">        plt.ylabel(<span class="string">'cost'</span>)</span><br><span class="line">        plt.xlabel(<span class="string">'iterations (per hundreds)'</span>)</span><br><span class="line">        plt.title(<span class="string">"Learning rate ="</span> + str(learning_rate))</span><br><span class="line">        plt.show()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#返回学习完毕后的参数</span></span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用0初始化"><a href="#使用0初始化" class="headerlink" title="使用0初始化"></a>使用0初始化</h3><h4 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_parameters_zeros</span><span class="params">(layers_dims)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    将模型的参数全部设置为0</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        layers_dims - 列表，模型的层数和对应每一层的节点的数量</span></span><br><span class="line"><span class="string">    返回</span></span><br><span class="line"><span class="string">        parameters - 包含了所有W和b的字典</span></span><br><span class="line"><span class="string">            W1 - 权重矩阵，维度为（layers_dims[1], layers_dims[0]）</span></span><br><span class="line"><span class="string">            b1 - 偏置向量，维度为（layers_dims[1],1）</span></span><br><span class="line"><span class="string">            ···</span></span><br><span class="line"><span class="string">            WL - 权重矩阵，维度为（layers_dims[L], layers_dims[L -1]）</span></span><br><span class="line"><span class="string">            bL - 偏置向量，维度为（layers_dims[L],1）</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    parameters = &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    L = len(layers_dims) <span class="comment">#网络层数</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> range(<span class="number">1</span>,L):</span><br><span class="line">        parameters[<span class="string">"W"</span> + str(l)] = np.zeros((layers_dims[l],layers_dims[l<span class="number">-1</span>]))</span><br><span class="line">        parameters[<span class="string">"b"</span> + str(l)] = np.zeros((layers_dims[l],<span class="number">1</span>))</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#使用断言确保我的数据格式是正确的</span></span><br><span class="line">        <span class="keyword">assert</span>(parameters[<span class="string">"W"</span> + str(l)].shape == (layers_dims[l],layers_dims[l<span class="number">-1</span>]))</span><br><span class="line">        <span class="keyword">assert</span>(parameters[<span class="string">"b"</span> + str(l)].shape == (layers_dims[l],<span class="number">1</span>))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+
+<h4 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parameters = model(train_X, train_Y, initialization = <span class="string">"zeros"</span>,is_polt=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620163621.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620163621.png" alt="image-20200620163417967"></a></p>
+<p>可以看到代价根本没有降下来，W初始化为0，梯度下降失效，神经网络再多的层数也只是在计算输入特征X的线性组合而已。</p>
+<h4 id="查看准确率"><a href="#查看准确率" class="headerlink" title="查看准确率"></a>查看准确率</h4><p>调用init_utils的predict函数直接进行预测</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> (<span class="string">"训练集:"</span>)</span><br><span class="line">predictions_train = init_utils.predict(train_X, train_Y, parameters)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"测试集:"</span>)</span><br><span class="line">predictions_test = init_utils.predict(test_X, test_Y, parameters)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620163619.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620163619.png" alt="image-20200620163617914"></a></p>
+<h4 id="查看细节"><a href="#查看细节" class="headerlink" title="查看细节"></a>查看细节</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"predictions_train = "</span> + str(predictions_train))</span><br><span class="line">print(<span class="string">"predictions_test = "</span> + str(predictions_test))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制决策边界</span></span><br><span class="line">plt.title(<span class="string">"Model with Zeros initialization"</span>)</span><br><span class="line">axes = plt.gca()</span><br><span class="line">axes.set_xlim([<span class="number">-1.5</span>, <span class="number">1.5</span>])</span><br><span class="line">axes.set_ylim([<span class="number">-1.5</span>, <span class="number">1.5</span>])</span><br><span class="line">init_utils.plot_decision_boundary(<span class="keyword">lambda</span> x: init_utils.predict_dec(parameters, x.T), train_X, np.squeeze(train_Y))</span><br></pre></td></tr></table></figure>
+
+<p>注意这里最后一句代码，将原本的train_Y 使用np.squeeze(train_Y)换成压缩后的数组，否则绘图会因为维度报错。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620172649.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620172649.png" alt="image-20200620172210916"></a></p>
+<p>预测值全是0，图像整体呈一个颜色，并没有进行分类。</p>
+<h3 id="随机初始化"><a href="#随机初始化" class="headerlink" title="随机初始化"></a>随机初始化</h3><h4 id="定义函数-1"><a href="#定义函数-1" class="headerlink" title="定义函数"></a>定义函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_parameters_random</span><span class="params">(layers_dims)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        layers_dims - 列表，模型的层数和对应每一层的节点的数量</span></span><br><span class="line"><span class="string">    返回</span></span><br><span class="line"><span class="string">        parameters - 包含了所有W和b的字典</span></span><br><span class="line"><span class="string">            W1 - 权重矩阵，维度为（layers_dims[1], layers_dims[0]）</span></span><br><span class="line"><span class="string">            b1 - 偏置向量，维度为（layers_dims[1],1）</span></span><br><span class="line"><span class="string">            ···</span></span><br><span class="line"><span class="string">            WL - 权重矩阵，维度为（layers_dims[L], layers_dims[L -1]）</span></span><br><span class="line"><span class="string">            b1 - 偏置向量，维度为（layers_dims[L],1）</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    np.random.seed(<span class="number">3</span>)               <span class="comment"># 指定随机种子</span></span><br><span class="line">    parameters = &#123;&#125;</span><br><span class="line">    L = len(layers_dims)            <span class="comment"># 层数</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> range(<span class="number">1</span>, L):</span><br><span class="line">        parameters[<span class="string">'W'</span> + str(l)] = np.random.randn(layers_dims[l], layers_dims[l - <span class="number">1</span>]) * <span class="number">10</span> <span class="comment">#使用10倍缩放</span></span><br><span class="line">        parameters[<span class="string">'b'</span> + str(l)] = np.zeros((layers_dims[l], <span class="number">1</span>))</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#使用断言确保我的数据格式是正确的</span></span><br><span class="line">        <span class="keyword">assert</span>(parameters[<span class="string">"W"</span> + str(l)].shape == (layers_dims[l],layers_dims[l<span class="number">-1</span>]))</span><br><span class="line">        <span class="keyword">assert</span>(parameters[<span class="string">"b"</span> + str(l)].shape == (layers_dims[l],<span class="number">1</span>))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="训练模型-1"><a href="#训练模型-1" class="headerlink" title="训练模型"></a>训练模型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parameters = model(train_X, train_Y, initialization = <span class="string">"random"</span>,is_polt=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620172646.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620172646.png" alt="image-20200620172644445"></a></p>
+<p>相比使用0初始化，随机初始化明显使代价函数降了下来。</p>
+<h4 id="查看准确率-1"><a href="#查看准确率-1" class="headerlink" title="查看准确率"></a>查看准确率</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"训练集："</span>)</span><br><span class="line">predictions_train = init_utils.predict(train_X, train_Y, parameters)</span><br><span class="line">print(<span class="string">"测试集："</span>)</span><br><span class="line">predictions_test = init_utils.predict(test_X, test_Y, parameters)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620172742.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620172742.png" alt="image-20200620172741472"></a></p>
+<p>结果正常多了。</p>
+<h4 id="查看细节-1"><a href="#查看细节-1" class="headerlink" title="查看细节"></a>查看细节</h4><p>同使用0初始化一样，最后绘图代码的<code>tarin_Y</code>要使用<code>np.squeeze(train_Y)</code>替换</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"predictions_train = "</span> + str(predictions_train))</span><br><span class="line">print(<span class="string">"predictions_test = "</span> + str(predictions_test))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制决策边界</span></span><br><span class="line">plt.title(<span class="string">"Model with large random initialization"</span>)</span><br><span class="line">axes = plt.gca()</span><br><span class="line">axes.set_xlim([<span class="number">-1.5</span>, <span class="number">1.5</span>])</span><br><span class="line">axes.set_ylim([<span class="number">-1.5</span>, <span class="number">1.5</span>])</span><br><span class="line">init_utils.plot_decision_boundary(<span class="keyword">lambda</span> x: init_utils.predict_dec(parameters, x.T), train_X, np.squeeze(train_Y))</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620173006.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620173006.png" alt="image-20200620172919162"></a></p>
+<p>成功进行了分类，但是效果不够很好，</p>
+<h3 id="抑梯度异常初始化"><a href="#抑梯度异常初始化" class="headerlink" title="抑梯度异常初始化"></a>抑梯度异常初始化</h3><h4 id="定义函数-2"><a href="#定义函数-2" class="headerlink" title="定义函数"></a>定义函数</h4><p>与随机初始化的区别是，这里用 <code>np.random.randn</code>初始化后乘上<code>np.sqrt(2 / layers_dims[l - 1])</code> （ReLU使用这个效果比较好）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_parameters_he</span><span class="params">(layers_dims)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        layers_dims - 列表，模型的层数和对应每一层的节点的数量</span></span><br><span class="line"><span class="string">    返回</span></span><br><span class="line"><span class="string">        parameters - 包含了所有W和b的字典</span></span><br><span class="line"><span class="string">            W1 - 权重矩阵，维度为（layers_dims[1], layers_dims[0]）</span></span><br><span class="line"><span class="string">            b1 - 偏置向量，维度为（layers_dims[1],1）</span></span><br><span class="line"><span class="string">            ···</span></span><br><span class="line"><span class="string">            WL - 权重矩阵，维度为（layers_dims[L], layers_dims[L -1]）</span></span><br><span class="line"><span class="string">            b1 - 偏置向量，维度为（layers_dims[L],1）</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    np.random.seed(<span class="number">3</span>)               <span class="comment"># 指定随机种子</span></span><br><span class="line">    parameters = &#123;&#125;</span><br><span class="line">    L = len(layers_dims)            <span class="comment"># 层数</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> range(<span class="number">1</span>, L):</span><br><span class="line">        parameters[<span class="string">'W'</span> + str(l)] = np.random.randn(layers_dims[l], layers_dims[l - <span class="number">1</span>]) * np.sqrt(<span class="number">2</span> / layers_dims[l - <span class="number">1</span>])</span><br><span class="line">        parameters[<span class="string">'b'</span> + str(l)] = np.zeros((layers_dims[l], <span class="number">1</span>))</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#使用断言确保我的数据格式是正确的</span></span><br><span class="line">        <span class="keyword">assert</span>(parameters[<span class="string">"W"</span> + str(l)].shape == (layers_dims[l],layers_dims[l<span class="number">-1</span>]))</span><br><span class="line">        <span class="keyword">assert</span>(parameters[<span class="string">"b"</span> + str(l)].shape == (layers_dims[l],<span class="number">1</span>))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+
+<h4 id="训练模型-2"><a href="#训练模型-2" class="headerlink" title="训练模型"></a>训练模型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parameters = model(train_X, train_Y, initialization = <span class="string">"he"</span>,is_polt=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620204528.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620204528.png" alt="image-20200620204526691"></a></p>
+<p>代价函数下降速度非常明显的变快了，并且代价函数最小值也得到了优化。</p>
+<h4 id="查看准确率-2"><a href="#查看准确率-2" class="headerlink" title="查看准确率"></a>查看准确率</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"训练集:"</span>)</span><br><span class="line">predictions_train = init_utils.predict(train_X, train_Y, parameters)</span><br><span class="line">print(<span class="string">"测试集:"</span>)</span><br><span class="line">init_utils.predictions_test = init_utils.predict(test_X, test_Y, parameters)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620205039.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620205039.png" alt="image-20200620205038238"></a></p>
+<p>准确率也得到了极大提高</p>
+<h4 id="查看细节-2"><a href="#查看细节-2" class="headerlink" title="查看细节"></a>查看细节</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"predictions_train = "</span> + str(predictions_train))</span><br><span class="line">print(<span class="string">"predictions_test = "</span> + str(predictions_test))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制决策边界</span></span><br><span class="line">plt.title(<span class="string">"Model with He initialization"</span>)</span><br><span class="line">axes = plt.gca()</span><br><span class="line">axes.set_xlim([<span class="number">-1.5</span>, <span class="number">1.5</span>])</span><br><span class="line">axes.set_ylim([<span class="number">-1.5</span>, <span class="number">1.5</span>])</span><br><span class="line">init_utils.plot_decision_boundary(<span class="keyword">lambda</span> x: init_utils.predict_dec(parameters, x.T), train_X, np.squeeze(train_Y))</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620205211.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620205211.png" alt="image-20200620205209229"></a></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>模型参数的初始化方式会导致不同的算法性能。</li>
+<li>使用0初始化会使得梯度下降失效，神经网络在计算输入特征的线性组合。</li>
+<li>使用随机初始化会正确执行梯度下降，但若初始化时的值过大，会导致算法性能过低。</li>
+</ol>
+<h2 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>假设你现在是一个AI专家，你需要设计一个模型，可以用于推荐在足球场中守门员将球发至哪个位置可以让本队的球员抢到球的可能性更大。说白了，实际上就是一个二分类，一半是己方抢到球，一半就是对方抢到球，我们来看一下这个图：</p>
+<p><a href="https://img-blog.csdn.net/20180408145205837?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTM3MzMzMjY=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" target="_blank" rel="noopener"><img src="https://img-blog.csdn.net/20180408145205837?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTM3MzMzMjY=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="football position"></a></p>
+<h3 id="读取数据并绘图-1"><a href="#读取数据并绘图-1" class="headerlink" title="读取数据并绘图"></a>读取数据并绘图</h3><p><strong>注：</strong></p>
+<p>这里和前面的绘图一样，需要将<code>train_Y</code>修改为<code>np.squeeze(train_Y)</code>，但读取数据这里就不能在传参的时候修改了，需要打开<code>reg_utils</code>文件找到<code>load_2D_dataset</code>函数，将里面绘图部分的<code>c=train_Y</code> 改为 <code>c=np.squeeze(train_Y)</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_X, train_Y, test_X, test_Y = reg_utils.load_2D_dataset(is_plot=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620211638.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620211638.png" alt="image-20200620211637301"></a></p>
+<p>每个点都代表守门员将球发至的位置，蓝点为己方球员抢到球，红点为对手球员抢到球。</p>
+<p>训练模型，找到适合我方球员抢球的位置。</p>
+<h3 id="查看模型-1"><a href="#查看模型-1" class="headerlink" title="查看模型"></a>查看模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">model</span><span class="params">(X,Y,learning_rate=<span class="number">0.3</span>,num_iterations=<span class="number">30000</span>,print_cost=True,is_plot=True,lambd=<span class="number">0</span>,keep_prob=<span class="number">1</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    实现一个三层的神经网络：LINEAR -&gt;RELU -&gt; LINEAR -&gt; RELU -&gt; LINEAR -&gt; SIGMOID</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        X - 输入的数据，维度为(2, 要训练/测试的数量)</span></span><br><span class="line"><span class="string">        Y - 标签，【0(蓝色) | 1(红色)】，维度为(1，对应的是输入的数据的标签)</span></span><br><span class="line"><span class="string">        learning_rate - 学习速率</span></span><br><span class="line"><span class="string">        num_iterations - 迭代的次数</span></span><br><span class="line"><span class="string">        print_cost - 是否打印成本值，每迭代10000次打印一次，但是每1000次记录一个成本值</span></span><br><span class="line"><span class="string">        is_polt - 是否绘制梯度下降的曲线图</span></span><br><span class="line"><span class="string">        lambd - L2正则化的超参数，即λ的值，实数。默认值为0表示不使用L2正则化。</span></span><br><span class="line"><span class="string">        keep_prob - 随机删除节点的概率，默认为1表示不使用随机失活</span></span><br><span class="line"><span class="string">    返回</span></span><br><span class="line"><span class="string">        parameters - 学习后的参数</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    grads = &#123;&#125;</span><br><span class="line">    costs = []</span><br><span class="line">    m = X.shape[<span class="number">1</span>]</span><br><span class="line">    layers_dims = [X.shape[<span class="number">0</span>],<span class="number">20</span>,<span class="number">3</span>,<span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#初始化参数</span></span><br><span class="line">    parameters = reg_utils.initialize_parameters(layers_dims)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#开始学习</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,num_iterations):</span><br><span class="line">        <span class="comment">#前向传播</span></span><br><span class="line">        <span class="comment">##是否随机删除节点</span></span><br><span class="line">        <span class="keyword">if</span> keep_prob == <span class="number">1</span>:</span><br><span class="line">            <span class="comment">###不随机删除节点</span></span><br><span class="line">            a3 , cache = reg_utils.forward_propagation(X,parameters)</span><br><span class="line">        <span class="keyword">elif</span> keep_prob &lt; <span class="number">1</span>:</span><br><span class="line">            <span class="comment">###随机删除节点</span></span><br><span class="line">            a3 , cache = forward_propagation_with_dropout(X,parameters,keep_prob)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">"keep_prob参数错误！程序退出。"</span>)</span><br><span class="line">            exit</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#计算成本</span></span><br><span class="line">        <span class="comment">## 是否使用二范数</span></span><br><span class="line">        <span class="keyword">if</span> lambd == <span class="number">0</span>:</span><br><span class="line">            <span class="comment">###不使用L2正则化</span></span><br><span class="line">            cost = reg_utils.compute_cost(a3,Y)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment">###使用L2正则化</span></span><br><span class="line">            cost = compute_cost_with_regularization(a3,Y,parameters,lambd)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#反向传播</span></span><br><span class="line">        <span class="comment">##可以同时使用L2正则化和随机删除节点，但是本次实验不同时使用。</span></span><br><span class="line">        <span class="keyword">assert</span>(lambd == <span class="number">0</span>  <span class="keyword">or</span> keep_prob ==<span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">##两个参数的使用情况</span></span><br><span class="line">        <span class="keyword">if</span> (lambd == <span class="number">0</span> <span class="keyword">and</span> keep_prob == <span class="number">1</span>):</span><br><span class="line">            <span class="comment">### 不使用L2正则化和不使用随机删除节点</span></span><br><span class="line">            grads = reg_utils.backward_propagation(X,Y,cache)</span><br><span class="line">        <span class="keyword">elif</span> lambd != <span class="number">0</span>:</span><br><span class="line">            <span class="comment">### 使用L2正则化，不使用随机删除节点</span></span><br><span class="line">            grads = backward_propagation_with_regularization(X, Y, cache, lambd)</span><br><span class="line">        <span class="keyword">elif</span> keep_prob &lt; <span class="number">1</span>:</span><br><span class="line">            <span class="comment">### 使用随机删除节点，不使用L2正则化</span></span><br><span class="line">            grads = backward_propagation_with_dropout(X, Y, cache, keep_prob)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#更新参数</span></span><br><span class="line">        parameters = reg_utils.update_parameters(parameters, grads, learning_rate)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#记录并打印成本</span></span><br><span class="line">        <span class="keyword">if</span> i % <span class="number">1000</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="comment">## 记录成本</span></span><br><span class="line">            costs.append(cost)</span><br><span class="line">            <span class="keyword">if</span> (print_cost <span class="keyword">and</span> i % <span class="number">10000</span> == <span class="number">0</span>):</span><br><span class="line">                <span class="comment">#打印成本</span></span><br><span class="line">                print(<span class="string">"第"</span> + str(i) + <span class="string">"次迭代，成本值为："</span> + str(cost))</span><br><span class="line">        </span><br><span class="line">    <span class="comment">#是否绘制成本曲线图</span></span><br><span class="line">    <span class="keyword">if</span> is_plot:</span><br><span class="line">        plt.plot(costs)</span><br><span class="line">        plt.ylabel(<span class="string">'cost'</span>)</span><br><span class="line">        plt.xlabel(<span class="string">'iterations (x1,000)'</span>)</span><br><span class="line">        plt.title(<span class="string">"Learning rate ="</span> + str(learning_rate))</span><br><span class="line">        plt.show()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#返回学习后的参数</span></span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+
+<h3 id="不使用正则化"><a href="#不使用正则化" class="headerlink" title="不使用正则化"></a>不使用正则化</h3><h4 id="训练模型-3"><a href="#训练模型-3" class="headerlink" title="训练模型"></a>训练模型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">parameters = model(train_X, train_Y,is_plot=<span class="literal">True</span>)</span><br><span class="line">print(<span class="string">"训练集:"</span>)</span><br><span class="line">predictions_train = reg_utils.predict(train_X, train_Y, parameters)</span><br><span class="line">print(<span class="string">"测试集:"</span>)</span><br><span class="line">predictions_test = reg_utils.predict(test_X, test_Y, parameters)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620220431.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620220431.png" alt="image-20200620220421003"></a></p>
+<h4 id="绘制决策边界"><a href="#绘制决策边界" class="headerlink" title="绘制决策边界"></a>绘制决策边界</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.title(<span class="string">"Model without regularization"</span>)</span><br><span class="line">axes = plt.gca()</span><br><span class="line">axes.set_xlim([<span class="number">-0.75</span>,<span class="number">0.40</span>])</span><br><span class="line">axes.set_ylim([<span class="number">-0.75</span>,<span class="number">0.65</span>])</span><br><span class="line">reg_utils.plot_decision_boundary(<span class="keyword">lambda</span> x: reg_utils.predict_dec(parameters, x.T), train_X, np.squeeze(train_Y))</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620220704.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620220704.png" alt="image-20200620220651552"></a></p>
+<p>通过无正则化的决策边界，可以看出过拟合现象</p>
+<h3 id="使用L2正则化"><a href="#使用L2正则化" class="headerlink" title="使用L2正则化"></a>使用L2正则化</h3><h4 id="定义L2函数"><a href="#定义L2函数" class="headerlink" title="定义L2函数"></a>定义L2函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 计算正则化代价</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_cost_with_regularization</span><span class="params">(A3,Y,parameters,lambd)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    实现公式2的L2正则化计算成本</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        A3 - 正向传播的输出结果，维度为（输出节点数量，训练/测试的数量）</span></span><br><span class="line"><span class="string">        Y - 标签向量，与数据一一对应，维度为(输出节点数量，训练/测试的数量)</span></span><br><span class="line"><span class="string">        parameters - 包含模型学习后的参数的字典</span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        cost - 使用公式2计算出来的正则化损失的值</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    m = Y.shape[<span class="number">1</span>]</span><br><span class="line">    <span class="comment"># 获取各层的模型参数W</span></span><br><span class="line">    W1 = parameters[<span class="string">"W1"</span>]</span><br><span class="line">    W2 = parameters[<span class="string">"W2"</span>]</span><br><span class="line">    W3 = parameters[<span class="string">"W3"</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 计算代价</span></span><br><span class="line">    cross_entropy_cost = reg_utils.compute_cost(A3,Y)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 计算L2正则化的代价</span></span><br><span class="line">    L2_regularization_cost = lambd * (np.sum(np.square(W1)) + np.sum(np.square(W2))  + np.sum(np.square(W3))) / (<span class="number">2</span> * m)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 计算总代价</span></span><br><span class="line">    cost = cross_entropy_cost + L2_regularization_cost</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> cost</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#因为改变了成本函数，所以必须改变向后传播的函数， 所有的梯度都必须根据这个新的成本值来计算。</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backward_propagation_with_regularization</span><span class="params">(X, Y, cache, lambd)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    实现我们添加了L2正则化的模型的后向传播。</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        X - 输入数据集，维度为（输入节点数量，数据集里面的数量）</span></span><br><span class="line"><span class="string">        Y - 标签，维度为（输出节点数量，数据集里面的数量）</span></span><br><span class="line"><span class="string">        cache - 来自forward_propagation（）的cache输出</span></span><br><span class="line"><span class="string">        lambda - regularization超参数，实数</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        gradients - 一个包含了每个参数、激活值和预激活值变量的梯度的字典</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    m = X.shape[<span class="number">1</span>] <span class="comment"># 获取样本数</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 获取cache的值</span></span><br><span class="line">    (Z1, A1, W1, b1, Z2, A2, W2, b2, Z3, A3, W3, b3) = cache</span><br><span class="line">    </span><br><span class="line">    dZ3 = A3 - Y</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 正则化的反向传播</span></span><br><span class="line">    dW3 = (<span class="number">1</span> / m) * np.dot(dZ3,A2.T) + ((lambd * W3) / m )</span><br><span class="line">    db3 = (<span class="number">1</span> / m) * np.sum(dZ3,axis=<span class="number">1</span>,keepdims=<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line">    dA2 = np.dot(W3.T,dZ3)</span><br><span class="line">    dZ2 = np.multiply(dA2,np.int64(A2 &gt; <span class="number">0</span>))</span><br><span class="line">    dW2 = (<span class="number">1</span> / m) * np.dot(dZ2,A1.T) + ((lambd * W2) / m)</span><br><span class="line">    db2 = (<span class="number">1</span> / m) * np.sum(dZ2,axis=<span class="number">1</span>,keepdims=<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line">    dA1 = np.dot(W2.T,dZ2)</span><br><span class="line">    dZ1 = np.multiply(dA1,np.int64(A1 &gt; <span class="number">0</span>))</span><br><span class="line">    dW1 = (<span class="number">1</span> / m) * np.dot(dZ1,X.T) + ((lambd * W1) / m)</span><br><span class="line">    db1 = (<span class="number">1</span> / m) * np.sum(dZ1,axis=<span class="number">1</span>,keepdims=<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line">    gradients = &#123;<span class="string">"dZ3"</span>: dZ3, <span class="string">"dW3"</span>: dW3, <span class="string">"db3"</span>: db3, <span class="string">"dA2"</span>: dA2,</span><br><span class="line">                 <span class="string">"dZ2"</span>: dZ2, <span class="string">"dW2"</span>: dW2, <span class="string">"db2"</span>: db2, <span class="string">"dA1"</span>: dA1, </span><br><span class="line">                 <span class="string">"dZ1"</span>: dZ1, <span class="string">"dW1"</span>: dW1, <span class="string">"db1"</span>: db1&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> gradients</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="训练模型-4"><a href="#训练模型-4" class="headerlink" title="训练模型"></a>训练模型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">parameters = model(train_X, train_Y, lambd=<span class="number">0.7</span>,is_plot=<span class="literal">True</span>)</span><br><span class="line">print(<span class="string">"使用正则化，训练集:"</span>)</span><br><span class="line">predictions_train = reg_utils.predict(train_X, train_Y, parameters)</span><br><span class="line">print(<span class="string">"使用正则化，测试集:"</span>)</span><br><span class="line">predictions_test = reg_utils.predict(test_X, test_Y, parameters)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620223913.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620223913.png" alt="image-20200620223911772"></a></p>
+<p>训练集准确率稍微降低了点，测试集提高了点，两者几乎持平。</p>
+<h4 id="绘制决策边界-1"><a href="#绘制决策边界-1" class="headerlink" title="绘制决策边界"></a>绘制决策边界</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.title(<span class="string">"Model with L2-regularization"</span>)</span><br><span class="line">axes = plt.gca()</span><br><span class="line">axes.set_xlim([<span class="number">-0.75</span>,<span class="number">0.40</span>])</span><br><span class="line">axes.set_ylim([<span class="number">-0.75</span>,<span class="number">0.65</span>])</span><br><span class="line">reg_utils.plot_decision_boundary(<span class="keyword">lambda</span> x: reg_utils.predict_dec(parameters, x.T), train_X, np.squeeze(train_Y))</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620224100.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620224100.png" alt="image-20200620224058965"></a></p>
+<p>根据决策边界可以看出改善了过拟合现象。</p>
+<p>实际上L2正则化的效果会根据超参数λ的的值而改变。</p>
+<p>L2正则化依赖于较小权重的模型比具有较大权重的模型更简单这样的假设，因此，通过削减成本函数中权重的平方值，可以将所有权重值逐渐改变到到较小的值。权值数值高的话会有更平滑的模型，其中输入变化时输出变化更慢，但是需要花费更多的时间。</p>
+<h3 id="使用随机失活"><a href="#使用随机失活" class="headerlink" title="使用随机失活"></a>使用随机失活</h3><h4 id="定义dropout正向传播函数"><a href="#定义dropout正向传播函数" class="headerlink" title="定义dropout正向传播函数"></a>定义dropout正向传播函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward_propagation_with_dropout</span><span class="params">(X,parameters,keep_prob=<span class="number">0.5</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    实现具有随机舍弃节点的前向传播。</span></span><br><span class="line"><span class="string">    LINEAR -&gt; RELU + DROPOUT -&gt; LINEAR -&gt; RELU + DROPOUT -&gt; LINEAR -&gt; SIGMOID.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        X  - 输入数据集，维度为（2，示例数）</span></span><br><span class="line"><span class="string">        parameters - 包含参数“W1”，“b1”，“W2”，“b2”，“W3”，“b3”的python字典：</span></span><br><span class="line"><span class="string">            W1  - 权重矩阵，维度为（20,2）</span></span><br><span class="line"><span class="string">            b1  - 偏向量，维度为（20,1）</span></span><br><span class="line"><span class="string">            W2  - 权重矩阵，维度为（3,20）</span></span><br><span class="line"><span class="string">            b2  - 偏向量，维度为（3,1）</span></span><br><span class="line"><span class="string">            W3  - 权重矩阵，维度为（1,3）</span></span><br><span class="line"><span class="string">            b3  - 偏向量，维度为（1,1）</span></span><br><span class="line"><span class="string">        keep_prob  - 随机删除的概率，实数</span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        A3  - 最后的激活值，维度为（1,1），正向传播的输出</span></span><br><span class="line"><span class="string">        cache - 存储了一些用于计算反向传播的数值的元组</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    np.random.seed(<span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    W1 = parameters[<span class="string">"W1"</span>]</span><br><span class="line">    b1 = parameters[<span class="string">"b1"</span>]</span><br><span class="line">    W2 = parameters[<span class="string">"W2"</span>]</span><br><span class="line">    b2 = parameters[<span class="string">"b2"</span>]</span><br><span class="line">    W3 = parameters[<span class="string">"W3"</span>]</span><br><span class="line">    b3 = parameters[<span class="string">"b3"</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#LINEAR -&gt; RELU -&gt; LINEAR -&gt; RELU -&gt; LINEAR -&gt; SIGMOID</span></span><br><span class="line">    Z1 = np.dot(W1,X) + b1</span><br><span class="line">    A1 = reg_utils.relu(Z1)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#下面的步骤1-4对应于上述的步骤1-4。</span></span><br><span class="line">    D1 = np.random.rand(A1.shape[<span class="number">0</span>],A1.shape[<span class="number">1</span>])    <span class="comment">#步骤1：初始化矩阵D1 = np.random.rand(..., ...)</span></span><br><span class="line">    D1 = D1 &lt; keep_prob                             <span class="comment">#步骤2：将D1的值转换为0或1（使用keep_prob作为阈值）</span></span><br><span class="line">    A1 = A1 * D1                                    <span class="comment">#步骤3：舍弃A1的一些节点（将它的值变为0或False）</span></span><br><span class="line">    A1 = A1 / keep_prob                             <span class="comment">#步骤4：缩放未舍弃的节点(不为0)的值</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    #不理解的同学运行一下下面代码就知道了。</span></span><br><span class="line"><span class="string">    import numpy as np</span></span><br><span class="line"><span class="string">    np.random.seed(1)</span></span><br><span class="line"><span class="string">    A1 = np.random.randn(1,3)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    D1 = np.random.rand(A1.shape[0],A1.shape[1])</span></span><br><span class="line"><span class="string">    keep_prob=0.5</span></span><br><span class="line"><span class="string">    D1 = D1 &lt; keep_prob</span></span><br><span class="line"><span class="string">    print(D1)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    A1 = 0.01</span></span><br><span class="line"><span class="string">    A1 = A1 * D1</span></span><br><span class="line"><span class="string">    A1 = A1 / keep_prob</span></span><br><span class="line"><span class="string">    print(A1)</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    Z2 = np.dot(W2,A1) + b2</span><br><span class="line">    A2 = reg_utils.relu(Z2)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#下面的步骤1-4对应于上述的步骤1-4。</span></span><br><span class="line">    D2 = np.random.rand(A2.shape[<span class="number">0</span>],A2.shape[<span class="number">1</span>])    <span class="comment">#步骤1：初始化矩阵D2 = np.random.rand(..., ...)</span></span><br><span class="line">    D2 = D2 &lt; keep_prob                             <span class="comment">#步骤2：将D2的值转换为0或1（使用keep_prob作为阈值）</span></span><br><span class="line">    A2 = A2 * D2                                    <span class="comment">#步骤3：舍弃A1的一些节点（将它的值变为0或False）</span></span><br><span class="line">    A2 = A2 / keep_prob                             <span class="comment">#步骤4：缩放未舍弃的节点(不为0)的值</span></span><br><span class="line">    </span><br><span class="line">    Z3 = np.dot(W3, A2) + b3</span><br><span class="line">    A3 = reg_utils.sigmoid(Z3)</span><br><span class="line">    </span><br><span class="line">    cache = (Z1, D1, A1, W1, b1, Z2, D2, A2, W2, b2, Z3, A3, W3, b3)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> A3, cache</span><br></pre></td></tr></table></figure>
+
+<h4 id="定义dropout反向传播函数"><a href="#定义dropout反向传播函数" class="headerlink" title="定义dropout反向传播函数"></a>定义dropout反向传播函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backward_propagation_with_dropout</span><span class="params">(X,Y,cache,keep_prob)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    实现我们随机删除的模型的后向传播。</span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        X  - 输入数据集，维度为（2，示例数）</span></span><br><span class="line"><span class="string">        Y  - 标签，维度为（输出节点数量，示例数量）</span></span><br><span class="line"><span class="string">        cache - 来自forward_propagation_with_dropout（）的cache输出</span></span><br><span class="line"><span class="string">        keep_prob  - 随机删除的概率，实数</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        gradients - 一个关于每个参数、激活值和预激活变量的梯度值的字典</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    m = X.shape[<span class="number">1</span>]</span><br><span class="line">    (Z1, D1, A1, W1, b1, Z2, D2, A2, W2, b2, Z3, A3, W3, b3) = cache</span><br><span class="line">    </span><br><span class="line">    dZ3 = A3 - Y</span><br><span class="line">    dW3 = (<span class="number">1</span> / m) * np.dot(dZ3,A2.T)</span><br><span class="line">    db3 = <span class="number">1.</span> / m * np.sum(dZ3, axis=<span class="number">1</span>, keepdims=<span class="literal">True</span>)</span><br><span class="line">    dA2 = np.dot(W3.T, dZ3)</span><br><span class="line">    </span><br><span class="line">    dA2 = dA2 * D2          <span class="comment"># 步骤1：使用正向传播期间相同的节点，舍弃那些关闭的节点（因为任何数乘以0或者False都为0或者False）</span></span><br><span class="line">    dA2 = dA2 / keep_prob   <span class="comment"># 步骤2：缩放未舍弃的节点(不为0)的值</span></span><br><span class="line">    </span><br><span class="line">    dZ2 = np.multiply(dA2, np.int64(A2 &gt; <span class="number">0</span>))</span><br><span class="line">    dW2 = <span class="number">1.</span> / m * np.dot(dZ2, A1.T)</span><br><span class="line">    db2 = <span class="number">1.</span> / m * np.sum(dZ2, axis=<span class="number">1</span>, keepdims=<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line">    dA1 = np.dot(W2.T, dZ2)</span><br><span class="line">    </span><br><span class="line">    dA1 = dA1 * D1          <span class="comment"># 步骤1：使用正向传播期间相同的节点，舍弃那些关闭的节点（因为任何数乘以0或者False都为0或者False）</span></span><br><span class="line">    dA1 = dA1 / keep_prob   <span class="comment"># 步骤2：缩放未舍弃的节点(不为0)的值</span></span><br><span class="line"></span><br><span class="line">    dZ1 = np.multiply(dA1, np.int64(A1 &gt; <span class="number">0</span>))</span><br><span class="line">    dW1 = <span class="number">1.</span> / m * np.dot(dZ1, X.T)</span><br><span class="line">    db1 = <span class="number">1.</span> / m * np.sum(dZ1, axis=<span class="number">1</span>, keepdims=<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line">    gradients = &#123;<span class="string">"dZ3"</span>: dZ3, <span class="string">"dW3"</span>: dW3, <span class="string">"db3"</span>: db3,<span class="string">"dA2"</span>: dA2,</span><br><span class="line">                 <span class="string">"dZ2"</span>: dZ2, <span class="string">"dW2"</span>: dW2, <span class="string">"db2"</span>: db2, <span class="string">"dA1"</span>: dA1, </span><br><span class="line">                 <span class="string">"dZ1"</span>: dZ1, <span class="string">"dW1"</span>: dW1, <span class="string">"db1"</span>: db1&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> gradients</span><br></pre></td></tr></table></figure>
+
+<h4 id="训练模型-5"><a href="#训练模型-5" class="headerlink" title="训练模型"></a>训练模型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">parameters = model(train_X, train_Y, keep_prob=<span class="number">0.86</span>, learning_rate=<span class="number">0.3</span>,is_plot=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"使用随机删除节点，训练集:"</span>)</span><br><span class="line">predictions_train = reg_utils.predict(train_X, train_Y, parameters)</span><br><span class="line">print(<span class="string">"使用随机删除节点，测试集:"</span>)</span><br><span class="line">reg_utils.predictions_test = reg_utils.predict(test_X, test_Y, parameters)</span><br></pre></td></tr></table></figure>
+
+<p>这里使用keep_prob=0.86，表示对于每个神经单元，每次迭代有86%的概率保留，24%的概率消除。</p>
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620225102.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620225102.png" alt="image-20200620225101790"></a></p>
+<p>代价更小，训练集的准确率下降一点，测试集的准确率得到提高。</p>
+<h4 id="绘制决策边界-2"><a href="#绘制决策边界-2" class="headerlink" title="绘制决策边界"></a>绘制决策边界</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.title(<span class="string">"Model with dropout"</span>)</span><br><span class="line">axes = plt.gca()</span><br><span class="line">axes.set_xlim([<span class="number">-0.75</span>, <span class="number">0.40</span>])</span><br><span class="line">axes.set_ylim([<span class="number">-0.75</span>, <span class="number">0.65</span>])</span><br><span class="line">reg_utils.plot_decision_boundary(<span class="keyword">lambda</span> x: reg_utils.predict_dec(parameters, x.T), train_X, np.squeeze(train_Y))</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620225236.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200620225236.png" alt="image-20200620225234004"></a></p>
+<p>相比使用L2正则化，随机失活的决策边界更加平滑。</p>
+<h2 id="梯度校验"><a href="#梯度校验" class="headerlink" title="梯度校验"></a>梯度校验</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200621020141.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200621020141.png" alt="image-20200621020139237"></a></p>
+<h3 id="一维线性"><a href="#一维线性" class="headerlink" title="一维线性"></a>一维线性</h3><h4 id="定义正向传播函数"><a href="#定义正向传播函数" class="headerlink" title="定义正向传播函数"></a>定义正向传播函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward_propagation</span><span class="params">(x,theta)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    实现图中呈现的线性前向传播（计算J）（J（theta）= theta * x）</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">    x  - 一个实值输入</span></span><br><span class="line"><span class="string">    theta  - 参数，也是一个实数</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">    J  - 函数J的值，用公式J（theta）= theta * x计算</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    J = np.dot(theta,x)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> J</span><br></pre></td></tr></table></figure>
+
+<h4 id="定义反向传播函数"><a href="#定义反向传播函数" class="headerlink" title="定义反向传播函数"></a>定义反向传播函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backward_propagation</span><span class="params">(x,theta)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    计算J相对于θ的导数。</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        x  - 一个实值输入</span></span><br><span class="line"><span class="string">        theta  - 参数，也是一个实数</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        dtheta  - 相对于θ的成本梯度</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    dtheta = x</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> dtheta</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="定义校验函数"><a href="#定义校验函数" class="headerlink" title="定义校验函数"></a>定义校验函数</h4><p>梯度检测的过程为：</p>
+<ol>
+<li><p>$θ^+ = θ + ε$</p>
+</li>
+<li><p>$ θ^− = θ − ε $</p>
+</li>
+<li><p>$J^+ = J(θ^+) $</p>
+</li>
+<li><p>$J^- = J(θ^-) $</p>
+</li>
+<li><p>$gradapprox = \frac{J^+ − J^−}{2∗ε}$</p>
+</li>
+</ol>
+<p>然后计算反向传播的值grad，然后计算误差</p>
+<p>$ difference = \frac{||grad−gradapprox||_2}{||grad||_2 + ||gradapprox||_2}$</p>
+<p>若 $ difference &lt; 10^−7 $，则grad是正确的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradient_check</span><span class="params">(x,theta,epsilon=<span class="number">1e-7</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    实现图中的反向传播。</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        x  - 一个实值输入</span></span><br><span class="line"><span class="string">        theta  - 参数，也是一个实数</span></span><br><span class="line"><span class="string">        epsilon  - 使用公式（3）计算输入的微小偏移以计算近似梯度</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        近似梯度和后向传播梯度之间的差异</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#使用公式（3）的左侧计算gradapprox。</span></span><br><span class="line">    thetaplus = theta + epsilon                               <span class="comment"># Step 1</span></span><br><span class="line">    thetaminus = theta - epsilon                              <span class="comment"># Step 2</span></span><br><span class="line">    J_plus = forward_propagation(x, thetaplus)                <span class="comment"># Step 3</span></span><br><span class="line">    J_minus = forward_propagation(x, thetaminus)              <span class="comment"># Step 4</span></span><br><span class="line">    gradapprox = (J_plus - J_minus) / (<span class="number">2</span> * epsilon)           <span class="comment"># Step 5</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">#检查gradapprox是否足够接近backward_propagation（）的输出</span></span><br><span class="line">    grad = backward_propagation(x, theta)</span><br><span class="line">    </span><br><span class="line">    numerator = np.linalg.norm(grad - gradapprox)                      <span class="comment"># Step 1'</span></span><br><span class="line">    denominator = np.linalg.norm(grad) + np.linalg.norm(gradapprox)    <span class="comment"># Step 2'</span></span><br><span class="line">    difference = numerator / denominator                               <span class="comment"># Step 3'</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> difference &lt; <span class="number">1e-7</span>:</span><br><span class="line">        print(<span class="string">"梯度检查：梯度正常!"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"梯度检查：梯度超出阈值!"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> difference</span><br></pre></td></tr></table></figure>
+
+<h4 id="进行测试"><a href="#进行测试" class="headerlink" title="进行测试"></a>进行测试</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#测试gradient_check</span></span><br><span class="line">print(<span class="string">"-----------------测试gradient_check-----------------"</span>)</span><br><span class="line">x, theta = <span class="number">2</span>, <span class="number">4</span></span><br><span class="line">difference = gradient_check(x, theta)</span><br><span class="line">print(<span class="string">"difference = "</span> + str(difference))</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://gitee.com/lluuiq/blog_img/raw/master/img/20200621022048.png" target="_blank" rel="noopener"><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200621022048.png" alt="image-20200621022045374"></a></p>
+<h3 id="高维度梯度校验"><a href="#高维度梯度校验" class="headerlink" title="高维度梯度校验"></a>高维度梯度校验</h3><h4 id="定义正向传播函数-1"><a href="#定义正向传播函数-1" class="headerlink" title="定义正向传播函数"></a>定义正向传播函数</h4><p>高维度梯度校验与一维类似，区别在于不只是校验一个导数，而是对每一层都进行校验。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward_propagation_n</span><span class="params">(X,Y,parameters)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    实现图中的前向传播（并计算成本）。</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        X - 训练集为m个例子</span></span><br><span class="line"><span class="string">        Y -  m个示例的标签</span></span><br><span class="line"><span class="string">        parameters - 包含参数“W1”，“b1”，“W2”，“b2”，“W3”，“b3”的python字典：</span></span><br><span class="line"><span class="string">            W1  - 权重矩阵，维度为（5,4）</span></span><br><span class="line"><span class="string">            b1  - 偏向量，维度为（5,1）</span></span><br><span class="line"><span class="string">            W2  - 权重矩阵，维度为（3,5）</span></span><br><span class="line"><span class="string">            b2  - 偏向量，维度为（3,1）</span></span><br><span class="line"><span class="string">            W3  - 权重矩阵，维度为（1,3）</span></span><br><span class="line"><span class="string">            b3  - 偏向量，维度为（1,1）</span></span><br><span class="line"><span class="string">   </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        cost - 成本函数（logistic）</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    m = X.shape[<span class="number">1</span>]</span><br><span class="line">    W1 = parameters[<span class="string">"W1"</span>]</span><br><span class="line">    b1 = parameters[<span class="string">"b1"</span>]</span><br><span class="line">    W2 = parameters[<span class="string">"W2"</span>]</span><br><span class="line">    b2 = parameters[<span class="string">"b2"</span>]</span><br><span class="line">    W3 = parameters[<span class="string">"W3"</span>]</span><br><span class="line">    b3 = parameters[<span class="string">"b3"</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># LINEAR -&gt; RELU -&gt; LINEAR -&gt; RELU -&gt; LINEAR -&gt; SIGMOID</span></span><br><span class="line">    Z1 = np.dot(W1,X) + b1</span><br><span class="line">    A1 = gc_utils.relu(Z1)</span><br><span class="line">    </span><br><span class="line">    Z2 = np.dot(W2,A1) + b2</span><br><span class="line">    A2 = gc_utils.relu(Z2)</span><br><span class="line">    </span><br><span class="line">    Z3 = np.dot(W3,A2) + b3</span><br><span class="line">    A3 = gc_utils.sigmoid(Z3)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#计算成本</span></span><br><span class="line">    logprobs = np.multiply(-np.log(A3), Y) + np.multiply(-np.log(<span class="number">1</span> - A3), <span class="number">1</span> - Y)</span><br><span class="line">    cost = (<span class="number">1</span> / m) * np.sum(logprobs)</span><br><span class="line">    </span><br><span class="line">    cache = (Z1, A1, W1, b1, Z2, A2, W2, b2, Z3, A3, W3, b3)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> cost, cache</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backward_propagation_n</span><span class="params">(X,Y,cache)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    实现图中所示的反向传播。</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        X - 输入数据点（输入节点数量，1）</span></span><br><span class="line"><span class="string">        Y - 标签</span></span><br><span class="line"><span class="string">        cache - 来自forward_propagation_n（）的cache输出</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        gradients - 一个字典，其中包含与每个参数、激活和激活前变量相关的成本梯度。</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    m = X.shape[<span class="number">1</span>]</span><br><span class="line">    (Z1, A1, W1, b1, Z2, A2, W2, b2, Z3, A3, W3, b3) = cache</span><br><span class="line">    </span><br><span class="line">    dZ3 = A3 - Y</span><br><span class="line">    dW3 = (<span class="number">1.</span> / m) * np.dot(dZ3,A2.T)</span><br><span class="line">    dW3 = <span class="number">1.</span> / m * np.dot(dZ3, A2.T)</span><br><span class="line">    db3 = <span class="number">1.</span> / m * np.sum(dZ3, axis=<span class="number">1</span>, keepdims=<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line">    dA2 = np.dot(W3.T, dZ3)</span><br><span class="line">    dZ2 = np.multiply(dA2, np.int64(A2 &gt; <span class="number">0</span>))</span><br><span class="line">    <span class="comment">#dW2 = 1. / m * np.dot(dZ2, A1.T) * 2  # Should not multiply by 2</span></span><br><span class="line">    dW2 = <span class="number">1.</span> / m * np.dot(dZ2, A1.T)</span><br><span class="line">    db2 = <span class="number">1.</span> / m * np.sum(dZ2, axis=<span class="number">1</span>, keepdims=<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line">    dA1 = np.dot(W2.T, dZ2)</span><br><span class="line">    dZ1 = np.multiply(dA1, np.int64(A1 &gt; <span class="number">0</span>))</span><br><span class="line">    dW1 = <span class="number">1.</span> / m * np.dot(dZ1, X.T)</span><br><span class="line">    <span class="comment">#db1 = 4. / m * np.sum(dZ1, axis=1, keepdims=True) # Should not multiply by 4</span></span><br><span class="line">    db1 = <span class="number">1.</span> / m * np.sum(dZ1, axis=<span class="number">1</span>, keepdims=<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line">    gradients = &#123;<span class="string">"dZ3"</span>: dZ3, <span class="string">"dW3"</span>: dW3, <span class="string">"db3"</span>: db3,</span><br><span class="line">                 <span class="string">"dA2"</span>: dA2, <span class="string">"dZ2"</span>: dZ2, <span class="string">"dW2"</span>: dW2, <span class="string">"db2"</span>: db2,</span><br><span class="line">                 <span class="string">"dA1"</span>: dA1, <span class="string">"dZ1"</span>: dZ1, <span class="string">"dW1"</span>: dW1, <span class="string">"db1"</span>: db1&#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> gradients</span><br></pre></td></tr></table></figure>
+
+<h4 id="定义校验函数-1"><a href="#定义校验函数-1" class="headerlink" title="定义校验函数"></a>定义校验函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradient_check_n</span><span class="params">(parameters,gradients,X,Y,epsilon=<span class="number">1e-7</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    检查backward_propagation_n是否正确计算forward_propagation_n输出的成本梯度</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        parameters - 包含参数“W1”，“b1”，“W2”，“b2”，“W3”，“b3”的python字典：</span></span><br><span class="line"><span class="string">        grad_output_propagation_n的输出包含与参数相关的成本梯度。</span></span><br><span class="line"><span class="string">        x  - 输入数据点，维度为（输入节点数量，1）</span></span><br><span class="line"><span class="string">        y  - 标签</span></span><br><span class="line"><span class="string">        epsilon  - 计算输入的微小偏移以计算近似梯度</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        difference - 近似梯度和后向传播梯度之间的差异</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment">#初始化参数</span></span><br><span class="line">    parameters_values , keys = gc_utils.dictionary_to_vector(parameters) <span class="comment">#keys用不到</span></span><br><span class="line">    grad = gc_utils.gradients_to_vector(gradients)</span><br><span class="line">    num_parameters = parameters_values.shape[<span class="number">0</span>]</span><br><span class="line">    J_plus = np.zeros((num_parameters,<span class="number">1</span>))</span><br><span class="line">    J_minus = np.zeros((num_parameters,<span class="number">1</span>))</span><br><span class="line">    gradapprox = np.zeros((num_parameters,<span class="number">1</span>))</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#计算gradapprox</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(num_parameters):</span><br><span class="line">        <span class="comment">#计算J_plus [i]。输入：“parameters_values，epsilon”。输出=“J_plus [i]”</span></span><br><span class="line">        thetaplus = np.copy(parameters_values)                                                  <span class="comment"># Step 1</span></span><br><span class="line">        thetaplus[i][<span class="number">0</span>] = thetaplus[i][<span class="number">0</span>] + epsilon                                             <span class="comment"># Step 2</span></span><br><span class="line">        J_plus[i], cache = forward_propagation_n(X,Y,gc_utils.vector_to_dictionary(thetaplus))  <span class="comment"># Step 3 ，cache用不到</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">#计算J_minus [i]。输入：“parameters_values，epsilon”。输出=“J_minus [i]”。</span></span><br><span class="line">        thetaminus = np.copy(parameters_values)                                                 <span class="comment"># Step 1</span></span><br><span class="line">        thetaminus[i][<span class="number">0</span>] = thetaminus[i][<span class="number">0</span>] - epsilon                                           <span class="comment"># Step 2        </span></span><br><span class="line">        J_minus[i], cache = forward_propagation_n(X,Y,gc_utils.vector_to_dictionary(thetaminus))<span class="comment"># Step 3 ，cache用不到</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">#计算gradapprox[i]</span></span><br><span class="line">        gradapprox[i] = (J_plus[i] - J_minus[i]) / (<span class="number">2</span> * epsilon)</span><br><span class="line">        </span><br><span class="line">    <span class="comment">#通过计算差异比较gradapprox和后向传播梯度。</span></span><br><span class="line">    numerator = np.linalg.norm(grad - gradapprox)                                     <span class="comment"># Step 1'</span></span><br><span class="line">    denominator = np.linalg.norm(grad) + np.linalg.norm(gradapprox)                   <span class="comment"># Step 2'</span></span><br><span class="line">    difference = numerator / denominator                                              <span class="comment"># Step 3'</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> difference &lt; <span class="number">1e-7</span>:</span><br><span class="line">        print(<span class="string">"梯度检查：梯度正常!"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"梯度检查：梯度超出阈值!"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> difference</span><br></pre></td></tr></table></figure>
+          
+            <br>
+            
+  
+    
+    
+
+<section class="widget copyright shadow desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://lluuiq.com/post/202006202233/>https://lluuiq.com/post/202006202233/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+
+
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-25T06:12:59+08:00">
+  <a class='notlink'>
+    <i class="fas fa-save" aria-hidden="true"></i>
+    <p>更新于：2020年6月25日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="nofollow"><i class="fas fa-tags" aria-hidden="true"></i><p>神经网络</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：6.1k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：27分钟</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/post/202006192233/'>
+                <p class='title'>网易云代理(听灰色歌曲)<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>想听一听网易云的灰色歌曲
+
+
+说明使用的工具地址：UnblockNeteaseMusic
+分为本地代理与服务器代理两种方法：
+
+使用服务器代理较为方便，所有设备的代理地址填服务器的即可。
+本地的...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    processEscapes: true,
+    tags: "ams",
+    macros: {
+      href: "{}"
+    }
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|dno",
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+};
+</script>
+
+
+
+
+  <script>
+    window.subData = {
+      title: '吴恩达深度学习编程作业2-1',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导入相关库"><span class="toc-text">导入相关库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化"><span class="toc-text">初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#读取数据并绘图"><span class="toc-text">读取数据并绘图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说明-1"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看模型"><span class="toc-text">查看模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用0初始化"><span class="toc-text">使用0初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义函数"><span class="toc-text">定义函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看准确率"><span class="toc-text">查看准确率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看细节"><span class="toc-text">查看细节</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#随机初始化"><span class="toc-text">随机初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义函数-1"><span class="toc-text">定义函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型-1"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看准确率-1"><span class="toc-text">查看准确率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看细节-1"><span class="toc-text">查看细节</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抑梯度异常初始化"><span class="toc-text">抑梯度异常初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义函数-2"><span class="toc-text">定义函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型-2"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看准确率-2"><span class="toc-text">查看准确率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看细节-2"><span class="toc-text">查看细节</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正则化"><span class="toc-text">正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题描述"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取数据并绘图-1"><span class="toc-text">读取数据并绘图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看模型-1"><span class="toc-text">查看模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不使用正则化"><span class="toc-text">不使用正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型-3"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#绘制决策边界"><span class="toc-text">绘制决策边界</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用L2正则化"><span class="toc-text">使用L2正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义L2函数"><span class="toc-text">定义L2函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型-4"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#绘制决策边界-1"><span class="toc-text">绘制决策边界</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用随机失活"><span class="toc-text">使用随机失活</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义dropout正向传播函数"><span class="toc-text">定义dropout正向传播函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义dropout反向传播函数"><span class="toc-text">定义dropout反向传播函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#训练模型-5"><span class="toc-text">训练模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#绘制决策边界-2"><span class="toc-text">绘制决策边界</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#梯度校验"><span class="toc-text">梯度校验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题描述-1"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一维线性"><span class="toc-text">一维线性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义正向传播函数"><span class="toc-text">定义正向传播函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义反向传播函数"><span class="toc-text">定义反向传播函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义校验函数"><span class="toc-text">定义校验函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进行测试"><span class="toc-text">进行测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高维度梯度校验"><span class="toc-text">高维度梯度校验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义正向传播函数-1"><span class="toc-text">定义正向传播函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定义校验函数-1"><span class="toc-text">定义校验函数</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.3'
+      loop='all'
+      order='random'
+      fixed='true'
+      list-max-height='500px'
+      server='netease'
+      type='playlist'
+      id='4945153572'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://lluuiq.com">Copyright © lluuiq</a></p>
+
+        </div>
+      
+    
+      
+        
+          <div><p><a href="http://beian.miit.gov.cn" target="_blank" rel="noopener">豫ICP备19027219号</a><br>京公网备案 41140302000094号</p>
+</div>
+        
+      
+    
+    <!--网站运行时间统计-->
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+        var now = new Date(); 
+        function createtime() { 
+            var grt= new Date("07/30/2019 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+            now.setTime(now.getTime()+250); 
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+            document.getElementById("timeDate").innerHTML = "本站已苟活 "+dnum+" 天 "; 
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+        } 
+    setInterval("createtime()",250);
+    </script>
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+
+  <!-- 彩带点击 -->
+  <!-- <script type="text/javascript" src="\js\ribbon.min.js"></script> -->
+  <!-- 雪花特效 -->
+  <!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+
+
+  <!-- 线条特效 -->
+  <!-- <script type="text/javascript"
+  color="0,0,0" opacity='1' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script> -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<!-- <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> -->
+<!-- <script src="/js/jquery.pjax.min.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js" data-pjax></script>
+  <script>
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+  </script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/background.png"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+<!-- theme.plugins.aplayer.js -->
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" async></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js" async></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js"></script>
+
+  
+
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+    appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+    placeholder: "有什么想说的吗？",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    visitor: 'false',
+    highlight:'true'
+  })
+  </script>
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.1/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copyed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-clipboard-check');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制成功';
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-exclamation-triangle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制失败';
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+
+
+
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?23032f56a100d5a5e26ed5b9d94163c7";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
+
+  <script>setLoadingBarProgress(100);</script>
+
+  <script>
+    // 窗口监听load(加载、刷新)事件，执行LoadFancybox()函数
+    $(function(){
+      LoadFancybox();
+    });
+
+    var pjax = new Pjax({
+      elements: "a",
+      selectors: [
+        "title", //pjax加载标题
+        ".l_main", //pjax加载主内容
+        ".l_side", //pjax加载侧边栏
+        ".switcher .h-list", // 使手机端的搜索框与菜单栏生效
+      ]
+    })
+
+    //加载fancybox
+    function LoadFancybox(){
+      $(".article-entry").find("img").each(function () {
+        //渲染fancy box
+        var t = document.createElement("a");
+        $(t).attr("data-fancybox", ""),
+        $(t).attr("href", $(this).attr("src")),
+        $(t).attr("margin","0 auto"),
+        $(this).wrap(t)
+      });
+    }
+
+    function LoadValine(){
+      $.getScript("https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js", function() {
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        var notify = 'true' == true;
+        var verify = 'true' == true;
+        var valine = new Valine();
+        valine.init({
+          el: '#valine_container',
+          notify: notify,
+          verify: verify,
+          guest_info: guest_info,
+          
+          appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+          appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+          placeholder: "有什么想说的吗？",
+          pageSize:'10',
+          avatar:'mp',
+          lang:'zh-cn',
+          visitor: 'false',
+          highlight:'true'
+        })
+      });
+    }
+  
+    // 加载pjax后执行的函数
+    document.addEventListener('pjax:complete', function (){
+      LoadFancybox();
+      LoadValine();
+      // LoadBaidu();
+    });
+
+  </script>
+</body>
+</html>
