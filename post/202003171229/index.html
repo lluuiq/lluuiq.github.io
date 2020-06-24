@@ -972,6 +972,9 @@
 <ul>
 <li>放大图片再关闭后，页面位置与放大前不对应，会返回到放大前一张图片时的位置 。</li>
 </ul>
+<p><strong>更新：</strong></p>
+<p>将原来代码中的<code>$(t).attr(&quot;data-fancybox&quot;,&quot;gallery&quot;),</code>中的<code>&quot;gallery&quot;</code>改为<code>&quot;&quot;</code></p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200625071949974.png" alt="image-20200625071949974"></p>
 <hr>
 <p>实现pjax后发现导航栏在点击不同部分时，主题的下划线不会改变，进行修改没有修改成，故直接将CSS代码注释</p>
 <p>打开source/css/_layout/navbar.styl 搜索<code>&amp;:active,&amp;.active</code> 将该部分代码注释</p>
@@ -1043,7 +1046,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-25T04:33:37+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-25T07:30:47+08:00">
   <a class='notlink'>
     <i class="fas fa-save" aria-hidden="true"></i>
     <p>更新于：2020年6月25日</p>

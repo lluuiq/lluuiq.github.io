@@ -778,7 +778,7 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard" aria-hidden="true"></i>
-      <p>字数：452字</p>
+      <p>字数：460字</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
@@ -806,54 +806,14 @@
 
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
-      <a id="more"></a>
-
-<h2 id="安装MinGW"><a href="#安装MinGW" class="headerlink" title="安装MinGW"></a>安装MinGW</h2><p>MinGW下载地址：<a href="https://osdn.net/projects/MinGW/releases/" target="_blank" rel="noopener">MinGW</a></p>
-<p>在中间点击图标下载windows版</p>
-<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200406015858.png" alt="image-20200406015857057"></p>
-<p>下载后打开安装，一直下一步最后安装完成后点击Continue。</p>
-<p>在打开的界面中，<code>Basic Setup</code>中勾选<code>MinGW32-gcc-g++-bin</code>。</p>
-<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200406225159.png" alt="image-20200406224030801"></p>
-<p>然后进入<code>All Packages</code>，找到<code>mingw32-make-bin</code>勾选。</p>
-<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200406225203.png" alt="image-20200406224255010"></p>
-<p>然后点击菜单栏的<code>Installation -&gt;  Apply Changes</code>安装勾选的包</p>
-<p>安装完成后点击Close关闭即可。</p>
-<p>若不小心安装后关掉了或者没有自动打开MinGW，可以在MinGW的安装目录中打开bin文件夹下的</p>
-<p><code>MinGW-get.exe</code></p>
-<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200406225207.png" alt="image-20200406020903397"></p>
-<h2 id="报错问题"><a href="#报错问题" class="headerlink" title="报错问题"></a>报错问题</h2><p>若在安装时出现<code>输入错误: 没有文件扩展“.js”的脚本引擎</code>的报错，则打开运行，输入<code>regedit</code></p>
-<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200406020052.png" alt="image-20200406020051445"></p>
-<p>在路径<code>HKEY_CLASSES_ROOT\.js</code>下，更改默认值为<code>JSFile</code></p>
-<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200406020304.png" alt="image-20200406020303194"></p>
-<h2 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h2><p>右键我的电脑，点击属性，然后进入高级系统设置</p>
-<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200406021233.png" alt="image-20200406021230911"></p>
-<p>点击环境变量</p>
-<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200406225211.png" alt="image-20200406021307818"></p>
-<p>找到系统变量的Path，双击进入编辑</p>
-<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200406021431.png" alt="image-20200406021429668"></p>
-<p>点击新建，添加路径：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\MinGW\bin</span><br></pre></td></tr></table></figure>
-
-<p>其中<code>C:\MinGW</code>为安装MinGW时的默认路径，若有修改则换为对应路径</p>
-<p>然后打开CMD，输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -v</span><br></pre></td></tr></table></figure>
-
-<p>查看是否配置成功</p>
-<h2 id="CLion配置"><a href="#CLion配置" class="headerlink" title="CLion配置"></a>CLion配置</h2><p>安装CLion后，并进行基础配置后，会提示配置C/C++环境，确保Environment为MinGW的安装目录即可。</p>
-<p>Make、C语言编译器、C++编译器会自动搜索bin目录下上文中安装好的包（若提示没找到则自行选取路径，若在目录中没找到说明没有安装成功）</p>
-<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200406225216.png" alt="image-20200406224427755"></p>
-<p>其他无需更改，点击OK即可。</p>
-<p>然后就可以新建一个C语言项目</p>
-<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200406225218.png" alt="image-20200406225107766"></p>
-<p>创建完成后会默认生成初始化代码块</p>
-<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200406225316.png" alt="image-20200406225309144"></p>
-<p>然后在菜单栏的Run中点击Run…</p>
-<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200406225344.png" alt="image-20200406225337183"></p>
-<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200406225357.png" alt="image-20200406225355896"></p>
-<p>初次运行会进行编译，等待编译完成后便会输出结果</p>
-<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200406225427.png" alt="image-20200406225425856"></p>
-
+      <p>记录配置CLion的过程</p>
       
+        
+          <div class="button readmore">
+            <a href="/post/202004062233/">
+              Read More <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
         
       
     </div>
