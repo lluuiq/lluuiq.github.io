@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>吴恩达深度学习编程作业2-2 - lluuiq&#39;s blog</title>
+  
+    <meta name="keywords" content="神经网络">
+  
+  
+    <meta name="description" content="吴恩达深度学习课程《改善深层神经网络：超参数调试、正则化以及优化》第二周（优化算法）的编程作业。">
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="lluuiq's blog">
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css">
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/global-hot-data.js" ></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script> -->
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script> -->
+
+
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script>
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+
+  <div class='wrapper'>
+    <div class='nav-sub container--flex'>
+      <a class="logo flat-box"></a>
+      <ul class='switcher h-list'>
+        <li><a class="s-comment flat-btn fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc flat-btn fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main container container--flex">
+      
+        
+        <a class="logo flat-box" target="_self" href='/'>
+          
+          
+          
+            lluuiq
+          
+          
+        </a>
+      
+      <!-- PC端菜单栏 -->
+			<div class='menu navigation'>
+				<ul class='h-list'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  
+                    <i class='fas fa-home fa-fw'></i>
+                  
+                  首页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  
+                    <i class='fas fa-tags fa-fw'></i>
+                  
+                  标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  
+                    <i class='fas fa-archive fa-fw'></i>
+                  
+                  归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  
+                    <i class='fas fa-link fa-fw'></i>
+                  
+                  友人帐
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  
+                    <i class='fas fa-info-circle fa-fw'></i>
+                  
+                  关于我
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+      <!-- PC端搜索框 -->
+      
+        <div class="m_search">
+          <form name="searchform" class="form u-search-form">
+            <i class="icon fas fa-search fa-fw"></i>
+            <input type="text" class="input u-search-input" placeholder="想找些什么？" />
+          </form>
+        </div>
+      
+
+      <!-- 手机端的搜索按钮与菜单栏按钮 -->
+			<ul class='switcher h-list'>
+				
+					<li><a class="s-search flat-btn fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li><a class="s-menu flat-btn fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+
+<!-- 手机端导航栏菜单 -->
+<ul class="menu-phone navigation white-box">
+  
+  
+    <li>
+      <a class="flat-box" href=/
+        
+        
+        
+          id="home"
+        >
+        
+          <i class='fas fa-home fa-fw'></i>
+        
+        首页
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/categories/
+        
+        
+        
+          id="categories"
+        >
+        
+          <i class='fas fa-folder-open fa-fw'></i>
+        
+        分类
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/tags/
+        
+        
+        
+          id="tags"
+        >
+        
+          <i class='fas fa-tags fa-fw'></i>
+        
+        标签
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/archives/
+        
+        
+        
+          id="archives"
+        >
+        
+          <i class='fas fa-archive fa-fw'></i>
+        
+        归档
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/friends/
+        
+        
+        
+          id="friends"
+        >
+        
+          <i class='fas fa-link fa-fw'></i>
+        
+        友人帐
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/about/
+        
+        
+        
+          id="about"
+        >
+        
+          <i class='fas fa-info-circle fa-fw'></i>
+        
+        关于我
+      </a>
+    </li>
+  
+</ul>
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%88%B6%E7%B1%BB/" href="/categories/%E7%88%B6%E7%B1%BB/"
+            id="categoriesE788B6E7B1BB"
+            ><div class='name'>父类</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%88%B6%E7%B1%BB/%E5%AD%90%E7%B1%BB/" href="/categories/%E7%88%B6%E7%B1%BB/%E5%AD%90%E7%B1%BB/"
+            id="categoriesE788B6E7B1BBE5AD90E7B1BB"
+            ><div class='name'>子类</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E6%A0%87%E7%AD%BE1/" style="font-size: 14px; color: #999">标签1</a> <a href="/tags/%E6%A0%87%E7%AD%BE2/" style="font-size: 14px; color: #999">标签2</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导入库函数"><span class="toc-text">导入库函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#未优化的梯度下降函数"><span class="toc-text">未优化的梯度下降函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mini-batch梯度下降函数"><span class="toc-text">mini-batch梯度下降函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明-1"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打乱训练集"><span class="toc-text">打乱训练集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分割样本"><span class="toc-text">分割样本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理剩余样本"><span class="toc-text">处理剩余样本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#完整函数代码"><span class="toc-text">完整函数代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动量梯度下降函数"><span class="toc-text">动量梯度下降函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化Vdw与Vdb"><span class="toc-text">初始化Vdw与Vdb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新参数函数"><span class="toc-text">更新参数函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Adam梯度下降函数"><span class="toc-text">Adam梯度下降函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明-2"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化Vdw、Vdb、Sdw、Sdb"><span class="toc-text">初始化Vdw、Vdb、Sdw、Sdb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新参数函数-1"><span class="toc-text">更新参数函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加载数据集"><span class="toc-text">加载数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定义模型"><span class="toc-text">定义模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进行测试"><span class="toc-text">进行测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#未优化的梯度下降"><span class="toc-text">未优化的梯度下降</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动量梯度下降"><span class="toc-text">动量梯度下降</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Adam算法"><span class="toc-text">Adam算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+    <div class='body-wrapper'>
+      
+
+<aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%88%B6%E7%B1%BB/" href="/categories/%E7%88%B6%E7%B1%BB/"
+            id="categoriesE788B6E7B1BB"
+            ><div class='name'>父类</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%88%B6%E7%B1%BB/%E5%AD%90%E7%B1%BB/" href="/categories/%E7%88%B6%E7%B1%BB/%E5%AD%90%E7%B1%BB/"
+            id="categoriesE788B6E7B1BBE5AD90E7B1BB"
+            ><div class='name'>子类</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E6%A0%87%E7%AD%BE1/" style="font-size: 14px; color: #999">标签1</a> <a href="/tags/%E6%A0%87%E7%AD%BE2/" style="font-size: 14px; color: #999">标签2</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导入库函数"><span class="toc-text">导入库函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#未优化的梯度下降函数"><span class="toc-text">未优化的梯度下降函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mini-batch梯度下降函数"><span class="toc-text">mini-batch梯度下降函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明-1"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打乱训练集"><span class="toc-text">打乱训练集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分割样本"><span class="toc-text">分割样本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理剩余样本"><span class="toc-text">处理剩余样本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#完整函数代码"><span class="toc-text">完整函数代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动量梯度下降函数"><span class="toc-text">动量梯度下降函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化Vdw与Vdb"><span class="toc-text">初始化Vdw与Vdb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新参数函数"><span class="toc-text">更新参数函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Adam梯度下降函数"><span class="toc-text">Adam梯度下降函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明-2"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化Vdw、Vdb、Sdw、Sdb"><span class="toc-text">初始化Vdw、Vdb、Sdw、Sdb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新参数函数-1"><span class="toc-text">更新参数函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加载数据集"><span class="toc-text">加载数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定义模型"><span class="toc-text">定义模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进行测试"><span class="toc-text">进行测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#未优化的梯度下降"><span class="toc-text">未优化的梯度下降</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动量梯度下降"><span class="toc-text">动量梯度下降</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Adam算法"><span class="toc-text">Adam算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/post/202006252316/">
+        吴恩达深度学习编程作业2-2
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+<div class='new-meta-item author'>
+  <a href="https://lluuiq.com" rel="nofollow">
+    <img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png">
+    <p>lluuiq</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>神经网络&nbsp;/&nbsp;学习笔记</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-edit" aria-hidden="true"></i>
+    <p>发布于：2020年6月25日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：3.7k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：16分钟</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>吴恩达深度学习课程《改善深层神经网络：超参数调试、正则化以及优化》第二周（优化算法）的编程作业。</p>
+<a id="more"></a>
+
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>题目与参考作业的地址：<a href="https://blog.csdn.net/u013733326/article/details/79847918" target="_blank" rel="noopener">【中文】【吴恩达课后编程作业】Course 2 - 改善深层神经网络 - 第一周作业(1&amp;2&amp;3)</a></p>
+<p>相关数据集与前提代码在该博文中下载。</p>
+<p>本次作业的目的是测试在mini-batch梯度下降中：动量梯度下降、Adam梯度下降，与未优化的梯度下降进行对比 。</p>
+<h2 id="导入库函数"><a href="#导入库函数" class="headerlink" title="导入库函数"></a>导入库函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">%matplotlib inline</span><br><span class="line">plt.rcParams[<span class="string">'figure.figsize'</span>] = (<span class="number">7.0</span>, <span class="number">4.0</span>) <span class="comment"># set default size of plots</span></span><br><span class="line">plt.rcParams[<span class="string">'image.interpolation'</span>] = <span class="string">'nearest'</span></span><br><span class="line">plt.rcParams[<span class="string">'image.cmap'</span>] = <span class="string">'gray'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> scipy.io</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> sklearn</span><br><span class="line"><span class="keyword">import</span> sklearn.datasets</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> opt_utils <span class="comment"># 存储常用函数的库</span></span><br><span class="line"><span class="keyword">import</span> testCase  <span class="comment"># 测试用库</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="未优化的梯度下降函数"><a href="#未优化的梯度下降函数" class="headerlink" title="未优化的梯度下降函数"></a>未优化的梯度下降函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_parameters_with_gd</span><span class="params">(parameters,grads,learning_rate)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    使用梯度下降更新参数</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        parameters - 字典，包含了要更新的参数：</span></span><br><span class="line"><span class="string">            parameters['W' + str(l)] = Wl</span></span><br><span class="line"><span class="string">            parameters['b' + str(l)] = bl</span></span><br><span class="line"><span class="string">        grads - 字典，包含了每一个梯度值用以更新参数</span></span><br><span class="line"><span class="string">            grads['dW' + str(l)] = dWl</span></span><br><span class="line"><span class="string">            grads['db' + str(l)] = dbl</span></span><br><span class="line"><span class="string">        learning_rate - 学习率</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">    返回值：</span></span><br><span class="line"><span class="string">        parameters - 字典，包含了更新后的参数</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    L = len(parameters) // <span class="number">2</span> <span class="comment">#神经网络的层数</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#更新每个参数</span></span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> range(L):</span><br><span class="line">        parameters[<span class="string">"W"</span> + str(l +<span class="number">1</span>)] = parameters[<span class="string">"W"</span> + str(l + <span class="number">1</span>)] - learning_rate * grads[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)]</span><br><span class="line">        parameters[<span class="string">"b"</span> + str(l +<span class="number">1</span>)] = parameters[<span class="string">"b"</span> + str(l + <span class="number">1</span>)] - learning_rate * grads[<span class="string">"db"</span> + str(l + <span class="number">1</span>)]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+
+</br>
+
+<p>之前学习的梯度下降算法，即 $w = w - α*dW$ 。</p>
+<h2 id="mini-batch梯度下降函数"><a href="#mini-batch梯度下降函数" class="headerlink" title="mini-batch梯度下降函数"></a>mini-batch梯度下降函数</h2><h3 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h3><p>mini-batch梯度下降是先将所有样本 根据指定的size来划分为若干样本子集。然后对样本子集进行梯度下降。</p>
+<p>步骤为：</p>
+<ol>
+<li>打乱训练集</li>
+<li>分割样本</li>
+<li>处理剩余样本</li>
+</ol>
+<h3 id="打乱训练集"><a href="#打乱训练集" class="headerlink" title="打乱训练集"></a>打乱训练集</h3><p>首先将训练集打乱 ，即采取随机划分。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">permutation = list(np.random.permutation(m)) <span class="comment"># 返回一个长度为m的 元素不重复的 随机排序的数组，且里面的数是0到m-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过切片操作按列排序</span></span><br><span class="line">shuffled_X = X[:,permutation]</span><br><span class="line">shuffled_Y = Y[:,permutation].reshape((<span class="number">1</span>,m))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>假设X为(2,3)的矩阵，Y为(1,3)的矩阵，则m=3，permutation为维度(1,3)的不重复随机数组，可能是<code>1,0,2</code>，可能是<code>2,0,1</code>等等。</p>
+<p>然后<code>X[:,permutation]</code> 会根据permutation对X的列进行重新排序，新的列索引等于permutation对应的元素。</p>
+</br>
+
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200626003316574.png" alt="image-20200626003316574"></p>
+<h3 id="分割样本"><a href="#分割样本" class="headerlink" title="分割样本"></a>分割样本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用于存储分割后的样本子集</span></span><br><span class="line">mini_batches = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据划分尺寸mini_batch_size来确定有多少个样本子集</span></span><br><span class="line">num_complete_minibatches = math.floor(m / mini_batch_size) </span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历样本子集</span></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">0</span>,num_complete_minibatches):</span><br><span class="line">    <span class="comment"># 根据mini_batch_size来分割数据集</span></span><br><span class="line">    mini_batch_X = shuffled_X[:,k * mini_batch_size:(k+<span class="number">1</span>)*mini_batch_size]</span><br><span class="line">    mini_batch_Y = shuffled_Y[:,k * mini_batch_size:(k+<span class="number">1</span>)*mini_batch_size]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># mini_batch 存储分割后的数据集</span></span><br><span class="line">    mini_batch = (mini_batch_X,mini_batch_Y)</span><br><span class="line">    <span class="comment"># 加到mini_batches列表中</span></span><br><span class="line">    mini_batches.append(mini_batch)</span><br></pre></td></tr></table></figure>
+
+<p>使用math.floor函数来对数据进行向下取整，所以 可能会有部分剩余的样本。</p>
+</br>
+
+<p>在循环中 shuffled_X是随机打乱后的样本，<code>shuffled_X[:,k * mini_batch_size:(k+1)*mini_batch_size]</code> 进行分割。</p>
+<p>假如一共有3个子集，即k=0，1，2。 然后设置mini_batch_size为64。</p>
+<p>当k=0时， <code>mini_batch_X = shuffled_X[:,0*64:1*64]  =  shuffled_X[:,0:64]</code> </p>
+<p>当k=1时， <code>mini_batch_X = shuffled_X[:,1*64:2*64]  =  shuffled_X[:,64:128]</code> </p>
+<p>当k=2时， <code>mini_batch_X = shuffled_X[:,2*64:3*64]  =  shuffled_X[:,128:192]</code></p>
+<p>根据python列表的切片操作来进行分割。 标签Y也同理进行操作。</p>
+<h3 id="处理剩余样本"><a href="#处理剩余样本" class="headerlink" title="处理剩余样本"></a>处理剩余样本</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 若样本划分后 有剩余样本</span></span><br><span class="line"><span class="keyword">if</span> m % mini_batch_size != <span class="number">0</span>:</span><br><span class="line">    <span class="comment"># 获取最后剩余的部分</span></span><br><span class="line">    mini_batch_X = shuffled_X[:,mini_batch_size * num_complete_minibatches:]</span><br><span class="line">    mini_batch_Y = shuffled_Y[:,mini_batch_size * num_complete_minibatches:]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 存储最后剩余的部分</span></span><br><span class="line">    mini_batch = (mini_batch_X,mini_batch_Y)</span><br><span class="line">    mini_batches.append(mini_batch)</span><br></pre></td></tr></table></figure>
+
+<p>m%mini_batch_size若不等于0，若明有剩余的样本，则对剩余的样本进行处理。</p>
+<p>根据之前的切片操作，可知<code>num_complete_minibatches * mini_batch_size</code>可以获得剩余部分的第一个位置。</p>
+<br>
+
+<p>假设有240个样本，即m=240。mini_batch_size = 64，则一共有 floor(240/64) = 3， 所以num_complete_minibatches=3 。</p>
+<p>如图下图一样，进行分割后，可以通过 <code>mini_batch_size * num_complete_minibatches</code>  即 <code>64 * 3 =  192</code> 来获得剩余样本的第一个数据的位置。</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200626005623871.png" alt="image-20200626005623871"></p>
+<h3 id="完整函数代码"><a href="#完整函数代码" class="headerlink" title="完整函数代码"></a>完整函数代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">random_mini_batches</span><span class="params">(X,Y,mini_batch_size=<span class="number">64</span>,seed=<span class="number">0</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    从（X，Y）中创建一个随机的mini-batch列表</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        X - 输入数据，维度为(输入节点数量，样本的数量)</span></span><br><span class="line"><span class="string">        Y - 对应的是X的标签，【1 | 0】（蓝|红），维度为(1,样本的数量)</span></span><br><span class="line"><span class="string">        mini_batch_size - 每个mini-batch的样本数量</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        mini-bacthes - 一个同步列表，维度为（mini_batch_X,mini_batch_Y）</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    np.random.seed(seed) <span class="comment">#指定随机种子</span></span><br><span class="line">    m = X.shape[<span class="number">1</span>] <span class="comment"># 获取样本数</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># ===== 打乱训练集 ===== #</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 返回一个长度为m的 元素不重复的 随机排序的数组，且里面的数是0到m-1</span></span><br><span class="line">    permutation = list(np.random.permutation(m)) </span><br><span class="line">    <span class="comment"># 通过切片操作按列排序</span></span><br><span class="line">    shuffled_X = X[:,permutation]</span><br><span class="line">    shuffled_Y = Y[:,permutation].reshape((<span class="number">1</span>,m))</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># ===== 分割样本 ====== #</span></span><br><span class="line">   </span><br><span class="line">    mini_batches = []  <span class="comment"># 用于存储分割后的样本子集</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 根据划分尺寸mini_batch_size来确定有多少个样本子集</span></span><br><span class="line">    num_complete_minibatches = math.floor(m / mini_batch_size)  </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 遍历样本子集</span></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">0</span>,num_complete_minibatches):</span><br><span class="line">        <span class="comment"># 根据mini_batch_size来分割数据集</span></span><br><span class="line">        mini_batch_X = shuffled_X[:,k * mini_batch_size:(k+<span class="number">1</span>)*mini_batch_size]</span><br><span class="line">        mini_batch_Y = shuffled_Y[:,k * mini_batch_size:(k+<span class="number">1</span>)*mini_batch_size]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># mini_batch 存储分割后的数据集</span></span><br><span class="line">        mini_batch = (mini_batch_X,mini_batch_Y)</span><br><span class="line">        <span class="comment"># 加到mini_batches列表中</span></span><br><span class="line">        mini_batches.append(mini_batch)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">	<span class="comment"># ===== 处理剩余样本 ===== #</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 若样本划分后 有剩余样本</span></span><br><span class="line">    <span class="keyword">if</span> m % mini_batch_size != <span class="number">0</span>:</span><br><span class="line">        <span class="comment"># 获取最后剩余的部分</span></span><br><span class="line">        mini_batch_X = shuffled_X[:,mini_batch_size * num_complete_minibatches:]</span><br><span class="line">        mini_batch_Y = shuffled_Y[:,mini_batch_size * num_complete_minibatches:]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 存储最后剩余的部分</span></span><br><span class="line">        mini_batch = (mini_batch_X,mini_batch_Y)</span><br><span class="line">        mini_batches.append(mini_batch)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> mini_batches</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="动量梯度下降函数"><a href="#动量梯度下降函数" class="headerlink" title="动量梯度下降函数"></a>动量梯度下降函数</h2><h3 id="初始化Vdw与Vdb"><a href="#初始化Vdw与Vdb" class="headerlink" title="初始化Vdw与Vdb"></a>初始化Vdw与Vdb</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_velocity</span><span class="params">(parameters)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    初始化速度，v是一个字典：</span></span><br><span class="line"><span class="string">        - keys: "dW1", "db1", ..., "dWL", "dbL" </span></span><br><span class="line"><span class="string">        - values:与相应的梯度/参数维度相同的值为零的矩阵。</span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        parameters - 一个字典，包含了以下参数：</span></span><br><span class="line"><span class="string">            parameters["W" + str(l)] = Wl</span></span><br><span class="line"><span class="string">            parameters["b" + str(l)] = bl</span></span><br><span class="line"><span class="string">    返回:</span></span><br><span class="line"><span class="string">        v - 一个字典变量，包含了以下参数：</span></span><br><span class="line"><span class="string">            v["dW" + str(l)] = dWl的速度</span></span><br><span class="line"><span class="string">            v["db" + str(l)] = dbl的速度</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    L = len(parameters) // <span class="number">2</span> <span class="comment">#神经网络的层数</span></span><br><span class="line">    v = &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> range(L):</span><br><span class="line">        v[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)] = np.zeros_like(parameters[<span class="string">"W"</span> + str(l + <span class="number">1</span>)])</span><br><span class="line">        v[<span class="string">"db"</span> + str(l + <span class="number">1</span>)] = np.zeros_like(parameters[<span class="string">"b"</span> + str(l + <span class="number">1</span>)])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> v</span><br></pre></td></tr></table></figure>
+
+<p>这里使用np.zeros_like来生成与 传入参数相同shape的 元素均为0的 ndarray。</p>
+<p>因为$V_{dW}$与dW的维度相同，而dW的维度又与W相同，故直接使得与W同维度即可。</p>
+<h3 id="更新参数函数"><a href="#更新参数函数" class="headerlink" title="更新参数函数"></a>更新参数函数</h3><p>动量梯度下降更新参数的公式：</p>
+<p>$ V_{dW} = β * V_{dW} + ( 1 - β) * dW $</p>
+<p>$ V_{db} = β * V_{db} + ( 1 - β) * db $</p>
+<p>$W =  W - α*V_{dW}$</p>
+<p>$b = b - α*V_{db}$</p>
+<p>要做的就是遍历每一层，对每一层都执行该操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_parameters_with_momentun</span><span class="params">(parameters,grads,v,beta,learning_rate)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    使用动量更新参数</span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        parameters - 一个字典类型的变量，包含了以下字段：</span></span><br><span class="line"><span class="string">            parameters["W" + str(l)] = Wl</span></span><br><span class="line"><span class="string">            parameters["b" + str(l)] = bl</span></span><br><span class="line"><span class="string">        grads - 一个包含梯度值的字典变量，具有以下字段：</span></span><br><span class="line"><span class="string">            grads["dW" + str(l)] = dWl</span></span><br><span class="line"><span class="string">            grads["db" + str(l)] = dbl</span></span><br><span class="line"><span class="string">        v - 包含当前速度的字典变量，具有以下字段：</span></span><br><span class="line"><span class="string">            v["dW" + str(l)] = ...</span></span><br><span class="line"><span class="string">            v["db" + str(l)] = ...</span></span><br><span class="line"><span class="string">        beta - 超参数，动量，实数</span></span><br><span class="line"><span class="string">        learning_rate - 学习率，实数</span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        parameters - 更新后的参数字典</span></span><br><span class="line"><span class="string">        v - 包含了更新后的速度变量</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 获取层数</span></span><br><span class="line">    L = len(parameters) // <span class="number">2</span> </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> range(L):</span><br><span class="line">        <span class="comment">#计算速度</span></span><br><span class="line">        v[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)] = beta * v[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)] + (<span class="number">1</span> - beta) * grads[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)]</span><br><span class="line">        v[<span class="string">"db"</span> + str(l + <span class="number">1</span>)] = beta * v[<span class="string">"db"</span> + str(l + <span class="number">1</span>)] + (<span class="number">1</span> - beta) * grads[<span class="string">"db"</span> + str(l + <span class="number">1</span>)]</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#更新参数</span></span><br><span class="line">        parameters[<span class="string">"W"</span> + str(l + <span class="number">1</span>)] = parameters[<span class="string">"W"</span> + str(l + <span class="number">1</span>)] - learning_rate * v[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)]</span><br><span class="line">        parameters[<span class="string">"b"</span> + str(l + <span class="number">1</span>)] = parameters[<span class="string">"b"</span> + str(l + <span class="number">1</span>)] - learning_rate * v[<span class="string">"db"</span> + str(l + <span class="number">1</span>)]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> parameters,v</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Adam梯度下降函数"><a href="#Adam梯度下降函数" class="headerlink" title="Adam梯度下降函数"></a>Adam梯度下降函数</h2><h3 id="说明-2"><a href="#说明-2" class="headerlink" title="说明"></a>说明</h3><p>Adam是动量梯度下降与RMSprop算法的结合。公式为：</p>
+<br>
+
+<ol>
+<li><p>初始化：</p>
+<p>​    $V_{dW}、V_{db}、S_{dW}、S_{db} = 0$</p>
+</li>
+<li><p>动量：</p>
+<p>​    $ V_{dW} = β<em>1 * V</em>{dW} + ( 1 - β_1) * dW $</p>
+<p>​    $ V_{db} = β<em>1 * V</em>{db} + ( 1 - β_1) * db $</p>
+</li>
+<li><p>RMSprop：</p>
+<p>​    $ S_{dW} = β<em>2 * S</em>{dW} + ( 1 - β_2) * (dW)^2 $</p>
+<p>​    $ S_{db} = β<em>2 * S</em>{db} + ( 1 - β_2) * (db)^2 $</p>
+</li>
+<li><p>计算偏差修正：</p>
+<p>​    $V^{corrected}<em>{dW} =  \frac{V</em>{dW}}{1 - β_1^t}$</p>
+<p>​    $V^{corrected}<em>{db} =  \frac{V</em>{db}}{1 - β_1^t}$</p>
+<p>​    $S^{corrected}<em>{dW} =  \frac{S</em>{dW}}{1 - β_2^t}$</p>
+<p>​    $S^{corrected}<em>{db} =  \frac{S</em>{db}}{1 - β_2^t}$</p>
+</li>
+<li><p>更新参数：</p>
+<p>​    $W =  W - α * \frac{V^{corrected}<em>{dW}}{ \sqrt{S^{corrected}</em>{dW} + ε}} $</p>
+<p>​    $b =  b - α * \frac{V^{corrected}<em>{db}}{ \sqrt{S^{corrected}</em>{db} + ε}} $</p>
+</li>
+</ol>
+<h3 id="初始化Vdw、Vdb、Sdw、Sdb"><a href="#初始化Vdw、Vdb、Sdw、Sdb" class="headerlink" title="初始化Vdw、Vdb、Sdw、Sdb"></a>初始化Vdw、Vdb、Sdw、Sdb</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_adam</span><span class="params">(parameters)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    初始化v和s，它们都是字典类型的变量，都包含了以下字段：</span></span><br><span class="line"><span class="string">        - keys: "dW1", "db1", ..., "dWL", "dbL" </span></span><br><span class="line"><span class="string">        - values：与对应的梯度/参数相同维度的值为零的numpy矩阵</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        parameters - 包含了以下参数的字典变量：</span></span><br><span class="line"><span class="string">            parameters["W" + str(l)] = Wl</span></span><br><span class="line"><span class="string">            parameters["b" + str(l)] = bl</span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        v - 包含梯度的指数加权平均值，字段如下：</span></span><br><span class="line"><span class="string">            v["dW" + str(l)] = ...</span></span><br><span class="line"><span class="string">            v["db" + str(l)] = ...</span></span><br><span class="line"><span class="string">        s - 包含平方梯度的指数加权平均值，字段如下：</span></span><br><span class="line"><span class="string">            s["dW" + str(l)] = ...</span></span><br><span class="line"><span class="string">            s["db" + str(l)] = ...</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    L = len(parameters) // <span class="number">2</span></span><br><span class="line">    v = &#123;&#125;</span><br><span class="line">    s = &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> range(L):</span><br><span class="line">        v[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)] = np.zeros_like(parameters[<span class="string">"W"</span> + str(l + <span class="number">1</span>)])</span><br><span class="line">        v[<span class="string">"db"</span> + str(l + <span class="number">1</span>)] = np.zeros_like(parameters[<span class="string">"b"</span> + str(l + <span class="number">1</span>)])</span><br><span class="line">        </span><br><span class="line">        s[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)] = np.zeros_like(parameters[<span class="string">"W"</span> + str(l + <span class="number">1</span>)])</span><br><span class="line">        s[<span class="string">"db"</span> + str(l + <span class="number">1</span>)] = np.zeros_like(parameters[<span class="string">"b"</span> + str(l + <span class="number">1</span>)])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> (v,s)</span><br></pre></td></tr></table></figure>
+
+<p>与动量梯度下降中的初始化类似，区别就是多了个字典s。</p>
+<h3 id="更新参数函数-1"><a href="#更新参数函数-1" class="headerlink" title="更新参数函数"></a>更新参数函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_parameters_with_adam</span><span class="params">(parameters,grads,v,s,t,learning_rate=<span class="number">0.01</span>,beta1=<span class="number">0.9</span>,beta2=<span class="number">0.999</span>,epsilon=<span class="number">1e-8</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    使用Adam更新参数</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        parameters - 包含了以下字段的字典：</span></span><br><span class="line"><span class="string">            parameters['W' + str(l)] = Wl</span></span><br><span class="line"><span class="string">            parameters['b' + str(l)] = bl</span></span><br><span class="line"><span class="string">        grads - 包含了梯度值的字典，有以下key值：</span></span><br><span class="line"><span class="string">            grads['dW' + str(l)] = dWl</span></span><br><span class="line"><span class="string">            grads['db' + str(l)] = dbl</span></span><br><span class="line"><span class="string">        v - Adam的变量，第一个梯度的移动平均值，是一个字典类型的变量</span></span><br><span class="line"><span class="string">        s - Adam的变量，平方梯度的移动平均值，是一个字典类型的变量</span></span><br><span class="line"><span class="string">        t - 当前迭代的次数</span></span><br><span class="line"><span class="string">        learning_rate - 学习率</span></span><br><span class="line"><span class="string">        beta1 - 动量，超参数,用于第一阶段，使得曲线的Y值不从0开始（参见天气数据的那个图）</span></span><br><span class="line"><span class="string">        beta2 - RMSprop的一个参数，超参数</span></span><br><span class="line"><span class="string">        epsilon - 防止除零操作（分母为0）</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        parameters - 更新后的参数</span></span><br><span class="line"><span class="string">        v - 第一个梯度的移动平均值，是一个字典类型的变量</span></span><br><span class="line"><span class="string">        s - 平方梯度的移动平均值，是一个字典类型的变量</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    L = len(parameters) // <span class="number">2</span></span><br><span class="line">    v_corrected = &#123;&#125; <span class="comment">#偏差修正后的值</span></span><br><span class="line">    s_corrected = &#123;&#125; <span class="comment">#偏差修正后的值</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> range(L):</span><br><span class="line">        <span class="comment"># ===== 动量 ===== #</span></span><br><span class="line">        v[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)] = beta1 * v[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)] + (<span class="number">1</span> - beta1) * grads[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)]</span><br><span class="line">        v[<span class="string">"db"</span> + str(l + <span class="number">1</span>)] = beta1 * v[<span class="string">"db"</span> + str(l + <span class="number">1</span>)] + (<span class="number">1</span> - beta1) * grads[<span class="string">"db"</span> + str(l + <span class="number">1</span>)]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># ===== RMSprop ===== #</span></span><br><span class="line">        s[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)] = beta2 * s[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)] + (<span class="number">1</span> - beta2) * np.square(grads[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)])</span><br><span class="line">        s[<span class="string">"db"</span> + str(l + <span class="number">1</span>)] = beta2 * s[<span class="string">"db"</span> + str(l + <span class="number">1</span>)] + (<span class="number">1</span> - beta2) * np.square(grads[<span class="string">"db"</span> + str(l + <span class="number">1</span>)])</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># ===== 计算偏差修正 ===== # </span></span><br><span class="line">        v_corrected[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)] = v[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)] / (<span class="number">1</span> - np.power(beta1,t))</span><br><span class="line">        v_corrected[<span class="string">"db"</span> + str(l + <span class="number">1</span>)] = v[<span class="string">"db"</span> + str(l + <span class="number">1</span>)] / (<span class="number">1</span> - np.power(beta1,t))</span><br><span class="line">        s_corrected[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)] = s[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)] / (<span class="number">1</span> - np.power(beta2,t))</span><br><span class="line">        s_corrected[<span class="string">"db"</span> + str(l + <span class="number">1</span>)] = s[<span class="string">"db"</span> + str(l + <span class="number">1</span>)] / (<span class="number">1</span> - np.power(beta2,t))</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># ===== 更新参数 ===== #</span></span><br><span class="line">        parameters[<span class="string">"W"</span> + str(l + <span class="number">1</span>)] = parameters[<span class="string">"W"</span> + str(l + <span class="number">1</span>)] - learning_rate * (v_corrected[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)] / np.sqrt(s_corrected[<span class="string">"dW"</span> + str(l + <span class="number">1</span>)] + epsilon))</span><br><span class="line">        parameters[<span class="string">"b"</span> + str(l + <span class="number">1</span>)] = parameters[<span class="string">"b"</span> + str(l + <span class="number">1</span>)] - learning_rate * (v_corrected[<span class="string">"db"</span> + str(l + <span class="number">1</span>)] / np.sqrt(s_corrected[<span class="string">"db"</span> + str(l + <span class="number">1</span>)] + epsilon))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> (parameters,v,s)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="加载数据集"><a href="#加载数据集" class="headerlink" title="加载数据集"></a>加载数据集</h2><p>通过opt_utils文件读取数据 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_X, train_Y = opt_utils.load_dataset(is_plot=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200626015155694.png" alt="image-20200626015155694"></p>
+<h2 id="定义模型"><a href="#定义模型" class="headerlink" title="定义模型"></a>定义模型</h2><p>使用之前实现过的一个三层神经网络（然而我并没有用同样的结构，所以直接用该博主的了）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">model</span><span class="params">(X,Y,layers_dims,optimizer,learning_rate=<span class="number">0.0007</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">          mini_batch_size=<span class="number">64</span>,beta=<span class="number">0.9</span>,beta1=<span class="number">0.9</span>,beta2=<span class="number">0.999</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">          epsilon=<span class="number">1e-8</span>,num_epochs=<span class="number">10000</span>,print_cost=True,is_plot=True)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    可以运行在不同优化器模式下的3层神经网络模型。</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        X - 输入数据，维度为（2，输入的数据集里面样本数量）</span></span><br><span class="line"><span class="string">        Y - 与X对应的标签</span></span><br><span class="line"><span class="string">        layers_dims - 包含层数和节点数量的列表</span></span><br><span class="line"><span class="string">        optimizer - 字符串类型的参数，用于选择优化类型，【 "gd" | "momentum" | "adam" 】</span></span><br><span class="line"><span class="string">        learning_rate - 学习率</span></span><br><span class="line"><span class="string">        mini_batch_size - 每个小批量数据集的大小</span></span><br><span class="line"><span class="string">        beta - 用于动量优化的一个超参数</span></span><br><span class="line"><span class="string">        beta1 - 用于计算梯度后的指数衰减的估计的超参数</span></span><br><span class="line"><span class="string">        beta1 - 用于计算平方梯度后的指数衰减的估计的超参数</span></span><br><span class="line"><span class="string">        epsilon - 用于在Adam中避免除零操作的超参数，一般不更改</span></span><br><span class="line"><span class="string">        num_epochs - 整个训练集的遍历次数，（视频2.9学习率衰减，1分55秒处，视频中称作“代”）,相当于之前的num_iteration</span></span><br><span class="line"><span class="string">        print_cost - 是否打印误差值，每遍历1000次数据集打印一次，但是每100次记录一个误差值，又称每1000代打印一次</span></span><br><span class="line"><span class="string">        is_plot - 是否绘制出曲线图</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        parameters - 包含了学习后的参数</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    L = len(layers_dims) <span class="comment"># 获取层数</span></span><br><span class="line">    costs = [] <span class="comment"># 用于存储代价</span></span><br><span class="line">    t = <span class="number">0</span> <span class="comment"># 每学习完一个minibatch就增加1</span></span><br><span class="line">    seed = <span class="number">10</span> <span class="comment"># 随机种子</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 使用opt_utils文件的初始化函数来进行 模型参数的初始化</span></span><br><span class="line">    parameters = opt_utils.initialize_parameters(layers_dims)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 根据传入的参数 optimizer来选择优化器</span></span><br><span class="line">    <span class="keyword">if</span> optimizer == <span class="string">"gd"</span>:</span><br><span class="line">        <span class="keyword">pass</span> <span class="comment">#不使用任何优化器，直接使用梯度下降法</span></span><br><span class="line">    <span class="keyword">elif</span> optimizer == <span class="string">"momentum"</span>:</span><br><span class="line">        v = initialize_velocity(parameters) <span class="comment">#使用动量</span></span><br><span class="line">    <span class="keyword">elif</span> optimizer == <span class="string">"adam"</span>:</span><br><span class="line">        v, s = initialize_adam(parameters)<span class="comment">#使用Adam优化</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"optimizer参数错误，程序退出。"</span>)</span><br><span class="line">        exit(<span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 开始学习，num_epochs为周期，用于mini-batch，相当于原来的迭代次数</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(num_epochs):</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 定义随机 minibatches,我们在每次遍历数据集之后增加种子以重新排列数据集，使每次数据的顺序都不同</span></span><br><span class="line">        seed = seed + <span class="number">1</span></span><br><span class="line">        <span class="comment"># 初始化mini-batch列表</span></span><br><span class="line">        minibatches = random_mini_batches(X,Y,mini_batch_size,seed)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 遍历 mini-batch列表，即遍历样本子集</span></span><br><span class="line">        <span class="keyword">for</span> minibatch <span class="keyword">in</span> minibatches:</span><br><span class="line">            <span class="comment"># 获取当前minibatch，以minibatch_X代替之前学习的梯度下降法中的X，minibatch_Y代替Y</span></span><br><span class="line">            (minibatch_X,minibatch_Y) = minibatch</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 正向传播</span></span><br><span class="line">            A3 , cache = opt_utils.forward_propagation(minibatch_X,parameters)</span><br><span class="line">            <span class="comment"># 计算代价</span></span><br><span class="line">            cost = opt_utils.compute_cost(A3 , minibatch_Y)</span><br><span class="line">            <span class="comment"># 反向传播</span></span><br><span class="line">            grads = opt_utils.backward_propagation(minibatch_X,minibatch_Y,cache)</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 更新参数</span></span><br><span class="line">            <span class="keyword">if</span> optimizer == <span class="string">"gd"</span>:</span><br><span class="line">                parameters = update_parameters_with_gd(parameters,grads,learning_rate)</span><br><span class="line">            <span class="keyword">elif</span> optimizer == <span class="string">"momentum"</span>:</span><br><span class="line">                parameters, v = update_parameters_with_momentun(parameters,grads,v,beta,learning_rate)</span><br><span class="line">            <span class="keyword">elif</span> optimizer == <span class="string">"adam"</span>:</span><br><span class="line">                t = t + <span class="number">1</span> </span><br><span class="line">                parameters , v , s = update_parameters_with_adam(parameters,grads,v,s,t,learning_rate,beta1,beta2,epsilon)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 记录代价</span></span><br><span class="line">        <span class="keyword">if</span> i % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">            costs.append(cost)</span><br><span class="line">            <span class="comment">#是否打印误差值</span></span><br><span class="line">            <span class="keyword">if</span> print_cost <span class="keyword">and</span> i % <span class="number">1000</span> == <span class="number">0</span>:</span><br><span class="line">                print(<span class="string">"第"</span> + str(i) + <span class="string">"次遍历整个数据集，当前误差值："</span> + str(cost))</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#是否绘制曲线图</span></span><br><span class="line">    <span class="keyword">if</span> is_plot:</span><br><span class="line">        plt.plot(costs)</span><br><span class="line">        plt.ylabel(<span class="string">'cost'</span>)</span><br><span class="line">        plt.xlabel(<span class="string">'epochs (per 100)'</span>)</span><br><span class="line">        plt.title(<span class="string">"Learning rate = "</span> + str(learning_rate))</span><br><span class="line">        plt.show()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="进行测试"><a href="#进行测试" class="headerlink" title="进行测试"></a>进行测试</h2><h3 id="未优化的梯度下降"><a href="#未优化的梯度下降" class="headerlink" title="未优化的梯度下降"></a>未优化的梯度下降</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义神经网络结构</span></span><br><span class="line">layers_dims = [train_X.shape[<span class="number">0</span>],<span class="number">5</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">parameters = model(train_X, train_Y, layers_dims, optimizer=<span class="string">"gd"</span>,is_plot=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#预测</span></span><br><span class="line">preditions = opt_utils.predict(train_X,train_Y,parameters)</span><br><span class="line"></span><br><span class="line"><span class="comment">#绘制分类图</span></span><br><span class="line">plt.title(<span class="string">"Model with Gradient Descent optimization"</span>)</span><br><span class="line">axes = plt.gca()</span><br><span class="line">axes.set_xlim([<span class="number">-1.5</span>, <span class="number">2.5</span>])</span><br><span class="line">axes.set_ylim([<span class="number">-1</span>, <span class="number">1.5</span>])</span><br><span class="line">opt_utils.plot_decision_boundary(<span class="keyword">lambda</span> x: opt_utils.predict_dec(parameters, x.T), train_X, train_Y)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200626020310914.png" alt="image-20200626020310914"></p>
+<h3 id="动量梯度下降"><a href="#动量梯度下降" class="headerlink" title="动量梯度下降"></a>动量梯度下降</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">layers_dims = [train_X.shape[<span class="number">0</span>],<span class="number">5</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line"><span class="comment">#使用动量的梯度下降</span></span><br><span class="line">parameters = model(train_X, train_Y, layers_dims, beta=<span class="number">0.9</span>,optimizer=<span class="string">"momentum"</span>,is_plot=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#预测</span></span><br><span class="line">preditions = opt_utils.predict(train_X,train_Y,parameters)</span><br><span class="line"></span><br><span class="line"><span class="comment">#绘制分类图</span></span><br><span class="line">plt.title(<span class="string">"Model with Momentum optimization"</span>)</span><br><span class="line">axes = plt.gca()</span><br><span class="line">axes.set_xlim([<span class="number">-1.5</span>, <span class="number">2.5</span>])</span><br><span class="line">axes.set_ylim([<span class="number">-1</span>, <span class="number">1.5</span>])</span><br><span class="line">opt_utils.plot_decision_boundary(<span class="keyword">lambda</span> x: opt_utils.predict_dec(parameters, x.T), train_X, np.squeeze(train_Y))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200626020727881.png" alt="image-20200626020727881"></p>
+<h3 id="Adam算法"><a href="#Adam算法" class="headerlink" title="Adam算法"></a>Adam算法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">layers_dims = [train_X.shape[<span class="number">0</span>], <span class="number">5</span>, <span class="number">2</span>, <span class="number">1</span>]</span><br><span class="line"><span class="comment">#使用Adam优化的梯度下降</span></span><br><span class="line">parameters = model(train_X, train_Y, layers_dims, optimizer=<span class="string">"adam"</span>,is_plot=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#预测</span></span><br><span class="line">preditions = opt_utils.predict(train_X,train_Y,parameters)</span><br><span class="line"></span><br><span class="line"><span class="comment">#绘制分类图</span></span><br><span class="line">plt.title(<span class="string">"Model with Adam optimization"</span>)</span><br><span class="line">axes = plt.gca()</span><br><span class="line">axes.set_xlim([<span class="number">-1.5</span>, <span class="number">2.5</span>])</span><br><span class="line">axes.set_ylim([<span class="number">-1</span>, <span class="number">1.5</span>])</span><br><span class="line">opt_utils.plot_decision_boundary(<span class="keyword">lambda</span> x: opt_utils.predict_dec(parameters, x.T), train_X,np.squeeze(train_Y))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200626020827605.png" alt="image-20200626020827605"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这里动量梯度下降与未使用优化算法的梯度下降效果差不多，应该是数据集不算大，拉不开差距 。</p>
+<p>明显看到Adam算法的效果要完爆另外两个。</p>
+
+          
+            <br>
+            
+  
+    
+    
+
+<section class="widget copyright shadow desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://lluuiq.com/post/202006252316/>https://lluuiq.com/post/202006252316/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+
+
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-26T02:10:13+08:00">
+  <a class='notlink'>
+    <i class="fas fa-save" aria-hidden="true"></i>
+    <p>更新于：2020年6月26日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="nofollow"><i class="fas fa-tags" aria-hidden="true"></i><p>神经网络</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：3.7k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：16分钟</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/post/202006260216/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>新建文章</p>
+                <p class='content'>
+
+</p>
+              </a>
+            
+            
+              <a class='next' href='/post/202006202233/'>
+                <p class='title'>吴恩达深度学习编程作业2-1<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>吴恩达深度学习课程《改善深层神经网络：超参数调试、正则化以及优化》第一周（深度学习的实用层面）的编程作业。
+
+
+说明题目与参考作业的地址：【中文】【吴恩达课后编程作业】Course 2 - 改善...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    processEscapes: true,
+    tags: "ams",
+    macros: {
+      href: "{}"
+    }
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|dno",
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+};
+</script>
+
+
+
+
+  <script>
+    window.subData = {
+      title: '吴恩达深度学习编程作业2-2',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%88%B6%E7%B1%BB/" href="/categories/%E7%88%B6%E7%B1%BB/"
+            id="categoriesE788B6E7B1BB"
+            ><div class='name'>父类</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%88%B6%E7%B1%BB/%E5%AD%90%E7%B1%BB/" href="/categories/%E7%88%B6%E7%B1%BB/%E5%AD%90%E7%B1%BB/"
+            id="categoriesE788B6E7B1BBE5AD90E7B1BB"
+            ><div class='name'>子类</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/C/" href="/categories/%E7%AC%94%E8%AE%B0/C/"
+            id="categoriesE7AC94E8AEB0C"
+            ><div class='name'>C</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/hexo/" href="/categories/%E7%AC%94%E8%AE%B0/hexo/"
+            id="categoriesE7AC94E8AEB0hexo"
+            ><div class='name'>hexo</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/python/" href="/categories/%E7%AC%94%E8%AE%B0/python/"
+            id="categoriesE7AC94E8AEB0python"
+            ><div class='name'>python</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/" href="/categories/%E7%AC%94%E8%AE%B0/%E5%8D%9A%E5%AE%A2/"
+            id="categoriesE7AC94E8AEB0E58D9AE5AEA2"
+            ><div class='name'>博客</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 14px; color: #999">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 17.33px; color: #828282">CLion</a> <a href="/tags/PyCharm/" style="font-size: 17.33px; color: #828282">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 17.33px; color: #828282">github</a> <a href="/tags/hexo/" style="font-size: 24px; color: #555">hexo</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E6%A0%87%E7%AD%BE1/" style="font-size: 14px; color: #999">标签1</a> <a href="/tags/%E6%A0%87%E7%AD%BE2/" style="font-size: 14px; color: #999">标签2</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 20.67px; color: #6c6c6c">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导入库函数"><span class="toc-text">导入库函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#未优化的梯度下降函数"><span class="toc-text">未优化的梯度下降函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mini-batch梯度下降函数"><span class="toc-text">mini-batch梯度下降函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明-1"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打乱训练集"><span class="toc-text">打乱训练集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分割样本"><span class="toc-text">分割样本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理剩余样本"><span class="toc-text">处理剩余样本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#完整函数代码"><span class="toc-text">完整函数代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动量梯度下降函数"><span class="toc-text">动量梯度下降函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化Vdw与Vdb"><span class="toc-text">初始化Vdw与Vdb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新参数函数"><span class="toc-text">更新参数函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Adam梯度下降函数"><span class="toc-text">Adam梯度下降函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明-2"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化Vdw、Vdb、Sdw、Sdb"><span class="toc-text">初始化Vdw、Vdb、Sdw、Sdb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新参数函数-1"><span class="toc-text">更新参数函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加载数据集"><span class="toc-text">加载数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定义模型"><span class="toc-text">定义模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进行测试"><span class="toc-text">进行测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#未优化的梯度下降"><span class="toc-text">未优化的梯度下降</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动量梯度下降"><span class="toc-text">动量梯度下降</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Adam算法"><span class="toc-text">Adam算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.3'
+      loop='all'
+      order='random'
+      fixed='true'
+      list-max-height='500px'
+      server='netease'
+      type='playlist'
+      id='4945153572'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://lluuiq.com">Copyright © lluuiq</a></p>
+
+        </div>
+      
+    
+      
+        
+          <div><p><a href="http://beian.miit.gov.cn" target="_blank" rel="noopener">豫ICP备19027219号</a><br>京公网备案 41140302000094号</p>
+</div>
+        
+      
+    
+    <!--网站运行时间统计-->
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+        var now = new Date(); 
+        function createtime() { 
+            var grt= new Date("07/30/2019 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+            now.setTime(now.getTime()+250); 
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+            document.getElementById("timeDate").innerHTML = "本站已苟活 "+dnum+" 天 "; 
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+        } 
+    setInterval("createtime()",250);
+    </script>
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+
+  <!-- 彩带点击 -->
+  <!-- <script type="text/javascript" src="\js\ribbon.min.js"></script> -->
+  <!-- 雪花特效 -->
+  <!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+
+
+  <!-- 线条特效 -->
+  <!-- <script type="text/javascript"
+  color="0,0,0" opacity='1' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script> -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<!-- <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> -->
+<!-- <script src="/js/jquery.pjax.min.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js" data-pjax></script>
+  <script>
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+  </script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/background.png"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+<!-- theme.plugins.aplayer.js -->
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" async></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js" async></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js"></script>
+
+  
+
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+    appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+    placeholder: "有什么想说的吗？",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    visitor: 'false',
+    highlight:'true'
+  })
+  </script>
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.1/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copyed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-clipboard-check');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制成功';
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-exclamation-triangle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制失败';
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+
+
+
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?23032f56a100d5a5e26ed5b9d94163c7";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
+
+  <script>setLoadingBarProgress(100);</script>
+
+  <script>
+    // 窗口监听load(加载、刷新)事件，执行LoadFancybox()函数
+    $(function(){
+      LoadFancybox();
+    });
+
+    var pjax = new Pjax({
+      elements: "a",
+      selectors: [
+        "title", //pjax加载标题
+        ".l_main", //pjax加载主内容
+        ".l_side", //pjax加载侧边栏
+        ".switcher .h-list", // 使手机端的搜索框与菜单栏生效
+      ]
+    })
+
+    //加载fancybox
+    function LoadFancybox(){
+      $(".article-entry").find("img").each(function () {
+        //渲染fancy box
+        var t = document.createElement("a");
+        $(t).attr("data-fancybox", ""),
+        $(t).attr("href", $(this).attr("src")),
+        $(t).attr("margin","0 auto"),
+        $(this).wrap(t)
+      });
+    }
+
+    function LoadValine(){
+      $.getScript("https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js", function() {
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        var notify = 'true' == true;
+        var verify = 'true' == true;
+        var valine = new Valine();
+        valine.init({
+          el: '#valine_container',
+          notify: notify,
+          verify: verify,
+          guest_info: guest_info,
+          
+          appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+          appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+          placeholder: "有什么想说的吗？",
+          pageSize:'10',
+          avatar:'mp',
+          lang:'zh-cn',
+          visitor: 'false',
+          highlight:'true'
+        })
+      });
+    }
+  
+    // 加载pjax后执行的函数
+    document.addEventListener('pjax:complete', function (){
+      LoadFancybox();
+      LoadValine();
+      // LoadBaidu();
+    });
+
+  </script>
+</body>
+</html>
