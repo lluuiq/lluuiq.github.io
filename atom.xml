@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lluuiq.com/"/>
-  <updated>2020-06-25T18:16:54.823Z</updated>
+  <updated>2020-06-25T18:10:13.612Z</updated>
   <id>https://lluuiq.com/</id>
   
   <author>
@@ -15,36 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>新建文章</title>
-    <link href="https://lluuiq.com/post/202006260216/"/>
-    <id>https://lluuiq.com/post/202006260216/</id>
-    <published>2020-06-25T18:16:54.000Z</published>
-    <updated>2020-06-25T18:16:54.823Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><a id="more"></a>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
-      
-    
-    </summary>
-    
-    
-      <category term="父类" scheme="https://lluuiq.com/categories/%E7%88%B6%E7%B1%BB/"/>
-    
-      <category term="子类" scheme="https://lluuiq.com/categories/%E7%88%B6%E7%B1%BB/%E5%AD%90%E7%B1%BB/"/>
-    
-    
-      <category term="标签1" scheme="https://lluuiq.com/tags/%E6%A0%87%E7%AD%BE1/"/>
-    
-      <category term="标签2" scheme="https://lluuiq.com/tags/%E6%A0%87%E7%AD%BE2/"/>
-    
-  </entry>
   
   <entry>
     <title>吴恩达深度学习编程作业2-2</title>

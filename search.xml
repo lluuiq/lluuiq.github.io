@@ -4,35 +4,6 @@
   
     
     <entry>
-      <title>新建文章</title>
-      <link href="/post/202006260216/"/>
-      <url>/post/202006260216/</url>
-      
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><a id="more"></a>]]></content>
-      
-      
-      <categories>
-          
-          <category> 父类 </category>
-          
-          <category> 子类 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 标签1 </tag>
-            
-            <tag> 标签2 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>吴恩达深度学习编程作业2-2</title>
       <link href="/post/202006252316/"/>
       <url>/post/202006252316/</url>
