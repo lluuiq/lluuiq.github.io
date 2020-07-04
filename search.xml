@@ -42,16 +42,14 @@
           
           <category> 笔记 </category>
           
-          <category> TensorFlow </category>
-          
       </categories>
       
       
         <tags>
             
-            <tag> 神经网络 </tag>
-            
             <tag> TensorFlow2 </tag>
+            
+            <tag> 神经网络 </tag>
             
         </tags>
       
@@ -202,8 +200,6 @@
           
           <category> 笔记 </category>
           
-          <category> 博客 </category>
-          
       </categories>
       
       
@@ -284,8 +280,6 @@
       <categories>
           
           <category> 笔记 </category>
-          
-          <category> 博客 </category>
           
       </categories>
       
