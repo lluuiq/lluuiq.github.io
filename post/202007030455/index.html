@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,8 +16,12 @@
 
   <!-- 页面元数据 -->
   
-    <title>标签：python - lluuiq&#39;s blog</title>
+    <title>Linux云服务器配置Anaconda3 - lluuiq&#39;s blog</title>
   
+    <meta name="keywords" content="Anaconda3">
+  
+  
+    <meta name="description" content="记录一下Linux云服务器上搭建Anaconda3并进行配置的过程，开启远程访问。">
   
 
   <!-- feed -->
@@ -507,6 +509,26 @@
   
 
   
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载Anaconda3并上传到服务器"><span class="toc-text">下载Anaconda3并上传到服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Anaconda3"><span class="toc-text">安装Anaconda3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置-root-bashrc-文件"><span class="toc-text">配置 &#x2F;root&#x2F;.bashrc 文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Anaconda3的python3-7"><span class="toc-text">使用Anaconda3的python3.7</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#是否显示-base"><span class="toc-text">是否显示(base)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置alias"><span class="toc-text">配置alias</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新-bashrc"><span class="toc-text">更新.bashrc</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程访问jupyter"><span class="toc-text">远程访问jupyter</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
 
 
 </aside>
@@ -676,29 +698,36 @@
   
 
   
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载Anaconda3并上传到服务器"><span class="toc-text">下载Anaconda3并上传到服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Anaconda3"><span class="toc-text">安装Anaconda3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置-root-bashrc-文件"><span class="toc-text">配置 &#x2F;root&#x2F;.bashrc 文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Anaconda3的python3-7"><span class="toc-text">使用Anaconda3的python3.7</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#是否显示-base"><span class="toc-text">是否显示(base)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置alias"><span class="toc-text">配置alias</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新-bashrc"><span class="toc-text">更新.bashrc</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程访问jupyter"><span class="toc-text">远程访问jupyter</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
 
 
 </aside>
 
-
 <div class='l_main'>
   
-    
-      
-  <section class="post-list ">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+
   
+    <article id="post" class="post white-box shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -707,11 +736,13 @@
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/post/202003040405/">
-      Scrapy笔记
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/post/202007030455/">
+        Linux云服务器配置Anaconda3
+      </a>
+    </h1>
+  
 
 
       
@@ -747,7 +778,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-edit" aria-hidden="true"></i>
-    <p>发布于：2020年3月4日</p>
+    <p>发布于：2020年7月3日</p>
   </a>
 </div>
 
@@ -758,7 +789,7 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard" aria-hidden="true"></i>
-      <p>字数：673字</p>
+      <p>字数：707字</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
@@ -784,40 +815,254 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <p>记录学习Scrapy时遇到的坑</p>
-<p><a href="https://scrapy-chs.readthedocs.io/zh_CN/latest/" target="_blank" rel="noopener">Scrapy官方文档</a></p>
-<p>学习时看的视频：<a href="https://www.bilibili.com/video/av57909837" target="_blank" rel="noopener">【python爬虫_从入门到精通（高级篇）】scrapy框架、反爬、分布式爬虫</a></p>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>记录一下Linux云服务器上搭建Anaconda3并进行配置的过程，开启远程访问。</p>
+<a id="more"></a>
+
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>Linux服务器：Centos7</p>
+<p>Anaconda3版本：2020.02-Linux-x86_64</p>
+<p><a href="https://www.anaconda.com/products/individual" target="_blank" rel="noopener">Anaconda3下载</a></p>
+<h2 id="下载Anaconda3并上传到服务器"><a href="#下载Anaconda3并上传到服务器" class="headerlink" title="下载Anaconda3并上传到服务器"></a>下载Anaconda3并上传到服务器</h2><p>在[说明](# 说明)中的下载地址里，找到Linux版本。</p>
+<p>（选择适合自己的安装包，我这里Linux是<strong>x86_64</strong>）</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630170224375.png" alt="image-20200630170224375"></p>
+<p>将下载的安装包上传到服务器（Xshell、FinalShell等软件）</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630170537967.png" alt="image-20200630170537967"></p>
+<h2 id="安装Anaconda3"><a href="#安装Anaconda3" class="headerlink" title="安装Anaconda3"></a>安装Anaconda3</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash Anaconda3-2020.02-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+
+<p>安装包的名字对应自己下载的版本即可。</p>
+<br>
+
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630170639627.png" alt="image-20200630170639627"></p>
+<p>回车</p>
+<br>
+
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630170718992.png" alt="image-20200630170718992"></p>
+<p>疯狂回车</p>
+<br>
+
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630170757862.png" alt="image-20200630170757862"></p>
+<p>输入yes</p>
+<br>
+
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630171034378.png" alt="image-20200630171034378"></p>
+<p>按回车安装到当前目录 <code>/root/anaconda3</code></p>
+<br>
+
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630171800088.png" alt="image-20200630171800088"></p>
+<p>输入yes</p>
+<hr>
+<p>最后安装完成后，输入<code>ipython</code>即可启动ipython</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630174756536.png" alt="image-20200630174756536"></p>
+<p>输入<code>exit()</code>或使用<code>ctrl+z</code>退出</p>
+<h2 id="配置-root-bashrc-文件"><a href="#配置-root-bashrc-文件" class="headerlink" title="配置 /root/.bashrc 文件"></a>配置 <code>/root/.bashrc</code> 文件</h2><h3 id="使用Anaconda3的python3-7"><a href="#使用Anaconda3的python3-7" class="headerlink" title="使用Anaconda3的python3.7"></a>使用Anaconda3的python3.7</h3><p>Anaconda3附带的是python3.7，在安装好Anaconda3后，输入python还是linux自带的python2。故对版本进行配置。</p>
+<p>添加如下代码（若安装路径不一样修改为自己的路径 ）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH="/root/anaconda3/bin:$PATH"</span><br></pre></td></tr></table></figure>
+
+<h3 id="是否显示-base"><a href="#是否显示-base" class="headerlink" title="是否显示(base)"></a>是否显示<code>(base)</code></h3><p>添加Anaconda3的python后会在指令行前面会出现<code>(base)</code></p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630172947611.png" alt="image-20200630172947611"></p>
+<p>表示启用了conda。如果不想显示这个<code>(base)</code>的话，在<code>/root/.bashrc</code>中添加</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda deactivate</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置alias"><a href="#配置alias" class="headerlink" title="配置alias"></a>配置alias</h3><p>加入下方代码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias python2="/usr/bin/python2.7"</span><br></pre></td></tr></table></figure>
+
+<p>python2为自定义的别名，可以使用py2或者其余自己喜欢的别名替代</p>
+<h3 id="更新-bashrc"><a href="#更新-bashrc" class="headerlink" title="更新.bashrc"></a>更新.bashrc</h3><p>每次修改.bashrc后都要输入<code>source ~/.bashrc</code> 进行更新才能生效。</p>
+<h2 id="远程访问jupyter"><a href="#远程访问jupyter" class="headerlink" title="远程访问jupyter"></a>远程访问jupyter</h2><p>打开ipython，然后按顺序输入以下代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> notebook.auth <span class="keyword">import</span> passwd</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd()</span><br></pre></td></tr></table></figure>
+
+<p>然后输入一个登陆jupyter的密码，再输入一次确认。</p>
+<p>输入后，会输出一个跟密钥一样的字符串</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630175648701.png" alt="image-20200630175648701"></p>
+<p>然后退出ipython。到anaconda3的安装目录下的<code>etc/jupyter</code>，执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630175919302.png" alt="image-20200630175919302"></p>
+<p>会输入信息显示配置文件的位置，编辑<code>/root/.jupyter/jupyter_notebook_config.py</code></p>
+<p>最后一行如果是root用户就加上，否则不用加。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">c.NotebookApp.ip = <span class="string">'*'</span> <span class="comment"># 设置使用此服务器的ip进行访问</span></span><br><span class="line">c.NotebookApp.password = <span class="string">u'sha1:XXXX'</span> <span class="comment"># 输入之前生成的key</span></span><br><span class="line">c.NotebookApp.open_browser = <span class="literal">False</span> <span class="comment"># 关闭启动jupyter时打开浏览器</span></span><br><span class="line">c.NotebookApp.port = XXXX <span class="comment"># 设置使用的端口</span></span><br><span class="line">c.NotebookApp.enable_mathjax = <span class="literal">True</span> <span class="comment"># 启用 MathJax</span></span><br><span class="line">c.NotebookApp.notebook_dir = <span class="string">'你的目录'</span> <span class="comment">#设置共享目录</span></span><br><span class="line">c.NotebookApp.allow_remote_access = <span class="literal">True</span></span><br><span class="line">c.NotebookApp.allow_root = <span class="literal">True</span> <span class="comment"># 允许在root用户下运行</span></span><br></pre></td></tr></table></figure>
+
+<p>效果图：</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630182338967.png" alt="image-20200630182338967"></p>
+<br>
+
+<p>接下来到服务器商那里放行设置的端口，如果有安装宝塔，宝塔上也要放行。</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630182248653.png" alt="image-20200630182248653"></p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630182351764.png" alt="image-20200630182351764"></p>
+<br>
+
+<p>然后输入<code>jupyter notebook</code>，开启jupyter</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630182143408.png" alt="image-20200630182143408"></p>
+<br>
+
+<p>其余设备上打开浏览器，输入 <code>IP:port</code> 即可访问，如 <code>192.168.0.123:8888</code></p>
+<p>输入密码即可进入。</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630182122207.png" alt="image-20200630182122207"></p>
+<br>
+
+<p>修改密码方法为输入 <code>jupyter notebook password</code>，然后像设置密码一样输入密码，最后会生成json配置文件。</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630183218003.png" alt="image-20200630183218003"></p>
+<p>然后打开生成的json文件，在.py配置文件中使用新生成的key</p>
+<p><img src="https://gitee.com/lluuiq/blog_img/raw/master/img/image-20200630183536102.png" alt="image-20200630183536102"></p>
+<p>json文件的优先级大于py，所以会覆盖。</p>
+
+          
+            <br>
+            
+  
+    
+    
+
+<section class="widget copyright shadow desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://lluuiq.com/post/202007030455/>https://lluuiq.com/post/202007030455/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+
+
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
       
         
-          <div class="button readmore">
-            <a href="/post/202003040405/">
-              Read More <i class="fas fa-chevron-right"></i>
-            </a>
-          </div>
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-04T09:13:21+08:00">
+  <a class='notlink'>
+    <i class="fas fa-save" aria-hidden="true"></i>
+    <p>更新于：2020年7月4日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Anaconda3/" rel="nofollow"><i class="fas fa-tags" aria-hidden="true"></i><p>Anaconda3</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：707字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：2分钟</p>
+    </a>
+  </div>
+
+
         
       
     </div>
   </section>
-</article>
 
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/post/202007030500/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>TensorFlow2.1 安装以及开启GPU加速</p>
+                <p class='content'>记录下TensorFlow2的安装以及开启GPU加速功能。
+使用Anaconda3的conda进行安装。
+
+
+查看GPU驱动版本与升级首先确定系统环境变量path里有下方路径，没有的话添加进去。...</p>
+              </a>
+            
+            
+              <a class='next' href='/post/202006252316/'>
+                <p class='title'>吴恩达深度学习编程作业2-2<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>吴恩达深度学习课程《改善深层神经网络：超参数调试、正则化以及优化》第二周（优化算法）的编程作业。
+
+
+说明题目与参考作业的地址：【中文】【吴恩达课后编程作业】Course 2 - 改善深层神经网...</p>
+              </a>
+            
           </div>
         
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
       
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
 
   
 
 
-    
-  
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Linux云服务器配置Anaconda3',
+      tools: true
+    }
+  </script>
+
+
 </div>
 <!-- <aside class='l_side'>
   
@@ -979,6 +1224,26 @@
 
 
   
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载Anaconda3并上传到服务器"><span class="toc-text">下载Anaconda3并上传到服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Anaconda3"><span class="toc-text">安装Anaconda3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置-root-bashrc-文件"><span class="toc-text">配置 &#x2F;root&#x2F;.bashrc 文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Anaconda3的python3-7"><span class="toc-text">使用Anaconda3的python3.7</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#是否显示-base"><span class="toc-text">是否显示(base)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置alias"><span class="toc-text">配置alias</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更新-bashrc"><span class="toc-text">更新.bashrc</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#远程访问jupyter"><span class="toc-text">远程访问jupyter</span></a></li></ol>
+    </div>
+  </section>
+
 
   
 
@@ -1171,6 +1436,37 @@
 
 
 
+
+  
+    
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js"></script>
+
+  
+
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+    appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+    placeholder: "有什么想说的吗？",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    visitor: 'false',
+    highlight:'true'
+  })
+  </script>
 
 
 
