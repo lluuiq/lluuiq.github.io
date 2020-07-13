@@ -6,7 +6,7 @@ top: false
 mathjax: false
 
 categories:
-- [笔记,博客]
+- [笔记]
 
 tags: [hexo,WebStack]
 

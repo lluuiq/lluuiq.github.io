@@ -5,7 +5,6 @@ toc: true
 top: false
 categories:
   - - 笔记
-    - python
 tags:
   - Anaconda3
   - PyQt

@@ -7,7 +7,7 @@ toc: true
 top: false
 
 categories: 
-- [笔记,hexo]
+- [笔记]
 tags: [markdown,hexo]
 ---
 # 这是一个测试用的文档，该句也是一级标题

@@ -5,7 +5,7 @@ toc: true
 top: false
 
 categories:
-- [妙妙工具箱]
+- [笔记]
 tags: [CLion]
 
 date: 2020-04-07 13:21:56

@@ -6,7 +6,7 @@ toc: true
 top: false
 
 categories: 
-- [笔记,python]
+- [笔记]
 tags: [python,爬虫,Scrapy]
 ---
 

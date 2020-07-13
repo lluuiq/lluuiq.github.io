@@ -6,7 +6,7 @@ toc: true
 top: false
 
 categories: 
-- [笔记,hexo]
+- [笔记]
 tags: [hexo,github,webhook]
 
 ---

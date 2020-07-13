@@ -7,7 +7,6 @@ mathjax: false
 
 categories:
   - - 笔记
-    - 博客
 
 tags:
   - Valine

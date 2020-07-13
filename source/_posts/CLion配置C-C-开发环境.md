@@ -5,7 +5,7 @@ toc: true
 top: false
 
 categories:
-- [笔记,C]
+- [笔记]
 tags: [CLion,C,C++]
 
 date: 2020-04-06 22:33:21

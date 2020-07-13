@@ -14,9 +14,26 @@ links:
       url: http://hyzz.site
       backgroundColor: '#3E74C9'
       textColor: '#fff'
-      tags: [标签1,标签2]    
+      tags: [深度学习,算法]    
 	  # 描述文字
-      desc: 描述文字
+      desc: 
+
+    - name: JimmyQin's Blog
+      avatar: https://cdn.jsdelivr.net/gh/aipaideer/pic/avatar.png
+      url: https://JimmyQin.cn
+      backgroundColor: '#445567'
+      textColor: '#fff'
+      tags: [前端爱好,BeatBoxer]    
+	  # 描述文字
+      desc: 挨拍的儿
+
+    - name: Colsrch
+      avatar: https://cdn.jsdelivr.net/gh/Colsrch/images/Colsrch/avatar.jpg
+      url: https://colsrch.top
+      backgroundColor: '#d7d1d5'
+      textColor: '#5d5d5d'
+      tags: [C/C++, MFC]
+      desc: 愿多年以后，我可以酌一杯清酒，烂醉如泥，梦中回到我们的曾经。
 ---
 
 <!--more-->
