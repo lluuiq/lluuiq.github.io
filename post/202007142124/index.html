@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>keras笔记-基础 - lluuiq&#39;s blog</title>
+  
+    <meta name="keywords" content="神经网络,keras">
+  
+  
+    <meta name="description" content="记录下入门keras的笔记，参考书籍 《Python深度学习》">
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="lluuiq's blog">
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css">
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/global-hot-data.js" ></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script> -->
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script> -->
+
+
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script>
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+
+  <div class='wrapper'>
+    <div class='nav-sub container--flex'>
+      <a class="logo flat-box"></a>
+      <ul class='switcher h-list'>
+        <li><a class="s-comment flat-btn fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc flat-btn fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main container container--flex">
+      
+        
+        <a class="logo flat-box" target="_self" href='/'>
+          
+          
+          
+            lluuiq
+          
+          
+        </a>
+      
+      <!-- PC端菜单栏 -->
+			<div class='menu navigation'>
+				<ul class='h-list'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  
+                    <i class='fas fa-home fa-fw'></i>
+                  
+                  首页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  
+                    <i class='fas fa-tags fa-fw'></i>
+                  
+                  标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  
+                    <i class='fas fa-archive fa-fw'></i>
+                  
+                  归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  
+                    <i class='fas fa-link fa-fw'></i>
+                  
+                  友人帐
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  
+                    <i class='fas fa-info-circle fa-fw'></i>
+                  
+                  关于我
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+      <!-- PC端搜索框 -->
+      
+        <div class="m_search">
+          <form name="searchform" class="form u-search-form">
+            <i class="icon fas fa-search fa-fw"></i>
+            <input type="text" class="input u-search-input" placeholder="想找些什么？" />
+          </form>
+        </div>
+      
+
+      <!-- 手机端的搜索按钮与菜单栏按钮 -->
+			<ul class='switcher h-list'>
+				
+					<li><a class="s-search flat-btn fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li><a class="s-menu flat-btn fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+
+<!-- 手机端导航栏菜单 -->
+<ul class="menu-phone navigation white-box">
+  
+  
+    <li>
+      <a class="flat-box" href=/
+        
+        
+        
+          id="home"
+        >
+        
+          <i class='fas fa-home fa-fw'></i>
+        
+        首页
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/categories/
+        
+        
+        
+          id="categories"
+        >
+        
+          <i class='fas fa-folder-open fa-fw'></i>
+        
+        分类
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/tags/
+        
+        
+        
+          id="tags"
+        >
+        
+          <i class='fas fa-tags fa-fw'></i>
+        
+        标签
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/archives/
+        
+        
+        
+          id="archives"
+        >
+        
+          <i class='fas fa-archive fa-fw'></i>
+        
+        归档
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/friends/
+        
+        
+        
+          id="friends"
+        >
+        
+          <i class='fas fa-link fa-fw'></i>
+        
+        友人帐
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/about/
+        
+        
+        
+          id="about"
+        >
+        
+          <i class='fas fa-info-circle fa-fw'></i>
+        
+        关于我
+      </a>
+    </li>
+  
+</ul>
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(6)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(15)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 19px; color: #777">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 16.5px; color: #888">CLion</a> <a href="/tags/PyCharm/" style="font-size: 16.5px; color: #888">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/TensorFlow2/" style="font-size: 14px; color: #999">TensorFlow2</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 16.5px; color: #888">github</a> <a href="/tags/hexo/" style="font-size: 21.5px; color: #666">hexo</a> <a href="/tags/jupyter/" style="font-size: 14px; color: #999">jupyter</a> <a href="/tags/keras/" style="font-size: 14px; color: #999">keras</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 24px; color: #555">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#电影评论二分类问题"><span class="toc-text">电影评论二分类问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导入库并读取数据"><span class="toc-text">导入库并读取数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据集向量化"><span class="toc-text">数据集向量化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#建模"><span class="toc-text">建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绘制损失函数与经度函数"><span class="toc-text">绘制损失函数与经度函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重新训练一个模型"><span class="toc-text">重新训练一个模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#评估模型"><span class="toc-text">评估模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#预测"><span class="toc-text">预测</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+    <div class='body-wrapper'>
+      
+
+<aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(6)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(15)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 19px; color: #777">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 16.5px; color: #888">CLion</a> <a href="/tags/PyCharm/" style="font-size: 16.5px; color: #888">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/TensorFlow2/" style="font-size: 14px; color: #999">TensorFlow2</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 16.5px; color: #888">github</a> <a href="/tags/hexo/" style="font-size: 21.5px; color: #666">hexo</a> <a href="/tags/jupyter/" style="font-size: 14px; color: #999">jupyter</a> <a href="/tags/keras/" style="font-size: 14px; color: #999">keras</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 24px; color: #555">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#电影评论二分类问题"><span class="toc-text">电影评论二分类问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导入库并读取数据"><span class="toc-text">导入库并读取数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据集向量化"><span class="toc-text">数据集向量化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#建模"><span class="toc-text">建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绘制损失函数与经度函数"><span class="toc-text">绘制损失函数与经度函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重新训练一个模型"><span class="toc-text">重新训练一个模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#评估模型"><span class="toc-text">评估模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#预测"><span class="toc-text">预测</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/post/202007142124/">
+        keras笔记-基础
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+<div class='new-meta-item author'>
+  <a href="https://lluuiq.com" rel="nofollow">
+    <img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png">
+    <p>lluuiq</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%94%E8%AE%B0/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>神经网络&nbsp;/&nbsp;笔记</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-edit" aria-hidden="true"></i>
+    <p>发布于：2020年7月14日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：1.9k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：7分钟</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>记录下入门keras的笔记，参考书籍 《Python深度学习》</p>
+<a id="more"></a>
+
+<h2 id="电影评论二分类问题"><a href="#电影评论二分类问题" class="headerlink" title="电影评论二分类问题"></a>电影评论二分类问题</h2><h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>使用keras自带的数据集 imdb。</p>
+<p>任务：根据评论建立模型预测一条评论是正面还是负面</p>
+<p>数据集：</p>
+<ul>
+<li><p>输入特征x为单词的索引组成的列表</p>
+<p>假设 it is very good，对应索引为 it : 5, is : 3 very : 10, good: 36</p>
+<p>那么该条数据的x为[5,3,10,36]</p>
+</li>
+<li><p>标签y为该条数据是正面还是负面，正面为1，负面为0</p>
+<p>假设有3个样本，[[it,is,very,good],[i,love,it],[it is boring]]</p>
+<p>那么y为[1,1,0]</p>
+</li>
+</ul>
+<h3 id="导入库并读取数据"><a href="#导入库并读取数据" class="headerlink" title="导入库并读取数据"></a>导入库并读取数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keras.datasets <span class="keyword">import</span> imdb</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">(train_data, train_labels),(test_data, test_labels) = imdb.load_data(num_words=<span class="number">10000</span>)</span><br></pre></td></tr></table></figure>
+
+<p>读取imdb的数据集，下载速度挺慢的，还容易出错，可以下载离线数据放在<code>C:\Users\用户名\.keras\datasets</code>中，然后再读取</p>
+<p>num_words指定一条数据最多含有一万个单词。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'训练集特征的维度:'</span>, train_data.shape,</span><br><span class="line">      <span class="string">" &amp; 训练集特征的类型:"</span>, type(train_data))</span><br><span class="line">print(<span class="string">'训练集标签的维度:'</span>, train_labels.shape)</span><br><span class="line">print(<span class="string">'测试集特征的维度:'</span>, test_data.shape)</span><br><span class="line">print(<span class="string">'测试集标签的维度:'</span>, test_labels.shape)</span><br><span class="line">print(<span class="string">"训练集特征第一条数据:"</span>,train_data[<span class="number">0</span>])</span><br><span class="line">print(<span class="string">"训练集标签第一条元素:"</span>,train_labels[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200714215040209.png" alt="image-20200714215040209"></p>
+<p>查看数据集的维度以及详细的值。</p>
+<p>可以看到一共有25000个样本（25000行），没有显示列的个数是因为每一条数据的单词数都不一样。</p>
+<p>标签实际为一维数组，即列表。</p>
+<br>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">    print(<span class="string">"第"</span>,i,<span class="string">"条数据的单词数:"</span>,len(train_data[i]))</span><br><span class="line">    </span><br><span class="line">print(<span class="string">"查看标签:"</span>,train_labels)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200714215551505.png" alt="image-20200714215551505"></p>
+<h3 id="数据集向量化"><a href="#数据集向量化" class="headerlink" title="数据集向量化"></a>数据集向量化</h3><p>要往神经网络中输入数据来建立模型，但神经网络的第一层是固定的输入维度，所以应该将输入特征转为统一的维度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">vectorize_sequences</span><span class="params">(sequences, dimension=<span class="number">10000</span>)</span>:</span></span><br><span class="line">    results = np.zeros((len(sequences), dimension))  <span class="comment"># 维度：(sequences的长度，10000)</span></span><br><span class="line">    <span class="keyword">for</span> i, sequence <span class="keyword">in</span> enumerate(sequences):</span><br><span class="line">        results[i, sequence] = <span class="number">1.</span>  <span class="comment"># 1. 将数据类型变为float32</span></span><br><span class="line">    <span class="keyword">return</span> results</span><br></pre></td></tr></table></figure>
+
+<p>创建一个元素均为0的张量 results，维度为（sequences的长度，10000）</p>
+<p>这样新的张量每一行还是对应着原来的数据，但列数统一扩充到了一万。</p>
+<p>然后遍历原来的输入特征，enumerate()将列表转为 索引,值 的形式。</p>
+<p>所以 i 就对应着行索引，sequence对应着该行的值，即一条输入特征数据。</p>
+<p>results[i,sequence] = 1` ，指定了results的第 i 行，将sequence中元素作为列索引，将results中对应列索引的元素置为1。</p>
+<p>一开始并不理解这个函数的作用，但自定义一个数据然后来测试一下就知道其作用了。</p>
+<br>
+
+<p>测试部分:</p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">vectorize_sequences</span><span class="params">(sequences, dimension=<span class="number">10</span>)</span>:</span> <span class="comment"># dimension改为10</span></span><br><span class="line">    results = np.zeros((len(sequences), dimension))</span><br><span class="line">    <span class="keyword">for</span> i, sequence <span class="keyword">in</span> enumerate(sequences):</span><br><span class="line">        results[i, sequence] = <span class="number">1.</span></span><br><span class="line">    <span class="keyword">return</span> results</span><br></pre></td></tr></table></figure>
+
+<p>这里设置dimension=10，即单词的最大长度为10。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a=[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>],[<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>]]</span><br><span class="line">vectorize_sequences(a)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200715003326890.png" alt="image-20200715003326890"></p>
+<p>创建一个二维数组，使用向量化函数，可以看到变成了(3,10)的维度（3为a的行数，10为定义的dimension）</p>
+<p>并且a[0]=[1,2,5,6,7] ，所以输出的新张量列索引为1,2,5,6,7的元素都置为了1。</p>
+<hr>
+<p>将dimension改回10000，然后向量化输入特征</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x_train = vectorize_sequences(train_data)</span><br><span class="line">x_test = vectorize_sequences(test_data)</span><br></pre></td></tr></table></figure>
+
+<p>接着将标签的数据类型转为float32</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y_train = np.asarray(train_labels).astype(<span class="string">'float32'</span>)</span><br><span class="line">y_test = np.asarray(test_labels).astype(<span class="string">'float32'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>查看数据信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"向量化后的维度："</span>)</span><br><span class="line">print(<span class="string">'训练集特征:'</span>, x_train.shape,</span><br><span class="line">      <span class="string">" &amp; 训练集特征的类型:"</span>, type(x_train))</span><br><span class="line">print(<span class="string">'训练集标签:'</span>, y_train.shape)</span><br><span class="line">print(<span class="string">'测试集特征:'</span>, x_test.shape)</span><br><span class="line">print(<span class="string">'测试集标签:'</span>, y_test.shape)</span><br><span class="line">print(<span class="string">'第一行特征:'</span>,x_train[<span class="number">0</span>])</span><br><span class="line">print(<span class="string">'第一行标签:'</span>,y_train[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200715003745446.png" alt="image-20200715003745446"></p>
+<h3 id="建模"><a href="#建模" class="headerlink" title="建模"></a>建模</h3><p>使用keras构建网络的流程为：</p>
+<ol>
+<li>创建模型对象</li>
+<li>添加网络层</li>
+<li>编译网络</li>
+<li>训练模型</li>
+</ol>
+<br>
+
+<p>先创建一个模型对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="comment"># Sequential是最基础的神经网络，即一层一层的那种</span></span><br><span class="line">network = models.Sequential()</span><br></pre></td></tr></table></figure>
+
+<p>然后添加网络层</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> layers</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加层，构建网络</span></span><br><span class="line">network.add(layers.Dense(<span class="number">16</span>, activation=<span class="string">'relu'</span>, input_shape=(<span class="number">10000</span>,)))</span><br><span class="line">network.add(layers.Dense(<span class="number">16</span>, activation=<span class="string">'relu'</span>))</span><br><span class="line">network.add(layers.Dense(<span class="number">1</span>, activation=<span class="string">'sigmoid'</span>))</span><br></pre></td></tr></table></figure>
+
+<p>第一层指定input_shape，即输入特征的维度（不设置这个也可以）</p>
+<p>最后一层为输出层，隐藏单元设置为1，激活函数使用sigmoid</p>
+<br>
+
+<p>添加好网络层后，编译该网络层</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 编译模型（建立模型）</span><br><span class="line">network.compile(</span><br><span class="line">    optimizer&#x3D;&#39;rmsprop&#39;,</span><br><span class="line">    loss&#x3D;&#39;binary_crossentropy&#39;,</span><br><span class="line">    metrics&#x3D;[&#39;acc&#39;]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>定义优化器为RMSprop，损失函数为二元交叉熵。</p>
+<br>
+
+<p>在进行训练前，先分割一下训练集与验证集，先拿验证集来对网络进行一次模拟考试</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将train_X的前1W条给x_val，后1W条给partial_x_train</span></span><br><span class="line">x_val = x_train[:<span class="number">10000</span>]</span><br><span class="line">partial_x_train = x_train[<span class="number">10000</span>:]</span><br><span class="line"></span><br><span class="line">y_val = y_train[:<span class="number">10000</span>]</span><br><span class="line">partial_y_train = y_train[<span class="number">10000</span>:]</span><br><span class="line"></span><br><span class="line">print(x_val.shape)</span><br><span class="line">print(partial_x_train.shape)</span><br><span class="line">print(y_val.shape)</span><br><span class="line">print(partial_y_train.shape)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200715015053803.png" alt="image-20200715015053803"></p>
+<br>
+
+<p>最后训练模型，将分隔好的训练集、验证集数据传入，定义epochs=20，mini-batch=512。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">epochs = <span class="number">20</span></span><br><span class="line">batch_size = <span class="number">512</span></span><br><span class="line"></span><br><span class="line">history = network.fit(</span><br><span class="line">    partial_x_train,</span><br><span class="line">    partial_y_train,</span><br><span class="line">    epochs=epochs,  <span class="comment"># 训练周期</span></span><br><span class="line">    batch_size=batch_size,  <span class="comment"># mini-batch尺寸</span></span><br><span class="line">    validation_data=(x_val, y_val)  <span class="comment"># 验证集</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200715014732565.png" alt="image-20200715014732565"></p>
+<p>输出的信息包括 当前代数/训练周期、进度条、训练时间，以及当代训练集的损失、精度，当代验证集的损失、精度</p>
+<p>这里用history接收<code>fit()</code>函数的返回值，其是一个字典，用来记录损失与经度的值</p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200715015454694.png" alt="image-20200715015454694"></p>
+<p>可以看到 key为acc时，值为之前训练时的精度列表。</p>
+<h3 id="绘制损失函数与经度函数"><a href="#绘制损失函数与经度函数" class="headerlink" title="绘制损失函数与经度函数"></a>绘制损失函数与经度函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">items = history.history  <span class="comment"># 为items赋值 值为history字典</span></span><br><span class="line">loss = items[<span class="string">'loss'</span>]</span><br><span class="line">val_loss = items[<span class="string">'val_loss'</span>]</span><br><span class="line">acc = items[<span class="string">'acc'</span>]</span><br><span class="line">val_acc = items[<span class="string">'val_acc'</span>]</span><br><span class="line"></span><br><span class="line">epochs_ls = range(<span class="number">1</span>, epochs+<span class="number">1</span>)  <span class="comment"># 将周期变为 [1,2,3,....,epochs+1]的range对象</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">''' 查看损失图像 '''</span></span><br><span class="line">plt.plot(epochs_ls, loss, <span class="string">'bo'</span>, label=<span class="string">'Training loss'</span>)</span><br><span class="line">plt.plot(epochs_ls, val_loss, <span class="string">'b'</span>, label=<span class="string">'Validation loss'</span>)</span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">'Train and validation loss'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Epochs'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Loss'</span>)</span><br><span class="line"></span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="string">'''查看精确度图像'''</span></span><br><span class="line">plt.plot(epochs_ls, acc, <span class="string">'bo'</span>, label=<span class="string">'Training accuracy'</span>)</span><br><span class="line">plt.plot(epochs_ls, val_acc, <span class="string">'b'</span>, label=<span class="string">'Validation accuracy'</span>)</span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">'Train and Validation Accuracy'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Epochs'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Accuracy'</span>)</span><br><span class="line"></span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200715020023273.png" alt="image-20200715020023273"></p>
+<p>观察图像可以发现，随着训练周期的增加，训练集的精度在提高，损失函数在下降。但是验证集的精度几乎没什么变化，损失还在不断提高。这是明显的过拟合现象 ，这次编程实践并没有涉及到过拟合，故放在后面的相关实践中再使用。</p>
+<h3 id="重新训练一个模型"><a href="#重新训练一个模型" class="headerlink" title="重新训练一个模型"></a>重新训练一个模型</h3><p>从损失函数图像可以看出，在第三代时训练集与验证集的损失差距就比较大了，故重新建立一个网络，设置epochs=4来试一下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">model = models.Sequential()</span><br><span class="line"></span><br><span class="line">model.add(layers.Dense(<span class="number">16</span>, activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(layers.Dense(<span class="number">16</span>, activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(layers.Dense(<span class="number">1</span>, activation=<span class="string">'sigmoid'</span>))</span><br><span class="line"></span><br><span class="line">model.compile(</span><br><span class="line">    optimizer=<span class="string">'rmsprop'</span>,</span><br><span class="line">    loss=<span class="string">'binary_crossentropy'</span>,</span><br><span class="line">    metrics=[<span class="string">'acc'</span>]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">epochs = <span class="number">4</span></span><br><span class="line">batch_size = <span class="number">512</span></span><br><span class="line"></span><br><span class="line">history2 = model.fit(</span><br><span class="line">    partial_x_train,</span><br><span class="line">    partial_y_train,</span><br><span class="line">    epochs=epochs, </span><br><span class="line">    batch_size=batch_size, </span><br><span class="line">    validation_data=(x_val, y_val) </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200715022632445.png" alt="image-20200715022632445"></p>
+<p>这次使用history2来接收返回的字典，并绘制新建模型的损失函数与精度函数</p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200715023757099.png" alt="image-20200715023757099"></p>
+<p>图像其实就是前4代的放大版。</p>
+<br>
+
+<h3 id="评估模型"><a href="#评估模型" class="headerlink" title="评估模型"></a>评估模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">results = model.evaluate(x_test,y_test)</span><br><span class="line">print(<span class="string">"results:"</span>,results)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200715024218725.png" alt="image-20200715024218725"></p>
+<p>损失0.3，精度0.87(约为0.88)</p>
+<h3 id="预测"><a href="#预测" class="headerlink" title="预测"></a>预测</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.predict(x_test)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200715024921544.png" alt="image-20200715024921544"></p>
+<p>输出的结果为 预测每一行的数据label值为1的概率，一般0.5以上基本可以判断为正面，当然概率越大，模型就越确信是一条正面评论</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th></th>
+<th align="center">电影评论分类（二元分类）</th>
+<th align="center">新闻分类（多分类问题）</th>
+<th align="center">房价预测（回归问题预测连续值）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据预处理</td>
+<td align="center">向量化</td>
+<td align="center">向量化与标签的one-hot编码</td>
+<td align="center">标准化</td>
+</tr>
+<tr>
+<td>验证方式</td>
+<td align="center">分割训练集与验证集</td>
+<td align="center">分割训练集与验证集</td>
+<td align="center">K折交叉验证</td>
+</tr>
+<tr>
+<td>输出层激活函数</td>
+<td align="center">sigmoid</td>
+<td align="center">softmax</td>
+<td align="center">无 （线性输出）</td>
+</tr>
+<tr>
+<td>损失函数</td>
+<td align="center">二元交叉熵</td>
+<td align="center">分类交叉熵</td>
+<td align="center">均方误差MSE</td>
+</tr>
+<tr>
+<td>评估指标</td>
+<td align="center">精确度</td>
+<td align="center">精确度</td>
+<td align="center">平均绝对误差MAE</td>
+</tr>
+</tbody></table>
+
+          
+            <br>
+            
+  
+    
+    
+
+<section class="widget copyright shadow desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://lluuiq.com/post/202007142124/>https://lluuiq.com/post/202007142124/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+
+
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-15T18:14:48+08:00">
+  <a class='notlink'>
+    <i class="fas fa-save" aria-hidden="true"></i>
+    <p>更新于：2020年7月15日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="nofollow"><i class="fas fa-tags" aria-hidden="true"></i><p>神经网络</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/keras/" rel="nofollow"><i class="fas fa-tags" aria-hidden="true"></i><p>keras</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：1.9k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：7分钟</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/post/202007040928/'>
+                <p class='title'>吴恩达深度学习编程作业2-3<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>吴恩达深度学习课程《改善深层神经网络：超参数调试、正则化以及优化》第三周（超参数调试、Batch正则化和程序框架）的编程作业。
+使用tensorflow2.1完成，既是完成编程作业，同时也是入门...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'keras笔记-基础',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(6)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(15)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 19px; color: #777">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 16.5px; color: #888">CLion</a> <a href="/tags/PyCharm/" style="font-size: 16.5px; color: #888">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/TensorFlow2/" style="font-size: 14px; color: #999">TensorFlow2</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 16.5px; color: #888">github</a> <a href="/tags/hexo/" style="font-size: 21.5px; color: #666">hexo</a> <a href="/tags/jupyter/" style="font-size: 14px; color: #999">jupyter</a> <a href="/tags/keras/" style="font-size: 14px; color: #999">keras</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 24px; color: #555">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#电影评论二分类问题"><span class="toc-text">电影评论二分类问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导入库并读取数据"><span class="toc-text">导入库并读取数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据集向量化"><span class="toc-text">数据集向量化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#建模"><span class="toc-text">建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绘制损失函数与经度函数"><span class="toc-text">绘制损失函数与经度函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重新训练一个模型"><span class="toc-text">重新训练一个模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#评估模型"><span class="toc-text">评估模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#预测"><span class="toc-text">预测</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.3'
+      loop='all'
+      order='random'
+      fixed='true'
+      list-max-height='500px'
+      server='netease'
+      type='playlist'
+      id='4945153572'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://lluuiq.com">Copyright © lluuiq</a></p>
+
+        </div>
+      
+    
+      
+        
+          <div><p><a href="http://beian.miit.gov.cn" target="_blank" rel="noopener">豫ICP备19027219号</a><br>京公网备案 41140302000094号</p>
+</div>
+        
+      
+    
+    <!--网站运行时间统计-->
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+        var now = new Date(); 
+        function createtime() { 
+            var grt= new Date("07/30/2019 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+            now.setTime(now.getTime()+250); 
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+            document.getElementById("timeDate").innerHTML = "本站已苟活 "+dnum+" 天 "; 
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+        } 
+    setInterval("createtime()",250);
+    </script>
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+
+  <!-- 彩带点击 -->
+  <!-- <script type="text/javascript" src="\js\ribbon.min.js"></script> -->
+  <!-- 雪花特效 -->
+  <!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+
+
+  <!-- 线条特效 -->
+  <!-- <script type="text/javascript"
+  color="0,0,0" opacity='1' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script> -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<!-- <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> -->
+<!-- <script src="/js/jquery.pjax.min.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js" data-pjax></script>
+  <script>
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+  </script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/background.png"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+<!-- theme.plugins.aplayer.js -->
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" async></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js" async></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js"></script>
+
+  
+
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+    appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+    placeholder: "有什么想说的吗？",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    visitor: 'false',
+    highlight:'true'
+  })
+  </script>
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.1/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copyed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-clipboard-check');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制成功';
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-exclamation-triangle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制失败';
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+
+
+
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?23032f56a100d5a5e26ed5b9d94163c7";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
+
+  <script>setLoadingBarProgress(100);</script>
+
+  <script>
+    // 窗口监听load(加载、刷新)事件，执行LoadFancybox()函数
+    $(function(){
+      LoadFancybox();
+    });
+
+    var pjax = new Pjax({
+      elements: "a",
+      selectors: [
+        "title", //pjax加载标题
+        ".l_main", //pjax加载主内容
+        ".l_side", //pjax加载侧边栏
+        ".switcher .h-list", // 使手机端的搜索框与菜单栏生效
+      ]
+    })
+
+    //加载fancybox
+    function LoadFancybox(){
+      $(".article-entry").find("img").each(function () {
+        //渲染fancy box
+        var t = document.createElement("a");
+        $(t).attr("data-fancybox", ""),
+        $(t).attr("href", $(this).attr("src")),
+        $(t).attr("margin","0 auto"),
+        $(this).wrap(t)
+      });
+    }
+
+    function LoadValine(){
+      $.getScript("https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js", function() {
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        var notify = 'true' == true;
+        var verify = 'true' == true;
+        var valine = new Valine();
+        valine.init({
+          el: '#valine_container',
+          notify: notify,
+          verify: verify,
+          guest_info: guest_info,
+          
+          appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+          appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+          placeholder: "有什么想说的吗？",
+          pageSize:'10',
+          avatar:'mp',
+          lang:'zh-cn',
+          visitor: 'false',
+          highlight:'true'
+        })
+      });
+    }
+  
+    // 加载pjax后执行的函数
+    document.addEventListener('pjax:complete', function (){
+      LoadFancybox();
+      LoadValine();
+      // LoadBaidu();
+    });
+
+  </script>
+</body>
+</html>

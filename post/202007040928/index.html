@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>吴恩达深度学习编程作业2-3 - lluuiq&#39;s blog</title>
+  
+    <meta name="keywords" content="神经网络">
+  
+  
+    <meta name="description" content="吴恩达深度学习课程《改善深层神经网络：超参数调试、正则化以及优化》第三周（超参数调试、Batch正则化和程序框架）的编程作业。
+使用tensorflow2.1完成，既是完成编程作业，同时也是入门学习tensorflow2。">
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="lluuiq's blog">
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css">
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/global-hot-data.js" ></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script> -->
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script> -->
+
+
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.js"></script>
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+
+  <div class='wrapper'>
+    <div class='nav-sub container--flex'>
+      <a class="logo flat-box"></a>
+      <ul class='switcher h-list'>
+        <li><a class="s-comment flat-btn fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc flat-btn fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main container container--flex">
+      
+        
+        <a class="logo flat-box" target="_self" href='/'>
+          
+          
+          
+            lluuiq
+          
+          
+        </a>
+      
+      <!-- PC端菜单栏 -->
+			<div class='menu navigation'>
+				<ul class='h-list'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  
+                    <i class='fas fa-home fa-fw'></i>
+                  
+                  首页
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  
+                    <i class='fas fa-folder-open fa-fw'></i>
+                  
+                  分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  
+                    <i class='fas fa-tags fa-fw'></i>
+                  
+                  标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  
+                    <i class='fas fa-archive fa-fw'></i>
+                  
+                  归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  
+                    <i class='fas fa-link fa-fw'></i>
+                  
+                  友人帐
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  
+                    <i class='fas fa-info-circle fa-fw'></i>
+                  
+                  关于我
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+      <!-- PC端搜索框 -->
+      
+        <div class="m_search">
+          <form name="searchform" class="form u-search-form">
+            <i class="icon fas fa-search fa-fw"></i>
+            <input type="text" class="input u-search-input" placeholder="想找些什么？" />
+          </form>
+        </div>
+      
+
+      <!-- 手机端的搜索按钮与菜单栏按钮 -->
+			<ul class='switcher h-list'>
+				
+					<li><a class="s-search flat-btn fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li><a class="s-menu flat-btn fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+
+<!-- 手机端导航栏菜单 -->
+<ul class="menu-phone navigation white-box">
+  
+  
+    <li>
+      <a class="flat-box" href=/
+        
+        
+        
+          id="home"
+        >
+        
+          <i class='fas fa-home fa-fw'></i>
+        
+        首页
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/categories/
+        
+        
+        
+          id="categories"
+        >
+        
+          <i class='fas fa-folder-open fa-fw'></i>
+        
+        分类
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/tags/
+        
+        
+        
+          id="tags"
+        >
+        
+          <i class='fas fa-tags fa-fw'></i>
+        
+        标签
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/archives/
+        
+        
+        
+          id="archives"
+        >
+        
+          <i class='fas fa-archive fa-fw'></i>
+        
+        归档
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/friends/
+        
+        
+        
+          id="friends"
+        >
+        
+          <i class='fas fa-link fa-fw'></i>
+        
+        友人帐
+      </a>
+    </li>
+  
+    <li>
+      <a class="flat-box" href=/about/
+        
+        
+        
+          id="about"
+        >
+        
+          <i class='fas fa-info-circle fa-fw'></i>
+        
+        关于我
+      </a>
+    </li>
+  
+</ul>
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(6)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(15)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 19px; color: #777">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 16.5px; color: #888">CLion</a> <a href="/tags/PyCharm/" style="font-size: 16.5px; color: #888">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/TensorFlow2/" style="font-size: 14px; color: #999">TensorFlow2</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 16.5px; color: #888">github</a> <a href="/tags/hexo/" style="font-size: 21.5px; color: #666">hexo</a> <a href="/tags/jupyter/" style="font-size: 14px; color: #999">jupyter</a> <a href="/tags/keras/" style="font-size: 14px; color: #999">keras</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 24px; color: #555">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导包"><span class="toc-text">导包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#入门引导"><span class="toc-text">入门引导</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#one"><span class="toc-text">one</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#two"><span class="toc-text">two</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#three"><span class="toc-text">three</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线性函数"><span class="toc-text">线性函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算sigmoid"><span class="toc-text">计算sigmoid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算代价（成本）"><span class="toc-text">计算代价（成本）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用独热编码（0，1编码）"><span class="toc-text">使用独热编码（0，1编码）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化为0和1"><span class="toc-text">初始化为0和1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用TensorFlow构建你的第一个神经网络"><span class="toc-text">使用TensorFlow构建你的第一个神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明："><span class="toc-text">说明：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加载数据集"><span class="toc-text">加载数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建placeholders"><span class="toc-text">创建placeholders</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化参数"><span class="toc-text">初始化参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正向传播"><span class="toc-text">正向传播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算代价"><span class="toc-text">计算代价</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反向传播"><span class="toc-text">反向传播</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建tensor"><span class="toc-text">创建tensor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算"><span class="toc-text">计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ndarray与tensor的转换"><span class="toc-text">ndarray与tensor的转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tf2没有占位符特性"><span class="toc-text">tf2没有占位符特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算sigmoid-1"><span class="toc-text">计算sigmoid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算代价（成本）-1"><span class="toc-text">计算代价（成本）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化模型参数"><span class="toc-text">初始化模型参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正向传播-1"><span class="toc-text">正向传播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算代价-1"><span class="toc-text">计算代价</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+    <div class='body-wrapper'>
+      
+
+<aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(6)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(15)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 19px; color: #777">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 16.5px; color: #888">CLion</a> <a href="/tags/PyCharm/" style="font-size: 16.5px; color: #888">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/TensorFlow2/" style="font-size: 14px; color: #999">TensorFlow2</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 16.5px; color: #888">github</a> <a href="/tags/hexo/" style="font-size: 21.5px; color: #666">hexo</a> <a href="/tags/jupyter/" style="font-size: 14px; color: #999">jupyter</a> <a href="/tags/keras/" style="font-size: 14px; color: #999">keras</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 24px; color: #555">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导包"><span class="toc-text">导包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#入门引导"><span class="toc-text">入门引导</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#one"><span class="toc-text">one</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#two"><span class="toc-text">two</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#three"><span class="toc-text">three</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线性函数"><span class="toc-text">线性函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算sigmoid"><span class="toc-text">计算sigmoid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算代价（成本）"><span class="toc-text">计算代价（成本）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用独热编码（0，1编码）"><span class="toc-text">使用独热编码（0，1编码）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化为0和1"><span class="toc-text">初始化为0和1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用TensorFlow构建你的第一个神经网络"><span class="toc-text">使用TensorFlow构建你的第一个神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明："><span class="toc-text">说明：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加载数据集"><span class="toc-text">加载数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建placeholders"><span class="toc-text">创建placeholders</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化参数"><span class="toc-text">初始化参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正向传播"><span class="toc-text">正向传播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算代价"><span class="toc-text">计算代价</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反向传播"><span class="toc-text">反向传播</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建tensor"><span class="toc-text">创建tensor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算"><span class="toc-text">计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ndarray与tensor的转换"><span class="toc-text">ndarray与tensor的转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tf2没有占位符特性"><span class="toc-text">tf2没有占位符特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算sigmoid-1"><span class="toc-text">计算sigmoid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算代价（成本）-1"><span class="toc-text">计算代价（成本）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化模型参数"><span class="toc-text">初始化模型参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正向传播-1"><span class="toc-text">正向传播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算代价-1"><span class="toc-text">计算代价</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/post/202007040928/">
+        吴恩达深度学习编程作业2-3
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+<div class='new-meta-item author'>
+  <a href="https://lluuiq.com" rel="nofollow">
+    <img src="https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png">
+    <p>lluuiq</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>神经网络&nbsp;/&nbsp;学习笔记</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-edit" aria-hidden="true"></i>
+    <p>发布于：2020年7月4日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：3.6k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：15分钟</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>吴恩达深度学习课程《改善深层神经网络：超参数调试、正则化以及优化》第三周（超参数调试、Batch正则化和程序框架）的编程作业。</p>
+<p>使用tensorflow2.1完成，既是完成编程作业，同时也是入门学习tensorflow2。</p>
+<a id="more"></a>
+
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><blockquote>
+<p>题目与参考作业的地址：<a href="https://blog.csdn.net/u013733326/article/details/79971488" target="_blank" rel="noopener">【中文】【吴恩达课后编程作业】Course 2 - 改善深层神经网络 - 第三周作业 - TensorFlow入门</a> </p>
+<p>相关数据集与前提代码在该博文中下载。</p>
+</blockquote>
+<br>
+
+<p><strong>原文使用的是tensorflow1.x版本，本文使用的是tensorflow2.1</strong></p>
+<p>为对比原文，采取与原文一致的过程，而使用tensorflow2.1实现。</p>
+<br>
+
+<p>作业要求：</p>
+<p>学习tensorflow的初始化变量、建立一个会话、训练算法、实现一个神经网络。</p>
+<p>tensorflow的安装可以参考我的另一篇文章：<a href="https://lluuiq.com/post/202007030500/">TensorFlow2.1 安装以及开启GPU加速</a></p>
+<h2 id="导包"><a href="#导包" class="headerlink" title="导包"></a>导包</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> tensorflow.python.framework <span class="keyword">import</span> ops</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">%matplotlib inline</span><br><span class="line"> </span><br><span class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>]=[<span class="string">'SimHei'</span>] <span class="comment"># 显示中文标签</span></span><br><span class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>]=<span class="literal">False</span> <span class="comment"># 显示负号</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> h5py</span><br><span class="line"><span class="keyword">import</span> tf_utils</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">np.random.seed(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="入门引导"><a href="#入门引导" class="headerlink" title="入门引导"></a>入门引导</h2><h4 id="one"><a href="#one" class="headerlink" title="one"></a>one</h4><p>损失函数loss的公式：$L(\hat{y},y) = (\hat{y}^{(i)} - y^{(i)})^{2}$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义常量张量 y_hat 与 y</span></span><br><span class="line">y_hat = tf.constant(<span class="number">36</span>, name=<span class="string">'y_hat'</span>)  <span class="comment"># y_hat = 36</span></span><br><span class="line">y = tf.constant(<span class="number">39</span>, name=<span class="string">'y'</span>)  <span class="comment"># y= 39</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义变量张量loss</span></span><br><span class="line">loss = tf.Variable((y-y_hat)**<span class="number">2</span>, name=<span class="string">'loss'</span>)  <span class="comment">#loss = (39-36)的平方，即9</span></span><br><span class="line">print(loss)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704115614905.png" alt="image-20200704115614905"></p>
+<p>可以看到loss的值为9（numpy=9）。</p>
+<p>与 tf1.X 相比，tf2不用再建立会话了。</p>
+<br>
+
+<p>tensorflow参与运算的单位是张量，易于理解的话，一维数组就是一维张量，二维数组即矩阵就是二维张量，N*N的数组就是N维张量。</p>
+<p><code>tf.constant</code> 创建一个常量的张量，无法改变其值。</p>
+<p><code>tf.Variable</code>创建一个变量的张量。</p>
+<p>参数有 <code>value,dtype=None,shape=None,name,verify_shape=Flase</code>。</p>
+<p>其中只有value是必须的值。</p>
+<h4 id="two"><a href="#two" class="headerlink" title="two"></a>two</h4><p>创建两个常量张量a与b，a=2，b=10</p>
+<p>c 等于a*b = 20</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = tf.constant(<span class="number">2</span>)  </span><br><span class="line">b = tf.constant(<span class="number">10</span>)</span><br><span class="line">c = tf.multiply(a,b)</span><br><span class="line">print(c)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704115602832.png" alt="image-20200704115602832"></p>
+<p>tf2里就可以直接输出。</p>
+<p><code>tf.multiply(a,b)</code>作用是计算 a*b ，并返回值。</p>
+<h4 id="three"><a href="#three" class="headerlink" title="three"></a>three</h4><p>原文展示了tf1.x的占位符（placeholder）用法，这个特性在tf2里被取消了 。</p>
+<h3 id="线性函数"><a href="#线性函数" class="headerlink" title="线性函数"></a>线性函数</h3><p>计算 $Y=W*X+b$，其中W与X是随机矩阵，b为随机向量。</p>
+<p>规定W维度为（4，3），X维度为（3，1），b维度为（4，1）。可计算出Y的维度为（4，1）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">linear_function</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    实现一个线性功能：</span></span><br><span class="line"><span class="string">        初始化W，类型为tensor的随机变量，维度为(4,3)</span></span><br><span class="line"><span class="string">        初始化X，类型为tensor的随机变量，维度为(3,1)</span></span><br><span class="line"><span class="string">        初始化b，类型为tensor的随机变量，维度为(4,1)</span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        # result - 运行了session后的结果，运行的是Y = WX + b</span></span><br><span class="line"><span class="string">        Y - 执行Y = WX + b 的结果，若需要ndarray需要使用 .numpy()转换</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    np.random.seed(<span class="number">1</span>)  <span class="comment"># 指定随机种子</span></span><br><span class="line"></span><br><span class="line">    X = np.random.randn(<span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line">    W = np.random.randn(<span class="number">4</span>, <span class="number">3</span>)</span><br><span class="line">    b = np.random.randn(<span class="number">4</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    Y = tf.add(tf.matmul(W, X), b)  <span class="comment"># tf.matmul是矩阵乘法</span></span><br><span class="line">    <span class="comment"># Y = tf.matmul(W,X) + b #也可以以写成这样子</span></span><br><span class="line"></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">        原文中的创建会话可以不使用了</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"><span class="comment">#     #创建一个session并运行它</span></span><br><span class="line"><span class="comment">#     sess = tf.Session()</span></span><br><span class="line"><span class="comment">#     result = sess.run(Y)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     #session使用完毕，关闭它</span></span><br><span class="line"><span class="comment">#     sess.close()</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Y.numpy()</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>然后运行函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Y = linear_function()</span><br><span class="line">print(Y)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704123233692.png" alt="image-20200704123233692"></p>
+<p>这里在函数返回值时 使用了  <code>Var.numpy()</code> 将tensor类型的Var（即tensorflow中的数据类型 – 张量）转为numpy的ndarray。</p>
+<p>可以使用 <code>tf.convert_to_tensor(Var)</code> 再将Var转为tensor。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.convert_to_tensor(Y)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704123300271.png" alt="image-20200704123300271"></p>
+<p>当然这里与numpy()一样可以用变量接收返回值 <code>Y = tf.convert_to_tensor(Y)</code></p>
+<h3 id="计算sigmoid"><a href="#计算sigmoid" class="headerlink" title="计算sigmoid"></a>计算sigmoid</h3><p>tf2直接省去了tf1的创建会话，所以使用起来简单了很多（甚至不用定义函数来执行了，但这里为了与原文对比所以还是定义了函数）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(z)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    实现使用sigmoid函数计算z</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        z - 输入的值，标量或矢量</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        result - 用sigmoid计算z的值</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     #创建一个占位符x，名字叫“x”</span></span><br><span class="line"><span class="comment">#     x = tf.placeholder(tf.float32,name="x")</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     #计算sigmoid(z)</span></span><br><span class="line"><span class="comment">#     sigmoid = tf.sigmoid(x)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     #创建一个会话，使用方法二</span></span><br><span class="line"><span class="comment">#     with tf.Session() as sess:</span></span><br><span class="line"><span class="comment">#         result = sess.run(sigmoid,feed_dict=&#123;x:z&#125;)</span></span><br><span class="line"></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">        tf1的一堆花里胡哨的东西 都可以去掉了。</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># tf2的sigmoid必须传入float，否则报错。</span></span><br><span class="line">    z = float(z)</span><br><span class="line">    result = tf.sigmoid(z)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result.numpy()</span><br></pre></td></tr></table></figure>
+
+<p>这里要使用float类型作为参数，否则报错。</p>
+<p>同上，返回值使用<code>numpy()</code>返回ndarry，使得与原文的返回类型一致。</p>
+<br>
+
+<p>测试一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"sigmoid(0) = "</span> + str(sigmoid(<span class="number">0</span>)))</span><br><span class="line">print(<span class="string">"sigmoid(12) = "</span> + str(sigmoid(<span class="number">12</span>)))</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704123611350.png" alt="image-20200704123611350"></p>
+<p>与原文区别就是<code>sigmoid(12)</code>变成了 0.9999938 而不是 0.999994 ，精度少了一位，基本没啥区别。</p>
+<h3 id="计算代价（成本）"><a href="#计算代价（成本）" class="headerlink" title="计算代价（成本）"></a>计算代价（成本）</h3><p>tensorflow自带了计算成本的函数，直接用就是。</p>
+<p><code>cross_entropy</code> 交叉熵</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tf.nn.sigmoid_cross_entropy_with_logits(</span><br><span class="line">    labels=<span class="literal">None</span>, <span class="comment"># Y </span></span><br><span class="line">    logits=<span class="literal">None</span>, <span class="comment"># Y帽</span></span><br><span class="line">    name=<span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用独热编码（0，1编码）"><a href="#使用独热编码（0，1编码）" class="headerlink" title="使用独热编码（0，1编码）"></a>使用独热编码（0，1编码）</h3><p>什么是独热编码？如原文所举的例子</p>
+<p>一个标签是[1 2 3 0 2 1]，有6个元素（样本），m = 6。</p>
+<p>而分类的类别个数有4个（0, 1, 2, 3），C=4。</p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704133014814.png" alt="image-20200704133014814"></p>
+<p>其实就相当于把标签的每个元素都拓展成值为0或1的向量。对应原来的值，将向量中对应下标的元素置为1。</p>
+<p>这样做的优势就在于将原本的向量扩充到了欧式空间，并且多元分类转为了二元分类问题， 扩充了特征。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tf.one_hot(</span><br><span class="line">    indices, </span><br><span class="line">    depth, </span><br><span class="line">    on_value=<span class="literal">None</span>, </span><br><span class="line">    off_value=<span class="literal">None</span>, </span><br><span class="line">    axis=<span class="literal">None</span>, </span><br><span class="line">    dtype=<span class="literal">None</span>, </span><br><span class="line">    name=<span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>定义一个函数，参数为标签与C，返回该标签的独热编码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">one_hot_matrix</span><span class="params">(lables, C)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    创建一个矩阵，其中第i行对应第i个类号，第j列对应第j个训练样本</span></span><br><span class="line"><span class="string">    所以如果第j个样本对应着第i个标签，那么entry (i,j)将会是1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        lables - 标签向量</span></span><br><span class="line"><span class="string">        C - 分类数</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        one_hot - 独热矩阵</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 创建一个tf.constant，赋值为C，名字叫C</span></span><br><span class="line">    C = tf.constant(C, name=<span class="string">"C"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用tf.one_hot，注意一下axis</span></span><br><span class="line">    one_hot_matrix = tf.one_hot(indices=lables, depth=C, axis=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">        原文TF1的内容</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line"><span class="comment">#     #创建一个session</span></span><br><span class="line"><span class="comment">#     sess = tf.Session()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     #运行session</span></span><br><span class="line"><span class="comment">#     one_hot = sess.run(one_hot_matrix)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     #关闭session</span></span><br><span class="line"><span class="comment">#     sess.close()</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> one_hot_matrix.numpy()</span><br></pre></td></tr></table></figure>
+
+<p>测试一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">labels = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>])</span><br><span class="line">one_hot_matrix = one_hot_matrix(labels, C=<span class="number">4</span>)</span><br><span class="line">print(one_hot_matrix)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704134506113.png" alt="image-20200704134506113"></p>
+<p>其实tf简化后没必要再定义函数了 ？ </p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704134919021.png" alt="image-20200704134919021"></p>
+<h3 id="初始化为0和1"><a href="#初始化为0和1" class="headerlink" title="初始化为0和1"></a>初始化为0和1</h3><p>学习如何用0或者1初始化一个向量，即<code>tf.zeros()</code>与<code>tf.ones()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">shape = <span class="number">3</span></span><br><span class="line">one = tf.ones(shape).numpy()</span><br><span class="line">zero = tf.zeros(shape).numpy()</span><br><span class="line">print(<span class="string">"one: "</span>,one)</span><br><span class="line">print(<span class="string">"zero: "</span>,zero)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704135230451.png" alt="image-20200704135230451"></p>
+<h2 id="使用TensorFlow构建你的第一个神经网络"><a href="#使用TensorFlow构建你的第一个神经网络" class="headerlink" title="使用TensorFlow构建你的第一个神经网络"></a>使用TensorFlow构建你的第一个神经网络</h2><h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><p>原文提到实现模型（tensorflow1.X）需要两个步骤：</p>
+<ol>
+<li>创建计算图</li>
+<li>运行计算图</li>
+</ol>
+<p>那么来看下tensorflow2里如何实现模型</p>
+ <br>
+
+<p><strong>任务目标：</strong>根据图片上的手势来识别数字。</p>
+<p><strong>训练集：</strong> 从0到5的数字的1080张图片，像素64*64，每个数字有180张图片。</p>
+<p><strong>测试集：</strong> 从0到5的数字的120张图片，像素64*64，每个数字有5张图片。</p>
+<p><img src="https://img-blog.csdn.net/20180417110431384?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTM3MzMzMjY=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="hands"></p>
+<h3 id="加载数据集"><a href="#加载数据集" class="headerlink" title="加载数据集"></a>加载数据集</h3><p>使用 <code>tf_utils</code>文件里的函数读取数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train_orig , Y_train_orig , X_test_orig , Y_test_orig , classes = tf_utils.load_dataset()</span><br></pre></td></tr></table></figure>
+
+<p>查看一下数据的维度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">print(X_train_orig.shape)</span><br><span class="line">print(Y_train_orig.shape)</span><br><span class="line">print(X_test_orig.shape)</span><br><span class="line">print(Y_test_orig.shape)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704140346416.png" alt="image-20200704140346416"></p>
+<p>接下来要做的为：</p>
+<ol>
+<li>事情和之前的作业一样，对输入特征 X 进行归一化以及转为 <code>( 3*64*64，样本数(m) )</code> 的矩阵。</li>
+<li>将标签Y转为独热矩阵。</li>
+</ol>
+<p>这部分没什么变化，直接用原文的代码即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 维度转为 (3*64*64,m)</span></span><br><span class="line">X_train_flatten = X_train_orig.reshape(X_train_orig.shape[<span class="number">0</span>],<span class="number">-1</span>).T <span class="comment">#每一列就是一个样本</span></span><br><span class="line">X_test_flatten = X_test_orig.reshape(X_test_orig.shape[<span class="number">0</span>],<span class="number">-1</span>).T</span><br><span class="line"></span><br><span class="line"><span class="comment"># 归一化数据</span></span><br><span class="line">X_train = X_train_flatten / <span class="number">255</span></span><br><span class="line">X_test = X_test_flatten / <span class="number">255</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 转为独热矩阵 （调用了tf_utils的代码）</span></span><br><span class="line">Y_train = tf_utils.convert_to_one_hot(Y_train_orig,<span class="number">6</span>)</span><br><span class="line">Y_test = tf_utils.convert_to_one_hot(Y_test_orig,<span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"训练集样本数 = "</span> + str(X_train.shape[<span class="number">1</span>]))</span><br><span class="line">print(<span class="string">"测试集样本数 = "</span> + str(X_test.shape[<span class="number">1</span>]))</span><br><span class="line">print(<span class="string">"X_train.shape: "</span> + str(X_train.shape))</span><br><span class="line">print(<span class="string">"Y_train.shape: "</span> + str(Y_train.shape))</span><br><span class="line">print(<span class="string">"X_test.shape: "</span> + str(X_test.shape))</span><br><span class="line">print(<span class="string">"Y_test.shape: "</span> + str(Y_test.shape))</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704140944728.png" alt="image-20200704140944728"></p>
+<h3 id="创建placeholders"><a href="#创建placeholders" class="headerlink" title="创建placeholders"></a>创建placeholders</h3><p>tf2没有占位符，跳过</p>
+<h3 id="初始化参数"><a href="#初始化参数" class="headerlink" title="初始化参数"></a>初始化参数</h3><p>tf2里去掉了<code>.contrib.layers</code>，而且<code>get_variable</code>需要使用<code>tf.compat.v1.get_variable</code>。至于区别因为现在刚入门，暂时不去细想了。</p>
+<p>这里使用tf2的keras接口调用来实现。详细API参考官方文档：<a href="https://tensorflow.google.cn/api_docs/python/tf/keras/initializers?hl=en" target="_blank" rel="noopener">Module: tf.keras.initializers</a></p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704175859478.png" alt="image-20200704175859478"></p>
+<p>原文中使用的是xavier，并且使用默认值 uniform=False，故这里应该使用 <code>tf.keras.initializers.GlorotUniform</code></p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704180146194.png" alt="image-20200704180146194"></p>
+<p>可以看到，参数只有一个seed，定义随机数种子。</p>
+<br>
+
+<p>再看一下用法</p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704180622698.png" alt="image-20200704180622698"></p>
+<p>先初始化一个张量看看情况</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">shape = (<span class="number">25</span>,<span class="number">12288</span>)</span><br><span class="line">seed = <span class="number">1</span></span><br><span class="line">initializer = tf.keras.initializers.GlorotUniform(seed)</span><br><span class="line">W1 = tf.Variable(initializer(shape=shape),name=<span class="string">'W1'</span>)</span><br><span class="line">print(W1)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704181054555.png" alt="image-20200704181054555"></p>
+<p>再试试zero初始化参数b，这里<code>tf.zeros_initializer()</code>其实在tf2里也可以用，但是既然用keras了，就用keras的接口吧</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tf.Variable(tf.zeros_initializer()(shape=(25, 1)), name='b1')</span></span><br><span class="line">tf.Variable(tf.keras.initializers.Zeros()(shape=(<span class="number">25</span>, <span class="number">1</span>)), name=<span class="string">'b1'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704182349147.png" alt="image-20200704182349147"></p>
+<p>可以看到，W1张量的name为W1，shape=(25, 12288)，dtype=float32，与原文一致，至于具体的值就不一定一致了。</p>
+<p>这里b我没有用变量接收返回值，反正也只是测试。可以看到信息与原文也一致。</p>
+<br>
+
+<p>初次尝试成功了，接下来就来实现原文中的函数，原文是定义一个函数，没有传入参数，返回3层模型参数的tensor字典。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_parameters</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    初始化神经网络的参数，参数的维度如下：</span></span><br><span class="line"><span class="string">        W1 : [25, 12288]</span></span><br><span class="line"><span class="string">        b1 : [25, 1]</span></span><br><span class="line"><span class="string">        W2 : [12, 25]</span></span><br><span class="line"><span class="string">        b2 : [12, 1]</span></span><br><span class="line"><span class="string">        W3 : [6, 12]</span></span><br><span class="line"><span class="string">        b3 : [6, 1]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        parameters - 包含了W和b的字典</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     tf.set_random_seed(1) #指定随机种子</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#     W1 = tf.get_variable("W1",[25,12288],initializer=tf.contrib.layers.xavier_initializer(seed=1))</span></span><br><span class="line"><span class="comment">#     b1 = tf.get_variable("b1",[25,1],initializer=tf.zeros_initializer())</span></span><br><span class="line"><span class="comment">#     W2 = tf.get_variable("W2", [12, 25], initializer = tf.contrib.layers.xavier_initializer(seed=1))</span></span><br><span class="line"><span class="comment">#     b2 = tf.get_variable("b2", [12, 1], initializer = tf.zeros_initializer())</span></span><br><span class="line"><span class="comment">#     W3 = tf.get_variable("W3", [6, 12], initializer = tf.contrib.layers.xavier_initializer(seed=1))</span></span><br><span class="line"><span class="comment">#     b3 = tf.get_variable("b3", [6, 1], initializer = tf.zeros_initializer())</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 定义随机种子</span></span><br><span class="line">    seed = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 初始化模型参数，这里省去了initializer赋值操作。</span></span><br><span class="line">    W1 = tf.Variable(tf.keras.initializers.GlorotUniform(seed)</span><br><span class="line">                     (shape=(<span class="number">25</span>, <span class="number">12288</span>)), name=<span class="string">'W1'</span>)</span><br><span class="line">    b1 = tf.Variable(tf.keras.initializers.Zeros()(shape=(<span class="number">25</span>, <span class="number">1</span>)), name=<span class="string">'b1'</span>)</span><br><span class="line"></span><br><span class="line">    W2 = tf.Variable(tf.keras.initializers.GlorotUniform(seed)</span><br><span class="line">                     (shape=(<span class="number">12</span>, <span class="number">25</span>)), name=<span class="string">'W2'</span>)</span><br><span class="line">    b2 = tf.Variable(tf.keras.initializers.Zeros()(shape=(<span class="number">12</span>, <span class="number">1</span>)), name=<span class="string">'b2'</span>)</span><br><span class="line"></span><br><span class="line">    W3 = tf.Variable(tf.keras.initializers.GlorotUniform(seed)</span><br><span class="line">                     (shape=(<span class="number">6</span>, <span class="number">12</span>)), name=<span class="string">'W3'</span>)</span><br><span class="line">    b3 = tf.Variable(tf.keras.initializers.Zeros()(shape=(<span class="number">6</span>, <span class="number">1</span>)), name=<span class="string">' b3'</span>)</span><br><span class="line"></span><br><span class="line">    parameters = &#123;</span><br><span class="line">        <span class="string">"W1"</span>: W1,</span><br><span class="line">        <span class="string">"b1"</span>: b1,</span><br><span class="line">        <span class="string">"W2"</span>: W2,</span><br><span class="line">        <span class="string">"b2"</span>: b2,</span><br><span class="line">        <span class="string">"W3"</span>: W3,</span><br><span class="line">        <span class="string">"b3"</span>: b3</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p><strong>测试：</strong></p>
+<p><code>tf.reset_default_graph()</code>改为<code>tf.compat.v1.reset_default_graph()</code>，使其使用1.X 版本的reset_default_graph函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tf.compat.v1.reset_default_graph()  <span class="comment"># 用于清除默认图形堆栈并重置全局默认图形。</span></span><br><span class="line"></span><br><span class="line">parameters = initialize_parameters()</span><br><span class="line">print(<span class="string">"W1 = "</span> + str(parameters[<span class="string">"W1"</span>]))</span><br><span class="line">print(<span class="string">"b1 = "</span> + str(parameters[<span class="string">"b1"</span>]))</span><br><span class="line">print(<span class="string">"W2 = "</span> + str(parameters[<span class="string">"W2"</span>]))</span><br><span class="line">print(<span class="string">"b2 = "</span> + str(parameters[<span class="string">"b2"</span>]))</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200704183445919.png" alt="image-20200704183445919"></p>
+<p>因为版本的区别，tensorflow2输出tensor会有个numpy信息直接查看值。</p>
+<p>对比tensor信息可以看到与原文一致。</p>
+<h3 id="正向传播"><a href="#正向传播" class="headerlink" title="正向传播"></a>正向传播</h3><p>将原本的计算代码改为使用tensorflow实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward_propagation</span><span class="params">(X, parameters)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    实现一个模型的前向传播，模型结构为LINEAR -&gt; RELU -&gt; LINEAR -&gt; RELU -&gt; LINEAR -&gt; SOFTMAX</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        X - 输入数据的占位符，维度为（输入节点数量，样本数量）</span></span><br><span class="line"><span class="string">        parameters - 包含了W和b的参数的字典</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        Z3 - 最后一个LINEAR节点的输出</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    W1 = parameters[<span class="string">'W1'</span>]</span><br><span class="line">    b1 = parameters[<span class="string">'b1'</span>]</span><br><span class="line">    W2 = parameters[<span class="string">'W2'</span>]</span><br><span class="line">    b2 = parameters[<span class="string">'b2'</span>]</span><br><span class="line">    W3 = parameters[<span class="string">'W3'</span>]</span><br><span class="line">    b3 = parameters[<span class="string">'b3'</span>]</span><br><span class="line"></span><br><span class="line">    Z1 = tf.add(tf.matmul(W1, X), b1)        <span class="comment"># Z1 = np.dot(W1, X) + b1</span></span><br><span class="line">    <span class="comment"># Z1 = tf.matmul(W1,X) + b1             #也可以这样写</span></span><br><span class="line">    A1 = tf.nn.relu(Z1)                    <span class="comment"># A1 = relu(Z1)</span></span><br><span class="line">    Z2 = tf.add(tf.matmul(W2, A1), b2)     <span class="comment"># Z2 = np.dot(W2, a1) + b2</span></span><br><span class="line">    A2 = tf.nn.relu(Z2)                    <span class="comment"># A2 = relu(Z2)</span></span><br><span class="line">    Z3 = tf.add(tf.matmul(W3, A2), b3)     <span class="comment"># Z3 = np.dot(W3,Z2) + b3</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Z3</span><br></pre></td></tr></table></figure>
+
+<p>进行测试：因为没有占位符，所以与其定义一个张量来测试，不如直接使用X_train</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tf.compat.v1.reset_default_graph()  <span class="comment"># 用于清除默认图形堆栈并重置全局默认图形。</span></span><br><span class="line"></span><br><span class="line">parameters = initialize_parameters()</span><br><span class="line">Z3 = forward_propagation(X_train, parameters)</span><br><span class="line">print(<span class="string">"Z3 = "</span> + str(Z3))</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>我在运行时有报错</p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200709143051271.png" alt="image-20200709143051271"></p>
+<p>这里需要注意 <code>tf.matmul(a,b)</code>函数中的a与b要求数据类型一样。查看模型参数parameters的数据类型，是float32</p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200709143201311.png" alt="image-20200709143201311"></p>
+<p>再查看一下X_train</p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200709143414661.png" alt="image-20200709143414661"></p>
+<p>可以看到一个是float32，一个是float64，故将数据集转为float32</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">X_train = tf.cast(X_train,dtype=tf.float32)</span><br><span class="line">Y_train = tf.cast(Y_train,dtype=tf.float32)</span><br><span class="line">X_test = tf.cast(X_test,dtype=tf.float32)</span><br><span class="line">Y_test = tf.cast(Y_test,dtype=tf.float32)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200709143839262.png" alt="image-20200709143839262"></p>
+<p>再进行测试，结果如下</p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200709143929024.png" alt="image-20200709143929024"></p>
+<p>对比原文的结果 <code>Z3 = Tensor(&quot;Add_2:0&quot;, shape=(6, ?), dtype=float32)</code>，可以看到shape、float32一致</p>
+<p><strong>注：</strong>原文的shape为<code>(6,?)</code>，是因为占位符中的维度为<code>(n_x,None)</code>与<code>(n_y,None)</code>,而生成占位符时传入的参数仅有<code>n_x</code>与<code>n_y</code>，即并没有指定样本数，所以Z3的样本数为<code>?</code>，实际上Z3的样本数等于输入特征X的样本数，X_train维度为<code>(12288,1080)</code>，所以Z3的shape应该为<code>(6,1080)</code>。6为输出层隐藏单元数量，即W3、b3的shape[0]</p>
+<h3 id="计算代价"><a href="#计算代价" class="headerlink" title="计算代价"></a>计算代价</h3><h3 id=""><a href="#" class="headerlink" title=""></a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_cost</span><span class="params">(Z3, Y)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    计算成本</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">        Z3 - 前向传播的结果</span></span><br><span class="line"><span class="string">        Y - 标签，一个占位符，和Z3的维度相同</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">        cost - 成本值</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    logits = tf.transpose(Z3)  <span class="comment"># 转置</span></span><br><span class="line">    labels = tf.transpose(Y)  <span class="comment"># 转置</span></span><br><span class="line">	</span><br><span class="line">    <span class="comment"># reduce_mean()计算平均值</span></span><br><span class="line">    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(</span><br><span class="line">        logits=logits, labels=labels))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> cost</span><br></pre></td></tr></table></figure>
+
+<p>测试一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tf.compat.v1.reset_default_graph()</span><br><span class="line"></span><br><span class="line">parameters = initialize_parameters()</span><br><span class="line">Z3 = forward_propagation(X_train,parameters)</span><br><span class="line">cost = compute_cost(Z3,Y_train)</span><br><span class="line">print(<span class="string">"cost = "</span> + str(cost))</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200709145329359.png" alt="image-20200709145329359"></p>
+<p>原文中并没有给出代价的值。</p>
+<h3 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h3><p>先看下tensorflow2中的Adam梯度下降函数<code>tf.keras.optimizers.Adam</code>：</p>
+<p><img src="C:%5CUsers%5C84452%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200709184254160.png" alt="image-20200709184254160"></p>
+<p>tensorflow使用一行代码即可实现反向传播。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="创建tensor"><a href="#创建tensor" class="headerlink" title="创建tensor"></a>创建tensor</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Var = tf.constant(value,dtype=<span class="literal">None</span>,shape=<span class="literal">None</span>,name=<span class="string">"Name"</span>,verify_shape=Flase) <span class="comment"># 常量</span></span><br><span class="line">Var = tf.Variable(value,dtype=<span class="literal">None</span>,shape=<span class="literal">None</span>,name=<span class="string">"Name"</span>,verify_shape=Flase) <span class="comment"># 变量</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tf.add(a,b)   <span class="comment"># a + b</span></span><br><span class="line">tf.multiply(a,b)   <span class="comment"># a * b</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="ndarray与tensor的转换"><a href="#ndarray与tensor的转换" class="headerlink" title="ndarray与tensor的转换"></a>ndarray与tensor的转换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Var.numpy()</span><br><span class="line">tf.convert_to_tensor(Var)</span><br></pre></td></tr></table></figure>
+
+<h3 id="tf2没有占位符特性"><a href="#tf2没有占位符特性" class="headerlink" title="tf2没有占位符特性"></a>tf2没有占位符特性</h3><h3 id="计算sigmoid-1"><a href="#计算sigmoid-1" class="headerlink" title="计算sigmoid"></a>计算sigmoid</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z = float(z)</span><br><span class="line">result = tf.sigmoid(z)</span><br></pre></td></tr></table></figure>
+
+<h3 id="计算代价（成本）-1"><a href="#计算代价（成本）-1" class="headerlink" title="计算代价（成本）"></a>计算代价（成本）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tf.nn.sigmoid_cross_entropy_with_logits(</span><br><span class="line">    labels=<span class="literal">None</span>, <span class="comment"># Y </span></span><br><span class="line">    logits=<span class="literal">None</span>, <span class="comment"># Y帽</span></span><br><span class="line">    name=<span class="literal">None</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="初始化模型参数"><a href="#初始化模型参数" class="headerlink" title="初始化模型参数"></a>初始化模型参数</h3><p>使用keras接口</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">seed = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># W1</span></span><br><span class="line">initializer = tf.keras.initializers.GlorotUniform(seed)</span><br><span class="line">W1 = tf.Variable(initializer(shape=shape_W, name=<span class="string">'W1'</span>))</span><br><span class="line"><span class="comment"># =&gt;     W1 = tf.Variable(tf.keras.initializers.GlorotUniform(seed)(shape=shape_W), name='W1')</span></span><br><span class="line">                 </span><br><span class="line"><span class="comment"># b1</span></span><br><span class="line">b1 = tf.Variable(tf.keras.initializers.Zeros()(shape=shape_b), name=<span class="string">'b1'</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="正向传播-1"><a href="#正向传播-1" class="headerlink" title="正向传播"></a>正向传播</h3><p>改用tensorflow进行计算</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Z1 = tf.add(tf.matmul(W1, X), b1)        <span class="comment"># Z1 = np.dot(W1, X) + b1</span></span><br><span class="line"><span class="comment"># Z1 = tf.matmul(W1,X) + b1             #也可以这样写</span></span><br><span class="line">A1 = tf.nn.relu(Z1)                    <span class="comment"># A1 = relu(Z1)</span></span><br><span class="line">Z2 = tf.add(tf.matmul(W2, A1), b2)     <span class="comment"># Z2 = np.dot(W2, a1) + b2</span></span><br><span class="line">A2 = tf.nn.relu(Z2)                    <span class="comment"># A2 = relu(Z2)</span></span><br><span class="line">Z3 = tf.add(tf.matmul(W3, A2), b3)     <span class="comment"># Z3 = np.dot(W3,Z2) + b3</span></span><br></pre></td></tr></table></figure>
+
+<p><code>matmul(a,b)</code>要求a与b的数据类型相同, <code>tf.nn.relu</code>为神经网络的relu激活函数</p>
+<h3 id="计算代价-1"><a href="#计算代价-1" class="headerlink" title="计算代价"></a>计算代价</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">logits = tf.transpose(Z3)  <span class="comment"># 转置</span></span><br><span class="line">labels = tf.transpose(Y)  <span class="comment"># 转置</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># reduce_mean()计算平均值</span></span><br><span class="line">cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=labels))</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> cost</span><br></pre></td></tr></table></figure>
+
+<p>先将Z3（$\hat{Y}$）与标签Y转置，然后用<code>tf.nn.softmax_cross_entropy_with_logits</code>计算代价，使用<code>reduce_mean</code>取平均值</p>
+
+          
+            <br>
+            
+  
+    
+    
+
+<section class="widget copyright shadow desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://lluuiq.com/post/202007040928/>https://lluuiq.com/post/202007040928/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+
+
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-09T18:58:45+08:00">
+  <a class='notlink'>
+    <i class="fas fa-save" aria-hidden="true"></i>
+    <p>更新于：2020年7月9日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="nofollow"><i class="fas fa-tags" aria-hidden="true"></i><p>神经网络</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard" aria-hidden="true"></i>
+      <p>字数：3.6k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+      <p>时长：15分钟</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/post/202007142124/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>keras笔记-基础</p>
+                <p class='content'>记录下入门keras的笔记，参考书籍 《Python深度学习》
+
+
+电影评论二分类问题说明使用keras自带的数据集 imdb。
+任务：根据评论建立模型预测一条评论是正面还是负面
+数据集：
+
+输...</p>
+              </a>
+            
+            
+              <a class='next' href='/post/202007040910/'>
+                <p class='title'>jupyter notebook配置笔记<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>记录下jupyter notebook的配置。
+
+
+修改快捷键在Help中可以查看快捷键（上）与修改快捷键（下）
+
+默认的就挺好用，但后面有安装一个autopep8插件，用来格式化代码，个人习惯...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    processEscapes: true,
+    tags: "ams",
+    macros: {
+      href: "{}"
+    }
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|dno",
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+};
+</script>
+
+
+
+
+  <script>
+    window.subData = {
+      title: '吴恩达深度学习编程作业2-3',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<!-- <aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop">
+  <div class='content'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://gitee.com/lluuiq/blog_img/raw/master/img/20200528013457.png'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+          <h2>lluuiq</h2>
+        
+        
+          <p>fly me to the star</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:mail@lluuiq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/lluuiq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=844520941&site=qq&menu=yes"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=118762977"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/"
+            id="categoriesE4BABAE7949FE79BB8E8B088"
+            ><div class='name'>人生相谈</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/" href="/categories/%E4%BA%BA%E7%94%9F%E7%9B%B8%E8%B0%88/%E5%AD%A6%E4%B9%A0/"
+            id="categoriesE4BABAE7949FE79BB8E8B088E5ADA6E4B9A0"
+            ><div class='name'>学习</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/" href="/categories/%E5%A6%99%E5%A6%99%E5%B7%A5%E5%85%B7%E7%AE%B1/"
+            id="categoriesE5A699E5A699E5B7A5E585B7E7AEB1"
+            ><div class='name'>妙妙工具箱</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9C"
+            ><div class='name'>神经网络</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE5ADA6E4B9A0E7AC94E8AEB0"
+            ><div class='name'>学习笔记</div><div class='badge'>(6)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7A59EE7BB8FE7BD91E7BB9CE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%AC%94%E8%AE%B0/" href="/categories/%E7%AC%94%E8%AE%B0/"
+            id="categoriesE7AC94E8AEB0"
+            ><div class='name'>笔记</div><div class='badge'>(15)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Anaconda3/" style="font-size: 19px; color: #777">Anaconda3</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C</a> <a href="/tags/C/" style="font-size: 14px; color: #999">C++</a> <a href="/tags/CLion/" style="font-size: 16.5px; color: #888">CLion</a> <a href="/tags/PyCharm/" style="font-size: 16.5px; color: #888">PyCharm</a> <a href="/tags/PyQt/" style="font-size: 14px; color: #999">PyQt</a> <a href="/tags/Scrapy/" style="font-size: 14px; color: #999">Scrapy</a> <a href="/tags/TensorFlow2/" style="font-size: 14px; color: #999">TensorFlow2</a> <a href="/tags/Valine/" style="font-size: 14px; color: #999">Valine</a> <a href="/tags/WebStack/" style="font-size: 14px; color: #999">WebStack</a> <a href="/tags/github/" style="font-size: 16.5px; color: #888">github</a> <a href="/tags/hexo/" style="font-size: 21.5px; color: #666">hexo</a> <a href="/tags/jupyter/" style="font-size: 14px; color: #999">jupyter</a> <a href="/tags/keras/" style="font-size: 14px; color: #999">keras</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/python/" style="font-size: 14px; color: #999">python</a> <a href="/tags/webhook/" style="font-size: 14px; color: #999">webhook</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 24px; color: #555">神经网络</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%B6%85%E8%83%BD%E5%8A%9B/" style="font-size: 14px; color: #999">超能力</a>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导包"><span class="toc-text">导包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#入门引导"><span class="toc-text">入门引导</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#one"><span class="toc-text">one</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#two"><span class="toc-text">two</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#three"><span class="toc-text">three</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线性函数"><span class="toc-text">线性函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算sigmoid"><span class="toc-text">计算sigmoid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算代价（成本）"><span class="toc-text">计算代价（成本）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用独热编码（0，1编码）"><span class="toc-text">使用独热编码（0，1编码）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化为0和1"><span class="toc-text">初始化为0和1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用TensorFlow构建你的第一个神经网络"><span class="toc-text">使用TensorFlow构建你的第一个神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#说明："><span class="toc-text">说明：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加载数据集"><span class="toc-text">加载数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建placeholders"><span class="toc-text">创建placeholders</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化参数"><span class="toc-text">初始化参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正向传播"><span class="toc-text">正向传播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算代价"><span class="toc-text">计算代价</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反向传播"><span class="toc-text">反向传播</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建tensor"><span class="toc-text">创建tensor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算"><span class="toc-text">计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ndarray与tensor的转换"><span class="toc-text">ndarray与tensor的转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tf2没有占位符特性"><span class="toc-text">tf2没有占位符特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算sigmoid-1"><span class="toc-text">计算sigmoid</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算代价（成本）-1"><span class="toc-text">计算代价（成本）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化模型参数"><span class="toc-text">初始化模型参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正向传播-1"><span class="toc-text">正向传播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算代价-1"><span class="toc-text">计算代价</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+ -->
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.3'
+      loop='all'
+      order='random'
+      fixed='true'
+      list-max-height='500px'
+      server='netease'
+      type='playlist'
+      id='4945153572'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://lluuiq.com">Copyright © lluuiq</a></p>
+
+        </div>
+      
+    
+      
+        
+          <div><p><a href="http://beian.miit.gov.cn" target="_blank" rel="noopener">豫ICP备19027219号</a><br>京公网备案 41140302000094号</p>
+</div>
+        
+      
+    
+    <!--网站运行时间统计-->
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+        var now = new Date(); 
+        function createtime() { 
+            var grt= new Date("07/30/2019 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+            now.setTime(now.getTime()+250); 
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+            document.getElementById("timeDate").innerHTML = "本站已苟活 "+dnum+" 天 "; 
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+        } 
+    setInterval("createtime()",250);
+    </script>
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+
+  <!-- 彩带点击 -->
+  <!-- <script type="text/javascript" src="\js\ribbon.min.js"></script> -->
+  <!-- 雪花特效 -->
+  <!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+
+
+  <!-- 线条特效 -->
+  <!-- <script type="text/javascript"
+  color="0,0,0" opacity='1' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script> -->
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<!-- <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script> -->
+<!-- <script src="/js/jquery.pjax.min.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js" data-pjax></script>
+  <script>
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+  </script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/lluuiq/blog_img/img/background.png"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+<!-- theme.plugins.aplayer.js -->
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js" async></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting/dist/Meting.min.js" async></script>
+
+  
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js"></script>
+
+  
+
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+    appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+    placeholder: "有什么想说的吗？",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    visitor: 'false',
+    highlight:'true'
+  })
+  </script>
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.1/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copyed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-clipboard-check');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制成功';
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-exclamation-triangle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = '复制失败';
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+
+
+
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?23032f56a100d5a5e26ed5b9d94163c7";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
+
+  <script>setLoadingBarProgress(100);</script>
+
+  <script>
+    // 窗口监听load(加载、刷新)事件，执行LoadFancybox()函数
+    $(function(){
+      LoadFancybox();
+    });
+
+    var pjax = new Pjax({
+      elements: "a",
+      selectors: [
+        "title", //pjax加载标题
+        ".l_main", //pjax加载主内容
+        ".l_side", //pjax加载侧边栏
+        ".switcher .h-list", // 使手机端的搜索框与菜单栏生效
+      ]
+    })
+
+    //加载fancybox
+    function LoadFancybox(){
+      $(".article-entry").find("img").each(function () {
+        //渲染fancy box
+        var t = document.createElement("a");
+        $(t).attr("data-fancybox", ""),
+        $(t).attr("href", $(this).attr("src")),
+        $(t).attr("margin","0 auto"),
+        $(this).wrap(t)
+      });
+    }
+
+    function LoadValine(){
+      $.getScript("https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.0/js/valine.js", function() {
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        var notify = 'true' == true;
+        var verify = 'true' == true;
+        var valine = new Valine();
+        valine.init({
+          el: '#valine_container',
+          notify: notify,
+          verify: verify,
+          guest_info: guest_info,
+          
+          appId: "kKfWnugSqGAcPYpeH8wNYltU-gzGzoHsz",
+          appKey: "NdwLtnM2yUza1v2VOJpKkQ4q",
+          placeholder: "有什么想说的吗？",
+          pageSize:'10',
+          avatar:'mp',
+          lang:'zh-cn',
+          visitor: 'false',
+          highlight:'true'
+        })
+      });
+    }
+  
+    // 加载pjax后执行的函数
+    document.addEventListener('pjax:complete', function (){
+      LoadFancybox();
+      LoadValine();
+      // LoadBaidu();
+    });
+
+  </script>
+</body>
+</html>
